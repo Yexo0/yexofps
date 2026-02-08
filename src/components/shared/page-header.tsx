@@ -13,13 +13,13 @@ export function PageHeader({ name, tagline, actions }: PageHeaderProps) {
   return (
     <GlassPanel className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
       <div className="flex items-center gap-4 flex-1">
-        <div className="avatar-ring-animated w-[72px] h-[72px] rounded-full shrink-0">
+        <div className="avatar-wrapper w-[72px] h-[72px] shrink-0">
           <Image
             src="/images/IMG_4549.png"
             alt="Yexo avatar"
             width={72}
             height={72}
-            className="w-full h-full rounded-full object-cover bg-[#111] relative z-[1]"
+            className="w-full h-full object-cover bg-[#111]"
           />
         </div>
         <div>

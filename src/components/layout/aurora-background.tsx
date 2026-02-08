@@ -17,7 +17,7 @@ export function AuroraBackground() {
 
   useEffect(() => {
     const generated: BlobData[] = Array.from({ length: 5 }, () => ({
-      size: Math.random() * 260 + 300,
+      size: Math.random() * 450 + 550,
       x: Math.random() * 100,
       y: Math.random() * 100,
       dx: (Math.random() * 2 - 1) * 70,

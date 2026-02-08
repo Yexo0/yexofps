@@ -119,7 +119,7 @@ export default function ConvertPage() {
   return (
     <>
       <BackButton />
-      <main className="relative z-[2] min-h-screen flex flex-col items-center gap-5 px-[18px] pt-[60px] pb-10 max-w-[1120px] mx-auto">
+      <main className="relative z-[2] min-h-screen flex flex-col items-center gap-5 px-[18px] pt-[60px] pb-[100px] max-w-[1120px] mx-auto">
         {/* Header */}
         <div className="w-full convert-section">
           <PageHeader name={t("name")} tagline={t("tagline")} actions={socialChips} />

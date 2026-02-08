@@ -18,16 +18,16 @@ export default function ProfilPage() {
     <>
       <BackButton />
       <PageRevealWrapper>
-        <main className="relative z-[2] min-h-screen flex flex-col items-center gap-5 px-[18px] pt-[60px] pb-10 max-w-[860px] mx-auto">
+        <main className="relative z-[2] min-h-screen flex flex-col items-center gap-5 px-[18px] pt-[60px] pb-[100px] max-w-[860px] mx-auto">
           {/* Avatar Card */}
           <GlassPanel className="w-full flex flex-col sm:flex-row items-center gap-5">
-            <div className="avatar-ring-animated w-[100px] h-[100px] rounded-full shrink-0">
+            <div className="avatar-wrapper w-[100px] h-[100px] shrink-0">
               <Image
                 src="/images/IMG_4549.png"
                 alt="Yexo avatar"
                 width={100}
                 height={100}
-                className="w-full h-full rounded-full object-cover bg-[#111] relative z-[1]"
+                className="w-full h-full object-cover bg-[#111]"
                 priority
               />
             </div>

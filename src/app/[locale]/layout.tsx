@@ -7,7 +7,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { AuroraBackground } from "@/components/layout/aurora-background";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
-import { SpotifyPlayer } from "@/components/layout/spotify-player";
+import { Chatbot } from "@/components/layout/chatbot";
 import "../globals.css";
 
 type Props = {
@@ -44,7 +44,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <AuroraBackground />
           <LanguageSwitcher />
           <div className="relative z-[2]">{children}</div>
-          <SpotifyPlayer />
+          <Chatbot />
         </NextIntlClientProvider>
       </body>
     </html>

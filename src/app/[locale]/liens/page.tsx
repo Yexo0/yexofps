@@ -42,11 +42,11 @@ export default function LiensPage() {
   return (
     <>
       <BackButton />
-      <main className="relative z-[2] min-h-screen flex flex-col items-center px-[18px] pt-[60px] pb-10 max-w-[700px] mx-auto">
+      <main className="relative z-[2] min-h-screen flex flex-col items-center px-[18px] pt-[60px] pb-[100px] max-w-[700px] mx-auto">
         {/* Hero */}
         <div className="links-section flex flex-col items-center gap-4 mb-8">
-          <div className="avatar-ring-animated w-[90px] h-[90px] rounded-full">
-            <Image src="/images/IMG_4549.png" alt="Yexo" width={90} height={90} className="w-full h-full rounded-full object-cover relative z-[1]" />
+          <div className="avatar-wrapper w-[90px] h-[90px]">
+            <Image src="/images/IMG_4549.png" alt="Yexo" width={90} height={90} className="w-full h-full object-cover" />
           </div>
           <div className="text-center">
             <h1 className="gradient-text text-3xl font-extrabold">{t("title")}</h1>
