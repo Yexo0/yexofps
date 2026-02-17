@@ -1,0 +1,497 @@
+{
+  "metadata": {
+    "title": "Yexo - Portfolio",
+    "description": "Yexo - Créateur de contenu Valorant & monteur vidéo"
+  },
+  "nav": {
+    "home": "Accueil",
+    "back": "Retour"
+  },
+  "footer": {
+    "copyright": "© 2026 Yexo. Tous droits réservés.",
+    "home": "Accueil"
+  },
+  "langSwitch": {
+    "label": "EN"
+  },
+  "dashboard": {
+    "profile": { "title": "Mon Profil", "button": "Profil" },
+    "ranks": { "title": "Rangs en Jeux", "button": "Mes Rangs" },
+    "shop": { "title": "Y-Services", "button": "Boutique" },
+    "tracker": { "title": "Mes stats", "button": "Tracker" },
+    "convert": { "title": "Convertisseur de sensi", "button": "Convertir" },
+    "links": { "title": "Mes Réseaux", "button": "Liens" },
+    "pro": { "title": "Professionnel", "button": "Pro" }
+  },
+  "profile": {
+    "name": "Yexo",
+    "tagline": "Passionné d'informatique et de montage vidéo",
+    "aboutTitle": "À propos",
+    "aboutText": "Hey ! Je suis Yexo, j'ai 20 ans. Je suis créateur de contenu Valorant et passionné de montage vidéo. J'adore partager mes créations et mes expériences avec la communauté gaming.",
+    "partnersTitle": "Mes Partenaires",
+    "partnerDiscount": "{discount} avec le code : {code}",
+    "partnerAccess": "Accéder",
+    "socialsTitle": "Réseaux Sociaux",
+    "others": "Autres"
+  },
+  "ranks": {
+    "name": "Yexo",
+    "tagline": "Juste un joueur d'égo",
+    "ranksTitle": "RANGS",
+    "setupTitle": "SETUP GAMING",
+    "mouse": "Souris",
+    "keyboard": "Clavier",
+    "mousepad": "Tapis"
+  },
+  "shop": {
+    "title": "Boutique",
+    "subtitlePart1": "Pour acheter :",
+    "subtitleContact": "contactez-moi par email",
+    "subtitleOr": "ou",
+    "subtitleDiscord": "ouvrez un ticket sur mon Discord",
+    "subtitleFastest": "(réponse la plus rapide)",
+    "contactCta": "Contact / Ticket Discord",
+    "payhipCta": "Achat instantané (Payhip)",
+    "noticeDiscord": "Ticket Discord = le plus rapide",
+    "noticePrices": "Prix affichés en €",
+    "noticeDelivery": "Livraison : fichiers / ressources + instructions si besoin",
+    "productsTitle": "Mes produits",
+    "buyContact": "Acheter / Contact",
+    "preview": "Aperçu",
+    "viewExamples": "Voir des exemples",
+    "bestValue": "Meilleur rapport qualité/prix",
+    "popular": "Populaire",
+    "trustTitle": "Stats & avis",
+    "statsTitle": "Quelques chiffres",
+    "statsSub": "Quelques chiffres pour se faire une idée. Pour des commandes personnalisées, Discord est toujours le plus rapide.",
+    "ordersLabel": "Commandes livrées",
+    "ordersNote": "Presets + montages + patchs livrés",
+    "replyLabel": "Temps de réponse moyen",
+    "replyNote": "Plus rapide en ouvrant un ticket",
+    "ratingLabel": "Note clients",
+    "ratingNote": "Basé sur les messages clients",
+    "reviewsTitle": "Avis clients",
+    "reviewsSub": "Messages courts que je reçois souvent après livraison.",
+    "reviewsDiscordCta": "Tous les avis sont visibles sur Discord",
+    "payhipBuyCta": "Achat instantané sur Payhip",
+    "payhipTitle": "Payhip",
+    "payhipText": "Pour ceux qui veulent un achat instantané sans discussion : utilisez Payhip.",
+    "payhipOpen": "Ouvrir mon Payhip",
+    "payhipOrContact": "Ou : me contacter",
+    "contactTitle": "Me contacter",
+    "discordFastest": "Discord (le plus rapide)",
+    "discordText": "Ouvrez un ticket sur mon Discord pour une réponse rapide.",
+    "joinDiscord": "Rejoindre Discord",
+    "joinDiscordEdits": "Discord Edits",
+    "emailTitle": "Email",
+    "emailText": "Pour les demandes / commandes : envoyez-moi un email.",
+    "socialsTitle": "Réseaux",
+    "socialsText": "Exemples, contenu, DMs si besoin.",
+    "contactTip": "Astuce : quand vous me contactez, mentionnez le produit, votre logiciel et votre objectif.",
+    "products": {
+      "colorAe": { "title": "Correction colorimétrique 4K Valorant", "desc": "After Effects 2024 • preset" },
+      "basicEdit": { "title": "Montage basique", "desc": "Simple, propre, efficace • délai selon la demande" },
+      "advancedEdit": { "title": "Montage avancé", "desc": "Transitions + rythme + effets • prix selon la complexité" },
+      "completePack": { "title": "Pack complet pour éditer comme moi", "desc": "Ressources + presets + paramètres + 1h de tuto" },
+      "colorVegas": { "title": "Correction colorimétrique 4K Vegas Pro", "desc": "Vegas Pro • preset" },
+      "antiCompression": { "title": "Patch anti-compression TikTok", "desc": "Pour upload en 1080p 60fps" }
+    },
+    "reviews": {
+      "saytroz": "Le pack est cool, et yexo est toujours là pour aider si besoin, merci encore",
+      "truthvlr": "Le patch est oufff, les uploads sont beaucoup plus nets.",
+      "s6nse": "+rep les clips sont propres",
+      "yakzu": "vendeur legit j'ai acheté des clips"
+    }
+  },
+  "tracker": {
+    "name": "Yexo",
+    "tagline": "Valorant Tracker (Tanjiro#33333 • EU)",
+    "title": "TRACKER",
+    "matchesTitle": "10 DERNIERS UNRATED",
+    "refresh": "Rafraîchir",
+    "auto": "Auto",
+    "loading": "Chargement...",
+    "upToDate": "À jour",
+    "error": "Erreur",
+    "cooldown": "Cooldown...",
+    "waiting": "En attente...",
+    "noMatches": "Aucun match trouvé (réponse vide).",
+    "fetchError": "Impossible de récupérer les données. Vérifiez que /api/valorant fonctionne.",
+    "rateLimit": "Limite de requêtes atteinte (429). Patientez.",
+    "httpError": "Erreur HTTP",
+    "peakRr": "PEAK RR",
+    "ranked": "Ranked",
+    "last10": "10 derniers",
+    "unrated": "Unrated",
+    "total": "Total",
+    "hsAvg": "Moyenne sur {count} matchs",
+    "hsNa": "HS% non dispo",
+    "kills": "kills",
+    "deaths": "deaths",
+    "winsLosses": "{wins}V / {losses}D",
+    "resultsNa": "Résultats non dispo",
+    "totalMatches": "Total sur {count} matchs",
+    "hint": "Ce sont juste mes stats récentes",
+    "modalKills": "KILLS",
+    "modalDeaths": "DEATHS",
+    "modalAssists": "ASSISTS",
+    "modalScore": "SCORE",
+    "modalHeadshots": "HEADSHOTS",
+    "modalBodyshots": "BODYSHOTS",
+    "modalLegshots": "LEGSHOTS",
+    "modalAccuracy": "RÉPARTITION PRÉCISION",
+    "modalTotalShots": "tirs totaux"
+  },
+  "converter": {
+    "name": "Yexo",
+    "tagline": "Convertisseur de Sensibilité (cm/360)",
+    "title": "CONVERTIR SENSI",
+    "detailsTitle": "DÉTAILS",
+    "fromGame": "De (Jeu)",
+    "fromSens": "Sensibilité source",
+    "fromDpi": "DPI source",
+    "toGame": "Vers (Jeu)",
+    "toDpi": "DPI cible",
+    "resultSens": "Sensibilité résultat",
+    "sameDpi": "Même DPI",
+    "convert": "Convertir",
+    "ready": "Prêt",
+    "converted": "Converti",
+    "invalidSens": "Entrez une sensibilité valide",
+    "invalidDpi": "Entrez un DPI valide",
+    "invalidTargetDpi": "Entrez un DPI cible valide",
+    "cm360Label": "cm/360",
+    "cm360Sub": "Même distance physique entre les jeux",
+    "edpiLabel": "eDPI",
+    "edpiSub": "eDPI source (sens × DPI)",
+    "edpiTo": "eDPI cible : {value}",
+    "yawLabel": "Valeurs Yaw",
+    "yawSub": "La conversion utilise yaw + cm/360",
+    "in360": "{value} in / 360°"
+  },
+  "pro": {
+    "name": "Baptiste Dauvergne",
+    "tagline": "BTS SIO option SISR • Réseaux, Systèmes & Cybersécurité",
+    "tabs": {
+      "overview": "Accueil",
+      "formation": "Formation",
+      "profile": "Profil",
+      "skills": "Compétences",
+      "infra": "Infrastructure",
+      "watch": "Veille",
+      "tutorials": "Tutos",
+      "contact": "Contact"
+    },
+    "overview": {
+      "title": "Espace Professionnel",
+      "intro": "Étudiant en BTS SIO option SISR, passionné par les réseaux, les systèmes et la cybersécurité. Retrouvez ici mon parcours, mes compétences et mes projets.",
+      "cards": {
+        "formation": "Formation BTS SIO SISR — systèmes, réseaux, cybersécurité",
+        "experience": "Stage chez Cekoya (Nîmes) — support, infrastructure, déploiement",
+        "skills": "Administration système, réseau, virtualisation, support utilisateur",
+        "passions": "Montage vidéo, création de contenu, gaming compétitif"
+      }
+    },
+    "formation": {
+      "title": "BTS SIO — SISR",
+      "whatIs": "Le BTS SIO (Services Informatiques aux Organisations) est une formation orientée vers l'informatique en entreprise. L'option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) se spécialise dans les réseaux, les systèmes et la cybersécurité.",
+      "modules": {
+        "sysadmin": { "title": "Administration Systèmes", "desc": "Mise en place et gestion d'environnements Windows et Linux. Virtualisation, gestion des utilisateurs, services." },
+        "network": { "title": "Réseaux & Infrastructure", "desc": "Adressage IP, VLAN, routage, topologies. Configuration réseau via Cisco Packet Tracer." },
+        "support": { "title": "Support & Assistance", "desc": "Diagnostic, résolution d'incidents. Installation et configuration de postes." },
+        "security": { "title": "Cybersécurité", "desc": "Sensibilisation à la sécurisation : mises à jour, mots de passe, segmentation, règles réseau." }
+      },
+      "whySisr": "Pourquoi SISR ?",
+      "whySisrText": "Je m'identifie au profil infrastructure : comprendre, configurer, sécuriser et maintenir des systèmes fiables. Mon objectif : construire une expertise dans des environnements professionnels réels.",
+      "education": {
+        "title": "Parcours",
+        "bts": "BTS SIO option SISR — En cours",
+        "but": "BUT R&T — Valence (2023-2024)",
+        "bac": "Bac STI2D option ITEC — Lycée Pierre Termier (Grenoble)"
+      }
+    },
+    "profileTab": {
+      "title": "Profil Professionnel",
+      "subtitle": "Qui je suis, ce que je sais faire",
+      "about": {
+        "title": "À propos de moi",
+        "p1": "Je suis Baptiste Dauvergne, étudiant en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) à Nîmes. Passionné par l'informatique et les technologies, je développe mes compétences dans l'administration système, la gestion d'infrastructures réseau et le support utilisateur.",
+        "p2": "Mon objectif est de continuer à progresser dans le domaine de l'infogérance et de la cybersécurité, tout en combinant rigueur technique et sens du service."
+      },
+      "competences": {
+        "title": "Mes Compétences",
+        "categories": {
+          "admin": {
+            "title": "Administration Système & Réseaux",
+            "items": [
+              "Adressage IP, VLAN, routage et configuration réseau",
+              "Création & gestion de machines virtuelles (VMware, Proxmox)",
+              "Gestion de parc informatique (inventaire, suivi, mise à jour)",
+              "Notions de cybersécurité (durcissement, règles firewall, mises à jour)"
+            ]
+          },
+          "support": {
+            "title": "Support & Assistance",
+            "items": [
+              "Support utilisateur (installation, dépannage, explications claires)",
+              "Configuration de postes de travail & environnement utilisateur",
+              "Communication claire et professionnelle (à distance et sur site)",
+              "Gestion de tickets et priorisation des incidents"
+            ]
+          },
+          "dev": {
+            "title": "Développement",
+            "items": [
+              "Python (scripts d'automatisation, traitement de données)",
+              "C# (applications console, logique orientée objet)",
+              "HTML / CSS / JavaScript (création de sites web, interfaces)",
+              "Utilisation de Git / GitHub (versioning, collaboration)"
+            ]
+          },
+          "soft": {
+            "title": "Savoir-être",
+            "items": [
+              "Calme, organisé et méthodique",
+              "Bonne gestion du stress et des priorités",
+              "Curieux et créatif face aux problèmes",
+              "Capacité à travailler en équipe comme en autonomie",
+              "Esprit d'amélioration continue"
+            ]
+          }
+        },
+        "badges": ["VMware", "Cisco", "Windows Server", "Linux", "Python", "Git"]
+      },
+      "formation": {
+        "title": "Formation & Parcours",
+        "bts": {
+          "title": "BTS SIO — SISR",
+          "location": "Lycée de la CCI, Nîmes",
+          "period": "2024 — 2026",
+          "items": [
+            "Administration des systèmes et réseaux",
+            "Virtualisation et services réseau",
+            "Support et assistance aux utilisateurs",
+            "Cybersécurité et gestion de parc informatique"
+          ]
+        },
+        "stage": {
+          "title": "Stage — Cekoya",
+          "location": "Nîmes",
+          "period": "2025",
+          "items": [
+            "Support informatique clients",
+            "Configuration réseau et déploiement d'équipements",
+            "Gestion d'inventaire et maintenance préventive"
+          ]
+        }
+      },
+      "interests": {
+        "title": "Au-delà du professionnel",
+        "cards": {
+          "content": {
+            "title": "Création de contenu",
+            "desc": "Montage vidéo et édition pour du contenu Valorant (Yexo). Travail sur le rythme, les transitions et le sound design."
+          },
+          "watch": {
+            "title": "Veille technologique",
+            "desc": "Suivi régulier des nouveautés en cybersécurité, infrastructures cloud et solutions open-source."
+          },
+          "projects": {
+            "title": "Projets personnels",
+            "desc": "Développement de scripts d'automatisation, expérimentation avec des homelab et self-hosting."
+          }
+        }
+      }
+    },
+    "skills": {
+      "title": "Compétences",
+      "subtitle": "Cliquez sur une compétence pour voir le détail de la mission associée.",
+      "missions": {
+        "gestion": {
+          "title": "Suivre le parc, éviter les surprises",
+          "subtitle": "Gestion du Patrimoine Informatique",
+          "intro": "La gestion du patrimoine informatique, c'est la base pour maintenir un SI propre : savoir quel matériel existe, où il se trouve, dans quel état et qui l'utilise. C'est aussi ce qui permet d'anticiper les pannes, les renouvellements et la sécurité.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Remise à jour de l'inventaire du parc informatique d'un client : vérification du matériel réel sur site, consolidation des informations et mise à jour du suivi pour faciliter la maintenance et le support.",
+          "context": "Le client avait un inventaire incomplet : certains postes n'étaient pas référencés, des équipements avaient changé d'utilisateur, et plusieurs informations (modèle, numéro de série, localisation) n'étaient plus à jour.",
+          "objective": "Obtenir un inventaire fiable et exploitable : postes, périphériques, équipements réseau, avec une traçabilité suffisante pour accélérer le support et planifier le renouvellement.",
+          "role": "Relevés terrain, consolidation des données et mise à jour de l'inventaire. J'ai aussi standardisé certains champs (noms, lieux, responsables) pour que l'inventaire reste lisible dans le temps.",
+          "actions": ["Vérifier sur site : postes, écrans, imprimantes, switches/routeurs visibles", "Renseigner/mettre à jour les infos clés : modèle, série, état, localisation, utilisateur", "Mettre une logique de nommage (ex : PC-XXX / SALLE-XXX) pour retrouver vite", "Identifier les équipements \"fantômes\" (présents dans l'outil mais absents sur site) et inversement", "Centraliser les infos utiles pour le support (OS, IP si fixe, garanties, rôle de la machine)"],
+          "proofTitle": "Pourquoi ça prouve ma compétence",
+          "proofText": "Ce qui fait la différence, ce n'est pas juste \"faire un inventaire\" : c'est la capacité à structurer et fiabiliser les données pour qu'elles soient utiles au quotidien (support + maintenance + sécurité).",
+          "impactTitle1": "Méthode & cohérence",
+          "impactText1": "Je travaille avec une logique \"terrain → outil → vérification\" : je collecte, je structure, puis je contrôle que les informations sont cohérentes et réutilisables.",
+          "impactTitle2": "Impact support & sécurité",
+          "impactText2": "Un inventaire propre réduit les incidents, accélère les dépannages (on sait quel matériel, où, pour qui), et aide à suivre les mises à jour / changements.",
+          "tags": ["Inventaire", "Traçabilité", "GLPI", "Terrain"]
+        },
+        "communication": {
+          "title": "Communiquer pour convaincre et convertir",
+          "subtitle": "Communication Externe",
+          "intro": "Comment Cekoya communique à l'extérieur (image, acquisition, crédibilité) et comment j'applique la même logique à mes projets perso (contenu & services).",
+          "missionLabel": "Communication externe chez Cekoya (Nîmes)",
+          "mission": "Cekoya s'appuie sur plusieurs leviers complémentaires : site vitrine, LinkedIn, Google (présence + avis), partenariats et salons. L'objectif est simple : être visible, inspirer confiance, et générer des opportunités.",
+          "context": "Site vitrine (clarté & crédibilité), LinkedIn (image pro & réseau), Google (être trouvé & recommandé), Partenariats (crédibilité terrain), Salons (visibilité & confiance).",
+          "objective": "La communication externe fonctionne quand elle est cohérente : même message partout (site, LinkedIn, Google), et surtout une réputation qui confirme ce message.",
+          "role": "Analyse des leviers de communication, application de la même logique à mes projets perso : montrer, rassurer, convertir. Mon contenu sert de preuve.",
+          "actions": ["Contenu : attirer par la preuve — montrer le niveau de qualité (rythme, transitions, sound design)", "Confiance : clarté & réactivité — attentes claires, délais annoncés, feedback précis", "Offre : lisibilité & process — ce qui est inclus, comment ça se déroule, ce qui est livré", "Site vitrine : rassurer rapidement (première impression)", "LinkedIn : crédibiliser + créer des contacts"],
+          "proofTitle": "Ce qui prouve la compétence",
+          "proofText": "Je sais \"vendre par la preuve\" : mon contenu rassure, mon discours est clair, et mon offre est simple. C'est la même base qu'une communication externe efficace en entreprise.",
+          "impactTitle1": "Cohérence multi-canal",
+          "impactText1": "Même message partout (site, LinkedIn, Google). La réputation confirme le message (partenaires, retours, présence).",
+          "impactTitle2": "Application personnelle",
+          "impactText2": "Je suis la même logique : montrer, rassurer, convertir. Mon contenu sert de preuve directe de qualité.",
+          "tags": ["Site web", "LinkedIn", "Google", "Partenariats"]
+        },
+        "support": {
+          "title": "Diagnostiquer vite, corriger proprement",
+          "subtitle": "Support & Incidents Réseau",
+          "intro": "Pendant mon stage chez Cekoya (Nîmes), j'ai participé au support informatique des clients : incidents réseau, services indisponibles, postes instables, impressions, accès aux ressources. Le support, c'est surtout une méthode : identifier, isoler, corriger, puis valider.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Incident réseau : accès aux partages et imprimantes indisponible sur plusieurs postes, après modification d'équipement (routeur / switch). Objectif : rétablir rapidement l'accès aux services sans impacter davantage la production.",
+          "context": "Plusieurs utilisateurs signalent : impossibilité d'accéder aux dossiers partagés, imprimantes introuvables et connexions instables. Le problème semble toucher une zone précise du réseau.",
+          "objective": "Rétablir l'accès aux services (partages, imprimantes, applis) et vérifier la stabilité. Une fois la correction appliquée, validation avec les utilisateurs concernés.",
+          "role": "Piste DHCP/DNS, erreur de VLAN, câble/port défaillant, ou conflit d'adressage. L'idée est d'isoler si c'est un problème poste ou réseau.",
+          "actions": ["Vérifier rapidement si le souci touche un poste ou plusieurs postes", "Contrôler l'adressage : IP, passerelle, DNS, bail DHCP et cohérence du réseau", "Tester l'accès aux ressources : ping passerelle, serveur, partages, imprimantes", "Isoler la zone : port switch / VLAN / équipement réseau lié aux postes concernés", "Appliquer la correction puis valider avec un cas réel (partages + impression)"],
+          "proofTitle": "Pourquoi ça prouve ma compétence",
+          "proofText": "Le support informatique demande à la fois de la technique et de la rigueur. Le point que je mets en avant : je sais suivre une méthode claire pour réduire le temps d'indisponibilité, tout en gardant un résultat propre.",
+          "impactTitle1": "Réactivité & priorisation",
+          "impactText1": "Je traite d'abord ce qui bloque le plus (accès aux ressources essentielles), puis je vérifie la stabilité avant de clôturer. L'objectif : retour à la production au plus vite.",
+          "impactTitle2": "Fiabilité & validation",
+          "impactText2": "Une correction n'est jamais \"supposée\" : elle est testée. Je valide sur un poste réel, puis je confirme auprès des utilisateurs que tout est revenu à la normale.",
+          "tags": ["Diagnostic", "DHCP/DNS", "VLAN", "Validation"]
+        },
+        "projet": {
+          "title": "Déploiement d'une solution 4G de secours",
+          "subtitle": "Projet Technique",
+          "intro": "Mission réalisée durant mon stage chez Cekoya (Nîmes), dans un contexte d'infogérance et d'interventions auprès de clients professionnels (PME, commerces, structures administratives).",
+          "missionLabel": "Ma mission : configuration du routeur 4G",
+          "mission": "Dans ce projet, j'étais responsable de la partie technique liée au routeur 4G : préparation, configuration, failover et tests. L'objectif était de livrer une configuration fiable, prête à être intégrée sur site.",
+          "context": "Un client rencontrait des coupures régulières de sa connexion Internet principale, ce qui impactait directement : l'accès aux outils métiers, la téléphonie IP et la productivité des employés.",
+          "objective": "Assurer une connexion de secours active automatiquement, sans intervention manuelle, afin de réduire l'impact des coupures sur l'activité du client.",
+          "role": "Responsable de la partie technique : préparation, configuration, failover et tests. Projet mené en équipe avec un technicien référent pour l'intégration sur site.",
+          "actions": ["Préparation 4G : paramétrage connexion (carte SIM / paramètres opérateur), sécurisation accès admin", "Configuration du failover : basculement automatique entre ligne principale et 4G", "Détection de panne et retour automatique dès que la connexion principale redevient stable", "Tests de coupure simulée : vérification du passage sur la 4G, stabilité de la connexion", "Confirmation du retour automatique vers la ligne principale"],
+          "proofTitle": "Critères de réussite",
+          "proofText": "La solution est validée lorsque le client conserve une connexion fonctionnelle malgré une coupure Internet, et que le basculement (et le retour) se fait de manière automatique et stable.",
+          "impactTitle1": "Fiabilité & autonomie",
+          "impactText1": "Solution stable, simple à maintenir, basculement fiable. Validation par des tests réalistes avant mise en production.",
+          "impactTitle2": "Travail en équipe",
+          "impactText2": "Intégration sur site et validation globale effectuées avec le technicien référent. Préparation technique en autonomie.",
+          "tags": ["Mikrotik", "Zyxel", "Failover", "4G"]
+        },
+        "assistance": {
+          "title": "Accompagner et rendre autonome",
+          "subtitle": "Assistance Utilisateur",
+          "intro": "Durant mon stage chez Cekoya (Nîmes), j'ai souvent été en contact avec les utilisateurs (à distance ou sur site). L'objectif était de résoudre rapidement un incident, tout en expliquant clairement ce qui se passe et ce que je fais.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Déploiement et prise en main d'un nouveau poste après incident, avec récupération de l'environnement utilisateur et vérifications réseau.",
+          "context": "Un utilisateur ne pouvait plus travailler correctement : lenteurs, plantages, et accès aléatoire aux ressources (lecteurs réseau / impression / applications). La priorité était de le remettre opérationnel rapidement.",
+          "objective": "Fournir un poste stable, retrouver l'environnement de travail (comptes, accès, outils), et guider l'utilisateur pour qu'il soit autonome sur les vérifications simples.",
+          "role": "Installation et configuration du poste, réintégration au domaine / réseau si nécessaire, vérifications (DHCP/DNS, partages, imprimantes), puis accompagnement utilisateur.",
+          "actions": ["Préparer un poste \"propre\" : mises à jour, drivers, paramétrage de base", "Vérifier la connectivité : accès partages, impression, applications, navigation", "Expliquer à l'utilisateur : ce qui a été fait + comment éviter que ça se reproduise", "Valider : l'utilisateur teste ses tâches réelles avant clôture"],
+          "proofTitle": "Pourquoi ça prouve ma compétence",
+          "proofText": "L'assistance utilisateur ne consiste pas seulement à \"réparer\". Le point clé que j'ai développé, c'est la capacité à traduire un problème technique en actions simples pour l'utilisateur.",
+          "impactTitle1": "Communication claire",
+          "impactText1": "J'explique ce que je fais avec des mots simples, je rassure l'utilisateur, et je donne 2–3 vérifications rapides qu'il peut refaire seul (Wi-Fi, câble, redémarrage, etc.).",
+          "impactTitle2": "Efficacité & validation",
+          "impactText2": "Je valide sur le \"réel\" : l'utilisateur teste ses tâches habituelles (impression, applis, dossiers). Le ticket n'est clos que quand le poste est réellement fonctionnel.",
+          "tags": ["Poste", "Domaine", "Support", "Formation"]
+        }
+      },
+      "labels": {
+        "context": "Contexte",
+        "objective": "Objectif",
+        "role": "Mon rôle",
+        "actions": "Ce que j'ai fait (concret)",
+        "proof": "Pourquoi ça prouve ma compétence"
+      }
+    },
+    "infra": {
+      "title": "Infrastructure Réseau",
+      "subtitle": "Schéma du réseau déployé lors de ma formation — topologie complète avec firewall, serveurs et services.",
+      "legend": "Légende",
+      "redNetwork": "Réseau Red (WAN)",
+      "greenNetwork": "Réseau Green (LAN)",
+      "dmz": "DMZ",
+      "config": "Configuration",
+      "dhcpRange": "Plage DHCP",
+      "gateway": "Passerelle",
+      "dns": "DNS"
+    },
+    "watch": {
+      "title": "Veille Technologique",
+      "topic": "Évolution de la virtualisation serveur (VMware)",
+      "sections": {
+        "before": {
+          "title": "Avant la virtualisation",
+          "text": "Modèle classique : 1 serveur physique = 1 service. Limites : sous-utilisation des ressources (10-20%), coûts élevés, faible flexibilité, pannes critiques."
+        },
+        "vmware": {
+          "title": "L'arrivée de VMware",
+          "text": "Fin des années 90 : démocratisation de l'hyperviseur. Séparation du matériel et de l'OS. Une machine physique peut héberger plusieurs serveurs logiques isolés.",
+          "benefits": ["Isolation des environnements", "Consolidation (moins de serveurs physiques)", "Déploiement rapide via clonage", "Meilleure sécurité par séparation"]
+        },
+        "today": {
+          "title": "VMware Aujourd'hui",
+          "text": "Acteur majeur avec ESXi, vSphere, vCenter, VMware Cloud.",
+          "features": ["vMotion : migration de VM sans interruption", "Snapshots avancés : retour rapide à un état précédent", "vSAN : stockage distribué sans SAN physique", "HA : redémarrage automatique des VM en cas de panne", "Intégration Kubernetes avec Tanzu"]
+        },
+        "why": {
+          "title": "Pourquoi c'est essentiel",
+          "points": ["Réduire les coûts (matériel, énergie, maintenance)", "Gagner en flexibilité et rapidité de déploiement", "Améliorer la sécurité par l'isolation", "Assurer la continuité de service (HA, clusters)", "Faciliter la migration cloud"]
+        }
+      },
+      "sources": "Sources : Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
+    },
+    "tutorials": {
+      "title": "Mes Tutoriels",
+      "subtitle": "Guides techniques réalisés pendant ma formation.",
+      "items": {
+        "zabbix": { "title": "Zabbix", "desc": "Installation serveur + agents (Linux/Windows)" },
+        "vlan": { "title": "VLAN sur ESXi", "desc": "Configuration & bonnes pratiques" },
+        "gpo": { "title": "GPO (Stratégies de groupe)", "desc": "Créer, lier, appliquer des stratégies dans un domaine AD" },
+        "ad": { "title": "Active Directory", "desc": "Installation, création de domaine, OU, comptes, groupes" },
+        "wifi": { "title": "Borne Wi-Fi Cisco", "desc": "Configuration SSID, sécurité, accès, VLAN Wi-Fi" },
+        "glpi": { "title": "GLPI & Fusion Inventory", "desc": "Inventaire, agents, collecte matériel/logiciel" },
+        "ipfire": { "title": "IPFire (Firewall)", "desc": "Installation, zones, règles, NAT, filtrage & sécurité" },
+        "proxmox": { "title": "Proxmox", "desc": "Installation, VM/CT, stockage, réseau, bonnes pratiques" },
+        "esxi": { "title": "Utilisateurs & droits ESXi", "desc": "Comptes, rôles, permissions, sécurité" },
+        "dhcpdns": { "title": "Windows Server : DHCP & DNS", "desc": "Étendues, réservations, zones DNS & enregistrements" }
+      },
+      "categories": {
+        "system": "Système",
+        "network": "Réseau",
+        "virtualization": "Virtualisation",
+        "security": "Sécurité",
+        "monitoring": "Monitoring",
+        "itsm": "ITSM"
+      }
+    },
+    "contactTab": {
+      "title": "Contact",
+      "intro": "Pour toute demande (stage, alternance, collaboration, montage vidéo, services), n'hésitez pas à me contacter.",
+      "emailPro": "Email (Pro)",
+      "emailBusiness": "Email (Business / Services)",
+      "links": "Mes Liens",
+      "send": "Envoyer",
+      "copy": "Copier",
+      "copied": "Copié !"
+    }
+  },
+  "links": {
+    "title": "MES liens",
+    "subtitle": "Tout ce qu'il faut pour me contacter.",
+    "socialsTitle": "Réseaux sociaux",
+    "discordTitle": "Discord",
+    "contactTitle": "Contact",
+    "emailPro": "Email (Pro)",
+    "emailBusiness": "Email (Business)",
+    "sendMail": "Envoyer un mail",
+    "sendMailBiz": "Envoyer un mail (Business)",
+    "openMail": "Ouvrir l'appli mail",
+    "joinServer": "Rejoindre le serveur",
+    "editingServices": "Services de montage",
+    "copyHint": "Astuce : cliquez sur copier pour récupérer mon e-mail",
+    "copied": "Copié !"
+  }
+}
