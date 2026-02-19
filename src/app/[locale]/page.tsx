@@ -4,6 +4,9 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { User, Gamepad2, Store, Link as LinkIcon, Crosshair, ArrowLeftRight, Briefcase } from "lucide-react";
 import { DashboardReveal } from "@/components/dashboard/dashboard-reveal";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({ subsets: ["latin"], weight: ["700", "900"] });
 
 const NAV_ITEMS = [
   { key: "profile", href: "/profil", icon: User, accent: "purple" },
@@ -23,6 +26,24 @@ const ACCENT_BG: Record<string, string> = {
   cyan: "rgba(34, 211, 238, 0.10)",
   green: "rgba(110, 227, 183, 0.10)",
   amber: "rgba(251, 191, 36, 0.10)",
+};
+
+const ACCENT_GLOW: Record<string, string> = {
+  purple: "0 0 25px rgba(167, 139, 250, 0.12), 0 0 60px rgba(167, 139, 250, 0.05)",
+  blue: "0 0 25px rgba(96, 165, 250, 0.12), 0 0 60px rgba(96, 165, 250, 0.05)",
+  pink: "0 0 25px rgba(244, 114, 182, 0.12), 0 0 60px rgba(244, 114, 182, 0.05)",
+  cyan: "0 0 25px rgba(34, 211, 238, 0.12), 0 0 60px rgba(34, 211, 238, 0.05)",
+  green: "0 0 25px rgba(110, 227, 183, 0.12), 0 0 60px rgba(110, 227, 183, 0.05)",
+  amber: "0 0 25px rgba(251, 191, 36, 0.12), 0 0 60px rgba(251, 191, 36, 0.05)",
+};
+
+const ACCENT_BORDER: Record<string, string> = {
+  purple: "rgba(167, 139, 250, 0.25)",
+  blue: "rgba(96, 165, 250, 0.25)",
+  pink: "rgba(244, 114, 182, 0.25)",
+  cyan: "rgba(34, 211, 238, 0.25)",
+  green: "rgba(110, 227, 183, 0.25)",
+  amber: "rgba(251, 191, 36, 0.25)",
 };
 
 const ACCENT_TEXT: Record<string, string> = {
@@ -52,9 +73,15 @@ function DashCard({
       href={href as "/profil"}
       className="dashboard-card no-underline group"
     >
-      <div className="glass-panel gradient-border !p-7 sm:!p-8 cursor-pointer hover:scale-[1.025] transition-all duration-300 flex flex-col items-center text-center gap-4">
+      <div
+        className="glass-panel gradient-border !p-7 sm:!p-8 cursor-pointer hover:scale-[1.025] transition-all duration-300 flex flex-col items-center text-center gap-4"
+        style={{
+          "--card-glow": ACCENT_GLOW[accent],
+          "--card-border": ACCENT_BORDER[accent],
+        } as React.CSSProperties}
+      >
         <span
-          className="w-14 h-14 rounded-2xl flex items-center justify-center"
+          className="dash-icon w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300"
           style={{ background: ACCENT_BG[accent] }}
         >
           <Icon className={`w-6 h-6 ${ACCENT_TEXT[accent]}`} />
@@ -78,19 +105,25 @@ export default function DashboardPage() {
       <div className="min-h-screen flex flex-col items-center px-5 sm:px-6 pt-[56px] pb-[100px]">
         {/* Avatar + Identity */}
         <div className="dashboard-avatar flex flex-col items-center gap-3 mb-10">
-          <div className="avatar-wrapper w-[110px] h-[110px]">
+          <div className="avatar-wrapper w-[120px] h-[120px]">
             <Image
               src="/images/IMG_4549.png"
               alt="Yexo avatar"
-              width={110}
-              height={110}
+              width={120}
+              height={120}
               className="w-full h-full object-cover bg-[#111]"
               priority
             />
           </div>
           <div className="text-center">
-            <h1 className="gradient-text text-[1.6rem] font-extrabold tracking-tight">YEXO</h1>
-            <p className="text-white/35 text-xs mt-0.5">Content Creator &bull; Valorant</p>
+            <h1
+              className={`${orbitron.className} hero-title text-[2rem] sm:text-[2.3rem] font-black tracking-[0.08em]`}
+            >
+              YEXO
+            </h1>
+            <p className="text-white/40 text-[0.7rem] sm:text-xs mt-1.5 font-medium uppercase tracking-[0.25em]">
+              Content Creator &bull; Valorant
+            </p>
           </div>
         </div>
 
