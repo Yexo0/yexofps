@@ -616,6 +616,70 @@ body::after {
   transform: translateX(4px);
 }
 
+/* ===== TRACKER-SPECIFIC ===== */
+
+/* Refresh spin when loading */
+.tracker-spin {
+  animation: spinSmooth 0.8s linear infinite;
+}
+
+@keyframes spinSmooth {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Stat cards — progress bar at bottom */
+.tracker-stat {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.tracker-stat::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: var(--stat-fill, 0%);
+  background: var(--stat-accent, rgba(167, 139, 250, 0.5));
+  border-radius: 0 2px 0 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0.6;
+}
+
+.tracker-stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--stat-accent, rgba(167, 139, 250, 0.1));
+}
+
+.tracker-stat:hover::after {
+  opacity: 1;
+}
+
+/* Match rows — colored left bar */
+.tracker-match {
+  border-left: 3px solid transparent;
+  border-left-color: var(--match-accent, transparent);
+  transition: all 0.25s ease;
+}
+
+.tracker-match:hover {
+  transform: translateX(4px);
+  border-color: transparent;
+  border-left-color: var(--match-accent, transparent);
+}
+
+/* Agent image glow on hover */
+.tracker-agent {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tracker-match:hover .tracker-agent {
+  box-shadow: 0 0 12px var(--match-accent, rgba(255,255,255,0.1));
+  transform: scale(1.05);
+}
+
 /* ===== CHATBOT ===== */
 .chatbot-toggle {
   position: fixed;
@@ -734,16 +798,754 @@ body::after {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(167, 139, 250, 0.06);
 }
 
-/* ===== LINK CARD PREMIUM ===== */
-.link-card-premium {
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* ===== SHOP-SPECIFIC ===== */
+
+/* Notice dots pulse */
+.notice-dot {
+  animation: dotPulse 2s ease-in-out infinite;
 }
 
-.link-card-premium:hover {
-  border-color: rgba(167, 139, 250, 0.2);
-  transform: translateX(6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(167, 139, 250, 0.05);
+/* Product card — image slow zoom on hover */
+.shop-product .shop-product-img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shop-product:hover .shop-product-img {
+  transform: scale(1.06);
+}
+
+/* Hover tint overlay — subtle purple wash on image */
+.product-tint {
+  background: rgba(167, 139, 250, 0);
+  transition: background 0.4s ease;
+  mix-blend-mode: overlay;
+}
+
+.shop-product:hover .product-tint {
+  background: rgba(167, 139, 250, 0.12);
+}
+
+/* Price tag pop on hover */
+.shop-price {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.shop-product:hover .shop-price {
+  transform: scale(1.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Badge glow pulse */
+.shop-badge {
+  animation: badgeGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 12px rgba(167, 139, 250, 0.2); }
+}
+
+/* Corner accent lines — appear on hover */
+.product-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.product-corner-tl {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid rgba(167, 139, 250, 0.5);
+  border-left: 1.5px solid rgba(167, 139, 250, 0.5);
+  border-radius: 2px 0 0 0;
+}
+
+.product-corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1.5px solid rgba(96, 165, 250, 0.5);
+  border-right: 1.5px solid rgba(96, 165, 250, 0.5);
+  border-radius: 0 0 2px 0;
+}
+
+.shop-product:hover .product-corner {
+  opacity: 1;
+}
+
+/* Title underline reveal on hover */
+.product-title {
+  position: relative;
+  display: inline-block;
+}
+
+.product-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.6), rgba(96, 165, 250, 0.4));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.shop-product:hover .product-title::after {
+  width: 100%;
+}
+
+/* Decorative background circle — scales on hover */
+.product-circle {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.04) 0%, transparent 70%);
+  transform: translateY(-50%) scale(0.6);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.shop-product:hover .product-circle {
+  transform: translateY(-50%) scale(1.2);
+  opacity: 1;
+}
+
+/* Content area — slides up on hover */
+.product-content {
+  transition: transform 0.35s ease;
+}
+
+.shop-product:hover .product-content {
+  transform: translateY(-3px);
+}
+
+/* Description text — brighter on hover */
+.product-desc {
+  transition: color 0.3s ease;
+}
+
+.shop-product:hover .product-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* CTA button — accent glow on card hover */
+.product-cta {
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shop-product:hover .product-cta {
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient separator between image and content */
+.shop-product .product-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.shop-product:hover .product-content::before {
+  opacity: 1;
+}
+
+/* Reviews — platform colored left border */
+.shop-review {
+  border-left: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.review-discord {
+  border-left-color: rgba(88, 101, 242, 0.3);
+}
+
+.review-discord:hover {
+  border-left-color: rgba(88, 101, 242, 0.7);
+  box-shadow: -4px 0 15px rgba(88, 101, 242, 0.06);
+}
+
+.review-tiktok {
+  border-left-color: rgba(254, 44, 85, 0.3);
+}
+
+.review-tiktok:hover {
+  border-left-color: rgba(254, 44, 85, 0.7);
+  box-shadow: -4px 0 15px rgba(254, 44, 85, 0.06);
+}
+
+/* Stars — subtle sparkle on appear */
+.review-star {
+  display: inline-block;
+  animation: starAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes starAppear {
+  0% { opacity: 0; transform: scale(0) rotate(-30deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Trust stat icon — pulse while counting */
+.stat-icon-counting {
+  animation: statIconPulse 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes statIconPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+/* Trust stat card — subtle accent left bar on hover */
+.trust-stat {
+  border-left: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.trust-stat:hover {
+  border-left-color: var(--stat-accent, rgba(167, 139, 250, 0.5));
+  transform: translateX(4px);
+}
+
+/* Contact cards — colored top border pulse */
+.contact-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.contact-card-blue::before {
+  background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.7), transparent);
+  animation: contactPulse 3s ease-in-out infinite;
+}
+
+.contact-card-pink::before {
+  background: linear-gradient(90deg, transparent, rgba(244, 114, 182, 0.7), transparent);
+  animation: contactPulse 3s ease-in-out infinite 0.5s;
+}
+
+.contact-card-purple::before {
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.7), transparent);
+  animation: contactPulse 3s ease-in-out infinite 1s;
+}
+
+@keyframes contactPulse {
+  0%, 100% { opacity: 0.2; transform: scaleX(0.5); }
+  50% { opacity: 0.8; transform: scaleX(1); }
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+  animation: none;
+  transform: scaleX(1);
+}
+
+/* ===== LINKS PAGE v3 — ALIVE ===== */
+
+/* Online dot */
+.link-online-dot {
+  animation: onlinePulse 2s ease-in-out infinite;
+}
+
+@keyframes onlinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+  50% { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+}
+
+/* Section label */
+.lk-section-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.25);
+  padding: 0 4px;
+  margin-bottom: 10px;
+}
+
+/* Reveal */
+.lk-reveal {
+  will-change: opacity, transform;
+}
+
+/* ── BIG CARDS (social — 4 col grid) ── */
+.lk-big-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 14px 22px;
+  border-radius: 20px;
+  background: var(--lk-bg, rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--lk-border-idle, rgba(255, 255, 255, 0.06));
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Radial glow behind icon — pulsing */
+.lk-big-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--lk-glow, rgba(167, 139, 250, 0.08)) 0%, transparent 70%);
+  animation: lkGlowPulse 3s ease-in-out infinite;
+  animation-delay: var(--lk-delay, 0s);
+  pointer-events: none;
+}
+
+@keyframes lkGlowPulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(0.9); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+/* Bottom gradient line — always visible, breathing */
+.lk-big-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--lk-color, rgba(167, 139, 250, 0.5));
+  animation: lkLinePulse 2.5s ease-in-out infinite;
+  animation-delay: var(--lk-delay, 0s);
+  pointer-events: none;
+}
+
+@keyframes lkLinePulse {
+  0%, 100% { opacity: 0.15; transform: scaleX(0.5); }
+  50% { opacity: 0.7; transform: scaleX(1); }
+}
+
+.lk-big-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.3));
+  background: var(--lk-bg-hover, rgba(255, 255, 255, 0.05));
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px var(--lk-glow, rgba(167, 139, 250, 0.1)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.lk-big-card:hover::before {
+  animation: none;
+  opacity: 1;
+  width: 150px;
+  height: 150px;
+  top: -25px;
+  transform: translateX(-50%) scale(1);
+  background: radial-gradient(circle, var(--lk-glow-strong, rgba(167, 139, 250, 0.22)) 0%, transparent 60%);
+}
+
+.lk-big-card:hover::after {
+  animation: none;
+  opacity: 1;
+  transform: scaleX(1);
+  left: 5%;
+  right: 5%;
+}
+
+.lk-big-card:active {
+  transform: translateY(-2px) scale(0.98);
+  transition-duration: 0.12s;
+}
+
+/* Icon ring — floating animation */
+.lk-big-icon-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lk-icon-bg, rgba(255, 255, 255, 0.05));
+  border: 1.5px solid var(--lk-icon-border, rgba(255, 255, 255, 0.08));
+  color: var(--lk-color, rgba(255, 255, 255, 0.6));
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+  animation: lkIconFloat 3s ease-in-out infinite;
+  animation-delay: var(--lk-delay, 0s);
+}
+
+@keyframes lkIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.lk-big-card:hover .lk-big-icon-ring {
+  animation: none;
+  transform: scale(1.18);
+  background: var(--lk-icon-bg-hover, rgba(255, 255, 255, 0.1));
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.4));
+  box-shadow:
+    0 0 25px var(--lk-glow, rgba(167, 139, 250, 0.25)),
+    0 0 50px var(--lk-glow, rgba(167, 139, 250, 0.1));
+}
+
+/* Platform name */
+.lk-big-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-big-card:hover .lk-big-name {
+  color: var(--lk-color, #fff);
+  text-shadow: 0 0 20px var(--lk-glow, rgba(167, 139, 250, 0.3));
+}
+
+/* Sub (@handle) */
+.lk-big-sub {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-big-card:hover .lk-big-sub {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* External arrow badge */
+.lk-big-go {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.15);
+  transition: all 0.35s ease;
+}
+
+.lk-big-card:hover .lk-big-go {
+  color: var(--lk-color, rgba(255, 255, 255, 0.7));
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.3));
+  background: var(--lk-icon-bg, rgba(255, 255, 255, 0.08));
+  transform: translate(2px, -2px);
+  box-shadow: 0 0 10px var(--lk-glow, rgba(167, 139, 250, 0.1));
+}
+
+/* Staggered animation delays */
+.lk-big-card:nth-child(1) { --lk-delay: 0s; }
+.lk-big-card:nth-child(2) { --lk-delay: 0.4s; }
+.lk-big-card:nth-child(3) { --lk-delay: 0.8s; }
+.lk-big-card:nth-child(4) { --lk-delay: 1.2s; }
+
+/* ── WIDE CARDS (discord, contact — 2 col) ── */
+.lk-wide-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--lk-bg, rgba(255, 255, 255, 0.025));
+  border: 1px solid var(--lk-border-idle, rgba(255, 255, 255, 0.06));
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Left accent bar — breathing */
+.lk-wide-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--lk-color, rgba(167, 139, 250, 0.5));
+  animation: lkBarBreath 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes lkBarBreath {
+  0%, 100% { opacity: 0.2; top: 30%; bottom: 30%; }
+  50% { opacity: 0.8; top: 12%; bottom: 12%; }
+}
+
+/* Shimmer sweep */
+.lk-wide-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    var(--lk-shimmer, rgba(255, 255, 255, 0.03)) 48%,
+    var(--lk-shimmer-peak, rgba(255, 255, 255, 0.06)) 50%,
+    var(--lk-shimmer, rgba(255, 255, 255, 0.03)) 52%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  background-position: 150% 0;
+  animation: lkSweep 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes lkSweep {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
+
+.lk-wide-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.25));
+  background: var(--lk-bg-hover, rgba(255, 255, 255, 0.05));
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.35),
+    0 0 30px var(--lk-glow, rgba(167, 139, 250, 0.1));
+}
+
+.lk-wide-card:hover::before {
+  animation: none;
+  opacity: 1;
+  top: 8%;
+  bottom: 8%;
+}
+
+.lk-wide-card:active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: 0.1s;
+}
+
+/* Icon */
+.lk-wide-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lk-icon-bg, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--lk-icon-border, rgba(255, 255, 255, 0.08));
+  color: var(--lk-color, rgba(255, 255, 255, 0.6));
+  transition: all 0.35s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-wide-card:hover .lk-wide-icon {
+  background: var(--lk-icon-bg-hover, rgba(255, 255, 255, 0.1));
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.3));
+  box-shadow: 0 0 20px var(--lk-glow, rgba(167, 139, 250, 0.18));
+  transform: scale(1.08);
+}
+
+/* Name */
+.lk-wide-name {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-wide-card:hover .lk-wide-name {
+  color: var(--lk-color, #fff);
+  text-shadow: 0 0 15px var(--lk-glow, rgba(167, 139, 250, 0.25));
+}
+
+/* Sub */
+.lk-wide-sub {
+  font-size: 0.73rem;
+  color: rgba(255, 255, 255, 0.3);
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-wide-card:hover .lk-wide-sub {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Arrow */
+.lk-wide-arrow {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.2);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.lk-wide-card:hover .lk-wide-arrow {
+  color: var(--lk-color, rgba(255, 255, 255, 0.6));
+  transform: translateX(5px);
+}
+
+/* Copy btn */
+.lk-copy-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.lk-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: var(--lk-border, rgba(167, 139, 250, 0.3));
+  color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.15);
+  box-shadow: 0 0 16px var(--lk-glow, rgba(167, 139, 250, 0.18));
+}
+
+.lk-copy-btn:active {
+  transform: scale(0.85);
+}
+
+/* ── Platform colors — BIG cards ── */
+
+/* TikTok — Turquoise néon (distinctif) */
+.lk-big-tiktok {
+  --lk-color: #00dcd0;
+  --lk-bg: rgba(0, 220, 208, 0.025);
+  --lk-bg-hover: rgba(0, 220, 208, 0.07);
+  --lk-border: rgba(0, 220, 208, 0.35);
+  --lk-border-idle: rgba(0, 220, 208, 0.08);
+  --lk-glow: rgba(0, 220, 208, 0.15);
+  --lk-glow-strong: rgba(0, 220, 208, 0.28);
+  --lk-icon-bg: rgba(0, 220, 208, 0.08);
+  --lk-icon-bg-hover: rgba(0, 220, 208, 0.18);
+  --lk-icon-border: rgba(0, 220, 208, 0.12);
+  --lk-shimmer: rgba(0, 220, 208, 0.04);
+  --lk-shimmer-peak: rgba(0, 220, 208, 0.08);
+}
+
+/* Instagram — Warm gradient orange/pink */
+.lk-big-instagram {
+  --lk-color: #f77737;
+  --lk-bg: rgba(247, 119, 55, 0.02);
+  --lk-bg-hover: rgba(247, 119, 55, 0.06);
+  --lk-border: rgba(247, 119, 55, 0.3);
+  --lk-border-idle: rgba(247, 119, 55, 0.06);
+  --lk-glow: rgba(247, 119, 55, 0.12);
+  --lk-glow-strong: rgba(247, 119, 55, 0.22);
+  --lk-icon-bg: rgba(247, 119, 55, 0.06);
+  --lk-icon-bg-hover: rgba(247, 119, 55, 0.14);
+  --lk-icon-border: rgba(247, 119, 55, 0.1);
+  --lk-shimmer: rgba(247, 119, 55, 0.03);
+  --lk-shimmer-peak: rgba(247, 119, 55, 0.07);
+}
+
+/* Linktree — Green */
+.lk-big-linktree {
+  --lk-color: #43e97b;
+  --lk-bg: rgba(67, 233, 123, 0.02);
+  --lk-bg-hover: rgba(67, 233, 123, 0.06);
+  --lk-border: rgba(67, 233, 123, 0.3);
+  --lk-border-idle: rgba(67, 233, 123, 0.06);
+  --lk-glow: rgba(67, 233, 123, 0.12);
+  --lk-glow-strong: rgba(67, 233, 123, 0.22);
+  --lk-icon-bg: rgba(67, 233, 123, 0.06);
+  --lk-icon-bg-hover: rgba(67, 233, 123, 0.14);
+  --lk-icon-border: rgba(67, 233, 123, 0.1);
+  --lk-shimmer: rgba(67, 233, 123, 0.03);
+  --lk-shimmer-peak: rgba(67, 233, 123, 0.07);
+}
+
+/* ── Platform colors — WIDE cards ── */
+
+/* Discord — Blurple */
+.lk-wide-discord {
+  --lk-color: #5865f2;
+  --lk-bg: rgba(88, 101, 242, 0.02);
+  --lk-bg-hover: rgba(88, 101, 242, 0.06);
+  --lk-border: rgba(88, 101, 242, 0.25);
+  --lk-border-idle: rgba(88, 101, 242, 0.06);
+  --lk-glow: rgba(88, 101, 242, 0.12);
+  --lk-icon-bg: rgba(88, 101, 242, 0.06);
+  --lk-icon-bg-hover: rgba(88, 101, 242, 0.14);
+  --lk-icon-border: rgba(88, 101, 242, 0.1);
+  --lk-shimmer: rgba(88, 101, 242, 0.03);
+  --lk-shimmer-peak: rgba(88, 101, 242, 0.06);
+}
+
+/* Email — Blue */
+.lk-wide-email {
+  --lk-color: #60a5fa;
+  --lk-bg: rgba(96, 165, 250, 0.02);
+  --lk-bg-hover: rgba(96, 165, 250, 0.06);
+  --lk-border: rgba(96, 165, 250, 0.25);
+  --lk-border-idle: rgba(96, 165, 250, 0.06);
+  --lk-glow: rgba(96, 165, 250, 0.12);
+  --lk-icon-bg: rgba(96, 165, 250, 0.06);
+  --lk-icon-bg-hover: rgba(96, 165, 250, 0.14);
+  --lk-icon-border: rgba(96, 165, 250, 0.1);
+  --lk-shimmer: rgba(96, 165, 250, 0.03);
+  --lk-shimmer-peak: rgba(96, 165, 250, 0.06);
+}
+
+/* Business — Purple */
+.lk-wide-business {
+  --lk-color: #a78bfa;
+  --lk-bg: rgba(167, 139, 250, 0.02);
+  --lk-bg-hover: rgba(167, 139, 250, 0.06);
+  --lk-border: rgba(167, 139, 250, 0.25);
+  --lk-border-idle: rgba(167, 139, 250, 0.06);
+  --lk-glow: rgba(167, 139, 250, 0.12);
+  --lk-icon-bg: rgba(167, 139, 250, 0.06);
+  --lk-icon-bg-hover: rgba(167, 139, 250, 0.14);
+  --lk-icon-border: rgba(167, 139, 250, 0.1);
+  --lk-shimmer: rgba(167, 139, 250, 0.03);
+  --lk-shimmer-peak: rgba(167, 139, 250, 0.06);
 }
 
 /* ===== PRO TABS ===== */
@@ -782,6 +1584,527 @@ body::after {
 
 .pro-tab-trigger[data-state="active"]::after {
   display: none !important;
+}
+
+/* ===== ANIMATED DIVIDER LINES ===== */
+.animated-line {
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #a78bfa);
+  background-size: 200% 100%;
+  animation: lineShimmer 3s ease-in-out infinite;
+}
+
+.animated-line-warm {
+  background: linear-gradient(90deg, #f472b6, #a78bfa, #f472b6);
+  background-size: 200% 100%;
+  animation: lineShimmer 3s ease-in-out infinite;
+}
+
+.animated-line-blue {
+  background: linear-gradient(90deg, #60a5fa, #22d3ee, #60a5fa);
+  background-size: 200% 100%;
+  animation: lineShimmer 3s ease-in-out infinite;
+}
+
+@keyframes lineShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== PARTNER CARDS ===== */
+.partner-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 55%,
+    transparent 65%
+  );
+  background-size: 300% 100%;
+  background-position: 150% 0;
+  animation: cardShimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+.partner-card:nth-child(1)::after { animation-delay: 0s; }
+.partner-card:nth-child(2)::after { animation-delay: 0.4s; }
+
+.partner-card:hover {
+  border-color: rgba(167, 139, 250, 0.2);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.08), 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== SOCIAL BUTTONS ===== */
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f3f3f3;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* TikTok — pink/red */
+.social-tiktok:hover {
+  background: rgba(254, 44, 85, 0.12);
+  border-color: rgba(254, 44, 85, 0.35);
+  box-shadow: 0 0 20px rgba(254, 44, 85, 0.10);
+  color: #fe2c55;
+}
+
+/* Instagram — gradient purple/orange */
+.social-instagram:hover {
+  background: rgba(228, 64, 95, 0.12);
+  border-color: rgba(228, 64, 95, 0.35);
+  box-shadow: 0 0 20px rgba(228, 64, 95, 0.10);
+  color: #e4405f;
+}
+
+/* Discord — blurple */
+.social-discord:hover {
+  background: rgba(88, 101, 242, 0.12);
+  border-color: rgba(88, 101, 242, 0.35);
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.10);
+  color: #5865f2;
+}
+
+/* Linktree / Others — green */
+.social-linktree:hover {
+  background: rgba(67, 233, 123, 0.12);
+  border-color: rgba(67, 233, 123, 0.35);
+  box-shadow: 0 0 20px rgba(67, 233, 123, 0.10);
+  color: #43e97b;
+}
+
+/* ===== RANK CARDS ===== */
+.rank-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+/* Pulsing accent top-line that breathes with game color */
+.rank-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--stat-accent, rgba(167, 139, 250, 0.5)), transparent);
+  animation: borderPulse 2.5s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  opacity: 0.7;
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.6); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+.rank-card:hover {
+  box-shadow: var(--rank-glow);
+  border-color: var(--stat-accent, rgba(167, 139, 250, 0.3));
+}
+
+
+/* Rank image — subtle float, staggered */
+.rank-image {
+  animation: rankFloat 3s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.rank-card:hover .rank-image {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 12px var(--stat-accent, rgba(167, 139, 250, 0.4)));
+}
+
+@keyframes rankFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Rank name — metallic text shimmer */
+.rank-name {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 1) 40%,
+    rgba(167, 139, 250, 0.9) 50%,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0%, 100% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+}
+
+/* Pulsing live dot next to game name */
+.rank-card .rank-dot {
+  animation: dotPulse 2s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* ===== SETUP CARDS ===== */
+.setup-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 2px solid transparent;
+}
+
+/* Breathing left accent bar — fades in and out */
+.setup-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent, rgba(96, 165, 250, 0.6), transparent);
+  animation: setupBreath 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.setup-card:nth-child(1)::after { animation-delay: 0s; }
+.setup-card:nth-child(2)::after { animation-delay: 0.6s; }
+.setup-card:nth-child(3)::after { animation-delay: 1.2s; }
+
+@keyframes setupBreath {
+  0%, 100% { opacity: 0.15; top: 30%; bottom: 30%; }
+  50% { opacity: 0.8; top: 10%; bottom: 10%; }
+}
+
+.setup-card:hover {
+  border-color: rgba(96, 165, 250, 0.25);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.10), 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateX(6px);
+}
+
+.setup-card:hover::after {
+  opacity: 1;
+  animation: none;
+  top: 10%;
+  bottom: 10%;
+}
+
+/* ===== SOCIAL CHIPS (icon-only buttons) ===== */
+.social-chip {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.social-chip:hover {
+  transform: translateY(-2px);
+}
+
+.social-chip-discord:hover {
+  background: rgba(88, 101, 242, 0.15);
+  border-color: rgba(88, 101, 242, 0.35);
+  color: #5865f2;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.12);
+}
+
+.social-chip-tiktok:hover {
+  background: rgba(254, 44, 85, 0.15);
+  border-color: rgba(254, 44, 85, 0.35);
+  color: #fe2c55;
+  box-shadow: 0 0 15px rgba(254, 44, 85, 0.12);
+}
+
+.social-chip-linktree:hover {
+  background: rgba(67, 233, 123, 0.15);
+  border-color: rgba(67, 233, 123, 0.35);
+  color: #43e97b;
+  box-shadow: 0 0 15px rgba(67, 233, 123, 0.12);
+}
+
+/* ===== CONVERTER PAGE ===== */
+
+/* Main converter panel — subtle inner glow */
+.convert-panel {
+  position: relative;
+}
+
+.convert-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 60% 40% at 30% 20%,
+    rgba(110, 227, 183, 0.025) 0%,
+    transparent 60%
+  ),
+  radial-gradient(
+    ellipse 50% 35% at 75% 80%,
+    rgba(167, 139, 250, 0.02) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* Convert side sections — stagger reveal */
+.convert-side {
+  position: relative;
+}
+
+/* Labels — fade-in slide with subtle tracking animation */
+.convert-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.convert-side:hover .convert-label {
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.08em;
+}
+
+/* Input fields — glow ring on focus */
+.convert-input {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.convert-input:focus {
+  box-shadow: 0 0 0 2px rgba(110, 227, 183, 0.12), 0 0 20px rgba(110, 227, 183, 0.06);
+}
+
+/* Select dropdown caret color */
+.convert-input option {
+  background: #0d0d12;
+}
+
+/* Swap button */
+.convert-swap {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.convert-swap::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(110, 227, 183, 0.2),
+    rgba(167, 139, 250, 0.2),
+    rgba(110, 227, 183, 0.2)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.convert-swap:hover::before {
+  opacity: 1;
+}
+
+.convert-swap:hover {
+  transform: scale(1.1);
+}
+
+/* Swap button spin animation (triggered by JS) */
+.convert-swap-spin {
+  animation: swapSpin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes swapSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+/* CTA convert button — emerald accent with pulse */
+.convert-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.convert-cta::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(110, 227, 183, 0.15),
+    rgba(96, 165, 250, 0.10)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.convert-cta:hover::after {
+  opacity: 1;
+  animation: ctaPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Result box — styled output */
+.convert-result-box {
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.04em;
+  transition: all 0.3s ease;
+}
+
+.convert-result-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(110, 227, 183, 0.4), rgba(167, 139, 250, 0.3));
+  border-radius: 3px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.convert-result-box:hover::before {
+  opacity: 1;
+}
+
+/* Flash animation — green pulse on new result */
+.convert-flash {
+  border-color: rgba(110, 227, 183, 0.5) !important;
+  box-shadow: 0 0 20px rgba(110, 227, 183, 0.15), inset 0 0 12px rgba(110, 227, 183, 0.05);
+  animation: resultFlash 0.6s ease-out;
+}
+
+@keyframes resultFlash {
+  0% {
+    border-color: rgba(110, 227, 183, 0.7);
+    box-shadow: 0 0 30px rgba(110, 227, 183, 0.25), inset 0 0 20px rgba(110, 227, 183, 0.08);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+}
+
+/* Detail cards — hover lift + glow */
+.convert-detail {
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.convert-detail::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--stat-accent, rgba(110, 227, 183, 0.5)), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.convert-detail:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--stat-accent, rgba(110, 227, 183, 0.08));
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.convert-detail:hover::after {
+  opacity: 0.8;
+}
+
+/* Detail dots — pulsing with accent color */
+.convert-detail-dot {
+  animation: convertDotPulse 2.5s ease-in-out infinite;
+}
+
+.convert-detail:nth-child(1) .convert-detail-dot { animation-delay: 0s; }
+.convert-detail:nth-child(2) .convert-detail-dot { animation-delay: 0.5s; }
+.convert-detail:nth-child(3) .convert-detail-dot { animation-delay: 1s; }
+
+@keyframes convertDotPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); box-shadow: none; }
+  50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 8px currentColor; }
+}
+
+/* Yaw value rows — hover highlight */
+.convert-yaw-row {
+  padding: 3px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.convert-yaw-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.convert-yaw-row:hover span:first-child {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.convert-yaw-row:hover span:last-child {
+  color: rgba(167, 139, 250, 0.8);
+}
+
+/* Staggered section fade-in (handled by JS in page) */
+.convert-section {
+  will-change: opacity, transform;
+}
+
+/* Animated line — emerald variant for converter */
+.animated-line {
+  background: linear-gradient(90deg, #6ee7b7, #a78bfa, #6ee7b7);
+  background-size: 200% 100%;
+  animation: lineShimmer 3s ease-in-out infinite;
 }
 
 /* ===== SELECTION ===== */

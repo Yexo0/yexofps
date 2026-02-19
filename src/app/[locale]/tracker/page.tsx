@@ -6,15 +6,16 @@ import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BackButton } from "@/components/layout/back-button";
 import { Footer } from "@/components/layout/footer";
-import { PageHeader } from "@/components/shared/page-header";
 import { GlassPanel } from "@/components/shared/glass-panel";
-import { SectionTitle } from "@/components/shared/section-title";
 import { TRACKER_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 import { MatchData, TrackerStats, computeStats, fmtPct, fmtNum } from "@/lib/tracker-types";
 import { MatchDetailModal } from "@/components/tracker/match-detail-modal";
 import { RefreshCw, Clock, Link } from "lucide-react";
 import { TikTokIcon } from "@/components/icons/tiktok";
 import { DiscordIcon } from "@/components/icons/discord";
+import { Orbitron } from "next/font/google";
+
+const orbitron = Orbitron({ subsets: ["latin"], weight: ["700", "900"] });
 
 type Status = "idle" | "loading" | "ok" | "error" | "cooldown";
 
@@ -120,10 +121,16 @@ export default function TrackerPage() {
 
   const statusDotClass =
     status === "ok" ? "bg-green-400" :
-    status === "loading" ? "bg-yellow-400 animate-pulse" :
+    status === "loading" ? "bg-yellow-400" :
     status === "error" ? "bg-red-400" :
     status === "cooldown" ? "bg-orange-400" :
     "bg-white/40";
+
+  const statusRingClass =
+    status === "ok" ? "ring-green-400/30" :
+    status === "loading" ? "ring-yellow-400/30" :
+    status === "error" ? "ring-red-400/30" :
+    "ring-white/10";
 
   const statusLabel =
     status === "ok" ? t("upToDate") :
@@ -131,27 +138,6 @@ export default function TrackerPage() {
     status === "error" ? t("error") :
     status === "cooldown" ? t("cooldown") :
     t("waiting");
-
-  const socialChips = (
-    <>
-      <button
-        onClick={() => fetchTracker(false)}
-        className="btn-ghost-premium !py-2 !px-3.5 !text-xs"
-      >
-        <RefreshCw className="w-3.5 h-3.5" />
-        <span>{t("refresh")}</span>
-        <small className="text-white/40">{cooldownLeft > 0 ? `${cooldownLeft}s` : "—"}</small>
-      </button>
-      <button
-        onClick={() => setAutoOn(!autoOn)}
-        className="btn-ghost-premium !py-2 !px-3.5 !text-xs"
-      >
-        <Clock className="w-3.5 h-3.5" />
-        <span>{t("auto")}</span>
-        <small className={autoOn ? "text-green-400" : "text-white/40"}>{autoOn ? "ON" : "OFF"}</small>
-      </button>
-    </>
-  );
 
   const STAT_ACCENTS = [
     "rgba(110, 227, 183, 0.5)",
@@ -167,25 +153,69 @@ export default function TrackerPage() {
       <main className="relative z-[2] min-h-screen flex flex-col items-center gap-5 px-[18px] pt-[60px] pb-[100px] max-w-[1120px] mx-auto">
         {/* Header */}
         <div className="w-full tracker-section">
-          <PageHeader name={t("name")} tagline={t("tagline")} actions={socialChips} />
+          <GlassPanel className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+            <div className="flex items-center gap-4 flex-1">
+              <div className="avatar-wrapper w-[72px] h-[72px] shrink-0">
+                <Image
+                  src="/images/IMG_4549.png"
+                  alt="Yexo avatar"
+                  width={72}
+                  height={72}
+                  className="w-full h-full object-cover bg-[#111]"
+                />
+              </div>
+              <div>
+                <h1 className={`${orbitron.className} hero-title text-[1.5rem] sm:text-[1.7rem] font-black tracking-[0.06em]`}>
+                  {t("name")}
+                </h1>
+                <div className="flex items-center gap-2 mt-1 text-sm text-white/55">
+                  <Image src="/images/france.png" alt="France" width={18} height={13} className="rounded-sm" />
+                  <span>France</span>
+                </div>
+                <p className="text-sm text-white/45 mt-1">{t("tagline")}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => fetchTracker(false)}
+                className="btn-ghost-premium !py-2 !px-3.5 !text-xs"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${status === "loading" ? "tracker-spin" : ""}`} />
+                <span>{t("refresh")}</span>
+                <small className="text-white/40">{cooldownLeft > 0 ? `${cooldownLeft}s` : "—"}</small>
+              </button>
+              <button
+                onClick={() => setAutoOn(!autoOn)}
+                className="btn-ghost-premium !py-2 !px-3.5 !text-xs"
+              >
+                <Clock className="w-3.5 h-3.5" />
+                <span>{t("auto")}</span>
+                <small className={autoOn ? "text-green-400" : "text-white/40"}>{autoOn ? "ON" : "OFF"}</small>
+              </button>
+            </div>
+          </GlassPanel>
         </div>
 
         {/* Stats */}
         <div className="w-full tracker-section">
           <GlassPanel>
-            <SectionTitle
-              title={t("title")}
-              right={
-                <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${statusDotClass}`} />
-                  <span className="text-xs text-white/50">{statusLabel}</span>
-                </div>
-              }
-            />
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-bold tracking-wide text-white">{t("title")}</h2>
+                <div className="mt-1.5 h-[2px] w-12 rounded-full animated-line" />
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="tracker-status-dot relative flex items-center justify-center w-4 h-4">
+                  <span className={`absolute inset-0 rounded-full ${statusRingClass} ring-2 animate-ping opacity-40`} />
+                  <span className={`relative w-2 h-2 rounded-full ${statusDotClass}`} />
+                </span>
+                <span className="text-xs text-white/50">{statusLabel}</span>
+              </div>
+            </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {/* HS% */}
-              <article className="stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[0] } as React.CSSProperties}>
+              <article className="tracker-stat stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[0], "--stat-fill": stats ? `${Math.min(stats.avgHs * 100, 100)}%` : "0%" } as React.CSSProperties}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-emerald-400/80">HS%</span>
                   <span className="text-[10px] text-white/35">{t("last10")}</span>
@@ -197,7 +227,7 @@ export default function TrackerPage() {
               </article>
 
               {/* K/D */}
-              <article className="stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[1] } as React.CSSProperties}>
+              <article className="tracker-stat stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[1], "--stat-fill": stats ? `${Math.min(stats.kd * 33, 100)}%` : "0%" } as React.CSSProperties}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-blue-400/80">K/D</span>
                   <span className="text-[10px] text-white/35">{t("last10")}</span>
@@ -209,7 +239,7 @@ export default function TrackerPage() {
               </article>
 
               {/* Winrate */}
-              <article className="stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[2] } as React.CSSProperties}>
+              <article className="tracker-stat stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[2], "--stat-fill": stats ? `${Math.min(stats.winrate * 100, 100)}%` : "0%" } as React.CSSProperties}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-pink-400/80">Winrate</span>
                   <span className="text-[10px] text-white/35">{t("unrated")}</span>
@@ -223,7 +253,7 @@ export default function TrackerPage() {
               </article>
 
               {/* K/D/A */}
-              <article className="stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[3] } as React.CSSProperties}>
+              <article className="tracker-stat stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[3], "--stat-fill": "60%" } as React.CSSProperties}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-purple-400/80">K / D / A</span>
                   <span className="text-[10px] text-white/35">{t("total")}</span>
@@ -237,7 +267,7 @@ export default function TrackerPage() {
               </article>
 
               {/* Peak RR */}
-              <article className="stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[4] } as React.CSSProperties}>
+              <article className="tracker-stat stat-card-premium" style={{ "--stat-accent": STAT_ACCENTS[4], "--stat-fill": "87%" } as React.CSSProperties}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-cyan-400/80">{t("peakRr")}</span>
                   <span className="text-[10px] text-white/35">{t("ranked")}</span>
@@ -265,65 +295,80 @@ export default function TrackerPage() {
         {/* Matches */}
         <div className="w-full tracker-section">
           <GlassPanel>
-            <SectionTitle title={t("matchesTitle")} />
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-bold tracking-wide text-white">{t("matchesTitle")}</h2>
+                <div className="mt-1.5 h-[2px] w-12 rounded-full animated-line-warm" />
+              </div>
+            </div>
             <div className="flex flex-col gap-2">
-              {matches.map((m, i) => (
-                <div
-                  key={i}
-                  onClick={() => setSelectedMatch(m)}
-                  className={`match-row-premium flex items-center gap-4 p-3 rounded-xl cursor-pointer ${
-                    m.result === "win"
-                      ? "bg-[rgba(110,255,190,0.04)] hover:bg-[rgba(110,255,190,0.10)]"
-                      : m.result === "loss"
-                      ? "bg-[rgba(255,120,150,0.04)] hover:bg-[rgba(255,120,150,0.10)]"
-                      : "bg-white/[0.02] hover:bg-white/[0.05]"
-                  }`}
-                >
-                  <Image
-                    src={m.agentImg || "/images/IMG_4549.png"}
-                    alt={m.agent}
-                    width={40}
-                    height={40}
-                    className="w-10 h-10 rounded-lg object-cover"
-                    unoptimized
-                  />
+              {matches.map((m, i) => {
+                const isWin = m.result === "win";
+                const isLoss = m.result === "loss";
+                const kdPositive = m.kills >= m.deaths;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => setSelectedMatch(m)}
+                    className={`tracker-match match-row-premium flex items-center gap-4 p-3 rounded-xl cursor-pointer ${
+                      isWin
+                        ? "bg-[rgba(110,255,190,0.04)] hover:bg-[rgba(110,255,190,0.10)]"
+                        : isLoss
+                        ? "bg-[rgba(255,120,150,0.04)] hover:bg-[rgba(255,120,150,0.10)]"
+                        : "bg-white/[0.02] hover:bg-white/[0.05]"
+                    }`}
+                    style={{
+                      "--match-accent": isWin ? "rgba(110, 227, 183, 0.6)" : isLoss ? "rgba(255, 120, 150, 0.6)" : "rgba(255,255,255,0.15)",
+                    } as React.CSSProperties}
+                  >
+                    <Image
+                      src={m.agentImg || "/images/IMG_4549.png"}
+                      alt={m.agent}
+                      width={40}
+                      height={40}
+                      className="tracker-agent w-10 h-10 rounded-lg object-cover"
+                      unoptimized
+                    />
 
-                  <div className="flex-1 min-w-0">
-                    <strong className="text-sm text-white block">{m.map}</strong>
-                    <span className="text-xs text-white/40">{m.mode.toUpperCase()} &bull; {m.agent}</span>
-                  </div>
+                    <div className="flex-1 min-w-0">
+                      <strong className="text-sm text-white block">{m.map}</strong>
+                      <span className="text-xs text-white/40">{m.mode.toUpperCase()} &bull; {m.agent}</span>
+                    </div>
 
-                  <div className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    m.result === "win"
-                      ? "bg-[rgba(110,255,190,0.15)] text-emerald-400"
-                      : m.result === "loss"
-                      ? "bg-[rgba(255,120,150,0.15)] text-pink-400"
-                      : "bg-white/[0.06] text-white/40"
-                  }`}>
-                    {m.result === "win" ? "WIN" : m.result === "loss" ? "LOSS" : "—"}
-                  </div>
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                      isWin
+                        ? "bg-[rgba(110,255,190,0.15)] text-emerald-400"
+                        : isLoss
+                        ? "bg-[rgba(255,120,150,0.15)] text-pink-400"
+                        : "bg-white/[0.06] text-white/40"
+                    }`}>
+                      {isWin ? "WIN" : isLoss ? "LOSS" : "—"}
+                    </div>
 
-                  <div className="hidden sm:block text-center w-16">
-                    <div className="text-[10px] text-white/30">Score</div>
-                    <div className="text-sm font-bold text-white">{m.score}</div>
-                  </div>
+                    <div className="hidden sm:block text-center w-16">
+                      <div className="text-[10px] text-white/30">Score</div>
+                      <div className="text-sm font-bold text-white">{m.score}</div>
+                    </div>
 
-                  <div className="text-center w-20">
-                    <div className="text-[10px] text-white/30">K/D/A</div>
-                    <div className="text-sm font-bold text-white">{m.kills}/{m.deaths}/{m.assists}</div>
-                  </div>
+                    <div className="text-center w-20">
+                      <div className="text-[10px] text-white/30">K/D/A</div>
+                      <div className={`text-sm font-bold ${kdPositive ? "text-emerald-300" : "text-pink-300"}`}>
+                        {m.kills}/{m.deaths}/{m.assists}
+                      </div>
+                    </div>
 
-                  <div className="hidden md:block text-center w-16">
-                    <div className="text-[10px] text-white/30">HS%</div>
-                    <div className="text-sm font-bold text-white">
-                      {(() => {
-                        const shots = m.headshots + m.bodyshots + m.legshots;
-                        return shots > 0 ? fmtPct(m.headshots / shots) : "—";
-                      })()}
+                    <div className="hidden md:block text-center w-16">
+                      <div className="text-[10px] text-white/30">HS%</div>
+                      <div className="text-sm font-bold text-white">
+                        {(() => {
+                          const shots = m.headshots + m.bodyshots + m.legshots;
+                          return shots > 0 ? fmtPct(m.headshots / shots) : "—";
+                        })()}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               {matches.length === 0 && status !== "loading" && (
                 <div className="text-center text-white/35 py-8 text-sm">{t("waiting")}</div>
