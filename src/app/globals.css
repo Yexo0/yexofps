@@ -835,14 +835,29 @@ body::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Badge glow pulse */
+/* Badge glow pulse — stronger */
 .shop-badge {
   animation: badgeGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes badgeGlow {
-  0%, 100% { box-shadow: none; }
-  50% { box-shadow: 0 0 12px rgba(167, 139, 250, 0.2); }
+  0%, 100% { box-shadow: 0 0 4px rgba(234, 179, 8, 0.2); }
+  50%       { box-shadow: 0 0 18px rgba(234, 179, 8, 0.6), 0 0 30px rgba(234, 179, 8, 0.15); }
+}
+
+/* Featured product — permanent amber border glow */
+@keyframes featuredCardGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(234, 179, 8, 0.18),
+      0 0 14px rgba(234, 179, 8, 0.06);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(234, 179, 8, 0.45),
+      0 0 28px rgba(234, 179, 8, 0.18),
+      0 0 50px rgba(234, 179, 8, 0.06);
+  }
 }
 
 /* Corner accent lines — appear on hover */
@@ -1549,6 +1564,34 @@ body::after {
 }
 
 /* ===== PRO TABS ===== */
+@keyframes proTabPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 10px rgba(167, 139, 250, 0.18),
+      0 0  4px rgba(167, 139, 250, 0.10);
+  }
+  50% {
+    box-shadow:
+      0 0 22px rgba(167, 139, 250, 0.45),
+      0 0 10px rgba(167, 139, 250, 0.22);
+  }
+}
+
+@keyframes proIconPulse {
+  0%, 100% { filter: drop-shadow(0 0 0px var(--icon-glow, rgba(167,139,250,0.3))); }
+  50%       { filter: drop-shadow(0 0 8px var(--icon-glow, rgba(167,139,250,0.3))); }
+}
+
+@keyframes proDotPulse {
+  0%, 100% { filter: drop-shadow(0 0 0px var(--dot-glow, rgba(167,139,250,0.5))); }
+  50%       { filter: drop-shadow(0 0 7px var(--dot-glow, rgba(167,139,250,0.5))); }
+}
+
+@keyframes proHeaderGlow {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+}
+
 .pro-tabs-list {
   gap: 2px;
   padding: 4px;
@@ -1565,26 +1608,67 @@ body::after {
   color: rgba(255, 255, 255, 0.35) !important;
   background: transparent !important;
   border: 1px solid transparent !important;
-  transition: all 0.25s ease !important;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
   gap: 6px !important;
   white-space: nowrap !important;
 }
 
 .pro-tab-trigger:hover {
-  color: rgba(255, 255, 255, 0.6) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255,255,255,0.08) !important;
 }
 
 .pro-tab-trigger[data-state="active"] {
   color: rgba(255, 255, 255, 0.95) !important;
-  background: rgba(167, 139, 250, 0.12) !important;
-  border-color: rgba(167, 139, 250, 0.2) !important;
-  box-shadow: 0 0 15px rgba(167, 139, 250, 0.06) !important;
+  background: rgba(167, 139, 250, 0.14) !important;
+  border-color: rgba(167, 139, 250, 0.30) !important;
+  animation: proTabPulse 3s ease-in-out infinite !important;
 }
 
 .pro-tab-trigger[data-state="active"]::after {
   display: none !important;
 }
+
+/* Header ambient glow */
+.pro-page-header {
+  position: relative;
+}
+.pro-page-header::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px; height: 140px;
+  background: radial-gradient(ellipse, rgba(167,139,250,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: proHeaderGlow 5s ease-in-out infinite;
+}
+.pro-page-header > * { position: relative; z-index: 1; }
+
+/* Animated shimmer underline for pro header */
+.pro-header-line {
+  height: 2px;
+  width: 56px;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(167,139,250,0.9), rgba(96,165,250,0.9), rgba(167,139,250,0.9));
+  background-size: 200% 100%;
+  animation: lineShimmer 3s ease-in-out infinite;
+}
+
+/* Icon glow for overview / formation / skills */
+.pro-icon-glow {
+  animation: proIconPulse 4s ease-in-out infinite;
+}
+
+/* Timeline dot glow */
+.pro-dot-pulse {
+  animation: proDotPulse 3s ease-in-out infinite;
+}
+.pro-dot-purple { --dot-glow: rgba(167, 139, 250, 0.6); }
+.pro-dot-blue   { --dot-glow: rgba(96,  165, 250, 0.6); }
 
 /* ===== ANIMATED DIVIDER LINES ===== */
 .animated-line {
@@ -1696,7 +1780,18 @@ body::after {
   50%       { opacity: 1;   transform: translateX(-50%) scale(1.06); }
 }
 
-/* Coloured tag badges */
+/* Coloured tag badges — pulsing border glow */
+@keyframes tagPulse {
+  0%, 100% {
+    box-shadow: 0 0 3px 0px var(--tg),  0 0  6px 0px var(--tg-soft);
+    border-color: var(--tg-border-dim);
+  }
+  50% {
+    box-shadow: 0 0 10px 3px var(--tg), 0 0 20px 6px var(--tg-soft);
+    border-color: var(--tg-border-bright);
+  }
+}
+
 .profile-tag {
   display: inline-flex;
   align-items: center;
@@ -1707,33 +1802,61 @@ body::after {
   font-weight: 600;
   letter-spacing: 0.04em;
   border: 1px solid;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  animation: tagPulse 4s ease-in-out infinite;
+  transition: transform 0.2s ease;
 }
 
 .profile-tag:hover { transform: translateY(-2px); }
 
+.profile-tag--lg {
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  gap: 7px;
+}
+
 .profile-tag--purple {
+  --tg:           rgba(167, 139, 250, 0.75);
+  --tg-soft:      rgba(167, 139, 250, 0.15);
+  --tg-border-dim:    rgba(167, 139, 250, 0.22);
+  --tg-border-bright: rgba(167, 139, 250, 0.55);
   background: rgba(167, 139, 250, 0.08);
-  border-color: rgba(167, 139, 250, 0.28);
+  border-color: var(--tg-border-dim);
   color: rgba(167, 139, 250, 0.95);
+  animation-delay: 0s;
 }
 
 .profile-tag--pink {
+  --tg:           rgba(244, 114, 182, 0.75);
+  --tg-soft:      rgba(244, 114, 182, 0.15);
+  --tg-border-dim:    rgba(244, 114, 182, 0.22);
+  --tg-border-bright: rgba(244, 114, 182, 0.55);
   background: rgba(244, 114, 182, 0.08);
-  border-color: rgba(244, 114, 182, 0.28);
+  border-color: var(--tg-border-dim);
   color: rgba(244, 114, 182, 0.95);
+  animation-delay: -1s;
 }
 
 .profile-tag--blue {
+  --tg:           rgba(96, 165, 250, 0.75);
+  --tg-soft:      rgba(96, 165, 250, 0.15);
+  --tg-border-dim:    rgba(96, 165, 250, 0.22);
+  --tg-border-bright: rgba(96, 165, 250, 0.55);
   background: rgba(96, 165, 250, 0.08);
-  border-color: rgba(96, 165, 250, 0.28);
+  border-color: var(--tg-border-dim);
   color: rgba(96, 165, 250, 0.95);
+  animation-delay: -2s;
 }
 
 .profile-tag--green {
+  --tg:           rgba(110, 227, 183, 0.75);
+  --tg-soft:      rgba(110, 227, 183, 0.15);
+  --tg-border-dim:    rgba(110, 227, 183, 0.22);
+  --tg-border-bright: rgba(110, 227, 183, 0.55);
   background: rgba(110, 227, 183, 0.08);
-  border-color: rgba(110, 227, 183, 0.28);
+  border-color: var(--tg-border-dim);
   color: rgba(110, 227, 183, 0.95);
+  animation-delay: -3s;
 }
 
 /* Hero social buttons (bigger than footer, smaller than dashboard) */
@@ -2060,20 +2183,34 @@ body::after {
   animation-duration: 5.5s;
 }
 
-/* "Disponible" live badge */
+/* "Disponible" live badge — pulsing radar ring */
+@keyframes liveBadgePing {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0px rgba(110, 227, 183, 0.4),
+      0 0 10px rgba(110, 227, 183, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px rgba(110, 227, 183, 0),
+      0 0 22px rgba(110, 227, 183, 0.30);
+  }
+}
+
 .shop-live-badge {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   padding: 5px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(110, 227, 183, 0.25);
-  background: rgba(110, 227, 183, 0.06);
-  color: rgba(110, 227, 183, 0.85);
+  border: 1px solid rgba(110, 227, 183, 0.30);
+  background: rgba(110, 227, 183, 0.07);
+  color: rgba(110, 227, 183, 0.90);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  animation: liveBadgePing 2.8s ease-in-out infinite;
 }
 
 .shop-live-dot {
@@ -2091,6 +2228,20 @@ body::after {
 }
 
 /* Hero CTA buttons */
+@keyframes ctaPrimaryPulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba(167, 139, 250, 0.30), 0 0  8px rgba(244, 114, 182, 0.10); }
+  50%       { box-shadow: 0 4px 32px rgba(167, 139, 250, 0.60), 0 0 20px rgba(244, 114, 182, 0.25); }
+}
+
+@keyframes sectionNumGlow {
+  0%, 100% { opacity: 0.20; }
+  50%       { opacity: 0.65; text-shadow: 0 0 10px rgba(167, 139, 250, 0.5); }
+}
+
+.shop-section-num {
+  animation: sectionNumGlow 4s ease-in-out infinite;
+}
+
 .shop-cta-primary {
   display: inline-flex;
   align-items: center;
@@ -2104,7 +2255,7 @@ body::after {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 20px rgba(167, 139, 250, 0.3);
+  animation: ctaPrimaryPulse 3s ease-in-out infinite;
 }
 
 .shop-cta-primary:hover {
@@ -2168,39 +2319,69 @@ body::after {
 /* Featured product (bestValue) */
 .shop-product--featured {
   grid-row: span 1;
+  animation: featuredCardGlow 3.5s ease-in-out infinite;
 }
 
-/* Review cards (upgraded) */
+/* Review cards */
+@keyframes reviewGlow {
+  0%, 100% {
+    box-shadow: -3px 0 10px -1px var(--rv-glow);
+    border-left-color: var(--rv-dim);
+  }
+  50% {
+    box-shadow: -3px 0 22px 2px var(--rv-glow), inset 0 0 20px -10px var(--rv-glow);
+    border-left-color: var(--rv-bright);
+  }
+}
+
 .shop-review-card {
   padding: 14px;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid transparent;
   border-left: 2px solid;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .shop-review-card.review-discord {
-  border-left-color: rgba(88, 101, 242, 0.4);
+  --rv-glow:   rgba(88, 101, 242, 0.35);
+  --rv-dim:    rgba(88, 101, 242, 0.30);
+  --rv-bright: rgba(88, 101, 242, 0.70);
+  border-left-color: var(--rv-dim);
+  animation: reviewGlow 4.5s ease-in-out infinite;
 }
 
 .shop-review-card.review-discord:hover {
-  background: rgba(88, 101, 242, 0.04);
-  border-left-color: rgba(88, 101, 242, 0.7);
-  box-shadow: -4px 0 20px rgba(88, 101, 242, 0.08);
+  background: rgba(88, 101, 242, 0.05);
+  box-shadow: -4px 0 24px rgba(88, 101, 242, 0.25);
 }
 
 .shop-review-card.review-tiktok {
-  border-left-color: rgba(254, 44, 85, 0.4);
+  --rv-glow:   rgba(254, 44, 85, 0.35);
+  --rv-dim:    rgba(254, 44, 85, 0.30);
+  --rv-bright: rgba(254, 44, 85, 0.70);
+  border-left-color: var(--rv-dim);
+  animation: reviewGlow 4.5s ease-in-out infinite;
+  animation-delay: -2.2s;
 }
 
 .shop-review-card.review-tiktok:hover {
-  background: rgba(254, 44, 85, 0.04);
-  border-left-color: rgba(254, 44, 85, 0.7);
-  box-shadow: -4px 0 20px rgba(254, 44, 85, 0.08);
+  background: rgba(254, 44, 85, 0.05);
+  box-shadow: -4px 0 24px rgba(254, 44, 85, 0.25);
 }
 
 /* Contact cards (whole card = CTA) */
+@keyframes contactCardGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px 1px var(--cc-glow);
+    border-color: var(--cc-border-dim);
+  }
+  50% {
+    box-shadow: 0 0 24px 6px var(--cc-glow), 0 6px 32px var(--cc-glow-soft);
+    border-color: var(--cc-border-bright);
+  }
+}
+
 .shop-contact-card {
   position: relative;
   display: flex;
@@ -2228,14 +2409,40 @@ body::after {
 .shop-contact-card--pink::before    { background: linear-gradient(90deg, transparent, rgba(244, 114, 182, 0.8), transparent); animation-delay: 0.6s; }
 .shop-contact-card--purple::before  { background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.8), transparent); animation-delay: 1.2s; }
 
+.shop-contact-card--discord {
+  --cc-glow:          rgba(88, 101, 242, 0.38);
+  --cc-glow-soft:     rgba(88, 101, 242, 0.12);
+  --cc-border-dim:    rgba(88, 101, 242, 0.18);
+  --cc-border-bright: rgba(88, 101, 242, 0.52);
+  animation: contactCardGlow 5s ease-in-out infinite;
+}
+
+.shop-contact-card--pink {
+  --cc-glow:          rgba(244, 114, 182, 0.38);
+  --cc-glow-soft:     rgba(244, 114, 182, 0.12);
+  --cc-border-dim:    rgba(244, 114, 182, 0.18);
+  --cc-border-bright: rgba(244, 114, 182, 0.52);
+  animation: contactCardGlow 5s ease-in-out infinite;
+  animation-delay: -1.6s;
+}
+
+.shop-contact-card--purple {
+  --cc-glow:          rgba(167, 139, 250, 0.38);
+  --cc-glow-soft:     rgba(167, 139, 250, 0.12);
+  --cc-border-dim:    rgba(167, 139, 250, 0.18);
+  --cc-border-bright: rgba(167, 139, 250, 0.52);
+  animation: contactCardGlow 5s ease-in-out infinite;
+  animation-delay: -3.2s;
+}
+
 .shop-contact-card:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-.shop-contact-card--discord:hover { box-shadow: 0 12px 36px rgba(88, 101, 242, 0.12); background: rgba(88, 101, 242, 0.04); }
-.shop-contact-card--pink:hover    { box-shadow: 0 12px 36px rgba(244, 114, 182, 0.12); background: rgba(244, 114, 182, 0.04); }
-.shop-contact-card--purple:hover  { box-shadow: 0 12px 36px rgba(167, 139, 250, 0.12); background: rgba(167, 139, 250, 0.04); }
+.shop-contact-card--discord:hover { box-shadow: 0 12px 36px rgba(88, 101, 242, 0.22); background: rgba(88, 101, 242, 0.04); }
+.shop-contact-card--pink:hover    { box-shadow: 0 12px 36px rgba(244, 114, 182, 0.22); background: rgba(244, 114, 182, 0.04); }
+.shop-contact-card--purple:hover  { box-shadow: 0 12px 36px rgba(167, 139, 250, 0.22); background: rgba(167, 139, 250, 0.04); }
 
 .shop-contact-icon {
   width: 44px;

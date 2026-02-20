@@ -103,7 +103,7 @@ export default function ShopPage() {
           <div className="flex items-center gap-4 mb-6">
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-white/20 font-mono text-xs">01</span>
+                <span className="shop-section-num font-mono text-xs">01</span>
                 <h2 className="gradient-text-warm text-xl font-bold">{t("productsTitle")}</h2>
               </div>
               <div className="mt-1.5 h-[3px] w-20 rounded-full animated-line-warm" />
@@ -186,7 +186,7 @@ export default function ShopPage() {
           {/* Stats panel */}
           <GlassPanel className="flex flex-col gap-1">
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-white/20 font-mono text-xs">02</span>
+              <span className="shop-section-num font-mono text-xs">02</span>
               <h2 className="gradient-text text-xl font-bold">{t("statsTitle")}</h2>
             </div>
             <div className="mt-1 mb-4 h-[3px] w-20 rounded-full animated-line" />
@@ -201,7 +201,7 @@ export default function ShopPage() {
           {/* Reviews panel */}
           <GlassPanel className="flex flex-col gap-1">
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-white/20 font-mono text-xs">03</span>
+              <span className="shop-section-num font-mono text-xs">03</span>
               <h2 className="gradient-text-warm text-xl font-bold">{t("reviewsTitle")}</h2>
             </div>
             <div className="mt-1 mb-4 h-[3px] w-20 rounded-full animated-line-warm" />
@@ -253,7 +253,7 @@ export default function ShopPage() {
         {/* ══════════ CONTACT ══════════ */}
         <section className="pr-item w-full" style={d(400)}>
           <div className="flex items-baseline gap-2 mb-6">
-            <span className="text-white/20 font-mono text-xs">04</span>
+            <span className="shop-section-num font-mono text-xs">04</span>
             <div>
               <h2 className="gradient-text text-xl font-bold">{t("contactTitle")}</h2>
               <div className="mt-1.5 h-[3px] w-20 rounded-full animated-line-blue" />

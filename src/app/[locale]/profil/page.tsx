@@ -54,24 +54,8 @@ export default function ProfilPage() {
             </p>
           </div>
 
-          {/* Tags */}
-          <div className="pr-item flex flex-wrap gap-2 justify-center" style={d(220)}>
-            <span className="profile-tag profile-tag--purple">
-              <Gamepad2 className="w-3 h-3" /> {t("tagRadiant")}
-            </span>
-            <span className="profile-tag profile-tag--pink">
-              <Video className="w-3 h-3" /> {t("tagEditor")}
-            </span>
-            <span className="profile-tag profile-tag--blue">
-              <Calendar className="w-3 h-3" /> {t("tagAge")}
-            </span>
-            <span className="profile-tag profile-tag--green">
-              <MapPin className="w-3 h-3" /> {t("tagLocation")}
-            </span>
-          </div>
-
           {/* Social buttons */}
-          <div className="pr-item flex flex-wrap gap-3 justify-center mt-1" style={d(350)}>
+          <div className="pr-item flex flex-wrap gap-3 justify-center mt-1" style={d(220)}>
             <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer"
               className="profile-social-btn profile-social-btn--tiktok">
               <TikTokIcon className="w-[18px] h-[18px]" />
@@ -108,14 +92,30 @@ export default function ProfilPage() {
               <div className="flex-1 h-px bg-gradient-to-r from-pink-500/20 to-transparent" />
             </div>
 
-            <div className="grid sm:grid-cols-[1fr_160px] gap-6 items-start">
-              {/* Quote text */}
-              <div className="relative pl-5 border-l-2 border-purple-500/25">
-                <span className="profile-quote-mark">&ldquo;</span>
-                <p className="text-white/65 leading-[1.85] text-[0.95rem]">
-                  {t("aboutText")}
-                </p>
-                <span className="profile-quote-mark profile-quote-mark--close">&rdquo;</span>
+            <div className="grid sm:grid-cols-[1fr_160px] gap-6 items-stretch">
+              {/* Quote text + tags */}
+              <div className="flex flex-col h-full">
+                <div className="relative pl-5 border-l-2 border-purple-500/25">
+                  <span className="profile-quote-mark">&ldquo;</span>
+                  <p className="text-white/65 leading-[1.85] text-[0.95rem]">
+                    {t("aboutText")}
+                  </p>
+                  <span className="profile-quote-mark profile-quote-mark--close">&rdquo;</span>
+                </div>
+                <div className="mt-auto mb-auto pt-4 flex flex-wrap gap-2.5">
+                  <span className="profile-tag profile-tag--purple profile-tag--lg">
+                    <Gamepad2 className="w-3.5 h-3.5" /> {t("tagRadiant")}
+                  </span>
+                  <span className="profile-tag profile-tag--pink profile-tag--lg">
+                    <Video className="w-3.5 h-3.5" /> {t("tagEditor")}
+                  </span>
+                  <span className="profile-tag profile-tag--blue profile-tag--lg">
+                    <Calendar className="w-3.5 h-3.5" /> {t("tagAge")}
+                  </span>
+                  <span className="profile-tag profile-tag--green profile-tag--lg">
+                    <MapPin className="w-3.5 h-3.5" /> {t("tagLocation")}
+                  </span>
+                </div>
               </div>
 
               {/* Mini timeline */}

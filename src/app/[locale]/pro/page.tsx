@@ -68,11 +68,12 @@ export default function ProPage() {
       <div className="min-h-screen flex flex-col items-center px-[18px] pt-[72px] pb-[100px]">
         <div className="w-full max-w-[860px]">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 pro-page-header">
             <h1 className="gradient-text text-[1.8rem] font-extrabold tracking-tight">
               {t("name")}
             </h1>
             <p className="text-white/40 text-sm mt-1">{t("tagline")}</p>
+            <div className="pro-header-line" />
           </div>
 
           {/* Tabs */}
@@ -154,6 +155,13 @@ function OverviewTab() {
     pink: "text-pink-400",
   };
 
+  const ICON_GLOW: Record<string, string> = {
+    purple: "rgba(167,139,250,0.6)",
+    blue: "rgba(96,165,250,0.6)",
+    cyan: "rgba(34,211,238,0.6)",
+    pink: "rgba(244,114,182,0.6)",
+  };
+
   return (
     <div className="space-y-6">
       <div className="glass-panel !p-6">
@@ -168,7 +176,7 @@ function OverviewTab() {
               className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
               style={{ background: ACCENT_COLORS[accent] }}
             >
-              <Icon className={`w-[18px] h-[18px] ${ACCENT_TEXT_COLORS[accent]}`} />
+              <Icon className={`w-[18px] h-[18px] ${ACCENT_TEXT_COLORS[accent]} pro-icon-glow`} style={{ "--icon-glow": ICON_GLOW[accent] } as React.CSSProperties} />
             </span>
             <p className="text-white/60 text-sm leading-relaxed">
               {t(`cards.${key}`)}
@@ -202,7 +210,7 @@ function FormationTab() {
         {modules.map(({ key, icon: Icon }) => (
           <div key={key} className="stat-card-premium">
             <div className="flex items-center gap-3 mb-2">
-              <Icon className="w-4 h-4 text-purple-400" />
+              <Icon className="w-4 h-4 text-purple-400 pro-icon-glow" />
               <h3 className="text-white font-semibold text-sm">
                 {t(`modules.${key}.title`)}
               </h3>
@@ -229,7 +237,7 @@ function FormationTab() {
               key={key}
               className="flex items-center gap-3 text-sm"
             >
-              <span className={`w-2 h-2 rounded-full shrink-0 ${i === 0 ? "bg-purple-400" : i === 1 ? "bg-blue-400" : "bg-white/20"}`} />
+              <span className={`w-2 h-2 rounded-full shrink-0 ${i === 0 ? "bg-purple-400 pro-dot-pulse pro-dot-purple" : i === 1 ? "bg-blue-400 pro-dot-pulse pro-dot-blue" : "bg-white/20"}`} />
               <span className={i === 0 ? "text-white font-medium" : "text-white/50"}>
                 {t(`education.${key}`)}
               </span>
@@ -271,6 +279,13 @@ const SKILL_HOVER_BORDER: Record<string, string> = {
   green: "hover:border-emerald-400/25 hover:shadow-[0_0_25px_rgba(110,227,183,0.08)]",
 };
 
+const SKILL_ICON_GLOW: Record<string, string> = {
+  blue: "rgba(96,165,250,0.6)",
+  pink: "rgba(244,114,182,0.6)",
+  cyan: "rgba(34,211,238,0.6)",
+  green: "rgba(110,227,183,0.6)",
+};
+
 const INTEREST_CARDS = [
   { key: "content", icon: Gamepad2, accent: "pink" },
   { key: "watch", icon: Eye, accent: "cyan" },
@@ -287,6 +302,12 @@ const INTEREST_ACCENT_TEXT: Record<string, string> = {
   pink: "text-pink-400",
   cyan: "text-cyan-400",
   purple: "text-purple-400",
+};
+
+const INTEREST_ICON_GLOW: Record<string, string> = {
+  pink: "rgba(244,114,182,0.6)",
+  cyan: "rgba(34,211,238,0.6)",
+  purple: "rgba(167,139,250,0.6)",
 };
 
 function ProfileTab() {
@@ -318,7 +339,7 @@ function ProfileTab() {
                   className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
                   style={{ background: SKILL_ACCENT_BG[accent] }}
                 >
-                  <Icon className={`w-6 h-6 ${SKILL_ACCENT_TEXT[accent]}`} />
+                  <Icon className={`w-6 h-6 ${SKILL_ACCENT_TEXT[accent]} pro-icon-glow`} style={{ "--icon-glow": SKILL_ICON_GLOW[accent] } as React.CSSProperties} />
                 </span>
                 <h3 className="text-white font-bold text-[0.95rem] mb-3">
                   {t(`competences.categories.${key}.title`)}
@@ -358,7 +379,7 @@ function ProfileTab() {
         <div className="relative pl-6 border-l-2 border-white/10 space-y-8">
           {/* BTS */}
           <div className="relative">
-            <span className="absolute -left-[calc(1.5rem+5px)] top-1 w-3 h-3 rounded-full bg-purple-400 ring-4 ring-[#0d0d12]" />
+            <span className="absolute -left-[calc(1.5rem+5px)] top-1 w-3 h-3 rounded-full bg-purple-400 ring-4 ring-[#0d0d12] pro-dot-pulse pro-dot-purple" />
             <div className="glass-panel !p-5">
               <h3 className="text-white font-bold text-[0.95rem]">{t("formation.bts.title")}</h3>
               <p className="text-white/35 text-xs mt-0.5">{t("formation.bts.location")} — {t("formation.bts.period")}</p>
@@ -375,7 +396,7 @@ function ProfileTab() {
 
           {/* Stage */}
           <div className="relative">
-            <span className="absolute -left-[calc(1.5rem+5px)] top-1 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-[#0d0d12]" />
+            <span className="absolute -left-[calc(1.5rem+5px)] top-1 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-[#0d0d12] pro-dot-pulse pro-dot-blue" />
             <div className="glass-panel !p-5">
               <h3 className="text-white font-bold text-[0.95rem]">{t("formation.stage.title")}</h3>
               <p className="text-white/35 text-xs mt-0.5">{t("formation.stage.location")} — {t("formation.stage.period")}</p>
@@ -403,7 +424,7 @@ function ProfileTab() {
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
                 style={{ background: INTEREST_ACCENT_BG[accent] }}
               >
-                <Icon className={`w-5 h-5 ${INTEREST_ACCENT_TEXT[accent]}`} />
+                <Icon className={`w-5 h-5 ${INTEREST_ACCENT_TEXT[accent]} pro-icon-glow`} style={{ "--icon-glow": INTEREST_ICON_GLOW[accent] } as React.CSSProperties} />
               </span>
               <h3 className="text-white font-semibold text-sm mb-1.5">
                 {t(`interests.cards.${key}.title`)}
@@ -457,6 +478,14 @@ function SkillsTab() {
     green: "rgba(110, 227, 183, 0.15)",
   };
 
+  const ICON_GLOW: Record<string, string> = {
+    blue: "rgba(96,165,250,0.6)",
+    pink: "rgba(244,114,182,0.6)",
+    purple: "rgba(167,139,250,0.6)",
+    cyan: "rgba(34,211,238,0.6)",
+    green: "rgba(110,227,183,0.6)",
+  };
+
   return (
     <div className="space-y-5">
       <div className="glass-panel !p-6">
@@ -485,7 +514,7 @@ function SkillsTab() {
                 }`}
                 style={{ background: ACCENT_BG[accent] }}
               >
-                <Icon className={`w-5 h-5 ${ACCENT_TEXT[accent]}`} />
+                <Icon className={`w-5 h-5 ${ACCENT_TEXT[accent]} pro-icon-glow`} style={{ "--icon-glow": ICON_GLOW[accent] } as React.CSSProperties} />
               </span>
               <div className="min-w-0">
                 <span className="block text-sm font-bold leading-tight truncate">
@@ -520,7 +549,7 @@ function SkillsTab() {
                   className="w-10 h-10 rounded-xl flex items-center justify-center"
                   style={{ background: ACCENT_BG[accent] }}
                 >
-                  <Icon className={`w-5 h-5 ${ACCENT_TEXT[accent]}`} />
+                  <Icon className={`w-5 h-5 ${ACCENT_TEXT[accent]} pro-icon-glow`} style={{ "--icon-glow": ICON_GLOW[accent] } as React.CSSProperties} />
                 </span>
                 <div>
                   <h3 className="text-white font-bold text-lg leading-tight">
@@ -815,7 +844,7 @@ function ContactTab() {
         {/* Email Pro */}
         <div className="stat-card-premium">
           <div className="flex items-center gap-3 mb-2">
-            <Mail className="w-4 h-4 text-purple-400" />
+            <Mail className="w-4 h-4 text-purple-400 pro-icon-glow" style={{ "--icon-glow": "rgba(167,139,250,0.6)" } as React.CSSProperties} />
             <h3 className="text-white font-semibold text-sm">{t("emailPro")}</h3>
           </div>
           <p className="text-white/50 text-xs mb-3">{EMAILS.pro}</p>
@@ -843,7 +872,7 @@ function ContactTab() {
         {/* Email Business */}
         <div className="stat-card-premium">
           <div className="flex items-center gap-3 mb-2">
-            <Briefcase className="w-4 h-4 text-blue-400" />
+            <Briefcase className="w-4 h-4 text-blue-400 pro-icon-glow" style={{ "--icon-glow": "rgba(96,165,250,0.6)" } as React.CSSProperties} />
             <h3 className="text-white font-semibold text-sm">{t("emailBusiness")}</h3>
           </div>
           <p className="text-white/50 text-xs mb-3">{EMAILS.business}</p>
