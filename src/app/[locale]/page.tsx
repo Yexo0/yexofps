@@ -102,7 +102,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardReveal>
-      <div className="min-h-screen flex flex-col items-center px-5 sm:px-6 pt-[56px] pb-[100px]">
+      <div className="min-h-screen flex flex-col items-center px-5 sm:px-6 pt-[56px] pb-4">
         {/* Avatar + Identity */}
         <div className="dashboard-avatar flex flex-col items-center gap-3 mb-10">
           <div className="avatar-wrapper w-[120px] h-[120px]">

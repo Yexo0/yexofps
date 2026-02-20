@@ -3,7 +3,6 @@
 
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/components/layout/back-button";
-import { Footer } from "@/components/layout/footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { NetworkDiagram } from "@/components/pro/network-diagram";
 import { SOCIAL_LINKS, EMAILS } from "@/lib/constants";
@@ -125,7 +124,6 @@ export default function ProPage() {
           </Tabs>
         </div>
 
-        <Footer />
       </div>
     </>
   );

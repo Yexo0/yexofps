@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { AuroraBackground } from "@/components/layout/aurora-background";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { Chatbot } from "@/components/layout/chatbot";
+import { Footer } from "@/components/layout/footer";
 import "../globals.css";
 
 type Props = {
@@ -44,6 +45,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <AuroraBackground />
           <LanguageSwitcher />
           <div className="relative z-[2]">{children}</div>
+          <Footer />
           <Chatbot />
         </NextIntlClientProvider>
       </body>

@@ -4,7 +4,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/components/layout/back-button";
-import { Footer } from "@/components/layout/footer";
 import { useCopyClipboard } from "@/hooks/use-copy-clipboard";
 import { SOCIAL_LINKS, EMAILS } from "@/lib/constants";
 import { ExternalLink, Mail, Briefcase, Send, Copy, Check, Sparkles } from "lucide-react";
@@ -209,7 +208,6 @@ export default function LiensPage() {
           <p className="lk-reveal text-[11px] text-white/25 text-center mt-4">{t("copyHint")}</p>
         </section>
 
-        <Footer />
       </main>
     </>
   );

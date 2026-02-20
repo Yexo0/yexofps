@@ -9,7 +9,18 @@
   },
   "footer": {
     "copyright": "© 2026 Yexo. Tous droits réservés.",
-    "home": "Accueil"
+    "home": "Accueil",
+    "tagline": "Content Creator · Valorant",
+    "desc": "Créateur de contenu gaming et monteur vidéo.",
+    "contactTitle": "Réseaux & Contact",
+    "navTitle": "Navigation",
+    "navProfile": "Profil",
+    "navRanks": "Rangs",
+    "navShop": "Boutique",
+    "navTracker": "Tracker",
+    "navConvert": "Convertisseur",
+    "navLinks": "Liens",
+    "contactLabel": "Contact :"
   },
   "langSwitch": {
     "label": "EN"
@@ -25,14 +36,28 @@
   },
   "profile": {
     "name": "Yexo",
-    "tagline": "Passionné d'informatique et de montage vidéo",
+    "tagline": "Content Creator · Monteur Vidéo",
+    "tagRadiant": "Radiant Valorant",
+    "tagEditor": "Monteur Vidéo",
+    "tagAge": "20 ans",
+    "tagLocation": "France",
     "aboutTitle": "À propos",
     "aboutText": "Hey ! Je suis Yexo, j'ai 20 ans. Je suis créateur de contenu Valorant et passionné de montage vidéo. J'adore partager mes créations et mes expériences avec la communauté gaming.",
     "partnersTitle": "Mes Partenaires",
     "partnerDiscount": "{discount} avec le code : {code}",
     "partnerAccess": "Accéder",
     "socialsTitle": "Réseaux Sociaux",
-    "others": "Autres"
+    "others": "Autres",
+    "tl1year": "2021",
+    "tl1label": "Début gaming compétitif",
+    "tl2year": "2022",
+    "tl2label": "Premiers clips TikTok",
+    "tl3year": "2023",
+    "tl3label": "Immortal sur Valorant",
+    "tl4year": "2024",
+    "tl4label": "Radiant sur Valorant",
+    "tl5year": "2025",
+    "tl5label": "Lancement Y-Services"
   },
   "ranks": {
     "name": "Yexo",
@@ -45,6 +70,10 @@
   },
   "shop": {
     "title": "Boutique",
+    "liveBadge": "Disponible aux commandes",
+    "tagAe": "After Effects",
+    "tagVegas": "Vegas Pro",
+    "tagDelivery": "Livraison rapide",
     "subtitlePart1": "Pour acheter :",
     "subtitleContact": "contactez-moi par email",
     "subtitleOr": "ou",

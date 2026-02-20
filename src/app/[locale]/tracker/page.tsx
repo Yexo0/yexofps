@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BackButton } from "@/components/layout/back-button";
-import { Footer } from "@/components/layout/footer";
 import { GlassPanel } from "@/components/shared/glass-panel";
 import { TRACKER_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
 import { MatchData, TrackerStats, computeStats, fmtPct, fmtNum } from "@/lib/tracker-types";
@@ -377,7 +376,6 @@ export default function TrackerPage() {
           </GlassPanel>
         </div>
 
-        <Footer />
       </main>
 
       <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />

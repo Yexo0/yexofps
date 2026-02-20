@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { BackButton } from "@/components/layout/back-button";
-import { Footer } from "@/components/layout/footer";
 import { GlassPanel } from "@/components/shared/glass-panel";
 import { RanksReveal } from "@/components/ranks/ranks-reveal";
 import { RANKS, SETUP, SOCIAL_LINKS } from "@/lib/constants";
@@ -167,7 +166,6 @@ export default function RanksPage() {
             </GlassPanel>
           </div>
 
-          <Footer />
         </main>
       </RanksReveal>
     </>

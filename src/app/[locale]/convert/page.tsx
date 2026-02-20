@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { BackButton } from "@/components/layout/back-button";
-import { Footer } from "@/components/layout/footer";
 import { GlassPanel } from "@/components/shared/glass-panel";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { GAMES, GameKey, GAME_KEYS, cm360, sensFromCm360, round } from "@/lib/converter-math";
@@ -333,7 +332,6 @@ export default function ConvertPage() {
           </GlassPanel>
         </div>
 
-        <Footer />
       </main>
     </>
   );

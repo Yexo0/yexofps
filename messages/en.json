@@ -9,7 +9,18 @@
   },
   "footer": {
     "copyright": "© 2026 Yexo. All rights reserved.",
-    "home": "Home"
+    "home": "Home",
+    "tagline": "Content Creator · Valorant",
+    "desc": "Gaming content creator and video editor.",
+    "contactTitle": "Socials & Contact",
+    "navTitle": "Navigation",
+    "navProfile": "Profile",
+    "navRanks": "Ranks",
+    "navShop": "Shop",
+    "navTracker": "Tracker",
+    "navConvert": "Converter",
+    "navLinks": "Links",
+    "contactLabel": "Contact :"
   },
   "langSwitch": {
     "label": "FR"
@@ -25,14 +36,28 @@
   },
   "profile": {
     "name": "Yexo",
-    "tagline": "Passionate about computing and video editing",
+    "tagline": "Content Creator · Video Editor",
+    "tagRadiant": "Valorant Radiant",
+    "tagEditor": "Video Editor",
+    "tagAge": "20 y/o",
+    "tagLocation": "France",
     "aboutTitle": "About me",
     "aboutText": "Hey! I'm Yexo, I'm 20 years old. I'm a Valorant content creator and passionate about video editing. I love sharing my creations and experiences with the gaming community.",
     "partnersTitle": "My Partners",
     "partnerDiscount": "{discount} with code: {code}",
     "partnerAccess": "Access",
     "socialsTitle": "Social Media",
-    "others": "Others"
+    "others": "Others",
+    "tl1year": "2021",
+    "tl1label": "Started competitive gaming",
+    "tl2year": "2022",
+    "tl2label": "First TikTok clips",
+    "tl3year": "2023",
+    "tl3label": "Valorant Immortal",
+    "tl4year": "2024",
+    "tl4label": "Valorant Radiant",
+    "tl5year": "2025",
+    "tl5label": "Y-Services launched"
   },
   "ranks": {
     "name": "Yexo",
@@ -45,6 +70,10 @@
   },
   "shop": {
     "title": "Shop",
+    "liveBadge": "Open for orders",
+    "tagAe": "After Effects",
+    "tagVegas": "Vegas Pro",
+    "tagDelivery": "Fast delivery",
     "subtitlePart1": "To buy:",
     "subtitleContact": "contact me by email",
     "subtitleOr": "or",
