@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/yexoo/Documents/Site yexo/Officiel de YEXO/yexofps-main)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
