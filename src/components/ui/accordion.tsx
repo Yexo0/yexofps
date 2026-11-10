@@ -37,8 +37,8 @@ export function Accordion({ items, defaultOpen }: { items: AccordionEntry[]; def
               />
             </Radix.Trigger>
           </Radix.Header>
-          <Radix.Content className="px-3 pb-3.5 pl-14 text-sm leading-relaxed text-muted">
-            {item.content}
+          <Radix.Content className="accordion-content text-sm leading-relaxed text-muted">
+            <div className="px-3 pb-3.5 pl-14">{item.content}</div>
           </Radix.Content>
         </Radix.Item>
       ))}

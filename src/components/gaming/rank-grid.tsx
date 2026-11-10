@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { RANKS } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Reticle } from "@/components/ui/reticle";
 
 type Rank = (typeof RANKS)[number];
 
@@ -30,7 +29,6 @@ export function RankGrid({ className }: { className?: string }) {
     <ul className={cn("grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-3", className)}>
       <li className="tile relative flex flex-col items-center justify-center gap-3 px-4 py-6 text-center sm:row-span-3">
         <GameStripe color={featured.color} />
-        <Reticle size={10} inset={8} />
         <Image
           src={featured.image}
           alt={t("alt", { rank: t(`items.${featured.id}.rank`), game: featured.game })}
@@ -43,6 +41,9 @@ export function RankGrid({ className }: { className?: string }) {
           <p className="mt-0.5 font-mono text-xs text-muted">{gameLabel(featured)}</p>
         </div>
         <p className="label">{t("peak")}</p>
+        {t.has(`items.${featured.id}.current`) && (
+          <p className="text-[12.5px] text-muted">{t(`items.${featured.id}.current`)}</p>
+        )}
       </li>
       {others.map((r) => (
         <li key={r.id} className="tile relative flex items-center gap-3.5 px-4 py-3.5">

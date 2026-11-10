@@ -1,8 +1,8 @@
 {
   "meta": {
     "home": {
-      "title": "Yexo · admin systèmes et réseaux, Radiant et monteur d'edits",
-      "description": "Baptiste Dauvergne, alias Yexo : alternant en administration systèmes et réseaux, Radiant sur Valorant et créateur d'edits sur TikTok."
+      "title": "Yexo · admin systèmes et réseaux, monteur vidéo sur Valorant",
+      "description": "Baptiste Dauvergne, alias Yexo : alternant en administration systèmes et réseaux, joueur de FPS et monteur vidéo sur Valorant."
     },
     "career": {
       "title": "Parcours",
@@ -18,7 +18,7 @@
     },
     "creator": {
       "title": "Créateur",
-      "description": "Mes edits Valorant sur TikTok, mes partenaires et Y-Services : presets d'étalonnage, montages et patch anti-compression."
+      "description": "Mes montages vidéo Valorant sur TikTok, mes partenaires et Y-Services : presets d'étalonnage, montages et patch anti-compression."
     },
     "tools": {
       "title": "Outils",
@@ -108,7 +108,7 @@
       "tracker": "Tracker Valorant",
       "matches": "Dernières parties",
       "setup": "Setup",
-      "edits": "Edits TikTok",
+      "edits": "Montages TikTok",
       "partners": "Partenaires et codes promo",
       "services": "Y-Services",
       "reviews": "Avis clients",
@@ -182,47 +182,51 @@
     },
     "bio": {
       "title": "Créateur",
-      "tagline": "Je monte des edits Valorant : rythme calé sur la musique, transitions propres, couleurs travaillées.",
+      "tagline": "Je monte des vidéos Valorant : rythme calé sur la musique, transitions propres, couleurs travaillées.",
       "text": "Je publie sous le nom de Yexo sur TikTok depuis 2022. Je monte surtout mes propres parties, avec un soin particulier pour le rythme, les transitions et le sound design. Ce que j'utilise pour mes vidéos, je le propose aussi : presets d'étalonnage, montages sur commande et patch anti-compression, réunis dans Y-Services.",
       "chips": {
-        "radiant": "Radiant sur Valorant",
+        "valorant": "Joueur Valorant",
         "editor": "Monteur vidéo",
+        "age": "{age} ans",
         "location": "France"
       },
-      "photoAlt": "Mon poste de montage, avec la timeline d'un edit Valorant à l'écran"
+      "photoAlt": "Mon poste de montage, avec la timeline d'une vidéo Valorant à l'écran"
     },
     "history": {
       "title": "Historique",
       "meta": "{count} étapes",
       "items": {
         "competitive": "Début du jeu compétitif",
-        "tiktok": "Premiers clips sur TikTok",
+        "tiktok": "Premiers montages sur TikTok",
         "immortal": "Immortal sur Valorant",
-        "radiant": "Radiant sur Valorant",
-        "services": "Lancement de Y-Services"
+        "radiant": "Peak Radiant, pendant quelques mois",
+        "services": "Lancement de Y-Services",
+        "immortal3": "Je joue moins : retour en Immortal 3"
       },
       "tracks": {
         "ranked": "ranked",
-        "edits": "edits",
+        "edits": "montage",
         "shop": "boutique"
       },
       "now": "maintenant",
       "clips": {
         "competitive": "Compétitif",
-        "tiktok": "Edits TikTok",
+        "tiktok": "Montages TikTok",
         "immortal": "Immortal",
         "radiant": "Radiant",
-        "services": "Y-Services"
-      }
+        "services": "Y-Services",
+        "immortal3": "Immortal 3"
+      },
+      "then": "Ensuite"
     },
     "edits": {
-      "title": "Edits",
-      "intro": "Deux exemples : un montage simple et un montage plus poussé. Le reste est sur TikTok.",
+      "title": "Montages",
+      "intro": "Deux exemples : un montage simple et un plus poussé. Le reste est sur TikTok.",
       "items": {
         "basicEdit": "Exemple de montage basique",
         "advancedEdit": "Exemple de montage avancé"
       },
-      "all": "Tous mes edits sur TikTok",
+      "all": "Tous mes montages sur TikTok",
       "newTab": "s'ouvre dans un nouvel onglet"
     },
     "partners": {
@@ -346,7 +350,7 @@
       "title": "En dehors du poste",
       "content": {
         "title": "Création de contenu",
-        "text": "Je monte des edits Valorant sous le nom de Yexo : rythme, transitions et sound design."
+        "text": "Je monte des vidéos Valorant sous le nom de Yexo : rythme, transitions et sound design."
       },
       "watch": {
         "title": "Veille",
@@ -623,7 +627,7 @@
             },
             {
               "title": "Appliqué à mes projets",
-              "text": "Montrer, rassurer, convertir : mes edits servent de preuve directe de qualité pour Y-Services."
+              "text": "Montrer, rassurer, convertir : mes montages servent de preuve directe de qualité pour Y-Services."
             }
           ],
           "tags": [
@@ -770,25 +774,20 @@
   "home": {
     "hero": {
       "avatarAlt": "Photo de profil de Yexo",
-      "realName": "Baptiste Dauvergne · France",
-      "tagline": "Admin systèmes et réseaux en alternance, Radiant sur Valorant, monteur d'edits.",
-      "uptime": "homelab depuis {homelab} · Radiant depuis {radiant} · TikTok depuis {tiktok}",
+      "realName": "Baptiste Dauvergne · {age} ans · France",
+      "tagline": "Admin systèmes et réseaux en alternance, joueur de FPS et monteur vidéo sur Valorant.",
       "contact": "Me contacter",
       "whoami": {
         "label": "Choisir le profil affiché",
         "yexo": {
           "title": "Yexo, côté jeu et montage.",
-          "text": "Je joue en ranked depuis 2021, j'ai atteint Radiant en 2024 et je monte mes parties pour TikTok depuis 2022. Mes presets et montages sont dans Y-Services."
+          "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services."
         },
         "baptiste": {
           "title": "Baptiste, côté infra.",
           "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer."
         }
       }
-    },
-    "ranks": {
-      "title": "Rangs",
-      "meta": "{count} jeux"
     },
     "fastfetch": {
       "keys": {
@@ -803,7 +802,7 @@
         "backups": "Sauvegardes",
         "site": "Site",
         "ranks": "Rangs",
-        "edits": "Edits"
+        "edits": "Montage"
       },
       "values": {
         "hosts": "{machines} machines · {vms} VM",
@@ -812,24 +811,26 @@
         "backups": "Veeam → NAS → copie hors site"
       }
     },
-    "shortcuts": {
-      "career": {
-        "title": "Parcours",
-        "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble."
-      },
-      "creator": {
-        "title": "Y-Services",
-        "meta": "{count} produits",
-        "text": "Presets d'étalonnage, montages et patch anti-compression, de {min} à {max}."
-      },
-      "tools": {
-        "title": "Convertisseur",
-        "text": "Garde la même visée entre Valorant, CS2, Apex Legends et Overwatch 2."
-      },
-      "contact": {
-        "title": "Contact",
-        "text": "Emails, Discord et réseaux, avec un bouton pour copier chaque adresse."
+    "edit": {
+      "title": "Montage à la une",
+      "meta": "TikTok",
+      "posterAlt": "Image extraite du montage",
+      "play": "Lire le montage",
+      "tiktokNote": "Lecture via le lecteur TikTok, avec réglage du son. Rien n'est chargé depuis TikTok avant ton clic.",
+      "open": "Voir sur TikTok",
+      "frameTitle": "Montage Valorant de Yexo (lecteur TikTok)",
+      "controls": {
+        "play": "Lecture",
+        "pause": "Pause",
+        "mute": "Couper le son",
+        "unmute": "Activer le son",
+        "volume": "Volume"
       }
+    },
+    "gaming": {
+      "title": "Gaming",
+      "ranks": "Meilleurs rangs",
+      "recent": "{count} dernières parties"
     }
   },
   "lab": {
@@ -975,7 +976,8 @@
       "alt": "Icône du rang {rank} sur {game}",
       "items": {
         "valorant": {
-          "rank": "Radiant"
+          "rank": "Radiant",
+          "current": "Actuellement Immortal 3"
         },
         "faceit": {
           "rank": "Niveau 10",
@@ -1036,7 +1038,7 @@
     },
     "intro": {
       "title": "Gaming",
-      "tagline": "Radiant sur Valorant, niveau 10 sur Faceit, Master sur Apex. Le tilt, je le laisse aux autres."
+      "tagline": "Surtout Valorant, avec des passages par CS, Apex et Clash Royale. Je joue moins qu'avant, mais la visée est restée."
     },
     "matches": {
       "title": "Dernières parties",
@@ -1126,7 +1128,7 @@
       "businessEmail": "commandes, partenariats, collaborations",
       "discord": "le serveur, avec les tickets pour commander",
       "discordEdits": "le serveur consacré au montage",
-      "tiktok": "mes edits",
+      "tiktok": "mes montages vidéo",
       "instagram": "compte perso",
       "instagramFps": "compte FPS",
       "linktree": "tous mes liens au même endroit"
@@ -1157,11 +1159,11 @@
     }
   },
   "og": {
-    "tagline": "Admin systèmes et réseaux en alternance, Radiant sur Valorant, monteur d'edits.",
+    "tagline": "Admin systèmes et réseaux en alternance, joueur de FPS et monteur vidéo sur Valorant.",
     "chips": {
       "sysadmin": "Systèmes et réseaux",
-      "radiant": "Radiant · Valorant",
-      "edits": "Edits TikTok"
+      "fps": "FPS · Valorant",
+      "video": "Montage vidéo"
     }
   },
   "notFound": {

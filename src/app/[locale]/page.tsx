@@ -1,23 +1,21 @@
-// src/app/[locale]/page.tsx — 01 Accueil : hero, carte live Valorant, fastfetch, aperçu des rangs, raccourcis.
+// src/app/[locale]/page.tsx — 01 Accueil, volontairement aéré : hero, montage à la une (avec le son),
+// fastfetch court (côté infra) et carte Gaming (rangs + dernières parties).
 import Image from "next/image";
 import type { Metadata } from "next";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Briefcase, Clapperboard, Mail, SlidersHorizontal, Trophy, type LucideIcon } from "lucide-react";
-import { PRODUCTS, RANKS, SOCIALS } from "@/config/site";
-import { LAB_SINCE } from "@/config/lab";
-import type { SpaceId } from "@/config/spaces";
+import { Mail, Play } from "lucide-react";
+import { PROFILE, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
-import { formatPrice } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { NextSpace } from "@/components/ui/next-space";
 import { Reticle } from "@/components/ui/reticle";
 import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
-import { RankGrid } from "@/components/gaming/rank-grid";
 import { LiveCard } from "@/components/home/live-card";
 import { Fastfetch } from "@/components/home/fastfetch";
 import { Whoami } from "@/components/home/whoami";
+import { FeaturedEdit } from "@/components/home/featured-edit";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -33,30 +31,25 @@ export default async function HomePage({ params }: Props) {
   return <Home />;
 }
 
-/** Années repères affichées dans la ligne "uptime" du hero (réelles) */
-const SINCE = { homelab: LAB_SINCE, radiant: 2024, tiktok: 2022 };
-
 function Home() {
   const t = useTranslations("home");
 
   return (
-    <div className="bento">
+    <div className="bento lg:gap-4">
       <Hero />
-      <LiveCard index={1} className="md:col-span-6 lg:col-span-4" />
-      <Fastfetch index={2} className="md:col-span-6 lg:col-span-7" />
       <Card
-        id="ranks"
-        icon={Trophy}
-        title={t("ranks.title")}
-        subtitle="ls ~/ranks --peak"
-        meta={t("ranks.meta", { count: RANKS.length })}
-        next="gaming"
-        index={3}
-        className="md:col-span-6 lg:col-span-5"
+        id="edit"
+        icon={Play}
+        title={t("edit.title")}
+        subtitle="mpv ~/edits/une.mp4"
+        meta={t("edit.meta")}
+        index={1}
+        className="md:col-span-6 lg:col-span-4 lg:row-span-2"
       >
-        <RankGrid className="flex-1" />
+        <FeaturedEdit />
       </Card>
-      <Shortcuts />
+      <Fastfetch index={2} className="md:col-span-3 lg:col-span-4" />
+      <LiveCard index={3} className="md:col-span-3 lg:col-span-4" />
     </div>
   );
 }
@@ -67,11 +60,11 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="card justify-between gap-8 md:col-span-6 lg:col-span-8"
+      className="card justify-between gap-10 md:col-span-6 lg:col-span-8 lg:p-10"
       style={{ ["--i" as string]: 0 }}
     >
       <div>
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end">
           <span className="relative shrink-0 p-2.5">
             <Reticle size={12} inset={0} />
             <Image
@@ -86,25 +79,20 @@ function Hero() {
           <div className="min-w-0">
             <h1
               id="hero-title"
-              className="text-[64px] font-bold leading-[0.9] tracking-[-0.04em] text-fg sm:text-[88px] xl:text-[104px]"
+              className="hero-title text-[64px] font-bold leading-[0.9] tracking-[-0.04em] text-fg sm:text-[88px] xl:text-[104px]"
             >
               Yexo
             </h1>
-            <p className="label mt-3">{t("realName")}</p>
+            <p className="label mt-3">{t("realName", { age: PROFILE.age })}</p>
           </div>
         </div>
 
-        <p className="mt-7 max-w-[34ch] text-[24px] font-bold leading-[1.2] tracking-tight text-fg sm:text-[28px]">
+        <p className="mt-9 max-w-[30ch] text-[24px] font-bold leading-[1.2] tracking-tight text-fg sm:text-[30px]">
           {t("tagline")}
         </p>
-        <div className="mt-5">
+        <div className="mt-6">
           <Whoami />
         </div>
-
-        <p className="terminal mt-5 inline-flex max-w-full flex-wrap items-center gap-x-2 rounded-xl px-3.5 py-2 text-[12.5px]">
-          <span className="prompt">$ uptime</span>
-          <span className="text-fg">{t("uptime", SINCE)}</span>
-        </p>
       </div>
 
       <div className="flex flex-wrap items-center gap-2.5">
@@ -128,48 +116,5 @@ function Hero() {
         <NextSpace to="career" />
       </span>
     </section>
-  );
-}
-
-/** Rangée de cartes courtes vers les autres espaces */
-function Shortcuts() {
-  const t = useTranslations("home.shortcuts");
-  const locale = useLocale();
-  const prices = PRODUCTS.flatMap((p) => (typeof p.price === "number" ? [p.price] : [...p.price]));
-
-  const items: { id: SpaceId; icon: LucideIcon; subtitle: string; meta?: string; text: string }[] = [
-    { id: "career", icon: Briefcase, subtitle: "cat ~/parcours/now.txt", text: t("career.text") },
-    {
-      id: "creator",
-      icon: Clapperboard,
-      subtitle: "ls ~/y-services",
-      meta: t("creator.meta", { count: PRODUCTS.length }),
-      text: t("creator.text", {
-        min: formatPrice(Math.min(...prices), locale),
-        max: formatPrice(Math.max(...prices), locale),
-      }),
-    },
-    { id: "tools", icon: SlidersHorizontal, subtitle: "sens --convert", text: t("tools.text") },
-    { id: "contact", icon: Mail, subtitle: "cat contact.txt", text: t("contact.text") },
-  ];
-
-  return (
-    <>
-      {items.map((item, i) => (
-        <Card
-          key={item.id}
-          icon={item.icon}
-          title={t(`${item.id}.title`)}
-          subtitle={item.subtitle}
-          meta={item.meta}
-          index={4 + i}
-          className="md:col-span-3 lg:col-span-3"
-          bodyClassName="justify-between gap-6"
-        >
-          <p className="text-sm leading-relaxed text-muted">{item.text}</p>
-          <NextSpace to={item.id} />
-        </Card>
-      ))}
-    </>
   );
 }

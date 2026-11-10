@@ -1,8 +1,8 @@
 {
   "meta": {
     "home": {
-      "title": "Yexo · sysadmin & network engineer, Radiant player and edit maker",
-      "description": "Baptiste Dauvergne, aka Yexo: work-study systems and network administrator, Radiant in Valorant and maker of TikTok edits."
+      "title": "Yexo · sysadmin and network engineer, Valorant video editor",
+      "description": "Baptiste Dauvergne, aka Yexo: work-study systems and network administrator, FPS player and Valorant video editor."
     },
     "career": {
       "title": "Career",
@@ -18,7 +18,7 @@
     },
     "creator": {
       "title": "Creator",
-      "description": "My Valorant edits on TikTok, my partners and Y-Services: color grading presets, edits and an anti-compression patch."
+      "description": "My Valorant video edits on TikTok, my partners and Y-Services: color grading presets, edits and an anti-compression patch."
     },
     "tools": {
       "title": "Tools",
@@ -182,24 +182,26 @@
     },
     "bio": {
       "title": "Creator",
-      "tagline": "I edit Valorant clips: pacing locked to the music, clean transitions, careful color grading.",
+      "tagline": "I edit Valorant videos: pacing locked to the music, clean transitions, careful color grading.",
       "text": "I've been posting as Yexo on TikTok since 2022. I mostly edit my own matches, with extra care for pacing, transitions and sound design. What I use for my videos, I also offer to others: color grading presets, custom edits and an anti-compression patch, all under Y-Services.",
       "chips": {
-        "radiant": "Radiant in Valorant",
+        "valorant": "Valorant player",
         "editor": "Video editor",
+        "age": "{age} years old",
         "location": "France"
       },
-      "photoAlt": "My editing station, with a Valorant edit timeline on screen"
+      "photoAlt": "My editing station, with a Valorant video timeline on screen"
     },
     "history": {
       "title": "History",
       "meta": "{count} milestones",
       "items": {
         "competitive": "Started competitive gaming",
-        "tiktok": "First clips on TikTok",
+        "tiktok": "First edits on TikTok",
         "immortal": "Immortal in Valorant",
-        "radiant": "Radiant in Valorant",
-        "services": "Launched Y-Services"
+        "radiant": "Peaked Radiant for a few months",
+        "services": "Launched Y-Services",
+        "immortal3": "Playing less: back to Immortal 3"
       },
       "tracks": {
         "ranked": "ranked",
@@ -212,8 +214,10 @@
         "tiktok": "TikTok edits",
         "immortal": "Immortal",
         "radiant": "Radiant",
-        "services": "Y-Services"
-      }
+        "services": "Y-Services",
+        "immortal3": "Immortal 3"
+      },
+      "then": "Then"
     },
     "edits": {
       "title": "Edits",
@@ -346,7 +350,7 @@
       "title": "Outside work",
       "content": {
         "title": "Content creation",
-        "text": "I edit Valorant clips as Yexo: pacing, transitions and sound design."
+        "text": "I edit Valorant videos as Yexo: pacing, transitions and sound design."
       },
       "watch": {
         "title": "Tech watch",
@@ -770,25 +774,20 @@
   "home": {
     "hero": {
       "avatarAlt": "Yexo's profile picture",
-      "realName": "Baptiste Dauvergne · France",
-      "tagline": "Work-study sysadmin and network engineer, Radiant in Valorant, edit maker.",
-      "uptime": "homelab since {homelab} · Radiant since {radiant} · TikTok since {tiktok}",
+      "realName": "Baptiste Dauvergne · {age} · France",
+      "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
       "contact": "Contact me",
       "whoami": {
         "label": "Choose which profile to show",
         "yexo": {
           "title": "Yexo, the gaming and editing side.",
-          "text": "I've played ranked since 2021, reached Radiant in 2024 and have been editing my matches for TikTok since 2022. My presets and edits are in Y-Services."
+          "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services."
         },
         "baptiste": {
           "title": "Baptiste, the infrastructure side.",
           "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it."
         }
       }
-    },
-    "ranks": {
-      "title": "Ranks",
-      "meta": "{count} games"
     },
     "fastfetch": {
       "keys": {
@@ -803,7 +802,7 @@
         "backups": "Backups",
         "site": "Site",
         "ranks": "Ranks",
-        "edits": "Edits"
+        "edits": "Editing"
       },
       "values": {
         "hosts": "{machines} machines · {vms} VMs",
@@ -812,24 +811,26 @@
         "backups": "Veeam → NAS → off-site copy"
       }
     },
-    "shortcuts": {
-      "career": {
-        "title": "Career",
-        "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble."
-      },
-      "creator": {
-        "title": "Y-Services",
-        "meta": "{count} products",
-        "text": "Color grading presets, edits and an anti-compression patch, from {min} to {max}."
-      },
-      "tools": {
-        "title": "Converter",
-        "text": "Keep the same aim across Valorant, CS2, Apex Legends and Overwatch 2."
-      },
-      "contact": {
-        "title": "Contact",
-        "text": "Emails, Discord and socials, with a button to copy each address."
+    "edit": {
+      "title": "Featured edit",
+      "meta": "TikTok",
+      "posterAlt": "Frame from the edit",
+      "play": "Play the edit",
+      "tiktokNote": "Plays in the TikTok player, with volume control. Nothing loads from TikTok until you click.",
+      "open": "Watch on TikTok",
+      "frameTitle": "Valorant edit by Yexo (TikTok player)",
+      "controls": {
+        "play": "Play",
+        "pause": "Pause",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "volume": "Volume"
       }
+    },
+    "gaming": {
+      "title": "Gaming",
+      "ranks": "Best ranks",
+      "recent": "Last {count} matches"
     }
   },
   "lab": {
@@ -975,7 +976,8 @@
       "alt": "{rank} rank icon in {game}",
       "items": {
         "valorant": {
-          "rank": "Radiant"
+          "rank": "Radiant",
+          "current": "Currently Immortal 3"
         },
         "faceit": {
           "rank": "Level 10",
@@ -1036,7 +1038,7 @@
     },
     "intro": {
       "title": "Gaming",
-      "tagline": "Radiant in Valorant, level 10 on Faceit, Master in Apex. I leave the tilt to others."
+      "tagline": "Mostly Valorant, with stints in CS, Apex and Clash Royale. I play less than I used to, but the aim stuck around."
     },
     "matches": {
       "title": "Recent matches",
@@ -1126,7 +1128,7 @@
       "businessEmail": "orders, partnerships, collaborations",
       "discord": "the server, with tickets to place an order",
       "discordEdits": "the server dedicated to editing",
-      "tiktok": "my edits",
+      "tiktok": "my video edits",
       "instagram": "personal account",
       "instagramFps": "FPS account",
       "linktree": "all my links in one place"
@@ -1157,11 +1159,11 @@
     }
   },
   "og": {
-    "tagline": "Work-study sysadmin and network engineer, Radiant in Valorant, edit maker.",
+    "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
     "chips": {
       "sysadmin": "Systems and networks",
-      "radiant": "Radiant · Valorant",
-      "edits": "TikTok edits"
+      "fps": "FPS · Valorant",
+      "video": "Video editing"
     }
   },
   "notFound": {

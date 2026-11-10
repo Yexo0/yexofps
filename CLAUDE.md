@@ -47,7 +47,7 @@ Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`
 ### Config — single sources of truth (`src/config/`)
 
 - `theme.ts` — accent seed color (change it to re-theme the whole site)
-- `site.ts` — every URL (socials, emails, affiliate links, Payhip, TikTok videos), tracker account, Valorant peak, ranks, setup, products (`exampleUrl` / `previewUrl` buttons only show when set), reviews
+- `site.ts` — every URL (socials, emails, affiliate links, Payhip, TikTok videos), age (`PROFILE`), featured edit (`FEATURED_EDIT`: TikTok embed on click, or a local `video` file with a custom player), tracker account, Valorant peak, ranks, setup, products (`exampleUrl` / `previewUrl` buttons only show when set), reviews
 - `spaces.ts` — the 7 spaces (order = number = keyboard shortcut)
 - `lab.ts` — the whole homelab (VLANs, hosts, VMs, map). Invented items carry `placeholder: true` + a comment
 - `career.ts` — timeline, skills, missions, PDF guides, BTS network map
@@ -63,7 +63,7 @@ All visible text lives in `messages/fr.json` and `messages/en.json` (same keys a
 
 ### Tracker data flow
 
-1. `useValorantTracker` fetches `/api/valorant?region=eu&name=yexo&tag=aim&mode=unrated&size=10` (params from `TRACKER` in `site.ts`)
+1. `useValorantTracker` fetches `/api/valorant?region=eu&name=Fallen%20angel&tag=yexo&mode=unrated&size=10` (params from `TRACKER` in `site.ts`)
 2. The API route (unchanged) proxies HenrikDev with `HENRIK_API_KEY` and reduces each match to the player's stats
 3. States: loading (skeleton) / ready / empty / error (rate limit, unavailable incl. missing key, network). The peak is always shown.
 4. Auto-refresh every 90 s, manual refresh with a 25 s cooldown
@@ -74,7 +74,9 @@ Yaw: CS2 `0.022`, Valorant `0.07`, Apex `0.022`, OW2 `0.0066`. `cm360 = (360 × 
 
 ## Design rules
 
-Dark neutral background with a static topographic texture, bento grid of 20px-radius cards inside a thin rounded frame, single pastel accent (game color stripes on rank tiles are the only exception). No neon, glow, flashy gradients, video, particles, emojis in the UI, blinking text or "hacker" clichés. Animations: short fades only, disabled with `prefers-reduced-motion`. Contrast AA in both themes.
+Dark neutral background with a static topographic texture, an airy home page (hero, featured edit player, short fastfetch, gaming summary), bento grid of 20px-radius cards inside a thin rounded frame, single pastel accent (game color stripes on rank tiles are the only exception). No neon, glow, flashy gradients, video, particles, emojis in the UI, blinking text or "hacker" clichés. Animations: soft Apple-like motion only (scroll reveal fade + slight rise via `ScrollReveal`, blur-in hero title, smooth accordion/dialog/tab transitions, press feedback), all disabled with `prefers-reduced-motion`.
+
+Tone: don't overplay ranks. Radiant (peak, a few months in 2024, now Immortal 3) appears only alongside the other ranks; the creator side is "monteur vidéo (Valorant)". Contrast AA in both themes.
 
 ## Environment Variables
 

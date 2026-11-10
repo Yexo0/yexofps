@@ -10,7 +10,6 @@ import type { MatchData } from "@/lib/tracker-types";
 import type { TrackerError } from "@/hooks/use-valorant-tracker";
 import { cn } from "@/lib/utils";
 import { DotDigits } from "@/components/ui/dot-digits";
-import { Reticle } from "@/components/ui/reticle";
 
 /** Formatage localisé des stats (NaN → tiret) */
 export function useStatFormat() {
@@ -37,7 +36,6 @@ export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
   const t = useTranslations("gaming.tracker");
   return (
     <div className={cn("tile relative flex items-center gap-4", size === "lg" ? "px-5 py-5" : "px-4 py-3.5")}>
-      {size === "lg" && <Reticle size={9} inset={7} />}
       <Image
         src={VALORANT_PEAK.image}
         alt=""

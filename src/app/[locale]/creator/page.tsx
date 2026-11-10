@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { useLocale, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
+  Cake,
   Clapperboard,
   ExternalLink,
   Gamepad2,
@@ -17,7 +18,7 @@ import {
   Video,
   Zap,
 } from "lucide-react";
-import { EDITS, EMAILS, ORDER_URL, PARTNERS, PRODUCTS, REVIEWS, SOCIALS } from "@/config/site";
+import { EDITS, EMAILS, ORDER_URL, PARTNERS, PRODUCTS, PROFILE, REVIEWS, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
 import { formatPrice } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
@@ -72,10 +73,13 @@ function Bio() {
           <p className="text-[15px] leading-relaxed text-muted">{t("text")}</p>
           <ul className="flex flex-wrap gap-1.5">
             <li>
-              <Chip icon={Gamepad2}>{t("chips.radiant")}</Chip>
+              <Chip icon={Video}>{t("chips.editor")}</Chip>
             </li>
             <li>
-              <Chip icon={Video}>{t("chips.editor")}</Chip>
+              <Chip icon={Gamepad2}>{t("chips.valorant")}</Chip>
+            </li>
+            <li>
+              <Chip icon={Cake}>{t("chips.age", { age: PROFILE.age })}</Chip>
             </li>
             <li>
               <Chip icon={MapPin}>{t("chips.location")}</Chip>
@@ -121,7 +125,7 @@ function CreatorHistory() {
       icon={History}
       title={t("title")}
       subtitle="ffprobe ~/yexo/2021-now.mov"
-      meta={t("meta", { count: 5 })}
+      meta={t("meta", { count: 6 })}
       index={2}
       className="md:col-span-6 lg:col-span-12"
     >
@@ -161,7 +165,7 @@ function Edits() {
                   alt=""
                   width={480}
                   height={270}
-                  className="h-full w-full object-cover transition-opacity duration-150 group-hover:opacity-85"
+                  className="zoom-media h-full w-full object-cover"
                 />
                 <span
                   aria-hidden="true"
@@ -251,14 +255,14 @@ function Services() {
       <p className="max-w-[80ch] text-sm leading-relaxed text-muted">{t("intro")}</p>
       <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {PRODUCTS.map((p) => (
-          <li key={p.id} className="tile flex flex-col overflow-hidden">
+          <li key={p.id} className="group tile flex flex-col overflow-hidden">
             <div className="relative aspect-[16/9] overflow-hidden bg-surface-3">
               <Image
                 src={p.image}
                 alt={t(`products.${p.id}.imageAlt`)}
                 width={480}
                 height={270}
-                className="h-full w-full object-cover object-top"
+                className="zoom-media h-full w-full object-cover object-top"
               />
             </div>
             <div className="flex flex-1 flex-col gap-2 px-4 py-4">

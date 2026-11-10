@@ -8,20 +8,25 @@ import { cn } from "@/lib/utils";
 
 const START = 2021;
 
-type ClipId = "competitive" | "tiktok" | "immortal" | "radiant" | "services";
+type ClipId = "competitive" | "tiktok" | "immortal" | "radiant" | "immortal3" | "services";
 
-/** Jalons réels (années) */
-const MILESTONES: { year: number; id: ClipId; icon?: LucideIcon; image?: string }[] = [
-  { year: 2021, id: "competitive", icon: Gamepad2 },
-  { year: 2022, id: "tiktok", icon: Video },
-  { year: 2023, id: "immortal", image: "/images/ranks/valorant-immortal.png" },
-  { year: 2024, id: "radiant", image: "/images/ranks/valorant-radiant.png" },
-  { year: 2025, id: "services", icon: Store },
+/**
+ * Jalons réels. `year` = libellé de la liste (null = "ensuite"), `from` = début du clip sur la timeline.
+ * Radiant : quelques mois en 2024, puis retour en Immortal 3 en jouant moins (date exacte inconnue,
+ * le clip Radiant est donc dessiné sur une partie de 2024 seulement).
+ */
+const MILESTONES: { year: number | null; from: number; id: ClipId; icon?: LucideIcon; image?: string }[] = [
+  { year: 2021, from: 2021, id: "competitive", icon: Gamepad2 },
+  { year: 2022, from: 2022, id: "tiktok", icon: Video },
+  { year: 2023, from: 2023, id: "immortal", image: "/images/ranks/valorant-immortal.png" },
+  { year: 2024, from: 2024, id: "radiant", image: "/images/ranks/valorant-radiant.png" },
+  { year: null, from: 2024.6, id: "immortal3", image: "/images/ranks/valorant-immortal.png" },
+  { year: 2025, from: 2025, id: "services", icon: Store },
 ];
 
 /** Pistes : chaque clip court de son jalon jusqu'au jalon suivant de la même piste (ou maintenant) */
 const TRACKS: { id: "ranked" | "edits" | "shop"; clips: ClipId[] }[] = [
-  { id: "ranked", clips: ["competitive", "immortal", "radiant"] },
+  { id: "ranked", clips: ["competitive", "immortal", "radiant", "immortal3"] },
   { id: "edits", clips: ["tiktok"] },
   { id: "shop", clips: ["services"] },
 ];
@@ -32,7 +37,7 @@ export function EditTimeline({ now }: { now: number }) {
   const span = end - START;
   const pct = (year: number) => ((year - START) / span) * 100;
   const years = Array.from({ length: span + 1 }, (_, i) => START + i);
-  const yearOf = (id: ClipId) => MILESTONES.find((m) => m.id === id)!.year;
+  const fromOf = (id: ClipId) => MILESTONES.find((m) => m.id === id)!.from;
 
   return (
     <>
@@ -40,7 +45,7 @@ export function EditTimeline({ now }: { now: number }) {
       <ol className="flex flex-col gap-1.5 sm:sr-only">
         {MILESTONES.map(({ year, id, icon: Icon, image }) => (
           <li key={id} className="tile flex items-center gap-3.5 px-4 py-3">
-            <span className="w-11 font-mono text-[13px] font-semibold text-accent">{year}</span>
+            <span className="w-14 font-mono text-[13px] font-semibold text-accent">{year ?? t("then")}</span>
             <span className="grid h-7 w-7 place-items-center" aria-hidden="true">
               {image ? (
                 <Image src={image} alt="" width={28} height={28} className="h-7 w-7 object-contain" />
@@ -79,9 +84,9 @@ export function EditTimeline({ now }: { now: number }) {
           {TRACKS.map((track) => (
             <div key={track.id} className="relative h-11 border-b border-line">
               {track.clips.map((id, i) => {
-                const from = yearOf(id);
+                const from = fromOf(id);
                 const next = track.clips[i + 1];
-                const to = next ? yearOf(next) : now;
+                const to = next ? fromOf(next) : now;
                 const m = MILESTONES.find((x) => x.id === id)!;
                 const Icon = m.icon;
                 return (

@@ -49,7 +49,7 @@ export function MissionTabs({ missions, labels }: { missions: Mission[]; labels:
       </Tabs.List>
 
       {missions.map((m) => (
-        <Tabs.Content key={m.id} value={m.id} className="grid gap-3 outline-none lg:grid-cols-12">
+        <Tabs.Content key={m.id} value={m.id} className="tab-in grid gap-3 outline-none lg:grid-cols-12">
           <div className="flex flex-col gap-3 lg:col-span-7">
             <div>
               <h3 className="text-xl font-bold tracking-tight">{m.title}</h3>

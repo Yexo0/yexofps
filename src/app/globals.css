@@ -31,6 +31,7 @@
 
   --radius-card: 20px;
   --radius-tile: 14px;
+  --ease-out-apple: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ─── Base ─────────────────────────────────────────────── */
@@ -183,8 +184,10 @@
     -webkit-backdrop-filter: blur(14px) saturate(1.05);
     backdrop-filter: blur(14px) saturate(1.05);
     padding: 18px;
-    animation: card-in 260ms ease both;
-    animation-delay: calc(var(--i, 0) * 40ms);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
     scroll-margin-top: 16px;
   }
   @media (min-width: 768px) {
@@ -233,7 +236,12 @@
     transition:
       background-color 150ms ease,
       color 150ms ease,
-      opacity 150ms ease;
+      opacity 150ms ease,
+      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn:active:not(:disabled),
+  .icon-btn:active {
+    transform: scale(0.96);
   }
   .btn-sm {
     min-height: 32px;
@@ -275,7 +283,8 @@
     color: var(--text-muted);
     transition:
       background-color 150ms ease,
-      color 150ms ease;
+      color 150ms ease,
+      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .icon-btn:hover {
     background: var(--surface-3);
@@ -360,8 +369,10 @@
     position: fixed;
     inset: 0;
     z-index: 60;
-    background: rgba(0, 0, 0, 0.55);
-    animation: fade-in 150ms ease both;
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    animation: fade-in 220ms ease both;
   }
   .dialog {
     position: fixed;
@@ -376,11 +387,41 @@
     border: 1px solid var(--line-strong);
     border-radius: 24px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-    animation: fade-in 150ms ease both;
+    animation: dialog-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .dialog-top {
     top: 12vh;
     transform: translateX(-50%);
+    animation-name: dialog-top-in;
+  }
+
+  /* ─── Accordéon : ouverture en douceur ──────────────── */
+  .accordion-content {
+    overflow: hidden;
+  }
+  .accordion-content[data-state="open"] {
+    animation: accordion-down 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .accordion-content[data-state="closed"] {
+    animation: accordion-up 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ─── Contenu d'onglet : fondu montant ──────────────── */
+  .tab-in[data-state="active"] {
+    animation: fade-up 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ─── Titre du hero : sort du flou au chargement ────── */
+  .hero-title {
+    animation: blur-in 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ─── Image qui s'agrandit légèrement au survol ─────── */
+  .zoom-media {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .group:hover .zoom-media {
+    transform: scale(1.035);
   }
 
   /* ─── Texte long ────────────────────────────────────── */
@@ -403,14 +444,88 @@
   }
 }
 
-/* ─── Animations : fondu court uniquement ──────────────── */
+/* ─── Animations (douces, façon Apple) ─────────────────── */
 
-@keyframes card-in {
+/* Apparition des cartes au défilement : fondu + léger glissement, une seule fois.
+   data-in est posé par ScrollReveal ; filet de sécurité : tout s'affiche après 2,5 s. */
+[data-js] .card:not([data-in]) {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  animation: reveal-fallback 1ms 2.5s forwards;
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dialog-in {
   from {
     opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
   }
   to {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dialog-top-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
   }
 }
 
@@ -434,6 +549,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-js] .card:not([data-in]) {
+    opacity: 1;
+    transform: none;
+  }
   *,
   *::before,
   *::after {

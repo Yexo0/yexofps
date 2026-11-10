@@ -35,7 +35,7 @@ export function Whoami() {
           key={p}
           value={p}
           forceMount
-          className="max-w-[68ch] text-[15px] leading-relaxed text-muted outline-none data-[state=inactive]:hidden"
+          className="tab-in max-w-[68ch] text-[15px] leading-relaxed text-muted outline-none data-[state=inactive]:hidden"
         >
           <p>
             <span className="font-semibold text-fg">{t(`${p}.title`)}</span> {t(`${p}.text`)}

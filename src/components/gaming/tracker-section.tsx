@@ -120,7 +120,7 @@ export function TrackerSection() {
           </button>
         </div>
 
-        <PeakTile size="lg" />
+        <PeakTile />
 
         {status === "loading" && (
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-hidden="true">

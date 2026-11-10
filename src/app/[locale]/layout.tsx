@@ -15,6 +15,7 @@ import { UIProvider } from "@/components/shell/ui-provider";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
 import { Statusline } from "@/components/shell/statusline";
+import { ScrollReveal } from "@/components/shell/scroll-reveal";
 import "../globals.css";
 
 type Props = {
@@ -86,6 +87,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             </div>
             <CommandPalette />
             <ShortcutsDialog />
+            <ScrollReveal />
           </UIProvider>
         </NextIntlClientProvider>
       </body>

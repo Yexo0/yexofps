@@ -9,6 +9,11 @@ export const SITE = {
   since: 2021,
 } as const;
 
+/** Infos perso affichées (accueil, bio créateur). L'âge est à mettre à jour à chaque anniversaire. */
+export const PROFILE = {
+  age: 21,
+} as const;
+
 /* ─── Réseaux ───────────────────────────────────────────── */
 
 export const SOCIALS = {
@@ -34,6 +39,18 @@ export const TIKTOK_VIDEOS = {
   basicEdit: "https://www.tiktok.com/@yexofps/video/7597391105256197398",
   advancedEdit: "https://www.tiktok.com/@yexofps/video/7600126324421840150",
 } as const;
+
+/**
+ * Montage mis en avant sur l'accueil (lecteur avec réglage du son).
+ * - `video` : fichier hébergé sur le site (ex : "/videos/edit.mp4" dans public/). Si présent, lecteur maison.
+ * - sinon : lecteur TikTok intégré, chargé seulement au clic (pas de cookies TikTok avant).
+ */
+export const FEATURED_EDIT: { tiktokId: string; url: string; poster: string; video?: string } = {
+  tiktokId: "7600126324421840150",
+  url: "https://www.tiktok.com/@yexofps/video/7600126324421840150",
+  poster: "/images/products/advanced-edit.webp",
+  video: undefined,
+};
 
 /** Edits mis en avant dans l'espace Créateur. Ajoute une entrée + son titre dans messages (creator.edits.items). */
 export const EDITS = [
@@ -67,8 +84,8 @@ export const PARTNERS = [
 /** Paramètres envoyés à /api/valorant (la route n'est pas modifiée). */
 export const TRACKER = {
   region: "eu",
-  name: "yexo",
-  tag: "aim",
+  name: "Fallen angel",
+  tag: "yexo",
   mode: "unrated",
   size: 10,
   autoRefreshMs: 90_000,

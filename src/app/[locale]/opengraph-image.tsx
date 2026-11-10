@@ -89,7 +89,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", gap: 12 }}>
-            {(["sysadmin", "radiant", "edits"] as const).map((k) => (
+            {(["sysadmin", "fps", "video"] as const).map((k) => (
               <div
                 key={k}
                 style={{

@@ -97,8 +97,9 @@ export const themeColor = { dark: hex(neutral, 4), light: hex(neutral, 94) };
 /**
  * Script exécuté avant le premier rendu : applique le thème choisi par le visiteur
  * (localStorage) pour éviter un flash. Sans choix enregistré, on reste en sombre.
+ * Pose aussi data-js : les animations d'apparition ne s'activent que si JavaScript tourne.
  */
-export const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();`;
+export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}})();`;
 
 /** Couleurs en hexadécimal pour les images générées (favicon, Open Graph) — mode sombre */
 export const brand = {

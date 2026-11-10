@@ -5,21 +5,8 @@ import { HOSTS, VMS, labStats } from "@/config/lab";
 import { RANKS, SOCIALS } from "@/config/site";
 import { Card } from "@/components/ui/card";
 
-/** Logo ASCII façon distribution Linux, dessiné avec la lettre du pseudo */
-const LOGO = [
-  "yyyy          yyyy",
-  " yyyy        yyyy ",
-  "  yyyy      yyyy  ",
-  "   yyyy    yyyy   ",
-  "    yyyy  yyyy    ",
-  "     yyyyyyyy     ",
-  "      yyyyyy      ",
-  "       yyyy       ",
-  "       yyyy       ",
-  "       yyyy       ",
-  "       yyyy       ",
-  "       yyyy       ",
-].join("\n");
+/** Petit logo ASCII façon distribution Linux, dessiné avec la lettre du pseudo */
+const LOGO = ["yy    yy", " yy  yy ", "  yyyy  ", "   yy   ", "   yy   "].join("\n");
 
 /** Nuancier en bas du terminal : tons de l'accent puis neutres */
 const SWATCHES = [
@@ -41,16 +28,14 @@ export function Fastfetch({ className, index }: { className?: string; index?: nu
   const os = (id: string) => HOSTS.find((h) => h.id === id)?.os ?? "";
   const monitoring = VMS.find((vm) => vm.id === "zbx01")?.services[0] ?? "Zabbix";
 
+  // Version courte (accueil) : l'essentiel de l'infra, puis les rangs et le montage
   const lines: [string, string][] = [
     [t("keys.hosts"), t("values.hosts", { machines: s.machines, vms: s.vms })],
     [t("keys.firewall"), os("fw01")],
     [t("keys.hypervisors"), `${os("esxi01")} · Hyper-V`],
     [t("keys.network"), t("values.network", { vlans: s.vlans })],
-    [t("keys.cpu"), t("values.threads", { threads: s.threads })],
-    [t("keys.memory"), `${s.ramGb} ${tUnits("gb")}`],
-    [t("keys.storage"), `${s.storageTb} ${tUnits("tb")}`],
+    [t("keys.memory"), `${s.ramGb} ${tUnits("gb")} · ${t("values.threads", { threads: s.threads })}`],
     [t("keys.monitoring"), monitoring],
-    [t("keys.backups"), t("values.backups")],
     [t("keys.site"), `Next.js · ${os("vps01")}`],
     [t("keys.ranks"), RANKS.map((r) => tRanks(`${r.id}.rank`)).join(" · ")],
     [t("keys.edits"), `TikTok ${SOCIALS.tiktok.handle}`],
@@ -67,36 +52,36 @@ export function Fastfetch({ className, index }: { className?: string; index?: nu
       index={index}
       className={className}
     >
-      <div className="terminal flex-1 overflow-x-auto p-4 sm:p-5">
+      <div className="terminal flex-1 overflow-x-auto p-4 text-[12.5px] sm:p-5">
         <p>
           <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
           <span className="text-fg">fastfetch</span>
         </p>
-        <div className="mt-3 flex flex-col gap-5 sm:flex-row">
-          <pre aria-hidden="true" className="hidden shrink-0 select-none text-[11px] font-semibold leading-[1.35] text-accent sm:block">
+        <div className="mt-3 flex items-center gap-4">
+          <pre aria-hidden="true" className="select-none text-[10px] font-semibold leading-[1.3] text-accent">
             {LOGO}
           </pre>
-          <div className="min-w-0">
+          <div>
             <p className="text-fg">
               <span className="prompt">yexo</span>@<span className="prompt">homelab</span>
             </p>
             <p aria-hidden="true" className="text-dim">
               ────────────
             </p>
-            <dl>
-              {lines.map(([k, v]) => (
-                <div key={k} className="flex min-w-0 flex-wrap gap-x-2 sm:flex-nowrap">
-                  <dt className="key shrink-0">{k}:</dt>
-                  <dd className="min-w-0 text-fg sm:truncate">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="mt-3 flex" aria-hidden="true">
-              {SWATCHES.map((c) => (
-                <span key={c} className="h-3.5 w-6 first:rounded-l last:rounded-r" style={{ backgroundColor: c }} />
-              ))}
-            </div>
           </div>
+        </div>
+        <dl className="mt-2">
+          {lines.map(([k, v]) => (
+            <div key={k} className="flex min-w-0 flex-wrap gap-x-2 sm:flex-nowrap">
+              <dt className="key shrink-0">{k}:</dt>
+              <dd className="min-w-0 text-fg sm:truncate">{v}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="mt-3 flex" aria-hidden="true">
+          {SWATCHES.map((c) => (
+            <span key={c} className="h-3 w-5 first:rounded-l last:rounded-r" style={{ backgroundColor: c }} />
+          ))}
         </div>
         <p className="mt-4">
           <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
