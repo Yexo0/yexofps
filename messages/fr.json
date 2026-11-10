@@ -69,5 +69,131 @@
       "shortcuts": "Raccourcis clavier",
       "language": "English version"
     }
+  },
+  "palette": {
+    "title": "Palette de commandes",
+    "placeholder": "Aller à un espace, copier un email, ouvrir un tuto…",
+    "results": "Résultats",
+    "empty": "Rien ne correspond à « {query} ».",
+    "groups": {
+      "spaces": "Espaces",
+      "sections": "Sections",
+      "actions": "Actions",
+      "links": "Liens",
+      "products": "Y-Services",
+      "docs": "Tutos PDF"
+    },
+    "sections": {
+      "timeline": "Frise du parcours",
+      "skills": "Compétences",
+      "missions": "Missions de stage",
+      "infraBts": "Schéma réseau du BTS",
+      "watch": "Veille technologique",
+      "docs": "Tutos PDF",
+      "labMap": "Schéma du homelab",
+      "labMachines": "Machines du lab",
+      "ranks": "Rangs",
+      "tracker": "Tracker Valorant",
+      "matches": "Dernières parties",
+      "setup": "Setup",
+      "edits": "Edits TikTok",
+      "partners": "Partenaires et codes promo",
+      "services": "Y-Services",
+      "reviews": "Avis clients",
+      "converter": "Convertisseur de sensibilité"
+    },
+    "actions": {
+      "copyPro": "Copier l'email pro",
+      "copyBusiness": "Copier l'email business",
+      "themeLight": "Passer en mode clair",
+      "themeDark": "Passer en mode sombre",
+      "language": "Read this site in English",
+      "shortcuts": "Afficher les raccourcis clavier"
+    },
+    "footer": {
+      "navigate": "naviguer",
+      "open": "ouvrir",
+      "close": "fermer"
+    }
+  },
+  "shortcuts": {
+    "title": "Raccourcis clavier",
+    "subtitle": "man yexo",
+    "spaces": "Espaces",
+    "general": "Général",
+    "palette": "Palette de commandes",
+    "help": "Afficher cette aide",
+    "close": "Fermer une fenêtre",
+    "note": "Les raccourcis à une touche sont désactivés pendant la saisie dans un champ."
+  },
+  "creator": {
+    "services": {
+      "products": {
+        "colorAe": {
+          "title": "Correction colorimétrique 4K · After Effects"
+        },
+        "basicEdit": {
+          "title": "Montage basique"
+        },
+        "advancedEdit": {
+          "title": "Montage avancé"
+        },
+        "completePack": {
+          "title": "Pack complet pour monter comme moi"
+        },
+        "colorVegas": {
+          "title": "Correction colorimétrique 4K · Vegas Pro"
+        },
+        "antiCompression": {
+          "title": "Patch anti-compression TikTok"
+        }
+      }
+    }
+  },
+  "career": {
+    "docs": {
+      "items": {
+        "zabbix": {
+          "title": "Zabbix",
+          "desc": "Installation du serveur et des agents (Linux et Windows)"
+        },
+        "vlan": {
+          "title": "VLAN sur ESXi",
+          "desc": "Configuration et bonnes pratiques"
+        },
+        "gpo": {
+          "title": "GPO (stratégies de groupe)",
+          "desc": "Créer, lier et appliquer des stratégies dans un domaine AD"
+        },
+        "ad": {
+          "title": "Active Directory",
+          "desc": "Installation, création du domaine, OU, comptes et groupes"
+        },
+        "wifi": {
+          "title": "Borne Wi-Fi Cisco",
+          "desc": "SSID, sécurité, accès et VLAN Wi-Fi"
+        },
+        "glpi": {
+          "title": "GLPI et FusionInventory",
+          "desc": "Inventaire, agents, collecte matériel et logiciel"
+        },
+        "ipfire": {
+          "title": "IPFire (pare-feu)",
+          "desc": "Installation, zones, règles, NAT et filtrage"
+        },
+        "proxmox": {
+          "title": "Proxmox",
+          "desc": "Installation, VM et conteneurs, stockage, réseau"
+        },
+        "esxi": {
+          "title": "Utilisateurs et droits ESXi",
+          "desc": "Comptes, rôles, permissions et sécurité"
+        },
+        "dhcpdns": {
+          "title": "Windows Server : DHCP et DNS",
+          "desc": "Étendues, réservations, zones et enregistrements DNS"
+        }
+      }
+    }
   }
 }

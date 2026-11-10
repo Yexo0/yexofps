@@ -12,6 +12,8 @@ import { DEFAULT_THEME } from "@/config/theme";
 import { themeColor, themeCss, themeScript } from "@/lib/theme";
 import { Rail } from "@/components/shell/rail";
 import { UIProvider } from "@/components/shell/ui-provider";
+import { CommandPalette } from "@/components/shell/command-palette";
+import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
 import "../globals.css";
 
 type Props = {
@@ -75,6 +77,8 @@ export default async function LocaleLayout({ children, params }: Props) {
                 {children}
               </main>
             </div>
+            <CommandPalette />
+            <ShortcutsDialog />
           </UIProvider>
         </NextIntlClientProvider>
       </body>

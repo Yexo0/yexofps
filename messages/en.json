@@ -69,5 +69,131 @@
       "shortcuts": "Keyboard shortcuts",
       "language": "Version française"
     }
+  },
+  "palette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a space, copy an email, open a guide…",
+    "results": "Results",
+    "empty": "Nothing matches “{query}”.",
+    "groups": {
+      "spaces": "Spaces",
+      "sections": "Sections",
+      "actions": "Actions",
+      "links": "Links",
+      "products": "Y-Services",
+      "docs": "PDF guides"
+    },
+    "sections": {
+      "timeline": "Career timeline",
+      "skills": "Skills",
+      "missions": "Internship assignments",
+      "infraBts": "BTS network map",
+      "watch": "Tech watch",
+      "docs": "PDF guides",
+      "labMap": "Homelab map",
+      "labMachines": "Lab machines",
+      "ranks": "Ranks",
+      "tracker": "Valorant tracker",
+      "matches": "Recent matches",
+      "setup": "Setup",
+      "edits": "TikTok edits",
+      "partners": "Partners and promo codes",
+      "services": "Y-Services",
+      "reviews": "Client reviews",
+      "converter": "Sensitivity converter"
+    },
+    "actions": {
+      "copyPro": "Copy work email",
+      "copyBusiness": "Copy business email",
+      "themeLight": "Switch to light mode",
+      "themeDark": "Switch to dark mode",
+      "language": "Lire ce site en français",
+      "shortcuts": "Show keyboard shortcuts"
+    },
+    "footer": {
+      "navigate": "navigate",
+      "open": "open",
+      "close": "close"
+    }
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "subtitle": "man yexo",
+    "spaces": "Spaces",
+    "general": "General",
+    "palette": "Command palette",
+    "help": "Show this help",
+    "close": "Close a dialog",
+    "note": "Single-key shortcuts are disabled while typing in a field."
+  },
+  "creator": {
+    "services": {
+      "products": {
+        "colorAe": {
+          "title": "4K color correction · After Effects"
+        },
+        "basicEdit": {
+          "title": "Basic edit"
+        },
+        "advancedEdit": {
+          "title": "Advanced edit"
+        },
+        "completePack": {
+          "title": "Complete pack to edit like me"
+        },
+        "colorVegas": {
+          "title": "4K color correction · Vegas Pro"
+        },
+        "antiCompression": {
+          "title": "TikTok anti-compression patch"
+        }
+      }
+    }
+  },
+  "career": {
+    "docs": {
+      "items": {
+        "zabbix": {
+          "title": "Zabbix",
+          "desc": "Server and agent installation (Linux and Windows)"
+        },
+        "vlan": {
+          "title": "VLANs on ESXi",
+          "desc": "Configuration and best practices"
+        },
+        "gpo": {
+          "title": "GPO (Group Policy)",
+          "desc": "Create, link and apply policies in an AD domain"
+        },
+        "ad": {
+          "title": "Active Directory",
+          "desc": "Installation, domain creation, OUs, accounts and groups"
+        },
+        "wifi": {
+          "title": "Cisco Wi-Fi access point",
+          "desc": "SSID, security, access and Wi-Fi VLAN"
+        },
+        "glpi": {
+          "title": "GLPI and FusionInventory",
+          "desc": "Inventory, agents, hardware and software collection"
+        },
+        "ipfire": {
+          "title": "IPFire (firewall)",
+          "desc": "Installation, zones, rules, NAT and filtering"
+        },
+        "proxmox": {
+          "title": "Proxmox",
+          "desc": "Installation, VMs and containers, storage, networking"
+        },
+        "esxi": {
+          "title": "ESXi users and permissions",
+          "desc": "Accounts, roles, permissions and security"
+        },
+        "dhcpdns": {
+          "title": "Windows Server: DHCP and DNS",
+          "desc": "Scopes, reservations, DNS zones and records"
+        }
+      }
+    }
   }
 }
