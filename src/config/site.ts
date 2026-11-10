@@ -95,8 +95,8 @@ export const TRACKER = {
 /** Peak affiché en permanence, même si l'API ne répond pas. */
 export const VALORANT_PEAK = {
   rank: "Radiant",
-  rr: 867,
-  episode: 25,
+  rr: 661,
+  episode: 8,
   act: 2,
   image: "/images/ranks/valorant-radiant.png",
 } as const;

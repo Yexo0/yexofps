@@ -994,7 +994,7 @@
     "tracker": {
       "title": "Live Valorant",
       "peak": "Peak rank",
-      "peakSeason": "V{episode} · Act {act}",
+      "peakSeason": "Episode {episode} · Act {act}",
       "peakStillHere": "The peak stays visible: it doesn't depend on the API.",
       "recent": "Last {count} matches",
       "loading": "Loading recent matches…",

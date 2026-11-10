@@ -994,7 +994,7 @@
     "tracker": {
       "title": "Valorant en direct",
       "peak": "Rang peak",
-      "peakSeason": "V{episode} · Acte {act}",
+      "peakSeason": "Épisode {episode} · Acte {act}",
       "peakStillHere": "Le peak reste affiché : il ne dépend pas de l'API.",
       "recent": "{count} dernières parties",
       "loading": "Chargement des dernières parties…",
