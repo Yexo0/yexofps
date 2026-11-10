@@ -134,23 +134,118 @@
     "services": {
       "products": {
         "colorAe": {
-          "title": "4K color correction · After Effects"
+          "title": "4K color correction · After Effects",
+          "desc": "Color grading preset for After Effects 2024, built for 4K Valorant clips.",
+          "imageAlt": "Before / after of the 4K color grading on a Valorant scene"
         },
         "basicEdit": {
-          "title": "Basic edit"
+          "title": "Basic edit",
+          "desc": "A simple, clean edit. Turnaround depends on the request.",
+          "imageAlt": "Frame from a basic edit"
         },
         "advancedEdit": {
-          "title": "Advanced edit"
+          "title": "Advanced edit",
+          "desc": "Transitions, pacing and effects. Price depends on complexity.",
+          "imageAlt": "Frame from an advanced edit"
         },
         "completePack": {
-          "title": "Complete pack to edit like me"
+          "title": "Complete pack to edit like me",
+          "desc": "My resources, presets and settings, with a one-hour tutorial to edit like me.",
+          "imageAlt": "Pack contents: agents, sounds, color packs and tutorials"
         },
         "colorVegas": {
-          "title": "4K color correction · Vegas Pro"
+          "title": "4K color correction · Vegas Pro",
+          "desc": "Color grading preset for Vegas Pro.",
+          "imageAlt": "Before / after of the color grading in Vegas Pro"
         },
         "antiCompression": {
-          "title": "TikTok anti-compression patch"
+          "title": "TikTok anti-compression patch",
+          "desc": "To post on TikTok in 1080p at 60 frames per second.",
+          "imageAlt": "Anti-compression patch files"
         }
+      },
+      "title": "Y-Services",
+      "meta": "{count} products",
+      "intro": "The presets, edits and tools I use for my own videos. To order, open a ticket on Discord (fastest), email me, or buy directly on Payhip.",
+      "order": "Order",
+      "orderLabel": "Order “{product}” on Discord",
+      "example": "See an example",
+      "preview": "Preview"
+    },
+    "bio": {
+      "title": "Creator",
+      "tagline": "I edit Valorant clips: pacing locked to the music, clean transitions, careful color grading.",
+      "text": "I've been posting as Yexo on TikTok since 2022. I mostly edit my own matches, with extra care for pacing, transitions and sound design. What I use for my videos, I also offer to others: color grading presets, custom edits and an anti-compression patch, all under Y-Services.",
+      "chips": {
+        "radiant": "Radiant in Valorant",
+        "editor": "Video editor",
+        "location": "France"
+      },
+      "photoAlt": "My editing station, with a Valorant edit timeline on screen"
+    },
+    "history": {
+      "title": "History",
+      "meta": "{count} milestones",
+      "items": {
+        "competitive": "Started competitive gaming",
+        "tiktok": "First clips on TikTok",
+        "immortal": "Immortal in Valorant",
+        "radiant": "Radiant in Valorant",
+        "services": "Launched Y-Services"
+      }
+    },
+    "edits": {
+      "title": "Edits",
+      "intro": "Two examples: a simple edit and a more advanced one. Everything else is on TikTok.",
+      "items": {
+        "basicEdit": "Basic edit example",
+        "advancedEdit": "Advanced edit example"
+      },
+      "all": "All my edits on TikTok",
+      "newTab": "opens in a new tab"
+    },
+    "partners": {
+      "title": "Partners",
+      "meta": "promo codes",
+      "discount": "−{discount}% with code {code}",
+      "visit": "Website",
+      "visitLabel": "Open {name}'s website (partner link)",
+      "codeLabel": "code {code}",
+      "note": "Partner links: using them supports me at no extra cost to you."
+    },
+    "order": {
+      "title": "How to order",
+      "discord": {
+        "title": "Discord ticket",
+        "text": "Fastest: open a ticket and describe what you need.",
+        "cta": "Open a ticket"
+      },
+      "email": {
+        "title": "Email",
+        "text": "For requests and orders.",
+        "cta": "Write",
+        "copyLabel": "business email"
+      },
+      "payhip": {
+        "title": "Payhip",
+        "text": "Instant purchase, no conversation needed.",
+        "cta": "Open Payhip"
+      },
+      "delivery": "Delivery: the files or resources, with instructions if needed. Prices shown in euros.",
+      "tip": "When you contact me, mention the product, your software and what you want to achieve."
+    },
+    "reviews": {
+      "title": "Client reviews",
+      "meta": "{count} reviews",
+      "intro": "Messages received after delivery, copied as is.",
+      "via": "via {platform}",
+      "quote": "“{text}”",
+      "all": "All reviews are on Discord",
+      "items": {
+        "saytroz": "The pack is nice, and yexo's always here to help if needed, thanks again",
+        "truthvlr": "The patch is crazyyy, uploads look way sharper.",
+        "s6nse": "+rep clips are clean",
+        "yakzu": "legit seller bought some clips"
       }
     }
   },

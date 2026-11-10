@@ -134,23 +134,118 @@
     "services": {
       "products": {
         "colorAe": {
-          "title": "Correction colorimétrique 4K · After Effects"
+          "title": "Correction colorimétrique 4K · After Effects",
+          "desc": "Preset d'étalonnage pour After Effects 2024, pensé pour des clips Valorant en 4K.",
+          "imageAlt": "Avant / après de l'étalonnage 4K sur une scène de Valorant"
         },
         "basicEdit": {
-          "title": "Montage basique"
+          "title": "Montage basique",
+          "desc": "Un montage simple et propre. Le délai dépend de la demande.",
+          "imageAlt": "Image extraite d'un montage basique"
         },
         "advancedEdit": {
-          "title": "Montage avancé"
+          "title": "Montage avancé",
+          "desc": "Transitions, rythme et effets. Le prix dépend de la complexité.",
+          "imageAlt": "Image extraite d'un montage avancé"
         },
         "completePack": {
-          "title": "Pack complet pour monter comme moi"
+          "title": "Pack complet pour monter comme moi",
+          "desc": "Mes ressources, presets et réglages, avec une heure de tuto pour monter comme moi.",
+          "imageAlt": "Contenu du pack : agents, sons, packs d'étalonnage et tutos"
         },
         "colorVegas": {
-          "title": "Correction colorimétrique 4K · Vegas Pro"
+          "title": "Correction colorimétrique 4K · Vegas Pro",
+          "desc": "Preset d'étalonnage pour Vegas Pro.",
+          "imageAlt": "Avant / après de l'étalonnage sous Vegas Pro"
         },
         "antiCompression": {
-          "title": "Patch anti-compression TikTok"
+          "title": "Patch anti-compression TikTok",
+          "desc": "Pour publier sur TikTok en 1080p à 60 images par seconde.",
+          "imageAlt": "Fichiers du patch anti-compression"
         }
+      },
+      "title": "Y-Services",
+      "meta": "{count} produits",
+      "intro": "Les presets, montages et outils que j'utilise pour mes propres vidéos. Pour commander, ouvre un ticket sur Discord (le plus rapide), écris-moi par email, ou achète directement sur Payhip.",
+      "order": "Commander",
+      "orderLabel": "Commander « {product} » sur Discord",
+      "example": "Voir un exemple",
+      "preview": "Aperçu"
+    },
+    "bio": {
+      "title": "Créateur",
+      "tagline": "Je monte des edits Valorant : rythme calé sur la musique, transitions propres, couleurs travaillées.",
+      "text": "Je publie sous le nom de Yexo sur TikTok depuis 2022. Je monte surtout mes propres parties, avec un soin particulier pour le rythme, les transitions et le sound design. Ce que j'utilise pour mes vidéos, je le propose aussi : presets d'étalonnage, montages sur commande et patch anti-compression, réunis dans Y-Services.",
+      "chips": {
+        "radiant": "Radiant sur Valorant",
+        "editor": "Monteur vidéo",
+        "location": "France"
+      },
+      "photoAlt": "Mon poste de montage, avec la timeline d'un edit Valorant à l'écran"
+    },
+    "history": {
+      "title": "Historique",
+      "meta": "{count} étapes",
+      "items": {
+        "competitive": "Début du jeu compétitif",
+        "tiktok": "Premiers clips sur TikTok",
+        "immortal": "Immortal sur Valorant",
+        "radiant": "Radiant sur Valorant",
+        "services": "Lancement de Y-Services"
+      }
+    },
+    "edits": {
+      "title": "Edits",
+      "intro": "Deux exemples : un montage simple et un montage plus poussé. Le reste est sur TikTok.",
+      "items": {
+        "basicEdit": "Exemple de montage basique",
+        "advancedEdit": "Exemple de montage avancé"
+      },
+      "all": "Tous mes edits sur TikTok",
+      "newTab": "s'ouvre dans un nouvel onglet"
+    },
+    "partners": {
+      "title": "Partenaires",
+      "meta": "codes promo",
+      "discount": "−{discount} % avec le code {code}",
+      "visit": "Le site",
+      "visitLabel": "Ouvrir le site de {name} (lien partenaire)",
+      "codeLabel": "le code {code}",
+      "note": "Liens partenaires : passer par eux me soutient sans rien te coûter de plus."
+    },
+    "order": {
+      "title": "Commander",
+      "discord": {
+        "title": "Ticket Discord",
+        "text": "Le plus rapide : ouvre un ticket et décris ta demande.",
+        "cta": "Ouvrir un ticket"
+      },
+      "email": {
+        "title": "Email",
+        "text": "Pour les demandes et les commandes.",
+        "cta": "Écrire",
+        "copyLabel": "l'email business"
+      },
+      "payhip": {
+        "title": "Payhip",
+        "text": "Achat instantané, sans passer par une discussion.",
+        "cta": "Ouvrir Payhip"
+      },
+      "delivery": "Livraison : les fichiers ou ressources, avec des instructions si besoin. Prix affichés en euros.",
+      "tip": "Quand tu me contactes, précise le produit, ton logiciel et ce que tu veux obtenir."
+    },
+    "reviews": {
+      "title": "Avis clients",
+      "meta": "{count} avis",
+      "intro": "Des messages reçus après livraison, recopiés tels quels.",
+      "via": "via {platform}",
+      "quote": "« {text} »",
+      "all": "Tous les avis sont sur Discord",
+      "items": {
+        "saytroz": "Le pack est cool, et yexo est toujours là pour aider si besoin, merci encore",
+        "truthvlr": "Le patch est oufff, les uploads sont beaucoup plus nets.",
+        "s6nse": "+rep les clips sont propres",
+        "yakzu": "vendeur legit j'ai acheté des clips"
       }
     }
   },
