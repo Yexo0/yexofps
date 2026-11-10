@@ -1042,5 +1042,39 @@
       "partner": "−{discount} % avec le code {code}",
       "codeLabel": "le code promo"
     }
+  },
+  "tools": {
+    "converter": {
+      "title": "Convertisseur de sensibilité",
+      "meta": "{count} jeux",
+      "intro": "Change de jeu sans réapprendre ta visée : le convertisseur garde la même distance de souris pour un tour complet (cm/360).",
+      "from": "Source",
+      "to": "Cible",
+      "game": "Jeu",
+      "sens": "Sensibilité",
+      "dpi": "DPI",
+      "targetDpi": "DPI cible",
+      "sameDpi": "Même DPI",
+      "swap": "Inverser la source et la cible",
+      "mine": "Ma config : {sens} à {dpi} DPI",
+      "result": "Sensibilité cible",
+      "in": "à entrer dans {game}",
+      "cm360Sub": "Même distance physique entre les jeux",
+      "in360": "{value} pouces par tour",
+      "edpiSub": "Sensibilité × DPI",
+      "edpiTo": "{value} en cible",
+      "errors": {
+        "invalidSens": "Entre une sensibilité valide.",
+        "invalidDpi": "Entre un DPI valide.",
+        "invalidTargetDpi": "Entre un DPI cible valide."
+      }
+    },
+    "how": {
+      "title": "Comment ça marche",
+      "text": "Chaque jeu multiplie ta sensibilité par un coefficient, le yaw. Le convertisseur calcule la distance que parcourt ta souris pour un tour complet, puis la sensibilité qui donne la même distance dans le jeu cible.",
+      "formula": "Formules",
+      "yaw": "Valeurs de yaw",
+      "note": "Résultat arrondi à 4 décimales. Le point sert de séparateur décimal, comme dans les jeux."
+    }
   }
 }

@@ -1042,5 +1042,39 @@
       "partner": "−{discount}% with code {code}",
       "codeLabel": "the promo code"
     }
+  },
+  "tools": {
+    "converter": {
+      "title": "Sensitivity converter",
+      "meta": "{count} games",
+      "intro": "Switch games without relearning your aim: the converter keeps the same mouse distance for a full turn (cm/360).",
+      "from": "Source",
+      "to": "Target",
+      "game": "Game",
+      "sens": "Sensitivity",
+      "dpi": "DPI",
+      "targetDpi": "Target DPI",
+      "sameDpi": "Same DPI",
+      "swap": "Swap source and target",
+      "mine": "My setup: {sens} at {dpi} DPI",
+      "result": "Target sensitivity",
+      "in": "to enter in {game}",
+      "cm360Sub": "Same physical distance across games",
+      "in360": "{value} inches per turn",
+      "edpiSub": "Sensitivity × DPI",
+      "edpiTo": "{value} on target",
+      "errors": {
+        "invalidSens": "Enter a valid sensitivity.",
+        "invalidDpi": "Enter a valid DPI.",
+        "invalidTargetDpi": "Enter a valid target DPI."
+      }
+    },
+    "how": {
+      "title": "How it works",
+      "text": "Each game multiplies your sensitivity by a coefficient, the yaw. The converter works out how far your mouse travels for a full turn, then the sensitivity that gives the same distance in the target game.",
+      "formula": "Formulas",
+      "yaw": "Yaw values",
+      "note": "Result rounded to 4 decimals. The dot is the decimal separator, as in games."
+    }
   }
 }
