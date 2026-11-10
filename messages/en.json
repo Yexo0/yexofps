@@ -711,6 +711,135 @@
     "units": {
       "gb": "GB",
       "tb": "TB"
+    },
+    "overview": {
+      "title": "Lab",
+      "meta": "since {year}",
+      "text": "My training ground since 2022: a pfSense firewall, Cisco and MikroTik switches, an ESXi host and Zabbix watching over all of it, plus a Hyper-V lab for school. Whatever I learn in class or at work, I rebuild here before I call it learned.",
+      "technologies": "Technologies used"
+    },
+    "stats": {
+      "machines": "Machines",
+      "guests": "Guests",
+      "threads": "Threads",
+      "memory": "Memory"
+    },
+    "map": {
+      "title": "Network map",
+      "meta": "{count} nodes",
+      "hint": "Hover or select a node to see its role and what it connects to.",
+      "related": "Connected to",
+      "ungrouped": "Network core",
+      "links": {
+        "tunnel": "WireGuard tunnel"
+      }
+    },
+    "nodes": {
+      "internet": {
+        "label": "Internet",
+        "sub": "WAN",
+        "role": "Internet uplink. The ISP box runs in bridge mode: pfSense holds the public address, and only the WireGuard port is open."
+      },
+      "vps01": {
+        "sub": "public site",
+        "role": "Ubuntu VPS hosting this site behind Nginx and Let's Encrypt. It joins the homelab through a site-to-site WireGuard tunnel: metrics to Zabbix, backups to the NAS, access to the staging site in the DMZ."
+      },
+      "fw01": {
+        "sub": "pfSense",
+        "role": "Firewall and router between VLANs: every flow from one to another goes through an explicit rule. It also runs the WireGuard admin VPN and the Unbound DNS resolver."
+      },
+      "sw-core": {
+        "sub": "L2 core",
+        "role": "MikroTik core switch: 802.1Q trunks to pfSense and the hosts, per-VLAN access ports for everything else."
+      },
+      "sw-lab": {
+        "sub": "Cisco IOS",
+        "role": "Cisco practice switch: I use it to work on the IOS CLI and to connect the PC running the Hyper-V lab."
+      },
+      "ap01": {
+        "sub": "Wi-Fi 6",
+        "role": "Wi-Fi access point: one network for personal devices (VLAN 50) and an isolated one for guests and IoT (VLAN 60)."
+      },
+      "esxi01": {
+        "sub": "ESXi",
+        "role": "Main hypervisor: a second-hand tower, picked for being quiet and having ECC RAM. One port group per VLAN on the vSwitch."
+      },
+      "nas01": {
+        "sub": "backups",
+        "role": "RAID 1 NAS: target for the Veeam and VPS backups, with an encrypted off-site copy every week."
+      },
+      "dc01": {
+        "sub": "test AD",
+        "role": "Test domain controller (lab.yexo.lan): I rebuild GPOs and AD structures here before using them anywhere else."
+      },
+      "zbx01": {
+        "sub": "monitoring",
+        "role": "Zabbix: SNMP for pfSense, switches and the NAS, VMware template for ESXi, agent 2 on the VMs and on the VPS through the tunnel. Alerts go to Discord."
+      },
+      "bkp01": {
+        "sub": "Veeam",
+        "role": "Nightly VM backups to the NAS, with 14 restore points. One test restore a month: a backup you never restored isn't a backup."
+      },
+      "rp01": {
+        "sub": "reverse proxy",
+        "role": "Nginx reverse proxy in the DMZ. It only receives traffic coming from the VPS through the tunnel and can't open anything towards the LAN."
+      },
+      "hv-lab": {
+        "sub": "school lab",
+        "role": "PC running the Hyper-V school lab: a Debian server (DHCP, FTP, MariaDB, inter-VLAN routing), a Windows Server, a Windows client and a Linux client, on an isolated vSwitch."
+      },
+      "clients": {
+        "label": "clients",
+        "sub": "home · IoT",
+        "role": "PCs, phones, console and IoT devices. IoT and guests only get internet access."
+      }
+    },
+    "vlans": {
+      "title": "VLANs",
+      "meta": "{count} VLANs",
+      "items": {
+        "admin": "Management interfaces: pfSense, ESXi, switches, access point and NAS. Reachable only through the WireGuard VPN.",
+        "srv": "Internal servers: test AD, Zabbix, GLPI, Veeam and Docker. The home network only reaches the ports it needs (DNS, web).",
+        "dmz": "What's exposed: reverse proxy and the site's staging copy. Reachable only through the VPS tunnel, with no way into the LAN.",
+        "lab": "The Hyper-V school lab, isolated from everything else with internet access only. I can break anything there safely.",
+        "home": "Personal network: PCs, phones and console. Internet and internal DNS.",
+        "iot": "Guests and IoT devices: internet only, with client isolation."
+      }
+    },
+    "machines": {
+      "title": "Machines",
+      "meta": "{count} devices",
+      "os": "OS",
+      "cpu": "CPU",
+      "ram": "RAM",
+      "storage": "Disks",
+      "coresThreads": "{cores} c / {threads} t",
+      "vms": "{count, plural, one {# hosted VM} other {# hosted VMs}}",
+      "kinds": {
+        "firewall": "firewall",
+        "switch": "switch",
+        "ap": "Wi-Fi",
+        "hypervisor": "hypervisor",
+        "nas": "NAS",
+        "workstation": "workstation",
+        "vps": "VPS"
+      }
+    },
+    "resources": {
+      "title": "Resources",
+      "text": "Each use gets its own VLAN, and pfSense filters everything that crosses from one to another. On the ISP box, only the WireGuard port is open: anything public goes through the VPS, then through the tunnel to the reverse proxy in the DMZ. VMs are backed up every night to the NAS, with an off-site copy every week. Zabbix watches the hardware, the VMs and the VPS, and warns me before anyone else notices an outage.",
+      "access": {
+        "title": "Admin access",
+        "text": "WireGuard VPN into VLAN 10, one key per device, nothing else open on the ISP box."
+      },
+      "backups": {
+        "title": "3-2-1 backups",
+        "text": "VMs backed up nightly to the NAS, encrypted off-site copy weekly, restore tested monthly."
+      },
+      "monitoring": {
+        "title": "Monitoring",
+        "text": "Zabbix watches hardware, VMs and the VPS, with alerts on Discord."
+      }
     }
   },
   "gaming": {

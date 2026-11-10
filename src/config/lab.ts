@@ -163,7 +163,7 @@ export const HOSTS: readonly Host[] = [
     ramGb: 32,
     storage: [{ label: "NVMe", tb: 1 }],
     vlans: [40, 50],
-    tags: ["Hyper-V", "vSwitch", "VLAN 40"],
+    tags: ["Hyper-V", "vSwitch"],
     placeholder: true,
   },
   {
@@ -288,7 +288,7 @@ export const LAB_MAP = {
     { from: "internet", to: "fw01" },
     { from: "internet", to: "vps01" },
     { from: "vps01", to: "fw01", kind: "dashed", label: "tunnel" },
-    { from: "fw01", to: "sw-core", label: "trunk" },
+    { from: "fw01", to: "sw-core" },
     { from: "sw-core", to: "esxi01" },
     { from: "sw-core", to: "nas01" },
     { from: "sw-core", to: "sw-lab" },

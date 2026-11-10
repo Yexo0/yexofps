@@ -711,6 +711,135 @@
     "units": {
       "gb": "Go",
       "tb": "To"
+    },
+    "overview": {
+      "title": "Lab",
+      "meta": "depuis {year}",
+      "text": "Mon terrain d'entraînement depuis 2022 : un pare-feu pfSense, des switchs Cisco et MikroTik, un hôte ESXi et Zabbix pour surveiller le tout, plus un lab Hyper-V pour l'école. Ce que j'apprends en cours ou en alternance, je le remonte ici avant de le considérer comme acquis.",
+      "technologies": "Technologies utilisées"
+    },
+    "stats": {
+      "machines": "Machines",
+      "guests": "Invités",
+      "threads": "Threads",
+      "memory": "Mémoire"
+    },
+    "map": {
+      "title": "Schéma du réseau",
+      "meta": "{count} nœuds",
+      "hint": "Survole ou sélectionne un nœud pour afficher son rôle et ce qui y est relié.",
+      "related": "Relié à",
+      "ungrouped": "Cœur du réseau",
+      "links": {
+        "tunnel": "tunnel WireGuard"
+      }
+    },
+    "nodes": {
+      "internet": {
+        "label": "Internet",
+        "sub": "WAN",
+        "role": "Arrivée Internet. La box est en mode bridge : c'est pfSense qui porte l'adresse publique, et seul le port WireGuard est ouvert."
+      },
+      "vps01": {
+        "sub": "site public",
+        "role": "VPS Ubuntu qui héberge ce site derrière Nginx et Let's Encrypt. Il rejoint le homelab par un tunnel WireGuard site à site : métriques vers Zabbix, sauvegardes vers le NAS, accès à la préprod en DMZ."
+      },
+      "fw01": {
+        "sub": "pfSense",
+        "role": "Pare-feu et routeur entre les VLAN : chaque flux de l'un à l'autre passe par une règle explicite. Il porte aussi le VPN WireGuard d'administration et le résolveur DNS Unbound."
+      },
+      "sw-core": {
+        "sub": "cœur L2",
+        "role": "Switch MikroTik de cœur : trunk 802.1Q vers pfSense et les hôtes, ports d'accès par VLAN pour le reste."
+      },
+      "sw-lab": {
+        "sub": "Cisco IOS",
+        "role": "Switch Cisco d'entraînement : je m'en sers pour pratiquer la CLI IOS et pour brancher le PC qui fait tourner le lab Hyper-V."
+      },
+      "ap01": {
+        "sub": "Wi-Fi 6",
+        "role": "Borne Wi-Fi : un réseau pour le perso (VLAN 50) et un réseau isolé pour les invités et les objets connectés (VLAN 60)."
+      },
+      "esxi01": {
+        "sub": "ESXi",
+        "role": "Hyperviseur principal : une tour d'occasion, choisie pour son silence et sa RAM ECC. Un groupe de ports par VLAN sur le vSwitch."
+      },
+      "nas01": {
+        "sub": "sauvegardes",
+        "role": "NAS en RAID 1 : cible des sauvegardes Veeam et de celles du VPS, avec une copie chiffrée hors site chaque semaine."
+      },
+      "dc01": {
+        "sub": "AD de test",
+        "role": "Contrôleur de domaine de test (lab.yexo.lan) : j'y reproduis des GPO et une organisation AD avant de m'en servir ailleurs."
+      },
+      "zbx01": {
+        "sub": "supervision",
+        "role": "Zabbix : SNMP pour pfSense, les switchs et le NAS, template VMware pour ESXi, agent 2 sur les VM et sur le VPS via le tunnel. Les alertes arrivent sur Discord."
+      },
+      "bkp01": {
+        "sub": "Veeam",
+        "role": "Sauvegarde des VM chaque nuit vers le NAS, avec 14 points de restauration. Une restauration de test par mois : une sauvegarde jamais restaurée n'en est pas une."
+      },
+      "rp01": {
+        "sub": "reverse proxy",
+        "role": "Reverse proxy Nginx en DMZ. Il ne reçoit que le trafic arrivé du VPS par le tunnel et ne peut rien initier vers le LAN."
+      },
+      "hv-lab": {
+        "sub": "lab école",
+        "role": "PC qui fait tourner le lab Hyper-V de l'école : un serveur Debian (DHCP, FTP, MariaDB, routage inter-VLAN), un Windows Server, un client Windows et un client Linux, sur un vSwitch isolé."
+      },
+      "clients": {
+        "label": "clients",
+        "sub": "perso · IoT",
+        "role": "PC, téléphones, console et objets connectés. Les objets et les invités n'ont accès qu'à Internet."
+      }
+    },
+    "vlans": {
+      "title": "VLAN",
+      "meta": "{count} VLAN",
+      "items": {
+        "admin": "Interfaces d'administration : pfSense, ESXi, switchs, borne et NAS. Accessible uniquement depuis le VPN WireGuard.",
+        "srv": "Serveurs internes : AD de test, Zabbix, GLPI, Veeam et Docker. Le réseau perso n'y accède que sur les ports nécessaires (DNS, web).",
+        "dmz": "Ce qui est exposé : reverse proxy et préprod du site. Joignable seulement par le tunnel du VPS, aucune connexion possible vers le LAN.",
+        "lab": "Lab Hyper-V de l'école, isolé du reste avec un accès Internet seul. Je peux tout y casser sans risque.",
+        "home": "Réseau perso : PC, téléphones et console. Internet et DNS interne.",
+        "iot": "Invités et objets connectés : Internet uniquement, avec isolation entre clients."
+      }
+    },
+    "machines": {
+      "title": "Machines",
+      "meta": "{count} équipements",
+      "os": "OS",
+      "cpu": "CPU",
+      "ram": "RAM",
+      "storage": "Disques",
+      "coresThreads": "{cores} c / {threads} t",
+      "vms": "{count, plural, one {# VM hébergée} other {# VM hébergées}}",
+      "kinds": {
+        "firewall": "pare-feu",
+        "switch": "switch",
+        "ap": "Wi-Fi",
+        "hypervisor": "hyperviseur",
+        "nas": "NAS",
+        "workstation": "poste",
+        "vps": "VPS"
+      }
+    },
+    "resources": {
+      "title": "Ressources",
+      "text": "Chaque usage a son VLAN, et pfSense filtre tout ce qui passe de l'un à l'autre. Côté box, seul le port WireGuard est ouvert : ce qui doit être public passe par le VPS, puis par le tunnel jusqu'au reverse proxy en DMZ. Les VM sont sauvegardées chaque nuit sur le NAS, avec une copie hors site chaque semaine. Zabbix surveille les équipements, les VM et le VPS, et me prévient avant que quelqu'un d'autre ne remarque la panne.",
+      "access": {
+        "title": "Accès admin",
+        "text": "VPN WireGuard vers le VLAN 10, une clé par appareil, rien d'autre d'ouvert côté box."
+      },
+      "backups": {
+        "title": "Sauvegardes 3-2-1",
+        "text": "VM sauvegardées chaque nuit sur le NAS, copie chiffrée hors site chaque semaine, restauration testée chaque mois."
+      },
+      "monitoring": {
+        "title": "Supervision",
+        "text": "Zabbix surveille équipements, VM et VPS, avec des alertes sur Discord."
+      }
     }
   },
   "gaming": {
