@@ -888,8 +888,64 @@
       "stats": {
         "kd": "K/D",
         "hs": "HS%",
-        "winrate": "Win rate"
+        "winrate": "Win rate",
+        "kda": "K / D / A",
+        "hsSub": "Average over {count} matches",
+        "hsNa": "No shots recorded",
+        "kdSub": "{kills} kills · {deaths} deaths",
+        "winSub": "{wins} W · {losses} L",
+        "winNa": "Results unavailable",
+        "kdaSub": "Total over {count} matches"
+      },
+      "trackerTitle": "Valorant tracker",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing…",
+      "auto": "Auto",
+      "autoLabel": "Automatic refresh every 90 seconds",
+      "status": {
+        "loading": "Loading…",
+        "ready": "Updated at {time}",
+        "empty": "No matches",
+        "error": "Unavailable"
       }
+    },
+    "intro": {
+      "title": "Gaming",
+      "tagline": "Radiant in Valorant, level 10 on Faceit, Master in Apex. I leave the tilt to others."
+    },
+    "matches": {
+      "title": "Recent matches",
+      "meta": "unrated",
+      "unavailable": "The match list will show up as soon as the API responds again.",
+      "note": "Click a match to see the shot breakdown. Data from the HenrikDev API.",
+      "columns": {
+        "score": "Score",
+        "kda": "K/D/A",
+        "hs": "HS%"
+      },
+      "detail": {
+        "kills": "Kills",
+        "deaths": "Deaths",
+        "assists": "Assists",
+        "score": "Score",
+        "headshots": "Head",
+        "bodyshots": "Body",
+        "legshots": "Legs",
+        "accuracy": "Shot breakdown",
+        "shots": "shots",
+        "close": "Close"
+      }
+    },
+    "setup": {
+      "title": "Setup",
+      "meta": "{count} items",
+      "items": {
+        "mouse": "Mouse",
+        "keyboard": "Keyboard",
+        "mousepad": "Mousepad"
+      },
+      "partner": "−{discount}% with code {code}",
+      "codeLabel": "the promo code"
     }
   }
 }

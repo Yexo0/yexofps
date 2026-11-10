@@ -135,3 +135,21 @@ export function ResultDots({ matches }: { matches: MatchData[] }) {
     </div>
   );
 }
+
+/* ─── Étiquette de résultat (Victoire / Défaite) ─── */
+
+export function ResultTag({ result }: { result: MatchData["result"] }) {
+  const t = useTranslations("gaming.tracker.result");
+  return (
+    <span
+      className={cn(
+        "inline-flex justify-center rounded-full px-2.5 py-1 text-xs font-semibold",
+        result === "win" && "bg-accent-tint text-accent",
+        result === "loss" && "bg-surface-3 text-muted",
+        result === "unknown" && "bg-surface-3 text-dim",
+      )}
+    >
+      {t(result)}
+    </span>
+  );
+}

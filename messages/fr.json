@@ -888,8 +888,64 @@
       "stats": {
         "kd": "K/D",
         "hs": "HS %",
-        "winrate": "Victoires"
+        "winrate": "Victoires",
+        "kda": "K / D / A",
+        "hsSub": "Moyenne sur {count} parties",
+        "hsNa": "Aucun tir enregistré",
+        "kdSub": "{kills} éliminations · {deaths} morts",
+        "winSub": "{wins} V · {losses} D",
+        "winNa": "Résultats indisponibles",
+        "kdaSub": "Total sur {count} parties"
+      },
+      "trackerTitle": "Tracker Valorant",
+      "refresh": "Rafraîchir",
+      "refreshing": "Actualisation…",
+      "auto": "Auto",
+      "autoLabel": "Rafraîchissement automatique toutes les 90 secondes",
+      "status": {
+        "loading": "Chargement…",
+        "ready": "À jour à {time}",
+        "empty": "Aucune partie",
+        "error": "Indisponible"
       }
+    },
+    "intro": {
+      "title": "Gaming",
+      "tagline": "Radiant sur Valorant, niveau 10 sur Faceit, Master sur Apex. Le tilt, je le laisse aux autres."
+    },
+    "matches": {
+      "title": "Dernières parties",
+      "meta": "non classées",
+      "unavailable": "La liste des parties s'affichera dès que l'API répondra à nouveau.",
+      "note": "Clique sur une partie pour voir le détail des tirs. Données fournies par l'API HenrikDev.",
+      "columns": {
+        "score": "Score",
+        "kda": "K/D/A",
+        "hs": "HS %"
+      },
+      "detail": {
+        "kills": "Élim.",
+        "deaths": "Morts",
+        "assists": "Assists",
+        "score": "Score",
+        "headshots": "Tête",
+        "bodyshots": "Corps",
+        "legshots": "Jambes",
+        "accuracy": "Répartition des tirs",
+        "shots": "tirs",
+        "close": "Fermer"
+      }
+    },
+    "setup": {
+      "title": "Setup",
+      "meta": "{count} pièces",
+      "items": {
+        "mouse": "Souris",
+        "keyboard": "Clavier",
+        "mousepad": "Tapis"
+      },
+      "partner": "−{discount} % avec le code {code}",
+      "codeLabel": "le code promo"
     }
   }
 }
