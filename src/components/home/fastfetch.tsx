@@ -1,0 +1,97 @@
+// src/components/home/fastfetch.tsx — Carte terminal façon fastfetch, alimentée par src/config/lab.ts.
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { SquareTerminal } from "lucide-react";
+import { HOSTS, VMS, labStats } from "@/config/lab";
+import { RANKS, SOCIALS } from "@/config/site";
+import { Card } from "@/components/ui/card";
+
+/** Nuancier en bas du terminal : tons de l'accent puis neutres */
+const SWATCHES = [
+  "var(--accent-low)",
+  "var(--accent-mid)",
+  "var(--accent)",
+  "var(--on-accent-container)",
+  "var(--surface-3)",
+  "var(--text-dim)",
+  "var(--text-muted)",
+  "var(--text)",
+];
+
+export function Fastfetch({ className, index }: { className?: string; index?: number }) {
+  const t = useTranslations("home.fastfetch");
+  const tUnits = useTranslations("lab.units");
+  const tRanks = useTranslations("gaming.ranks.items");
+  const s = labStats();
+  const os = (id: string) => HOSTS.find((h) => h.id === id)?.os ?? "";
+  const monitoring = VMS.find((vm) => vm.id === "zbx01")?.services[0] ?? "Zabbix";
+
+  const lines: [string, string][] = [
+    [t("keys.hosts"), t("values.hosts", { machines: s.machines, vms: s.vms })],
+    [t("keys.firewall"), os("fw01")],
+    [t("keys.hypervisors"), `${os("esxi01")} · Hyper-V`],
+    [t("keys.network"), t("values.network", { vlans: s.vlans })],
+    [t("keys.cpu"), t("values.threads", { threads: s.threads })],
+    [t("keys.memory"), `${s.ramGb} ${tUnits("gb")}`],
+    [t("keys.storage"), `${s.storageTb} ${tUnits("tb")}`],
+    [t("keys.monitoring"), monitoring],
+    [t("keys.backups"), t("values.backups")],
+    [t("keys.site"), `Next.js · ${os("vps01")}`],
+    [t("keys.ranks"), RANKS.map((r) => tRanks(`${r.id}.rank`)).join(" · ")],
+    [t("keys.edits"), `TikTok ${SOCIALS.tiktok.handle}`],
+  ];
+
+  return (
+    <Card
+      id="fastfetch"
+      icon={SquareTerminal}
+      title="fastfetch"
+      subtitle="ssh yexo@homelab"
+      meta="zsh"
+      next="lab"
+      index={index}
+      className={className}
+    >
+      <div className="terminal flex-1 overflow-x-auto p-4 sm:p-5">
+        <p>
+          <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
+          <span className="text-fg">fastfetch</span>
+        </p>
+        <div className="mt-3 flex flex-col gap-5 sm:flex-row">
+          <Image
+            src="/images/avatar.webp"
+            alt={t("avatarAlt")}
+            width={128}
+            height={128}
+            className="h-28 w-28 shrink-0 rounded-xl object-cover grayscale-[0.2] sm:h-32 sm:w-32"
+          />
+          <div className="min-w-0">
+            <p className="text-fg">
+              <span className="prompt">yexo</span>@<span className="prompt">homelab</span>
+            </p>
+            <p aria-hidden="true" className="text-dim">
+              ────────────
+            </p>
+            <dl>
+              {lines.map(([k, v]) => (
+                <div key={k} className="flex min-w-0 flex-wrap gap-x-2 sm:flex-nowrap">
+                  <dt className="key shrink-0">{k}:</dt>
+                  <dd className="min-w-0 text-fg sm:truncate">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-3 flex" aria-hidden="true">
+              {SWATCHES.map((c) => (
+                <span key={c} className="h-3.5 w-6 first:rounded-l last:rounded-r" style={{ backgroundColor: c }} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className="mt-4">
+          <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
+          <span aria-hidden="true" className="inline-block h-[1.05em] w-2 translate-y-[3px] bg-muted" />
+        </p>
+      </div>
+    </Card>
+  );
+}

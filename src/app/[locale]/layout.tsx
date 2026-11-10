@@ -75,6 +75,10 @@ export default async function LocaleLayout({ children, params }: Props) {
             <div className="shell">
               <main id="main" tabIndex={-1} className="frame outline-none">
                 {children}
+                <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 px-2 pb-1 pt-5 font-mono text-[11px] text-dim">
+                  <p>{t("footer.copyright", { year: new Date().getFullYear(), name: SITE.name, author: SITE.author })}</p>
+                  <p>{t("footer.hosting")}</p>
+                </footer>
               </main>
             </div>
             <CommandPalette />

@@ -43,7 +43,11 @@
     "close": "Fermer",
     "write": "Écrire",
     "download": "Télécharger",
-    "placeholderNote": "valeur d'exemple"
+    "placeholderNote": "valeur d'exemple",
+    "footer": {
+      "copyright": "© {year} {name} · {author}",
+      "hosting": "Fait main, auto-hébergé sur mon VPS."
+    }
   },
   "nav": {
     "main": "Navigation principale",
@@ -193,6 +197,118 @@
           "title": "Windows Server : DHCP et DNS",
           "desc": "Étendues, réservations, zones et enregistrements DNS"
         }
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "avatarAlt": "Photo de profil de Yexo",
+      "realName": "Baptiste Dauvergne · France",
+      "tagline": "Admin systèmes et réseaux en alternance, Radiant sur Valorant, monteur d'edits.",
+      "intro": "Je m'appelle Baptiste. En semaine, je suis alternant gestionnaire d'infrastructures informatiques au sein d'une DSI et je prépare un bachelor d'administrateur systèmes et réseaux. Le soir, je joue en ranked et je monte des edits Valorant pour TikTok. Entre les deux, je casse mon homelab pour apprendre à le réparer.",
+      "uptime": "homelab depuis {homelab} · Radiant depuis {radiant} · TikTok depuis {tiktok}",
+      "contact": "Me contacter"
+    },
+    "ranks": {
+      "title": "Rangs",
+      "meta": "{count} jeux"
+    },
+    "fastfetch": {
+      "avatarAlt": "Photo de profil de Yexo",
+      "keys": {
+        "hosts": "Hôtes",
+        "firewall": "Pare-feu",
+        "hypervisors": "Hyperviseurs",
+        "network": "Réseau",
+        "cpu": "CPU",
+        "memory": "Mémoire",
+        "storage": "Stockage",
+        "monitoring": "Supervision",
+        "backups": "Sauvegardes",
+        "site": "Site",
+        "ranks": "Rangs",
+        "edits": "Edits"
+      },
+      "values": {
+        "hosts": "{machines} machines · {vms} VM",
+        "network": "{vlans} VLAN · DMZ · WireGuard",
+        "threads": "{threads} threads",
+        "backups": "Veeam → NAS → copie hors site"
+      }
+    },
+    "shortcuts": {
+      "career": {
+        "title": "Parcours",
+        "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble."
+      },
+      "creator": {
+        "title": "Y-Services",
+        "meta": "{count} produits",
+        "text": "Presets d'étalonnage, montages et patch anti-compression, de {min} à {max}."
+      },
+      "tools": {
+        "title": "Convertisseur",
+        "text": "Garde la même visée entre Valorant, CS2, Apex Legends et Overwatch 2."
+      },
+      "contact": {
+        "title": "Contact",
+        "text": "Emails, Discord et réseaux, avec un bouton pour copier chaque adresse."
+      }
+    }
+  },
+  "lab": {
+    "units": {
+      "gb": "Go",
+      "tb": "To"
+    }
+  },
+  "gaming": {
+    "ranks": {
+      "title": "Rangs",
+      "meta": "{count} jeux",
+      "peak": "Rang peak",
+      "alt": "Icône du rang {rank} sur {game}",
+      "items": {
+        "valorant": {
+          "rank": "Radiant"
+        },
+        "faceit": {
+          "rank": "Niveau 10",
+          "platform": "CS:GO / CS2"
+        },
+        "apex": {
+          "rank": "Master"
+        },
+        "clashRoyale": {
+          "rank": "Ultimate Champion"
+        }
+      }
+    },
+    "tracker": {
+      "title": "Valorant en direct",
+      "peak": "Rang peak",
+      "peakSeason": "V{episode} · Acte {act}",
+      "peakStillHere": "Le peak reste affiché : il ne dépend pas de l'API.",
+      "recent": "{count} dernières parties",
+      "loading": "Chargement des dernières parties…",
+      "empty": "Aucune partie récente trouvée sur ce compte.",
+      "errors": {
+        "rateLimit": "Trop de requêtes vers l'API. Réessaie dans une minute.",
+        "unavailable": "Les stats sont indisponibles pour le moment.",
+        "network": "Impossible de joindre le serveur."
+      },
+      "retry": "Réessayer",
+      "retryIn": "Réessayer ({seconds} s)",
+      "resultsSummary": "{wins} victoires et {losses} défaites sur les dernières parties",
+      "result": {
+        "win": "Victoire",
+        "loss": "Défaite",
+        "unknown": "Résultat inconnu"
+      },
+      "stats": {
+        "kd": "K/D",
+        "hs": "HS %",
+        "winrate": "Victoires"
       }
     }
   }

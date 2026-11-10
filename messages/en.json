@@ -43,7 +43,11 @@
     "close": "Close",
     "write": "Write",
     "download": "Download",
-    "placeholderNote": "sample value"
+    "placeholderNote": "sample value",
+    "footer": {
+      "copyright": "© {year} {name} · {author}",
+      "hosting": "Handmade, self-hosted on my VPS."
+    }
   },
   "nav": {
     "main": "Main navigation",
@@ -193,6 +197,118 @@
           "title": "Windows Server: DHCP and DNS",
           "desc": "Scopes, reservations, DNS zones and records"
         }
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "avatarAlt": "Yexo's profile picture",
+      "realName": "Baptiste Dauvergne · France",
+      "tagline": "Work-study sysadmin and network engineer, Radiant in Valorant, edit maker.",
+      "intro": "I'm Baptiste. During the week, I'm a work-study IT infrastructure administrator in an IT department while studying for a bachelor's degree in systems and network administration. In the evening, I play ranked and edit Valorant clips for TikTok. In between, I break my homelab to learn how to fix it.",
+      "uptime": "homelab since {homelab} · Radiant since {radiant} · TikTok since {tiktok}",
+      "contact": "Contact me"
+    },
+    "ranks": {
+      "title": "Ranks",
+      "meta": "{count} games"
+    },
+    "fastfetch": {
+      "avatarAlt": "Yexo's profile picture",
+      "keys": {
+        "hosts": "Hosts",
+        "firewall": "Firewall",
+        "hypervisors": "Hypervisors",
+        "network": "Network",
+        "cpu": "CPU",
+        "memory": "Memory",
+        "storage": "Storage",
+        "monitoring": "Monitoring",
+        "backups": "Backups",
+        "site": "Site",
+        "ranks": "Ranks",
+        "edits": "Edits"
+      },
+      "values": {
+        "hosts": "{machines} machines · {vms} VMs",
+        "network": "{vlans} VLANs · DMZ · WireGuard",
+        "threads": "{threads} threads",
+        "backups": "Veeam → NAS → off-site copy"
+      }
+    },
+    "shortcuts": {
+      "career": {
+        "title": "Career",
+        "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble."
+      },
+      "creator": {
+        "title": "Y-Services",
+        "meta": "{count} products",
+        "text": "Color grading presets, edits and an anti-compression patch, from {min} to {max}."
+      },
+      "tools": {
+        "title": "Converter",
+        "text": "Keep the same aim across Valorant, CS2, Apex Legends and Overwatch 2."
+      },
+      "contact": {
+        "title": "Contact",
+        "text": "Emails, Discord and socials, with a button to copy each address."
+      }
+    }
+  },
+  "lab": {
+    "units": {
+      "gb": "GB",
+      "tb": "TB"
+    }
+  },
+  "gaming": {
+    "ranks": {
+      "title": "Ranks",
+      "meta": "{count} games",
+      "peak": "Peak rank",
+      "alt": "{rank} rank icon in {game}",
+      "items": {
+        "valorant": {
+          "rank": "Radiant"
+        },
+        "faceit": {
+          "rank": "Level 10",
+          "platform": "CS:GO / CS2"
+        },
+        "apex": {
+          "rank": "Master"
+        },
+        "clashRoyale": {
+          "rank": "Ultimate Champion"
+        }
+      }
+    },
+    "tracker": {
+      "title": "Live Valorant",
+      "peak": "Peak rank",
+      "peakSeason": "V{episode} · Act {act}",
+      "peakStillHere": "The peak stays visible: it doesn't depend on the API.",
+      "recent": "Last {count} matches",
+      "loading": "Loading recent matches…",
+      "empty": "No recent matches found on this account.",
+      "errors": {
+        "rateLimit": "Too many requests to the API. Try again in a minute.",
+        "unavailable": "Stats are unavailable right now.",
+        "network": "Can't reach the server."
+      },
+      "retry": "Try again",
+      "retryIn": "Try again ({seconds}s)",
+      "resultsSummary": "{wins} wins and {losses} losses in recent matches",
+      "result": {
+        "win": "Win",
+        "loss": "Loss",
+        "unknown": "Unknown result"
+      },
+      "stats": {
+        "kd": "K/D",
+        "hs": "HS%",
+        "winrate": "Win rate"
       }
     }
   }
