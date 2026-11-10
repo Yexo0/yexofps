@@ -144,7 +144,7 @@ function Vlans() {
             icon: <span className="font-mono text-[11px] font-semibold">{v.id}</span>,
             content: (
               <>
-                <p className="font-mono text-xs text-dim">{v.subnet}</p>
+                <p className="font-mono text-xs text-muted">{v.subnet}</p>
                 <p className="mt-1.5">{t(`items.${v.key}`)}</p>
                 {members.length > 0 && (
                   <div className="mt-2.5 flex flex-wrap gap-1.5">

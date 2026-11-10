@@ -42,7 +42,7 @@ export function MissionTabs({ missions, labels }: { missions: Mission[]; labels:
             value={m.id}
             className="btn btn-sm shrink-0 bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-accent data-[state=active]:text-on-accent"
           >
-            <span className="font-mono text-[11px] opacity-70">{String(i + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-[11px]">{String(i + 1).padStart(2, "0")}</span>
             {m.tab}
           </Tabs.Trigger>
         ))}

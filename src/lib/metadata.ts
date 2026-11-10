@@ -24,6 +24,8 @@ export function pageMetadata({
   const languages = Object.fromEntries(routing.locales.map((l) => [l, localizedPath(l, path)]));
   const url = localizedPath(locale, path);
   const ogTitle = absoluteTitle ? title : `${title} · ${SITE.name}`;
+  // Image générée par src/app/[locale]/opengraph-image.tsx
+  const image = { url: `/${locale}/opengraph-image`, width: 1200, height: 630, alt: `${SITE.name} · yexofps.org` };
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -40,7 +42,8 @@ export function pageMetadata({
       description,
       locale: locale === "fr" ? "fr_FR" : "en_US",
       alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => (l === "fr" ? "fr_FR" : "en_US")),
+      images: [image],
     },
-    twitter: { card: "summary_large_image", title: ogTitle, description },
+    twitter: { card: "summary_large_image", title: ogTitle, description, images: [image.url] },
   };
 }

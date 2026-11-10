@@ -384,7 +384,7 @@ function Watch() {
           </section>
         ))}
         <section className="tile bg-accent-tint px-4 py-3.5">
-          <h3 className="label mb-1.5 text-accent">{t("sections.broadcom.title")}</h3>
+          <h3 className="label mb-1.5 text-on-accent-container">{t("sections.broadcom.title")}</h3>
           <p className="text-[13px] leading-relaxed text-fg">{t("sections.broadcom.text")}</p>
         </section>
       </div>

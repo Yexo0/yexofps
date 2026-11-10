@@ -99,3 +99,17 @@ export const themeColor = { dark: hex(neutral, 4), light: hex(neutral, 94) };
  * (localStorage) pour éviter un flash. Sans choix enregistré, on reste en sombre.
  */
 export const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();`;
+
+/** Couleurs en hexadécimal pour les images générées (favicon, Open Graph) — mode sombre */
+export const brand = {
+  bg: hex(neutral, 4),
+  surface: hex(neutral, 10),
+  surface2: hex(neutral, 15),
+  line: hex(variant, 25),
+  text: hex(neutral, 92),
+  muted: hex(variant, 80),
+  dim: hex(variant, 66),
+  accent: hex(primary, 80),
+  onAccent: hex(primary, 20),
+  accentTint: hex(primary, 25),
+};

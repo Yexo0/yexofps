@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# yexofps.org
 
-## Getting Started
+Site perso de Baptiste Dauvergne (Yexo) : parcours en administration systèmes et réseaux, homelab, rangs et tracker Valorant, edits et Y-Services, convertisseur de sensibilité.
 
-First, run the development server:
+Next.js 16 · TypeScript · Tailwind CSS v4 · next-intl (FR / EN) · auto-hébergé sur un VPS Ubuntu.
+
+## Lancer le projet
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le tracker Valorant a besoin d'une clé HenrikDev dans `.env.local` :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+HENRIK_API_KEY=ta_cle
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sans clé, le site fonctionne : le tracker affiche un état « indisponible » et le peak reste visible.
 
-## Learn More
+## Modifier le contenu
 
-To learn more about Next.js, take a look at the following resources:
+| Quoi | Où |
+|------|----|
+| Couleur d'accent (toute la palette en découle) | `src/config/theme.ts` |
+| Liens, emails, partenaires, produits, rangs, setup, compte du tracker | `src/config/site.ts` |
+| Homelab (machines, VM, VLAN, schéma) | `src/config/lab.ts` |
+| Parcours (frise, compétences, missions, tutos) | `src/config/career.ts` |
+| Tous les textes | `messages/fr.json`, `messages/en.json` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dans `src/config/lab.ts`, chaque élément inventé porte `placeholder: true` et un commentaire `PLACEHOLDER` : remplace-le par tes vraies infos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Vérifications avant de déployer
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run build
+```

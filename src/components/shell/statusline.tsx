@@ -18,7 +18,7 @@ export function Statusline({ deployedAt, year }: { deployedAt: string; year: num
   const active = spaceFromPath(pathname);
 
   return (
-    <footer className="mt-3 flex min-h-8 flex-wrap items-stretch overflow-hidden rounded-xl bg-surface-2 font-mono text-[11px] text-muted">
+    <footer className="flex min-h-8 flex-wrap items-stretch overflow-hidden rounded-xl bg-surface-2 font-mono text-[11px] text-muted">
       <span className="flex items-center bg-accent px-3 font-semibold text-on-accent">[{t("status.session")}]</span>
 
       <nav aria-label={t("status.nav")} className="hidden items-center md:flex">

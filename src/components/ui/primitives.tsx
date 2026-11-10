@@ -113,13 +113,3 @@ export function ExternalButton({
 export function Skeleton({ className }: { className?: string }) {
   return <span aria-hidden="true" className={cn("skeleton block", className)} />;
 }
-
-/* ─── Ligne clé / valeur façon fastfetch ─── */
-
-export function KeyValue({ k, children }: { k: string; children: ReactNode }) {
-  return (
-    <p className="min-w-0">
-      <span className="key">{k}:</span> <span className="text-fg">{children}</span>
-    </p>
-  );
-}

@@ -77,9 +77,11 @@ export default async function LocaleLayout({ children, params }: Props) {
             </a>
             <Rail />
             <div className="shell">
-              <main id="main" tabIndex={-1} className="frame outline-none">
+              <main id="main" tabIndex={-1} className="frame flex flex-col outline-none">
                 {children}
-                <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
+                <div className="mt-auto pt-3">
+                  <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
+                </div>
               </main>
             </div>
             <CommandPalette />

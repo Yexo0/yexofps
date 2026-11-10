@@ -4,86 +4,84 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Yexo Portfolio — a personal gaming portfolio site for a Valorant content creator (Yexo). Rebuilt with Next.js from the original static HTML/CSS/JS site. Includes dashboard, profile, gaming ranks, shop (video editing services), Valorant match tracker, sensitivity converter, and links page. Bilingual (French/English) via next-intl.
+yexofps.org — personal site of Baptiste Dauvergne ("Yexo" on the creator/gaming side). Dashboard-style site organised in 7 "spaces": Home, Career, Lab (homelab), Gaming (ranks + live Valorant tracker), Creator (edits, partners, Y-Services shop), Tools (sensitivity converter), Contact. Bilingual (French first, English) via next-intl. Self-hosted on an Ubuntu VPS.
+
+Never mention the work-study employer, its name or its city anywhere (texts, translations, metadata, Lab). The role is written as "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI".
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 with App Router, TypeScript
-- **UI Components:** shadcn/ui (Radix UI primitives) — components in `src/components/ui/`
-- **Styling:** Tailwind CSS v4, custom dark theme in `src/app/globals.css`
-- **Icons:** Lucide React + custom SVG components for TikTok/Discord in `src/components/icons/`
-- **i18n:** next-intl with `/en/...` and `/fr/...` route prefixes
-- **External API:** HenrikDev Valorant API via `/api/valorant` proxy route
+- **Framework:** Next.js 16 (App Router, Turbopack), TypeScript, React 19
+- **Styling:** Tailwind CSS v4, tokens in `src/app/globals.css`
+- **Colors:** Material You tonal palette generated from ONE seed color (`src/config/theme.ts`) by `src/lib/theme.ts` (`@material/material-color-utilities`), injected as CSS variables. Dark by default, light available.
+- **Fonts:** Geist + Geist Mono (`geist` package, no network at build)
+- **UI primitives:** Radix (`radix-ui`: Dialog, Accordion, Tabs), Lucide icons, brand SVGs in `src/components/icons/brands.tsx`
+- **i18n:** next-intl, `/fr/...` and `/en/...` prefixes, default `fr`
+- **External API:** HenrikDev Valorant API via `/api/valorant`
 
 ## Commands
 
 ```bash
-npm run dev        # Start dev server (default port 3000)
-npm run build      # Production build
-npm run lint       # ESLint
+npm run dev        # Dev server (port 3000)
+npm run build      # Production build (must pass with no warning)
+npm run lint       # ESLint (must pass with no warning)
 ```
 
 ## Architecture
 
-### Routing (`src/app/`)
+### Routes (`src/app/[locale]/`)
 
-All pages are under `[locale]/` for i18n routing:
+| Space | Route | File |
+|-------|-------|------|
+| 01 Home | `/` | `page.tsx` |
+| 02 Career | `/career` | `career/page.tsx` |
+| 03 Lab | `/lab` | `lab/page.tsx` |
+| 04 Gaming | `/gaming` | `gaming/page.tsx` |
+| 05 Creator | `/creator` | `creator/page.tsx` |
+| 06 Tools | `/tools` | `tools/page.tsx` |
+| 07 Contact | `/contact` | `contact/page.tsx` |
 
-| Route | File | Type | Purpose |
-|-------|------|------|---------|
-| `/` | `[locale]/page.tsx` | Server | Dashboard — avatar + 6 navigation cards |
-| `/profil` | `[locale]/profil/page.tsx` | Server | About, partners, social media |
-| `/ranks` | `[locale]/ranks/page.tsx` | Server | Gaming ranks + setup |
-| `/shop` | `[locale]/shop/page.tsx` | Client | Products, trust stats, reviews, Payhip |
-| `/tracker` | `[locale]/tracker/page.tsx` | Client | Valorant match tracker with live stats |
-| `/convert` | `[locale]/convert/page.tsx` | Client | Sensitivity converter (cm/360) |
-| `/liens` | `[locale]/liens/page.tsx` | Client | Contact links + clipboard copy |
-| `/api/valorant` | `api/valorant/route.ts` | API | HenrikDev Valorant proxy |
+Also: `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
 
-### i18n Setup (`src/i18n/`)
+Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`, with or without locale) are 301-redirected in `next.config.ts`.
 
-- `routing.ts` — locale config (`en`, `fr`, default `en`)
-- `request.ts` — server-side message loading
-- `navigation.ts` — typed `Link`, `useRouter`, `usePathname`
-- `src/middleware.ts` — locale redirect middleware (excludes `/api`, `/images`)
-- `messages/en.json` + `messages/fr.json` — all UI translations
+### Config — single sources of truth (`src/config/`)
 
-### Shared Components
+- `theme.ts` — accent seed color (change it to re-theme the whole site)
+- `site.ts` — every URL (socials, emails, affiliate links, Payhip, TikTok videos), tracker account, Valorant peak, ranks, setup, products (`exampleUrl` / `previewUrl` buttons only show when set), reviews
+- `spaces.ts` — the 7 spaces (order = number = keyboard shortcut)
+- `lab.ts` — the whole homelab (VLANs, hosts, VMs, map). Invented items carry `placeholder: true` + a comment
+- `career.ts` — timeline, skills, missions, PDF guides, BTS network map
 
-- `components/layout/` — AuroraBackground (client, random blobs), BackButton, LanguageSwitcher (client), Footer, PageReveal
-- `components/shared/` — GlassPanel, SectionTitle, PageHeader
-- `components/icons/` — TikTokIcon, DiscordIcon (SVG)
+All visible text lives in `messages/fr.json` and `messages/en.json` (same keys as the config ids). Card subtitles are shell commands and stay literal.
 
-### Key Libraries (`src/lib/`)
+### Components (`src/components/`)
 
-- `constants.ts` — all hardcoded data (social URLs, emails, partners, ranks, setup, products, reviews, tracker config)
-- `tracker-types.ts` — `MatchData`/`TrackerStats` types, `computeStats()`, `fmtPct()`, `fmtNum()`
-- `converter-math.ts` — game yaw values, `cm360()`, `sensFromCm360()`, `round()`
+- `shell/` — Rail (desktop) + bottom bar (mobile), UIProvider (shortcuts 1–7, Ctrl/⌘+K, ?), CommandPalette, ShortcutsDialog, Statusline (tmux-style footer), Logo
+- `ui/` — Card (base of everything: icon pill, title, mono subtitle, meta, "next space" link), primitives (StatTile, Chip, Tag, buttons, Skeleton), Accordion, CopyButton, NextSpace, Reticle (viewfinder corners), DotDigits (dot-matrix numbers)
+- `network-map/` — interactive SVG map (hover/click → role, neighbours, traceroute path), list view on mobile
+- `gaming/`, `home/`, `career/`, `creator/`, `tools/` — space-specific pieces
 
-### Visual Design
+### Tracker data flow
 
-Dark theme (`#0b0b0c` background) with animated aurora blobs, glass-morphism cards (`.glass-panel` class in globals.css), micro-stars with twinkle animation, staggered fade-in reveal on page load. All custom CSS in `src/app/globals.css`.
+1. `useValorantTracker` fetches `/api/valorant?region=eu&name=yexo&tag=aim&mode=unrated&size=10` (params from `TRACKER` in `site.ts`)
+2. The API route (unchanged) proxies HenrikDev with `HENRIK_API_KEY` and reduces each match to the player's stats
+3. States: loading (skeleton) / ready / empty / error (rate limit, unavailable incl. missing key, network). The peak is always shown.
+4. Auto-refresh every 90 s, manual refresh with a 25 s cooldown
 
-### Tracker Data Flow
+### Sensitivity converter math (`src/lib/converter-math.ts`, unchanged)
 
-1. Client fetches `/api/valorant?region=eu&name=tanjiro&tag=33333&mode=unrated&size=10`
-2. API route proxies to HenrikDev with `HENRIK_API_KEY` auth header
-3. Response reduced to player-specific stats per match
-4. Client aggregates into TrackerStats and renders stat cards + match list
-5. Auto-refresh every 90s, manual refresh with 25s cooldown
+Yaw: CS2 `0.022`, Valorant `0.07`, Apex `0.022`, OW2 `0.0066`. `cm360 = (360 × 2.54) / (dpi × sens × yaw)`.
 
-### Sensitivity Converter Math
+## Design rules
 
-Yaw values: CS2=`0.022`, Valorant=`0.07`, Apex=`0.022`, OW2=`0.0066`
-Formula: `cm360 = (360 * 2.54) / (dpi * sens * yaw)`
+Dark neutral background with a static topographic texture, bento grid of 20px-radius cards inside a thin rounded frame, single pastel accent (game color stripes on rank tiles are the only exception). No neon, glow, flashy gradients, video, particles, emojis in the UI, blinking text or "hacker" clichés. Animations: short fades only, disabled with `prefers-reduced-motion`. Contrast AA in both themes.
 
 ## Environment Variables
 
-- `HENRIK_API_KEY` — HenrikDev Valorant API key (in `.env.local`)
+- `HENRIK_API_KEY` — HenrikDev Valorant API key (`.env.local`, never committed)
 
-## Code Style (from rules.md)
+## Code Style
 
-- Code files start with path/filename as a one-line comment
-- Comments describe purpose, effect when necessary
-- Prioritize modularity, DRY, performance, security
-- Finish one file before the next; use TODO comments for incomplete work
+- Code files start with their path/filename as a one-line comment
+- Comments describe purpose and effect when necessary
+- Modularity, DRY, performance, security

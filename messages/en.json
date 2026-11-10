@@ -1155,5 +1155,19 @@
       },
       "tip": "For an order, mention the product, your software and what you want to achieve."
     }
+  },
+  "og": {
+    "tagline": "Work-study sysadmin and network engineer, Radiant in Valorant, edit maker.",
+    "chips": {
+      "sysadmin": "Systems and networks",
+      "radiant": "Radiant · Valorant",
+      "edits": "TikTok edits"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page doesn't exist or moved when the site was redesigned. Shortcuts 1 to 7 and search (Ctrl+K) still work.",
+    "home": "Back to home",
+    "contact": "Report a broken link"
   }
 }

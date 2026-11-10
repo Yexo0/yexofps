@@ -1155,5 +1155,19 @@
       },
       "tip": "Pour une commande, précise le produit, ton logiciel et ce que tu veux obtenir."
     }
+  },
+  "og": {
+    "tagline": "Admin systèmes et réseaux en alternance, Radiant sur Valorant, monteur d'edits.",
+    "chips": {
+      "sysadmin": "Systèmes et réseaux",
+      "radiant": "Radiant · Valorant",
+      "edits": "Edits TikTok"
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "Cette page n'existe pas ou a changé d'adresse avec la refonte du site. Les raccourcis 1 à 7 et la recherche (Ctrl+K) restent disponibles.",
+    "home": "Retour à l'accueil",
+    "contact": "Me signaler un lien cassé"
   }
 }
