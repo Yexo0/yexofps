@@ -1,10 +1,25 @@
 // src/components/home/fastfetch.tsx — Carte terminal façon fastfetch, alimentée par src/config/lab.ts.
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SquareTerminal } from "lucide-react";
 import { HOSTS, VMS, labStats } from "@/config/lab";
 import { RANKS, SOCIALS } from "@/config/site";
 import { Card } from "@/components/ui/card";
+
+/** Logo ASCII façon distribution Linux, dessiné avec la lettre du pseudo */
+const LOGO = [
+  "yyyy          yyyy",
+  " yyyy        yyyy ",
+  "  yyyy      yyyy  ",
+  "   yyyy    yyyy   ",
+  "    yyyy  yyyy    ",
+  "     yyyyyyyy     ",
+  "      yyyyyy      ",
+  "       yyyy       ",
+  "       yyyy       ",
+  "       yyyy       ",
+  "       yyyy       ",
+  "       yyyy       ",
+].join("\n");
 
 /** Nuancier en bas du terminal : tons de l'accent puis neutres */
 const SWATCHES = [
@@ -58,13 +73,9 @@ export function Fastfetch({ className, index }: { className?: string; index?: nu
           <span className="text-fg">fastfetch</span>
         </p>
         <div className="mt-3 flex flex-col gap-5 sm:flex-row">
-          <Image
-            src="/images/avatar.webp"
-            alt={t("avatarAlt")}
-            width={128}
-            height={128}
-            className="h-28 w-28 shrink-0 rounded-xl object-cover grayscale-[0.2] sm:h-32 sm:w-32"
-          />
+          <pre aria-hidden="true" className="hidden shrink-0 select-none text-[11px] font-semibold leading-[1.35] text-accent sm:block">
+            {LOGO}
+          </pre>
           <div className="min-w-0">
             <p className="text-fg">
               <span className="prompt">yexo</span>@<span className="prompt">homelab</span>

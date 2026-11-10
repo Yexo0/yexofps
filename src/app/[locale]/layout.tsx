@@ -14,6 +14,7 @@ import { Rail } from "@/components/shell/rail";
 import { UIProvider } from "@/components/shell/ui-provider";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
+import { Statusline } from "@/components/shell/statusline";
 import "../globals.css";
 
 type Props = {
@@ -53,6 +54,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations("common");
+  // Pages générées au build : la date de build = date du dernier déploiement
+  const buildDate = new Date();
+  const deployedAt = new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(buildDate);
 
   return (
     <html
@@ -75,10 +79,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <div className="shell">
               <main id="main" tabIndex={-1} className="frame outline-none">
                 {children}
-                <footer className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 px-2 pb-1 pt-5 font-mono text-[11px] text-dim">
-                  <p>{t("footer.copyright", { year: new Date().getFullYear(), name: SITE.name, author: SITE.author })}</p>
-                  <p>{t("footer.hosting")}</p>
-                </footer>
+                <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
               </main>
             </div>
             <CommandPalette />

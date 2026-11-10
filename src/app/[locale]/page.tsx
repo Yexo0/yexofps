@@ -11,11 +11,13 @@ import { pageMetadata } from "@/lib/metadata";
 import { formatPrice } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { NextSpace } from "@/components/ui/next-space";
+import { Reticle } from "@/components/ui/reticle";
 import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
 import { RankGrid } from "@/components/gaming/rank-grid";
 import { LiveCard } from "@/components/home/live-card";
 import { Fastfetch } from "@/components/home/fastfetch";
+import { Whoami } from "@/components/home/whoami";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -70,14 +72,17 @@ function Hero() {
     >
       <div>
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end">
-          <Image
-            src="/images/avatar.webp"
-            alt={t("avatarAlt")}
-            width={128}
-            height={128}
-            priority
-            className="h-24 w-24 shrink-0 rounded-2xl object-cover ring-1 ring-line sm:h-28 sm:w-28"
-          />
+          <span className="relative shrink-0 p-2.5">
+            <Reticle size={12} inset={0} />
+            <Image
+              src="/images/avatar.webp"
+              alt={t("avatarAlt")}
+              width={128}
+              height={128}
+              priority
+              className="h-24 w-24 rounded-xl object-cover sm:h-28 sm:w-28"
+            />
+          </span>
           <div className="min-w-0">
             <h1
               id="hero-title"
@@ -92,7 +97,9 @@ function Hero() {
         <p className="mt-7 max-w-[34ch] text-[24px] font-bold leading-[1.2] tracking-tight text-fg sm:text-[28px]">
           {t("tagline")}
         </p>
-        <p className="mt-4 max-w-[68ch] text-[15px] leading-relaxed text-muted">{t("intro")}</p>
+        <div className="mt-5">
+          <Whoami />
+        </div>
 
         <p className="terminal mt-5 inline-flex max-w-full flex-wrap items-center gap-x-2 rounded-xl px-3.5 py-2 text-[12.5px]">
           <span className="prompt">$ uptime</span>

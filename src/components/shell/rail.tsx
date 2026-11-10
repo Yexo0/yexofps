@@ -12,6 +12,7 @@ import { SOCIALS } from "@/config/site";
 import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
+import { Reticle } from "@/components/ui/reticle";
 import { Logo } from "./logo";
 import { useUI } from "./ui-provider";
 
@@ -72,12 +73,11 @@ function RailItem({ space, active, n, name }: { space: Space; active: boolean; n
         aria-current={active ? "page" : undefined}
         aria-label={`${n}. ${name}`}
         className={cn(
-          "group relative grid h-10 w-10 place-items-center rounded-full transition-colors duration-150",
-          active
-            ? "bg-accent text-on-accent"
-            : "text-muted hover:bg-surface-3 hover:text-fg",
+          "group relative grid h-10 w-10 place-items-center rounded-xl transition-colors duration-150",
+          active ? "bg-accent-tint text-accent" : "text-muted hover:bg-surface-3 hover:text-fg",
         )}
       >
+        {active && <Reticle size={6} inset={0} />}
         <Icon size={18} aria-hidden="true" />
         <Tip>
           <span className="mr-1.5 font-mono text-dim">{n}</span>

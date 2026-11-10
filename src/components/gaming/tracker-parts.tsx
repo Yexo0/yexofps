@@ -9,6 +9,8 @@ import { VALORANT_PEAK } from "@/config/site";
 import type { MatchData } from "@/lib/tracker-types";
 import type { TrackerError } from "@/hooks/use-valorant-tracker";
 import { cn } from "@/lib/utils";
+import { DotDigits } from "@/components/ui/dot-digits";
+import { Reticle } from "@/components/ui/reticle";
 
 /** Formatage localisé des stats (NaN → tiret) */
 export function useStatFormat() {
@@ -34,7 +36,8 @@ export function matchHs(m: MatchData) {
 export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
   const t = useTranslations("gaming.tracker");
   return (
-    <div className={cn("tile flex items-center gap-4", size === "lg" ? "px-5 py-5" : "px-4 py-3.5")}>
+    <div className={cn("tile relative flex items-center gap-4", size === "lg" ? "px-5 py-5" : "px-4 py-3.5")}>
+      {size === "lg" && <Reticle size={9} inset={7} />}
       <Image
         src={VALORANT_PEAK.image}
         alt=""
@@ -49,10 +52,8 @@ export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
         </p>
       </div>
       <div className="text-right">
-        <p className="flex items-baseline justify-end gap-1 leading-none">
-          <span className={cn("font-bold tabular-nums", size === "lg" ? "text-3xl" : "text-2xl")}>
-            {VALORANT_PEAK.rr}
-          </span>
+        <p className="flex items-end justify-end gap-1.5 leading-none">
+          <DotDigits value={String(VALORANT_PEAK.rr)} dot={size === "lg" ? 4.5 : 3.5} gap={1.5} className="text-accent" />
           <span className="font-mono text-[11px] text-muted">RR</span>
         </p>
         <p className="mt-1 font-mono text-[11px] text-dim">

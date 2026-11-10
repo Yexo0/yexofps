@@ -45,8 +45,16 @@
     "download": "Télécharger",
     "placeholderNote": "valeur d'exemple",
     "footer": {
-      "copyright": "© {year} {name} · {author}",
-      "hosting": "Fait main, auto-hébergé sur mon VPS."
+      "copyright": "© {year} {name} · {author}"
+    },
+    "status": {
+      "session": "yexo",
+      "nav": "Espaces (barre d'état)",
+      "deployed": "auto-hébergé · déployé le {date}",
+      "theme": {
+        "dark": "sombre",
+        "light": "clair"
+      }
     }
   },
   "nav": {
@@ -192,6 +200,19 @@
         "immortal": "Immortal sur Valorant",
         "radiant": "Radiant sur Valorant",
         "services": "Lancement de Y-Services"
+      },
+      "tracks": {
+        "ranked": "ranked",
+        "edits": "edits",
+        "shop": "boutique"
+      },
+      "now": "maintenant",
+      "clips": {
+        "competitive": "Compétitif",
+        "tiktok": "Edits TikTok",
+        "immortal": "Immortal",
+        "radiant": "Radiant",
+        "services": "Y-Services"
       }
     },
     "edits": {
@@ -618,7 +639,7 @@
       "title": "Réseau de formation (BTS)",
       "meta": "{count} nœuds",
       "intro": "L'infrastructure montée pendant le BTS : un serveur VMware qui héberge le pare-feu IPFire, les serveurs du LAN et un WordPress en DMZ, derrière le réseau du lycée. Survole ou sélectionne un nœud pour voir son rôle.",
-      "hint": "Survole ou sélectionne un nœud pour afficher son rôle et ce qui y est relié.",
+      "hint": "Survole ou sélectionne un nœud : son rôle, ses voisins et le chemin depuis le réseau du lycée s'affichent ici.",
       "related": "Relié à",
       "ungrouped": "Réseau du lycée",
       "groups": {
@@ -751,16 +772,25 @@
       "avatarAlt": "Photo de profil de Yexo",
       "realName": "Baptiste Dauvergne · France",
       "tagline": "Admin systèmes et réseaux en alternance, Radiant sur Valorant, monteur d'edits.",
-      "intro": "Je m'appelle Baptiste. En semaine, je suis alternant gestionnaire d'infrastructures informatiques au sein d'une DSI et je prépare un bachelor d'administrateur systèmes et réseaux. Le soir, je joue en ranked et je monte des edits Valorant pour TikTok. Entre les deux, je casse mon homelab pour apprendre à le réparer.",
       "uptime": "homelab depuis {homelab} · Radiant depuis {radiant} · TikTok depuis {tiktok}",
-      "contact": "Me contacter"
+      "contact": "Me contacter",
+      "whoami": {
+        "label": "Choisir le profil affiché",
+        "yexo": {
+          "title": "Yexo, côté jeu et montage.",
+          "text": "Je joue en ranked depuis 2021, j'ai atteint Radiant en 2024 et je monte mes parties pour TikTok depuis 2022. Mes presets et montages sont dans Y-Services."
+        },
+        "baptiste": {
+          "title": "Baptiste, côté infra.",
+          "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer."
+        }
+      }
     },
     "ranks": {
       "title": "Rangs",
       "meta": "{count} jeux"
     },
     "fastfetch": {
-      "avatarAlt": "Photo de profil de Yexo",
       "keys": {
         "hosts": "Hôtes",
         "firewall": "Pare-feu",
@@ -822,7 +852,7 @@
     "map": {
       "title": "Schéma du réseau",
       "meta": "{count} nœuds",
-      "hint": "Survole ou sélectionne un nœud pour afficher son rôle et ce qui y est relié.",
+      "hint": "Survole ou sélectionne un nœud : son rôle, ses voisins et le chemin depuis Internet s'affichent ici.",
       "related": "Relié à",
       "ungrouped": "Cœur du réseau",
       "links": {

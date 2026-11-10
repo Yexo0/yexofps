@@ -14,10 +14,8 @@ import {
   MessageSquareQuote,
   Play,
   ShoppingBag,
-  Store,
   Video,
   Zap,
-  type LucideIcon,
 } from "lucide-react";
 import { EDITS, EMAILS, ORDER_URL, PARTNERS, PRODUCTS, REVIEWS, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -26,6 +24,8 @@ import { Card } from "@/components/ui/card";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Chip, ExternalButton, buttonClass } from "@/components/ui/primitives";
 import { DiscordIcon, InstagramIcon, TikTokIcon } from "@/components/icons/brands";
+import { EditTimeline } from "@/components/creator/edit-timeline";
+import { Waveform } from "@/components/creator/waveform";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -41,12 +41,12 @@ export default async function CreatorPage({ params }: Props) {
   return (
     <div className="bento">
       <Bio />
+      <Partners />
       <CreatorHistory />
       <Edits />
-      <Partners />
+      <Reviews />
       <Services />
       <Order />
-      <Reviews />
     </div>
   );
 }
@@ -108,43 +108,24 @@ function Bio() {
   );
 }
 
-/* ─── Historique 2021 → 2025 ─── */
-
-const HISTORY: { year: number; id: string; icon?: LucideIcon; image?: string }[] = [
-  { year: 2021, id: "competitive", icon: Gamepad2 },
-  { year: 2022, id: "tiktok", icon: Video },
-  { year: 2023, id: "immortal", image: "/images/ranks/valorant-immortal.png" },
-  { year: 2024, id: "radiant", image: "/images/ranks/valorant-radiant.png" },
-  { year: 2025, id: "services", icon: Store },
-];
+/* ─── Historique : timeline de montage ─── */
 
 function CreatorHistory() {
   const t = useTranslations("creator.history");
+  // Position de la tête de lecture : date du build (pages statiques)
+  const d = new Date();
+  const now = d.getFullYear() + d.getMonth() / 12;
   return (
     <Card
       id="history"
       icon={History}
       title={t("title")}
-      subtitle="git log --since=2021"
-      meta={t("meta", { count: HISTORY.length })}
-      index={1}
-      className="md:col-span-6 lg:col-span-5"
+      subtitle="ffprobe ~/yexo/2021-now.mov"
+      meta={t("meta", { count: 5 })}
+      index={2}
+      className="md:col-span-6 lg:col-span-12"
     >
-      <ol className="flex flex-col gap-1.5">
-        {HISTORY.map(({ year, id, icon: Icon, image }) => (
-          <li key={id} className="tile flex items-center gap-3.5 px-4 py-3">
-            <span className="w-11 font-mono text-[13px] font-semibold text-accent">{year}</span>
-            <span className="grid h-7 w-7 place-items-center" aria-hidden="true">
-              {image ? (
-                <Image src={image} alt="" width={28} height={28} className="h-7 w-7 object-contain" />
-              ) : Icon ? (
-                <Icon size={16} className="text-muted" />
-              ) : null}
-            </span>
-            <span className="text-sm font-medium">{t(`items.${id}`)}</span>
-          </li>
-        ))}
-      </ol>
+      <EditTimeline now={now} />
     </Card>
   );
 }
@@ -160,13 +141,13 @@ function Edits() {
       title={t("title")}
       subtitle="ls ~/edits"
       meta="TikTok"
-      index={2}
+      index={3}
       className="md:col-span-6 lg:col-span-7"
       bodyClassName="gap-4"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
       <ul className="grid gap-2.5 sm:grid-cols-2">
-        {EDITS.map((edit) => (
+        {EDITS.map((edit, i) => (
           <li key={edit.id}>
             <a
               href={edit.url}
@@ -188,6 +169,10 @@ function Edits() {
                 >
                   <Play size={15} fill="currentColor" />
                 </span>
+              </span>
+              <span className="flex items-center gap-2.5 px-4 pt-3">
+                <span className="font-mono text-[10px] text-dim">A1</span>
+                <Waveform seed={i + 2} />
               </span>
               <span className="flex items-center justify-between gap-3 px-4 py-3">
                 <span className="text-sm font-semibold">{t(`items.${edit.id}`)}</span>
@@ -219,7 +204,7 @@ function Partners() {
       title={t("title")}
       subtitle="cat ~/partners.txt"
       meta={t("meta")}
-      index={3}
+      index={1}
       className="md:col-span-6 lg:col-span-5"
     >
       <ul className="flex flex-col gap-2">
@@ -259,7 +244,7 @@ function Services() {
       title={t("title")}
       subtitle="ls ~/y-services"
       meta={t("meta", { count: PRODUCTS.length })}
-      index={4}
+      index={5}
       className="md:col-span-6 lg:col-span-12"
       bodyClassName="gap-4"
     >
@@ -327,11 +312,12 @@ function Order() {
       icon={Zap}
       title={t("title")}
       subtitle="cat ~/y-services/commander.md"
-      index={5}
-      className="md:col-span-6 lg:col-span-5"
+      index={6}
+      next="tools"
+      className="md:col-span-6 lg:col-span-12"
       bodyClassName="gap-2"
     >
-      <ol className="flex flex-col gap-2">
+      <ol className="grid gap-2 lg:grid-cols-3">
         <li className="tile flex flex-col gap-3 px-4 py-4">
           <div className="flex items-start gap-3">
             <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent font-mono text-[11px] text-on-accent">1</span>
@@ -392,13 +378,12 @@ function Reviews() {
       title={t("title")}
       subtitle="tail -n 4 ~/y-services/reviews.log"
       meta={t("meta", { count: REVIEWS.length })}
-      next="tools"
-      index={6}
-      className="md:col-span-6 lg:col-span-7"
+      index={4}
+      className="md:col-span-6 lg:col-span-5"
       bodyClassName="gap-3"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
-      <ul className="grid gap-2 sm:grid-cols-2">
+      <ul className="grid gap-2">
         {REVIEWS.map((r) => (
           <li key={r.id}>
             <figure className="tile flex h-full flex-col gap-3 px-4 py-4">

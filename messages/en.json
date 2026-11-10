@@ -45,8 +45,16 @@
     "download": "Download",
     "placeholderNote": "sample value",
     "footer": {
-      "copyright": "© {year} {name} · {author}",
-      "hosting": "Handmade, self-hosted on my VPS."
+      "copyright": "© {year} {name} · {author}"
+    },
+    "status": {
+      "session": "yexo",
+      "nav": "Spaces (status bar)",
+      "deployed": "self-hosted · deployed {date}",
+      "theme": {
+        "dark": "dark",
+        "light": "light"
+      }
     }
   },
   "nav": {
@@ -192,6 +200,19 @@
         "immortal": "Immortal in Valorant",
         "radiant": "Radiant in Valorant",
         "services": "Launched Y-Services"
+      },
+      "tracks": {
+        "ranked": "ranked",
+        "edits": "edits",
+        "shop": "shop"
+      },
+      "now": "now",
+      "clips": {
+        "competitive": "Competitive",
+        "tiktok": "TikTok edits",
+        "immortal": "Immortal",
+        "radiant": "Radiant",
+        "services": "Y-Services"
       }
     },
     "edits": {
@@ -618,7 +639,7 @@
       "title": "Training network (BTS)",
       "meta": "{count} nodes",
       "intro": "The infrastructure built during the BTS: a VMware server hosting the IPFire firewall, the LAN servers and a WordPress site in a DMZ, behind the school network. Hover or select a node to see its role.",
-      "hint": "Hover or select a node to see its role and what it connects to.",
+      "hint": "Hover or select a node: its role, its neighbours and the path from the school network show up here.",
       "related": "Connected to",
       "ungrouped": "School network",
       "groups": {
@@ -751,16 +772,25 @@
       "avatarAlt": "Yexo's profile picture",
       "realName": "Baptiste Dauvergne · France",
       "tagline": "Work-study sysadmin and network engineer, Radiant in Valorant, edit maker.",
-      "intro": "I'm Baptiste. During the week, I'm a work-study IT infrastructure administrator in an IT department while studying for a bachelor's degree in systems and network administration. In the evening, I play ranked and edit Valorant clips for TikTok. In between, I break my homelab to learn how to fix it.",
       "uptime": "homelab since {homelab} · Radiant since {radiant} · TikTok since {tiktok}",
-      "contact": "Contact me"
+      "contact": "Contact me",
+      "whoami": {
+        "label": "Choose which profile to show",
+        "yexo": {
+          "title": "Yexo, the gaming and editing side.",
+          "text": "I've played ranked since 2021, reached Radiant in 2024 and have been editing my matches for TikTok since 2022. My presets and edits are in Y-Services."
+        },
+        "baptiste": {
+          "title": "Baptiste, the infrastructure side.",
+          "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it."
+        }
+      }
     },
     "ranks": {
       "title": "Ranks",
       "meta": "{count} games"
     },
     "fastfetch": {
-      "avatarAlt": "Yexo's profile picture",
       "keys": {
         "hosts": "Hosts",
         "firewall": "Firewall",
@@ -822,7 +852,7 @@
     "map": {
       "title": "Network map",
       "meta": "{count} nodes",
-      "hint": "Hover or select a node to see its role and what it connects to.",
+      "hint": "Hover or select a node: its role, its neighbours and the path from the internet show up here.",
       "related": "Connected to",
       "ungrouped": "Network core",
       "links": {

@@ -53,14 +53,14 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Texture abstraite statique, très discrète */
+  /* Courbes de niveau statiques, très discrètes (cartes Valorant, cartes réseau) */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background-image: url("/textures/folds.webp");
+    background-image: url("/textures/topo.webp");
     background-size: cover;
     background-position: center;
     opacity: var(--texture-opacity);

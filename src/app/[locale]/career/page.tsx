@@ -335,7 +335,8 @@ function InfraBts() {
             },
           ]),
         )}
-        labels={{ title: t("title"), hint: t("hint"), related: t("related"), ungrouped: t("ungrouped") }}
+        labels={{ title: t("title"), hint: t("hint"), related: t("related"), ungrouped: t("ungrouped"), trace: "traceroute" }}
+        root="school"
       />
     </Card>
   );

@@ -9,6 +9,8 @@ import { ArrowDownUp, CircleAlert, RotateCcw } from "lucide-react";
 import { GAMES, GAME_KEYS, cm360, round, sensFromCm360, type GameKey } from "@/lib/converter-math";
 import { MY_SENS } from "@/config/site";
 import { CopyButton } from "@/components/ui/copy-button";
+import { DotDigits } from "@/components/ui/dot-digits";
+import { Reticle } from "@/components/ui/reticle";
 import { cn } from "@/lib/utils";
 
 type Result =
@@ -219,14 +221,15 @@ export function Converter() {
 
       {/* ─── Résultat ─── */}
       <div className="flex flex-col gap-2 lg:col-span-5" aria-live="polite">
-        <div className="tile flex flex-1 flex-col justify-between gap-6 px-5 py-5">
+        <div className="tile relative flex flex-1 flex-col justify-between gap-6 px-5 py-5">
+          <Reticle size={12} inset={8} />
           <div>
             <p className="label">{t("result")}</p>
             <p className="mt-1 text-sm text-muted">{t("in", { game: GAMES[to].name })}</p>
           </div>
           {result.ok ? (
-            <p className="break-all font-mono text-[56px] font-semibold leading-none tracking-tight text-fg sm:text-[64px]">
-              {String(result.sens)}
+            <p className="text-accent">
+              <DotDigits value={String(result.sens)} dot={6} gap={2} />
             </p>
           ) : (
             <p role="alert" className="flex items-center gap-2 text-sm text-fg">

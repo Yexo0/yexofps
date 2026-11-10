@@ -43,6 +43,8 @@ export interface MapLabels {
   hint: string;
   related: string;
   ungrouped: string;
+  /** ex : "traceroute" */
+  trace: string;
 }
 
 const W = 150;
@@ -69,6 +71,33 @@ function linkPath(a: MapNode, b: MapNode) {
   return { d: `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`, x1, y1, x2, y2 };
 }
 
+/** Plus court chemin (en sauts) entre deux nœuds, sur les liens physiques et tunnels */
+function tracePath(links: readonly MapLink[], from: string, to: string): string[] {
+  if (from === to) return [from];
+  const adj = new Map<string, string[]>();
+  for (const l of links) {
+    if (l.kind === "logical") continue;
+    adj.set(l.from, [...(adj.get(l.from) ?? []), l.to]);
+    adj.set(l.to, [...(adj.get(l.to) ?? []), l.from]);
+  }
+  const prev = new Map<string, string>([[from, from]]);
+  const queue = [from];
+  while (queue.length) {
+    const cur = queue.shift()!;
+    for (const next of adj.get(cur) ?? []) {
+      if (prev.has(next)) continue;
+      prev.set(next, cur);
+      if (next === to) {
+        const path = [to];
+        while (path[0] !== from) path.unshift(prev.get(path[0])!);
+        return path;
+      }
+      queue.push(next);
+    }
+  }
+  return [];
+}
+
 function inGroup(n: MapNode, g: MapGroup) {
   return n.x >= g.x && n.y >= g.y && n.x + W <= g.x + g.w && n.y + H <= g.y + g.h;
 }
@@ -81,7 +110,10 @@ export function NetworkMap({
   groups,
   details,
   labels,
+  root,
 }: {
+  /** Point de départ du traceroute (par défaut : premier nœud) */
+  root?: string;
   width: number;
   height: number;
   nodes: readonly MapNode[];
@@ -109,6 +141,13 @@ export function NetworkMap({
   }, [links]);
 
   const related = active ? new Set([active, ...(neighbors.get(active) ?? [])]) : null;
+  const origin = root ?? nodes[0]?.id;
+  const path = useMemo(() => (active && origin ? tracePath(links, origin, active) : []), [active, origin, links]);
+  const onPath = (a: string, b: string) => {
+    const i = path.indexOf(a);
+    const j = path.indexOf(b);
+    return i >= 0 && j >= 0 && Math.abs(i - j) === 1;
+  };
   const togglePin = (id: string) => setPinned((p) => (p === id ? null : id));
 
   const onNodeKey = (e: KeyboardEvent, id: string) => {
@@ -176,7 +215,8 @@ export function NetworkMap({
               const b = byId.get(l.to);
               if (!a || !b) return null;
               const p = linkPath(a, b);
-              const isActive = !!active && (l.from === active || l.to === active);
+              const traced = onPath(l.from, l.to);
+              const isActive = traced || (!!active && (l.from === active || l.to === active));
               const dimmed = !!related && !isActive;
               return (
                 <g key={`${l.from}-${l.to}`} aria-hidden="true" opacity={dimmed ? 0.3 : 1}>
@@ -185,7 +225,7 @@ export function NetworkMap({
                     fill="none"
                     stroke={isActive ? "var(--accent)" : "var(--text-dim)"}
                     strokeOpacity={isActive ? 1 : 0.55}
-                    strokeWidth={isActive ? 1.6 : 1.1}
+                    strokeWidth={traced ? 2.2 : isActive ? 1.5 : 1.1}
                     strokeDasharray={l.kind === "dashed" ? "5 5" : undefined}
                   />
                   <circle cx={p.x1} cy={p.y1} r={2.4} fill={isActive ? "var(--accent)" : "var(--text-dim)"} />
@@ -213,7 +253,7 @@ export function NetworkMap({
             const Icon = MAP_ICONS[n.icon];
             const isActive = n.id === active;
             const isPinned = n.id === pinned;
-            const dimmed = !!related && !related.has(n.id);
+            const dimmed = !!related && !related.has(n.id) && !path.includes(n.id);
             return (
               <g
                 key={n.id}
@@ -317,6 +357,26 @@ export function NetworkMap({
                 {activeNode.label}
                 <span className="ml-2 font-normal text-dim">{activeNode.sub}</span>
               </p>
+              {path.length > 1 && (
+                <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-[11.5px]">
+                  <span className="text-dim">
+                    $ {labels.trace} {activeNode.label}
+                  </span>
+                  <ol className="flex flex-wrap items-center gap-x-1.5" aria-label={`${labels.trace} ${activeNode.label}`}>
+                    {path.map((id, i) => (
+                      <li key={id} className="flex items-center gap-1.5">
+                        {i > 0 && (
+                          <span aria-hidden="true" className="text-dim">
+                            ›
+                          </span>
+                        )}
+                        <span className="text-dim">{i + 1}</span>
+                        <span className={id === activeNode.id ? "text-accent" : "text-fg"}>{byId.get(id)?.label}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
               <NodeDetails
                 detail={details[activeNode.id]}
                 neighbors={neighborsOf(activeNode.id)}

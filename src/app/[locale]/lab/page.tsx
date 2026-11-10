@@ -109,7 +109,9 @@ function MapCard() {
           hint: t("map.hint"),
           related: t("map.related"),
           ungrouped: t("map.ungrouped"),
+          trace: "traceroute",
         }}
+        root="internet"
       />
     </Card>
   );
