@@ -3,6 +3,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { CircleAlert, RefreshCw, SearchX } from "lucide-react";
 import { VALORANT_PEAK } from "@/config/site";
@@ -22,6 +23,16 @@ export function useStatFormat() {
         ? format.number(x, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         : "—",
   };
+}
+
+/** Score vu par le joueur (son équipe d'abord) : la route renvoie rouge-bleu, on réordonne selon le résultat */
+export function playerScore(m: MatchData): string {
+  if (m.redWon === null || m.blueWon === null) return m.score;
+  const hi = Math.max(m.redWon, m.blueWon);
+  const lo = Math.min(m.redWon, m.blueWon);
+  if (m.result === "win") return `${hi}-${lo}`;
+  if (m.result === "loss") return `${lo}-${hi}`;
+  return m.score;
 }
 
 /** HS% d'une partie (NaN si aucun tir enregistré) */
@@ -150,5 +161,30 @@ export function ResultTag({ result }: { result: MatchData["result"] }) {
     >
       {t(result)}
     </span>
+  );
+}
+
+/* ─── Icône d'agent (CDN valorant-api) avec repli sur l'initiale si l'image ne charge pas ─── */
+
+export function AgentAvatar({ src, agent, size = 40 }: { src: string; agent: string; size?: 40 | 56 }) {
+  const [failed, setFailed] = useState(false);
+  const box = size === 56 ? "h-14 w-14 rounded-2xl text-lg" : "h-10 w-10 rounded-xl text-sm";
+  if (!src || failed) {
+    return (
+      <span aria-hidden="true" className={cn("grid shrink-0 place-items-center bg-surface-3 font-semibold text-muted", box)}>
+        {agent.charAt(0) || "?"}
+      </span>
+    );
+  }
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={size}
+      height={size}
+      unoptimized
+      onError={() => setFailed(true)}
+      className={cn("shrink-0 bg-surface-3 object-cover", box)}
+    />
   );
 }

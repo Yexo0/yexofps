@@ -63,7 +63,7 @@ export function LiveCard({ className, index }: { className?: string; index?: num
       </div>
 
       <div className="flex items-center justify-between gap-3">
-        <p className="label">{t("recent", { count: TRACKER.size })}</p>
+        <p className="label">{t("recent", { count: data?.matches.length ?? TRACKER.size })}</p>
         {status === "ready" && data && <ResultDots matches={data.matches} />}
       </div>
 

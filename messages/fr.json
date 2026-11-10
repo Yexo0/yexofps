@@ -830,7 +830,7 @@
     "gaming": {
       "title": "Gaming",
       "ranks": "Meilleurs rangs",
-      "recent": "{count} dernières parties"
+      "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}"
     }
   },
   "lab": {
@@ -996,7 +996,7 @@
       "peak": "Rang peak",
       "peakSeason": "Épisode {episode} · Acte {act}",
       "peakStillHere": "Le peak reste affiché : il ne dépend pas de l'API.",
-      "recent": "{count} dernières parties",
+      "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}",
       "loading": "Chargement des dernières parties…",
       "empty": "Aucune partie récente trouvée sur ce compte.",
       "errors": {

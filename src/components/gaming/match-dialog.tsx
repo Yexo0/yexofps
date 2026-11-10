@@ -1,12 +1,11 @@
 // src/components/gaming/match-dialog.tsx — Détail d'une partie : K/D/A, score, tirs et répartition.
 "use client";
 
-import Image from "next/image";
 import { useFormatter, useTranslations } from "next-intl";
 import { Dialog } from "radix-ui";
 import { X } from "lucide-react";
 import type { MatchData } from "@/lib/tracker-types";
-import { ResultTag, useStatFormat } from "./tracker-parts";
+import { AgentAvatar, ResultTag, playerScore, useStatFormat } from "./tracker-parts";
 
 const R = 44;
 const CIRC = 2 * Math.PI * R;
@@ -41,16 +40,7 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
           {match && (
             <>
               <div className="flex items-start gap-4">
-                {match.agentImg ? (
-                  <Image
-                    src={match.agentImg}
-                    alt=""
-                    width={56}
-                    height={56}
-                    unoptimized
-                    className="h-14 w-14 rounded-2xl bg-surface-3 object-cover"
-                  />
-                ) : null}
+                <AgentAvatar src={match.agentImg} agent={match.agent} size={56} />
                 <div className="min-w-0 flex-1">
                   <Dialog.Title className="text-lg font-bold leading-tight">{match.map}</Dialog.Title>
                   <Dialog.Description className="font-mono text-[11.5px] text-dim">
@@ -73,7 +63,7 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
                     ["kills", match.kills],
                     ["deaths", match.deaths],
                     ["assists", match.assists],
-                    ["score", match.score],
+                    ["score", playerScore(match)],
                   ] as const
                 ).map(([k, v]) => (
                   <div key={k} className="tile flex flex-col px-3 py-3">

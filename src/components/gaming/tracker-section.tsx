@@ -2,7 +2,6 @@
 // Une seule instance du hook : les deux cartes partagent le même appel API.
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Crosshair, ListOrdered, RefreshCw } from "lucide-react";
@@ -12,7 +11,7 @@ import type { MatchData } from "@/lib/tracker-types";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/primitives";
-import { PeakTile, ResultDots, ResultTag, TrackerNotice, matchHs, useStatFormat } from "./tracker-parts";
+import { AgentAvatar, PeakTile, ResultDots, ResultTag, TrackerNotice, matchHs, playerScore, useStatFormat } from "./tracker-parts";
 import { MatchDialog } from "./match-dialog";
 
 export function TrackerSection() {
@@ -159,7 +158,7 @@ export function TrackerSection() {
         id="matches"
         icon={ListOrdered}
         title={tm("title")}
-        subtitle={`valorant matches --last ${TRACKER.size}`}
+        subtitle={`valorant matches --last ${data?.matches.length ?? TRACKER.size}`}
         meta={tm("meta")}
         index={2}
         className="md:col-span-6 lg:col-span-12"
@@ -198,18 +197,7 @@ export function TrackerSection() {
                     onClick={() => setSelected(m)}
                     className="grid w-full grid-cols-[40px_1fr_auto] items-center gap-x-4 rounded-[14px] bg-surface-2 px-3 py-2.5 text-left transition-colors hover:bg-surface-3 sm:grid-cols-[40px_1fr_96px_72px_88px_64px]"
                   >
-                    {m.agentImg ? (
-                      <Image
-                        src={m.agentImg}
-                        alt=""
-                        width={40}
-                        height={40}
-                        unoptimized
-                        className="h-10 w-10 rounded-xl bg-surface-3 object-cover"
-                      />
-                    ) : (
-                      <span className="h-10 w-10 rounded-xl bg-surface-3" aria-hidden="true" />
-                    )}
+                    <AgentAvatar src={m.agentImg} agent={m.agent} />
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-semibold">{m.map}</span>
                       <span className="block truncate font-mono text-[11px] text-dim">
@@ -217,7 +205,7 @@ export function TrackerSection() {
                       </span>
                     </span>
                     <ResultTag result={m.result} />
-                    <Cell label={tm("columns.score")} value={m.score} className="hidden sm:block" />
+                    <Cell label={tm("columns.score")} value={playerScore(m)} className="hidden sm:block" />
                     <Cell label={tm("columns.kda")} value={`${m.kills}/${m.deaths}/${m.assists}`} className="hidden sm:block" />
                     <Cell label={tm("columns.hs")} value={f.pct(hs)} className="hidden sm:block" />
                   </button>

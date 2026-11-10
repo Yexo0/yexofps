@@ -70,13 +70,13 @@ function Setup() {
           const partner = "partner" in item ? PARTNERS.find((p) => p.id === item.partner) : undefined;
           return (
             <li key={item.id} className="tile flex flex-col overflow-hidden">
-              <div className="m-2 mb-0 grid h-36 place-items-center rounded-[10px] bg-[#f4f4f5] p-4">
+              <div className="relative m-2 mb-0 h-40 overflow-hidden rounded-[10px] bg-white">
                 <Image
                   src={item.image}
                   alt={item.name}
-                  width={240}
-                  height={160}
-                  className="h-full w-full object-contain"
+                  fill
+                  sizes="(min-width: 640px) 33vw, 100vw"
+                  className="object-contain p-4"
                 />
               </div>
               <div className="flex flex-1 flex-col gap-1 px-4 py-3.5">

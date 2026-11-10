@@ -830,7 +830,7 @@
     "gaming": {
       "title": "Gaming",
       "ranks": "Best ranks",
-      "recent": "Last {count} matches"
+      "recent": "{count, plural, one {Last match} other {Last # matches}}"
     }
   },
   "lab": {
@@ -996,7 +996,7 @@
       "peak": "Peak rank",
       "peakSeason": "Episode {episode} · Act {act}",
       "peakStillHere": "The peak stays visible: it doesn't depend on the API.",
-      "recent": "Last {count} matches",
+      "recent": "{count, plural, one {Last match} other {Last # matches}}",
       "loading": "Loading recent matches…",
       "empty": "No recent matches found on this account.",
       "errors": {
