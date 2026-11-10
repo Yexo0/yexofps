@@ -1076,5 +1076,54 @@
       "yaw": "Valeurs de yaw",
       "note": "Résultat arrondi à 4 décimales. Le point sert de séparateur décimal, comme dans les jeux."
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "meta": "{count} canaux",
+    "intro": "Tous les moyens de me joindre au même endroit. Pour une commande Y-Services, le ticket Discord reste le plus rapide.",
+    "keys": {
+      "proEmail": "email.pro",
+      "businessEmail": "email.business",
+      "discord": "discord",
+      "discordEdits": "discord.edits",
+      "tiktok": "tiktok",
+      "instagram": "instagram.perso",
+      "instagramFps": "instagram.fps",
+      "linktree": "linktree"
+    },
+    "comments": {
+      "proEmail": "alternance, stage, sujets pro",
+      "businessEmail": "commandes, partenariats, collaborations",
+      "discord": "le serveur, avec les tickets pour commander",
+      "discordEdits": "le serveur consacré au montage",
+      "tiktok": "mes edits",
+      "instagram": "compte perso",
+      "instagramFps": "compte FPS",
+      "linktree": "tous mes liens au même endroit"
+    },
+    "write": "Écrire",
+    "open": "Ouvrir",
+    "writeLabel": "Écrire à {email}",
+    "openLabel": "Ouvrir {name} (nouvel onglet)",
+    "subjects": {
+      "pro": "Contact depuis yexofps.org",
+      "business": "Demande business depuis yexofps.org"
+    },
+    "routing": {
+      "title": "Qui contacter",
+      "pro": {
+        "title": "Alternance, stage, sujet pro",
+        "text": "Écris à l'adresse pro, avec l'objet de ta demande dans le titre."
+      },
+      "order": {
+        "title": "Commande Y-Services",
+        "text": "Ouvre un ticket sur Discord, c'est le plus rapide. L'email business marche aussi."
+      },
+      "collab": {
+        "title": "Partenariat ou collaboration",
+        "text": "Passe par l'email business et présente ton projet en quelques lignes."
+      },
+      "tip": "Pour une commande, précise le produit, ton logiciel et ce que tu veux obtenir."
+    }
   }
 }

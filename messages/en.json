@@ -1076,5 +1076,54 @@
       "yaw": "Yaw values",
       "note": "Result rounded to 4 decimals. The dot is the decimal separator, as in games."
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "meta": "{count} channels",
+    "intro": "Every way to reach me, in one place. For a Y-Services order, a Discord ticket is still the fastest.",
+    "keys": {
+      "proEmail": "email.work",
+      "businessEmail": "email.business",
+      "discord": "discord",
+      "discordEdits": "discord.edits",
+      "tiktok": "tiktok",
+      "instagram": "instagram.personal",
+      "instagramFps": "instagram.fps",
+      "linktree": "linktree"
+    },
+    "comments": {
+      "proEmail": "work-study, internships, professional topics",
+      "businessEmail": "orders, partnerships, collaborations",
+      "discord": "the server, with tickets to place an order",
+      "discordEdits": "the server dedicated to editing",
+      "tiktok": "my edits",
+      "instagram": "personal account",
+      "instagramFps": "FPS account",
+      "linktree": "all my links in one place"
+    },
+    "write": "Write",
+    "open": "Open",
+    "writeLabel": "Write to {email}",
+    "openLabel": "Open {name} (new tab)",
+    "subjects": {
+      "pro": "Contact from yexofps.org",
+      "business": "Business request from yexofps.org"
+    },
+    "routing": {
+      "title": "Who to contact",
+      "pro": {
+        "title": "Work-study, internship, professional topic",
+        "text": "Write to the work address, with the topic of your request in the subject line."
+      },
+      "order": {
+        "title": "Y-Services order",
+        "text": "Open a ticket on Discord, it's the fastest. The business email works too."
+      },
+      "collab": {
+        "title": "Partnership or collaboration",
+        "text": "Use the business email and describe your project in a few lines."
+      },
+      "tip": "For an order, mention the product, your software and what you want to achieve."
+    }
   }
 }
