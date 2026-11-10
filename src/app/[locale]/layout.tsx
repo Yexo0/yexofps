@@ -1,14 +1,17 @@
-// src/app/[locale]/layout.tsx
+// src/app/[locale]/layout.tsx — Layout racine par langue : <html>, thème, police, rail, cadre.
 import type { ReactNode } from "react";
-import type { Metadata } from "next";
-import { NextIntlClientProvider, useMessages } from "next-intl";
-import { getTranslations } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { AuroraBackground } from "@/components/layout/aurora-background";
-import { LanguageSwitcher } from "@/components/layout/language-switcher";
-import { Chatbot } from "@/components/layout/chatbot";
-import { Footer } from "@/components/layout/footer";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { routing } from "@/i18n/routing";
+import { SITE } from "@/config/site";
+import { DEFAULT_THEME } from "@/config/theme";
+import { themeColor, themeCss, themeScript } from "@/lib/theme";
+import { Rail } from "@/components/shell/rail";
+import { UIProvider } from "@/components/shell/ui-provider";
 import "../globals.css";
 
 type Props = {
@@ -16,37 +19,63 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  return {
-    title: t("title"),
-    description: t("description"),
-  };
-}
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return {
+    metadataBase: new URL(SITE.url),
+    title: { default: t("home.title"), template: `%s · ${SITE.name}` },
+    description: t("home.description"),
+    applicationName: SITE.name,
+    authors: [{ name: SITE.author }],
+    openGraph: {
+      type: "website",
+      siteName: SITE.name,
+      locale: locale === "fr" ? "fr_FR" : "en_US",
+    },
+    twitter: { card: "summary_large_image" },
+  };
+}
+
+export const viewport: Viewport = {
+  themeColor: themeColor.dark,
+  colorScheme: "dark light",
+};
+
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
-
-  if (!routing.locales.includes(locale as "en" | "fr")) {
-    notFound();
-  }
-
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const t = await getTranslations("common");
 
   return (
-    <html lang={locale}>
+    <html
+      lang={locale}
+      data-theme={DEFAULT_THEME}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <style id="theme-tokens" dangerouslySetInnerHTML={{ __html: themeCss }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <AuroraBackground />
-          <LanguageSwitcher />
-          <div className="relative z-[2]">{children}</div>
-          <Footer />
-          <Chatbot />
+        <NextIntlClientProvider>
+          <UIProvider>
+            <a href="#main" className="skip-link">
+              {t("skipToContent")}
+            </a>
+            <Rail />
+            <div className="shell">
+              <main id="main" tabIndex={-1} className="frame outline-none">
+                {children}
+              </main>
+            </div>
+          </UIProvider>
         </NextIntlClientProvider>
       </body>
     </html>
