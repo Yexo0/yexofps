@@ -1,0 +1,50 @@
+// src/components/network-map/icons.ts — Icônes des nœuds du schéma réseau, référencées par clé
+// (les données viennent de fichiers de config, sérialisables entre serveur et client).
+import {
+  Activity,
+  AppWindow,
+  Archive,
+  ClipboardList,
+  Cloud,
+  Container,
+  Database,
+  FolderTree,
+  Globe,
+  HardDrive,
+  HardDriveDownload,
+  Laptop,
+  Monitor,
+  Network,
+  Router,
+  Server,
+  ShieldCheck,
+  Users,
+  Waypoints,
+  Wifi,
+  type LucideIcon,
+} from "lucide-react";
+
+export const MAP_ICONS = {
+  globe: Globe,
+  cloud: Cloud,
+  shield: ShieldCheck,
+  switch: Network,
+  wifi: Wifi,
+  server: Server,
+  storage: HardDrive,
+  desktop: Monitor,
+  users: Users,
+  directory: FolderTree,
+  monitor: Activity,
+  backup: Archive,
+  container: Container,
+  proxy: Waypoints,
+  web: AppWindow,
+  router: Router,
+  database: Database,
+  laptop: Laptop,
+  deploy: HardDriveDownload,
+  ticket: ClipboardList,
+} satisfies Record<string, LucideIcon>;
+
+export type MapIcon = keyof typeof MAP_ICONS;

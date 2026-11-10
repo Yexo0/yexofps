@@ -197,7 +197,458 @@
           "title": "Windows Server : DHCP et DNS",
           "desc": "Étendues, réservations, zones et enregistrements DNS"
         }
+      },
+      "title": "Tutos PDF",
+      "meta": "{count} PDF",
+      "intro": "Guides techniques rédigés pendant ma formation, à télécharger.",
+      "pages": "{count} p.",
+      "downloadLabel": "Télécharger le PDF ({count} pages)",
+      "categories": {
+        "system": "Système",
+        "network": "Réseau",
+        "virtualization": "Virtualisation",
+        "security": "Sécurité",
+        "monitoring": "Supervision",
+        "itsm": "ITSM"
       }
+    },
+    "intro": {
+      "meta": "admin sys · réseau",
+      "role": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI",
+      "school": "Bachelor Administrateur systèmes, réseaux et bases de données · EPSI Grenoble",
+      "p1": "Depuis novembre 2026, je suis alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en parallèle du bachelor Administrateur systèmes, réseaux et bases de données de l'EPSI Grenoble. Avant ça, j'ai fait un BTS SIO option SISR au Campus CCI de Nîmes, avec un stage en infogérance chez Cekoya.",
+      "p2": "Ce qui me plaît dans l'infra : comprendre pourquoi ça marche avant d'y toucher, et laisser derrière moi une config propre et documentée. Mon homelab sert à tester tout ce que je n'ai pas le droit de casser ailleurs.",
+      "stats": {
+        "missions": "Missions détaillées",
+        "docs": "Tutos rédigés",
+        "homelab": "Homelab depuis"
+      },
+      "email": "M'écrire",
+      "emailLabel": "l'email pro"
+    },
+    "elsewhere": {
+      "title": "En dehors du poste",
+      "content": {
+        "title": "Création de contenu",
+        "text": "Je monte des edits Valorant sous le nom de Yexo : rythme, transitions et sound design."
+      },
+      "watch": {
+        "title": "Veille",
+        "text": "Je suis l'actualité de la cybersécurité, de l'infra cloud et des outils open source."
+      },
+      "homelab": {
+        "title": "Homelab et scripts",
+        "text": "Self-hosting, scripts d'automatisation et maquettes réseau à la maison, détaillés dans l'espace Lab."
+      }
+    },
+    "timeline": {
+      "title": "Parcours",
+      "meta": "{count} étapes",
+      "current": "en cours",
+      "seeMissions": "Voir les missions du stage",
+      "items": {
+        "workStudy": {
+          "date": "Depuis novembre 2026",
+          "title": "Alternant gestionnaire d'infrastructures informatiques",
+          "place": "Au sein d'une DSI",
+          "items": [
+            "Support de proximité auprès des utilisateurs",
+            "Traitement des tickets dans GLPI"
+          ]
+        },
+        "bachelor": {
+          "date": "2026 – 2027",
+          "title": "Bachelor Administrateur systèmes, réseaux et bases de données",
+          "place": "EPSI Grenoble · en alternance"
+        },
+        "bts": {
+          "date": "2024 – 2026",
+          "title": "BTS SIO option SISR",
+          "place": "Campus CCI de Nîmes",
+          "text": "Le BTS SIO forme à l'informatique en entreprise ; l'option SISR se concentre sur les réseaux, les systèmes et la sécurité. J'ai choisi SISR pour le côté infrastructure : comprendre un réseau, le configurer, le sécuriser et le maintenir.",
+          "items": [
+            "Administration Windows et Linux, virtualisation, comptes et services",
+            "Adressage IP, VLAN, routage, maquettes sous Cisco Packet Tracer",
+            "Diagnostic d'incidents, installation et configuration de postes",
+            "Sécurité : mises à jour, mots de passe, segmentation, règles réseau"
+          ]
+        },
+        "internship": {
+          "date": "Stage",
+          "title": "Stage chez Cekoya",
+          "place": "Nîmes · infogérance pour des clients professionnels",
+          "items": [
+            "Support informatique des clients, à distance et sur site",
+            "Configuration réseau et déploiement d'équipements",
+            "Inventaire du parc et maintenance préventive"
+          ]
+        },
+        "but": {
+          "date": "2023 – 2024",
+          "title": "BUT Réseaux et Télécommunications",
+          "place": "Valence"
+        },
+        "bac": {
+          "date": "2023",
+          "title": "Bac STI2D option ITEC",
+          "place": "Lycée Pierre Termier, Grenoble"
+        }
+      }
+    },
+    "skills": {
+      "title": "Compétences",
+      "meta": "{count} domaines",
+      "items": {
+        "support": {
+          "title": "Support N1 / N2",
+          "text": "Diagnostiquer, isoler, corriger, puis valider avec l'utilisateur. Je traite les tickets dans GLPI, j'installe et je configure les postes, et j'explique ce que j'ai fait avec des mots simples."
+        },
+        "windows": {
+          "title": "Windows Server et Active Directory",
+          "text": "Création de domaine, OU, comptes et groupes, stratégies de groupe (GPO), DHCP et DNS sous Windows Server. Les tutos AD, GPO et DHCP/DNS sont plus bas."
+        },
+        "virtualization": {
+          "title": "Virtualisation",
+          "text": "VMware ESXi (VM, vSwitch, utilisateurs et droits), Proxmox pour les VM et les conteneurs, Hyper-V pour les labs d'école."
+        },
+        "network": {
+          "title": "Réseau",
+          "text": "Adressage IP, VLAN et routage inter-VLAN, configuration de routeurs MikroTik et Zyxel avec bascule 4G, bornes Wi-Fi Cisco, pare-feu IPFire et pfSense."
+        },
+        "linux": {
+          "title": "Linux",
+          "text": "Debian et Ubuntu côté serveur : DHCP, FTP, MariaDB, routage inter-VLAN, serveur Zabbix et ses agents."
+        },
+        "inventory": {
+          "title": "Parc et inventaire",
+          "text": "Inventaire matériel et logiciel avec GLPI et FusionInventory, déploiement d'images avec FOG, règles de nommage pour retrouver une machine en dix secondes."
+        },
+        "code": {
+          "title": "Code",
+          "text": "Python pour les scripts d'automatisation, C# pour des applications console, HTML, CSS et JavaScript pour le web, Git pour versionner le tout."
+        },
+        "soft": {
+          "title": "Savoir-être",
+          "text": "Je garde mon calme quand ça casse, je traite d'abord ce qui bloque le plus de monde, et je documente ce que je fais : les dix tutos PDF plus bas en sont la preuve. Je travaille aussi bien seul qu'en binôme."
+        }
+      }
+    },
+    "missions": {
+      "title": "Missions de stage",
+      "meta": "{count} missions",
+      "labels": {
+        "context": "Contexte",
+        "objective": "Objectif",
+        "role": "Mon rôle",
+        "actions": "Ce que j'ai fait"
+      },
+      "items": {
+        "support": {
+          "tab": "Support et incidents réseau",
+          "title": "Diagnostiquer vite, corriger proprement",
+          "intro": "Pendant mon stage chez Cekoya, j'ai participé au support des clients : incidents réseau, services indisponibles, postes instables, impressions, accès aux ressources. Le support, c'est surtout une méthode : identifier, isoler, corriger, puis valider.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Incident réseau : partages et imprimantes inaccessibles sur plusieurs postes après un changement d'équipement (routeur ou switch). Objectif : rétablir l'accès vite, sans perturber davantage la production.",
+          "context": "Plusieurs utilisateurs signalent des dossiers partagés inaccessibles, des imprimantes introuvables et des connexions instables. Le problème semble limité à une zone précise du réseau.",
+          "objective": "Rétablir l'accès aux partages, aux imprimantes et aux applications, vérifier la stabilité, puis valider avec les utilisateurs concernés.",
+          "role": "Piste DHCP/DNS, erreur de VLAN, câble ou port défaillant, conflit d'adressage : il fallait d'abord savoir si le problème venait des postes ou du réseau.",
+          "actions": [
+            "Vérifier si le souci touche un poste ou plusieurs",
+            "Contrôler l'adressage : IP, passerelle, DNS, bail DHCP",
+            "Tester l'accès aux ressources : ping passerelle, serveur, partages, imprimantes",
+            "Isoler la zone : port du switch, VLAN, équipement relié aux postes concernés",
+            "Corriger, puis valider sur un cas réel (partage et impression)"
+          ],
+          "proofTitle": "Pourquoi ça compte",
+          "proofText": "Le support demande de la technique, mais surtout une méthode claire pour réduire le temps d'indisponibilité tout en laissant un résultat propre.",
+          "impacts": [
+            {
+              "title": "Prioriser",
+              "text": "Je traite d'abord ce qui bloque le plus (l'accès aux ressources essentielles), puis je vérifie la stabilité avant de clôturer."
+            },
+            {
+              "title": "Valider",
+              "text": "Une correction n'est jamais supposée : je la teste sur un poste réel, puis je confirme avec les utilisateurs que tout est revenu à la normale."
+            }
+          ],
+          "tags": [
+            "Diagnostic",
+            "DHCP/DNS",
+            "VLAN",
+            "Validation"
+          ]
+        },
+        "project": {
+          "tab": "Bascule 4G de secours",
+          "title": "Déploiement d'une solution 4G de secours",
+          "intro": "Mission réalisée pendant mon stage chez Cekoya, dans un contexte d'infogérance auprès de clients professionnels (PME, commerces, structures administratives).",
+          "missionLabel": "Ma mission : configurer le routeur 4G",
+          "mission": "J'étais responsable de la partie technique du routeur 4G : préparation, configuration, bascule et tests. Le but : livrer une configuration fiable, prête à être installée chez le client.",
+          "context": "Un client subissait des coupures régulières de sa connexion principale, ce qui bloquait ses outils métier, sa téléphonie IP et le travail des équipes.",
+          "objective": "Basculer automatiquement sur une connexion de secours, sans intervention manuelle, pour limiter l'impact des coupures.",
+          "role": "Préparation, configuration, bascule et tests en autonomie, intégration sur site avec un technicien référent.",
+          "actions": [
+            "Préparer la 4G : carte SIM, paramètres opérateur, accès admin sécurisé",
+            "Configurer la bascule automatique entre la ligne principale et la 4G",
+            "Détecter la panne et revenir automatiquement quand la ligne principale est stable",
+            "Simuler des coupures pour vérifier le passage en 4G et la stabilité",
+            "Confirmer le retour automatique sur la ligne principale"
+          ],
+          "proofTitle": "Critères de réussite",
+          "proofText": "La solution est validée quand le client garde une connexion fonctionnelle pendant une coupure, et que la bascule comme le retour se font seuls et de façon stable.",
+          "impacts": [
+            {
+              "title": "Fiabilité",
+              "text": "Solution simple à maintenir, bascule testée en conditions réalistes avant la mise en production."
+            },
+            {
+              "title": "Travail en binôme",
+              "text": "Préparation technique en autonomie, intégration sur site et validation finale avec le technicien référent."
+            }
+          ],
+          "tags": [
+            "MikroTik",
+            "Zyxel",
+            "Failover",
+            "4G"
+          ]
+        },
+        "assistance": {
+          "tab": "Assistance utilisateur",
+          "title": "Dépanner et rendre l'utilisateur autonome",
+          "intro": "Pendant mon stage chez Cekoya, j'étais souvent en contact direct avec les utilisateurs, à distance ou sur site. Le but : résoudre l'incident vite, en expliquant ce qui se passe et ce que je fais.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Déploiement d'un nouveau poste après incident, avec récupération de l'environnement de l'utilisateur et vérifications réseau.",
+          "context": "Un utilisateur ne pouvait plus travailler : lenteurs, plantages, accès aléatoire aux lecteurs réseau, à l'impression et aux applications. La priorité : le remettre au travail rapidement.",
+          "objective": "Fournir un poste stable, retrouver ses comptes, accès et outils, et lui montrer les vérifications simples à faire seul.",
+          "role": "Installation et configuration du poste, réintégration au domaine si besoin, vérifications DHCP/DNS, partages et imprimantes, puis accompagnement.",
+          "actions": [
+            "Préparer un poste propre : mises à jour, pilotes, paramétrage de base",
+            "Vérifier les accès : partages, impression, applications, navigation",
+            "Expliquer ce qui a été fait et comment éviter que ça se reproduise",
+            "Faire tester les tâches réelles de l'utilisateur avant de clôturer"
+          ],
+          "proofTitle": "Pourquoi ça compte",
+          "proofText": "L'assistance ne consiste pas seulement à réparer : il faut traduire un problème technique en actions simples pour l'utilisateur.",
+          "impacts": [
+            {
+              "title": "Expliquer simplement",
+              "text": "Je décris ce que je fais sans jargon et je laisse deux ou trois vérifications rapides à refaire seul (Wi-Fi, câble, redémarrage)."
+            },
+            {
+              "title": "Clôturer sur du réel",
+              "text": "L'utilisateur teste ses tâches habituelles. Le ticket n'est fermé que quand le poste fonctionne vraiment."
+            }
+          ],
+          "tags": [
+            "Poste",
+            "Domaine",
+            "Support",
+            "Accompagnement"
+          ]
+        },
+        "inventory": {
+          "tab": "Gestion du parc",
+          "title": "Suivre le parc, éviter les surprises",
+          "intro": "La gestion du parc, c'est la base d'un SI propre : savoir quel matériel existe, où il se trouve, dans quel état et qui l'utilise. C'est aussi ce qui permet d'anticiper les pannes et les renouvellements.",
+          "missionLabel": "Mission mise en avant",
+          "mission": "Remise à jour de l'inventaire du parc d'un client : vérification du matériel sur site, consolidation des informations et mise à jour du suivi pour faciliter la maintenance et le support.",
+          "context": "L'inventaire du client était incomplet : des postes non référencés, du matériel passé d'un utilisateur à l'autre, et des informations (modèle, numéro de série, emplacement) périmées.",
+          "objective": "Un inventaire fiable des postes, périphériques et équipements réseau, avec assez de traçabilité pour accélérer le support et planifier les renouvellements.",
+          "role": "Relevés sur le terrain, consolidation et mise à jour de l'inventaire. J'ai aussi standardisé certains champs (noms, lieux, responsables) pour qu'il reste lisible dans le temps.",
+          "actions": [
+            "Vérifier sur site les postes, écrans, imprimantes et équipements réseau visibles",
+            "Mettre à jour modèle, numéro de série, état, emplacement et utilisateur",
+            "Appliquer une règle de nommage (PC-XXX, SALLE-XXX) pour tout retrouver vite",
+            "Repérer le matériel fantôme : présent dans l'outil mais absent sur site, et inversement",
+            "Centraliser les infos utiles au support : OS, IP fixe, garantie, rôle de la machine"
+          ],
+          "proofTitle": "Pourquoi ça compte",
+          "proofText": "La différence ne tient pas à « faire un inventaire », mais à structurer des données assez fiables pour servir tous les jours au support, à la maintenance et à la sécurité.",
+          "impacts": [
+            {
+              "title": "Terrain, outil, vérification",
+              "text": "Je collecte, je structure, puis je contrôle que les informations sont cohérentes et réutilisables."
+            },
+            {
+              "title": "Moins d'incidents",
+              "text": "Un inventaire propre accélère les dépannages (quel matériel, où, pour qui) et aide à suivre les mises à jour."
+            }
+          ],
+          "tags": [
+            "Inventaire",
+            "Traçabilité",
+            "GLPI",
+            "Terrain"
+          ]
+        },
+        "communication": {
+          "tab": "Communication externe",
+          "title": "Communiquer pour convaincre",
+          "intro": "Comment Cekoya communique vers l'extérieur (image, acquisition, crédibilité), et comment j'applique la même logique à mes projets perso : contenu et services.",
+          "missionLabel": "Communication externe chez Cekoya",
+          "mission": "Cekoya s'appuie sur plusieurs leviers complémentaires : site vitrine, LinkedIn, présence et avis Google, partenariats et salons. Le but : être visible, inspirer confiance et créer des opportunités.",
+          "context": "Site vitrine (première impression), LinkedIn (image pro et réseau), Google (être trouvé et recommandé), partenariats (crédibilité terrain), salons (visibilité et confiance).",
+          "objective": "Une communication qui tient la route : le même message partout, confirmé par la réputation.",
+          "role": "Analyse des leviers de communication, puis application de la même logique à mes projets : montrer, rassurer, convertir. Mon contenu sert de preuve.",
+          "actions": [
+            "Contenu : attirer par la preuve en montrant le niveau (rythme, transitions, sound design)",
+            "Confiance : des attentes claires, des délais annoncés, des retours précis",
+            "Offre : ce qui est inclus, comment ça se passe, ce qui est livré",
+            "Site vitrine : rassurer dès la première impression",
+            "LinkedIn : crédibiliser et créer des contacts"
+          ],
+          "proofTitle": "Ce que ça montre",
+          "proofText": "Je sais vendre par la preuve : un contenu qui rassure, un discours clair et une offre simple. C'est la même base qu'une communication externe efficace en entreprise.",
+          "impacts": [
+            {
+              "title": "Un message cohérent",
+              "text": "Le même discours sur le site, LinkedIn et Google ; les partenaires et les retours clients le confirment."
+            },
+            {
+              "title": "Appliqué à mes projets",
+              "text": "Montrer, rassurer, convertir : mes edits servent de preuve directe de qualité pour Y-Services."
+            }
+          ],
+          "tags": [
+            "Site web",
+            "LinkedIn",
+            "Google",
+            "Partenariats"
+          ]
+        }
+      }
+    },
+    "infra": {
+      "title": "Réseau de formation (BTS)",
+      "meta": "{count} nœuds",
+      "intro": "L'infrastructure montée pendant le BTS : un serveur VMware qui héberge le pare-feu IPFire, les serveurs du LAN et un WordPress en DMZ, derrière le réseau du lycée. Survole ou sélectionne un nœud pour voir son rôle.",
+      "hint": "Survole ou sélectionne un nœud pour afficher son rôle et ce qui y est relié.",
+      "related": "Relié à",
+      "ungrouped": "Réseau du lycée",
+      "groups": {
+        "vmware": "Serveur VMware",
+        "dmz": "DMZ"
+      },
+      "nodes": {
+        "school": {
+          "label": "Réseau lycée",
+          "sub": "DHCP",
+          "role": "Réseau du lycée : c'est par là qu'arrive l'accès Internet, avec une adresse obtenue en DHCP."
+        },
+        "router": {
+          "label": "Routeur",
+          "sub": "192.168.1.1/24",
+          "role": "Routeur principal, passerelle vers le réseau du lycée."
+        },
+        "vswRed": {
+          "label": "vSwitch Red",
+          "sub": "192.168.1.0/24",
+          "role": "Switch virtuel VMware côté WAN, relié à l'interface Red d'IPFire."
+        },
+        "ipfire": {
+          "label": "IPFire",
+          "sub": "pare-feu",
+          "role": "Pare-feu en VM : NAT, filtrage et passerelle entre Red et Green. Interface Red en 192.168.1.14/24, Green en 192.168.2.10/24.",
+          "tags": [
+            "NAT",
+            "Filtrage",
+            "Red",
+            "Green"
+          ]
+        },
+        "vswGreen": {
+          "label": "vSwitch Green",
+          "sub": "192.168.2.0/24",
+          "role": "Switch virtuel VMware côté LAN (zone Green)."
+        },
+        "glpi": {
+          "label": "GLPI",
+          "sub": "192.168.2.15",
+          "role": "Gestion de parc : inventaire, tickets et suivi du matériel.",
+          "tags": [
+            "GLPI",
+            "FusionInventory"
+          ]
+        },
+        "fog": {
+          "label": "FOG",
+          "sub": "192.168.2.156",
+          "role": "Serveur Linux de déploiement et de clonage d'images."
+        },
+        "winsrv": {
+          "label": "Windows Server",
+          "sub": "192.168.2.254",
+          "role": "Contrôleur de domaine : Active Directory, DHCP, DNS et GPO.",
+          "tags": [
+            "AD DS",
+            "DHCP",
+            "DNS",
+            "GPO"
+          ]
+        },
+        "wordpress": {
+          "label": "WordPress",
+          "sub": "192.168.2.13",
+          "role": "Serveur web isolé en DMZ, qui héberge le site WordPress."
+        },
+        "switch": {
+          "label": "Switch",
+          "sub": "LAN physique",
+          "role": "Switch physique qui distribue le LAN jusqu'à la borne Wi-Fi."
+        },
+        "wifi": {
+          "label": "Borne Wi-Fi",
+          "sub": "192.168.2.250",
+          "role": "Borne Wi-Fi Cisco : accès sans fil au LAN."
+        }
+      }
+    },
+    "watch": {
+      "title": "Veille technologique",
+      "topic": "L'évolution de la virtualisation serveur, de VMware à aujourd'hui",
+      "sections": {
+        "before": {
+          "title": "Avant la virtualisation",
+          "text": "Un serveur physique, un service. Résultat : des machines utilisées à 10-20 %, des coûts élevés, peu de souplesse et des pannes critiques."
+        },
+        "vmware": {
+          "title": "L'arrivée de VMware",
+          "text": "Fin des années 1990, l'hyperviseur sépare le matériel du système : une machine physique héberge plusieurs serveurs isolés.",
+          "benefits": [
+            "Environnements isolés",
+            "Moins de serveurs physiques",
+            "Déploiement rapide par clonage",
+            "Meilleure sécurité par séparation"
+          ]
+        },
+        "today": {
+          "title": "VMware aujourd'hui",
+          "text": "ESXi, vSphere et vCenter restent des références en entreprise.",
+          "features": [
+            "vMotion : migrer une VM sans interruption",
+            "Snapshots : revenir vite à un état précédent",
+            "vSAN : stockage distribué sans SAN physique",
+            "HA : redémarrage automatique des VM en cas de panne",
+            "Tanzu : intégration de Kubernetes"
+          ]
+        },
+        "broadcom": {
+          "title": "Depuis le rachat par Broadcom",
+          "text": "Broadcom a finalisé le rachat de VMware en novembre 2023, puis a remplacé les licences perpétuelles par des abonnements groupés et retiré l'ESXi gratuit début 2024. Beaucoup d'entreprises et de homelabs ont alors regardé du côté de Proxmox VE et d'Hyper-V : c'est aussi pour ça que je pratique les trois."
+        },
+        "why": {
+          "title": "Pourquoi c'est essentiel",
+          "points": [
+            "Réduire les coûts : matériel, énergie, maintenance",
+            "Déployer plus vite et plus souplement",
+            "Isoler pour mieux sécuriser",
+            "Assurer la continuité de service (HA, clusters)",
+            "Faciliter la migration vers le cloud"
+          ]
+        }
+      },
+      "sources": "Sources : Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
     }
   },
   "home": {

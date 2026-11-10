@@ -197,7 +197,458 @@
           "title": "Windows Server: DHCP and DNS",
           "desc": "Scopes, reservations, DNS zones and records"
         }
+      },
+      "title": "PDF guides",
+      "meta": "{count} PDFs",
+      "intro": "Technical guides I wrote during my studies, ready to download (in French).",
+      "pages": "{count} p.",
+      "downloadLabel": "Download the PDF ({count} pages)",
+      "categories": {
+        "system": "System",
+        "network": "Network",
+        "virtualization": "Virtualization",
+        "security": "Security",
+        "monitoring": "Monitoring",
+        "itsm": "ITSM"
       }
+    },
+    "intro": {
+      "meta": "sysadmin · network",
+      "role": "Work-study IT infrastructure administrator in an IT department",
+      "school": "Bachelor's in systems, network and database administration · EPSI Grenoble",
+      "p1": "Since November 2026, I've been a work-study IT infrastructure administrator in an IT department, alongside a bachelor's degree in systems, network and database administration at EPSI Grenoble. Before that, I completed a BTS SIO (SISR option) at Campus CCI in Nîmes, with an internship in managed IT services at Cekoya.",
+      "p2": "What I like about infrastructure: understanding why something works before touching it, and leaving a clean, documented setup behind. My homelab is where I test everything I'm not allowed to break anywhere else.",
+      "stats": {
+        "missions": "Detailed assignments",
+        "docs": "Guides written",
+        "homelab": "Homelab since"
+      },
+      "email": "Email me",
+      "emailLabel": "work email"
+    },
+    "elsewhere": {
+      "title": "Outside work",
+      "content": {
+        "title": "Content creation",
+        "text": "I edit Valorant clips as Yexo: pacing, transitions and sound design."
+      },
+      "watch": {
+        "title": "Tech watch",
+        "text": "I follow cybersecurity, cloud infrastructure and open-source news."
+      },
+      "homelab": {
+        "title": "Homelab and scripts",
+        "text": "Self-hosting, automation scripts and network labs at home, detailed in the Lab space."
+      }
+    },
+    "timeline": {
+      "title": "Career",
+      "meta": "{count} steps",
+      "current": "ongoing",
+      "seeMissions": "See the internship assignments",
+      "items": {
+        "workStudy": {
+          "date": "Since November 2026",
+          "title": "Work-study IT infrastructure administrator",
+          "place": "In an IT department",
+          "items": [
+            "On-site support for users",
+            "Handling tickets in GLPI"
+          ]
+        },
+        "bachelor": {
+          "date": "2026 – 2027",
+          "title": "Bachelor's in systems, network and database administration",
+          "place": "EPSI Grenoble · work-study"
+        },
+        "bts": {
+          "date": "2024 – 2026",
+          "title": "BTS SIO, SISR option",
+          "place": "Campus CCI, Nîmes",
+          "text": "The BTS SIO is a two-year French degree in business IT; the SISR option focuses on networks, systems and security. I picked SISR for the infrastructure side: understanding a network, configuring it, securing it and keeping it running.",
+          "items": [
+            "Windows and Linux administration, virtualization, accounts and services",
+            "IP addressing, VLANs, routing, labs in Cisco Packet Tracer",
+            "Incident diagnosis, workstation installation and setup",
+            "Security: updates, passwords, segmentation, network rules"
+          ]
+        },
+        "internship": {
+          "date": "Internship",
+          "title": "Internship at Cekoya",
+          "place": "Nîmes · managed IT services for business clients",
+          "items": [
+            "IT support for clients, remote and on-site",
+            "Network configuration and equipment deployment",
+            "Asset inventory and preventive maintenance"
+          ]
+        },
+        "but": {
+          "date": "2023 – 2024",
+          "title": "BUT Networks and Telecommunications",
+          "place": "Valence"
+        },
+        "bac": {
+          "date": "2023",
+          "title": "Baccalauréat STI2D, ITEC option",
+          "place": "Lycée Pierre Termier, Grenoble"
+        }
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "meta": "{count} areas",
+      "items": {
+        "support": {
+          "title": "Level 1 / 2 support",
+          "text": "Diagnose, isolate, fix, then confirm with the user. I handle tickets in GLPI, install and configure workstations, and explain what I did in plain words."
+        },
+        "windows": {
+          "title": "Windows Server and Active Directory",
+          "text": "Domain creation, OUs, accounts and groups, Group Policy (GPO), DHCP and DNS on Windows Server. The AD, GPO and DHCP/DNS guides are further down."
+        },
+        "virtualization": {
+          "title": "Virtualization",
+          "text": "VMware ESXi (VMs, vSwitches, users and permissions), Proxmox for VMs and containers, Hyper-V for school labs."
+        },
+        "network": {
+          "title": "Networking",
+          "text": "IP addressing, VLANs and inter-VLAN routing, MikroTik and Zyxel router configuration with 4G failover, Cisco Wi-Fi access points, IPFire and pfSense firewalls."
+        },
+        "linux": {
+          "title": "Linux",
+          "text": "Debian and Ubuntu servers: DHCP, FTP, MariaDB, inter-VLAN routing, a Zabbix server and its agents."
+        },
+        "inventory": {
+          "title": "Asset management",
+          "text": "Hardware and software inventory with GLPI and FusionInventory, image deployment with FOG, naming rules that let you find any machine in ten seconds."
+        },
+        "code": {
+          "title": "Code",
+          "text": "Python for automation scripts, C# for console apps, HTML, CSS and JavaScript for the web, Git to version all of it."
+        },
+        "soft": {
+          "title": "Soft skills",
+          "text": "I stay calm when things break, I fix what blocks the most people first, and I document what I do: the ten PDF guides below are proof. I work as well alone as in a pair."
+        }
+      }
+    },
+    "missions": {
+      "title": "Internship assignments",
+      "meta": "{count} assignments",
+      "labels": {
+        "context": "Context",
+        "objective": "Goal",
+        "role": "My role",
+        "actions": "What I did"
+      },
+      "items": {
+        "support": {
+          "tab": "Support and network incidents",
+          "title": "Diagnose fast, fix properly",
+          "intro": "During my internship at Cekoya, I took part in client support: network incidents, unavailable services, unstable workstations, printing, access to resources. Support is mostly a method: identify, isolate, fix, then confirm.",
+          "missionLabel": "Featured assignment",
+          "mission": "Network incident: shares and printers unreachable on several workstations after a router or switch change. Goal: restore access quickly without disrupting production further.",
+          "context": "Several users report unreachable shared folders, missing printers and unstable connections. The issue seems limited to one part of the network.",
+          "objective": "Restore access to shares, printers and apps, check stability, then confirm with the affected users.",
+          "role": "DHCP/DNS, a VLAN mistake, a faulty cable or port, an address conflict: the first step was to find out whether the workstations or the network were at fault.",
+          "actions": [
+            "Check whether one workstation or several are affected",
+            "Check addressing: IP, gateway, DNS, DHCP lease",
+            "Test access: ping the gateway, the server, shares and printers",
+            "Isolate the area: switch port, VLAN, equipment linked to the affected workstations",
+            "Fix, then confirm with a real case (a share and a print job)"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "Support takes technical skills, but above all a clear method to cut downtime while leaving a clean result.",
+          "impacts": [
+            {
+              "title": "Prioritize",
+              "text": "I fix what blocks the most first (access to essential resources), then check stability before closing."
+            },
+            {
+              "title": "Confirm",
+              "text": "A fix is never assumed: I test it on a real workstation, then check with users that everything is back to normal."
+            }
+          ],
+          "tags": [
+            "Diagnosis",
+            "DHCP/DNS",
+            "VLAN",
+            "Validation"
+          ]
+        },
+        "project": {
+          "tab": "4G backup link",
+          "title": "Deploying a 4G backup connection",
+          "intro": "Assignment carried out during my internship at Cekoya, in a managed-services context with business clients (small companies, shops, public bodies).",
+          "missionLabel": "My part: configuring the 4G router",
+          "mission": "I handled the technical side of the 4G router: preparation, configuration, failover and testing. The goal: deliver a reliable setup, ready to install at the client's site.",
+          "context": "A client kept losing its main internet connection, which blocked its business tools, IP phones and day-to-day work.",
+          "objective": "Switch automatically to a backup connection, with no manual action, to limit the impact of outages.",
+          "role": "Preparation, configuration, failover and testing on my own; on-site integration with a senior technician.",
+          "actions": [
+            "Prepare the 4G link: SIM card, carrier settings, secured admin access",
+            "Configure automatic failover between the main line and 4G",
+            "Detect the outage and fail back once the main line is stable",
+            "Simulate outages to check the switch to 4G and its stability",
+            "Confirm the automatic return to the main line"
+          ],
+          "proofTitle": "Success criteria",
+          "proofText": "The setup passes when the client keeps a working connection during an outage, and both failover and failback happen on their own, reliably.",
+          "impacts": [
+            {
+              "title": "Reliability",
+              "text": "Simple to maintain, failover tested in realistic conditions before going live."
+            },
+            {
+              "title": "Working in a pair",
+              "text": "Technical preparation on my own, on-site integration and final validation with the senior technician."
+            }
+          ],
+          "tags": [
+            "MikroTik",
+            "Zyxel",
+            "Failover",
+            "4G"
+          ]
+        },
+        "assistance": {
+          "tab": "User assistance",
+          "title": "Fix it, then help the user help themselves",
+          "intro": "During my internship at Cekoya, I was often in direct contact with users, remotely or on-site. The goal: solve the incident quickly while explaining what's going on and what I'm doing.",
+          "missionLabel": "Featured assignment",
+          "mission": "Deploying a new workstation after an incident, with the user's environment restored and network checks.",
+          "context": "A user could no longer work: slowdowns, crashes, random access to network drives, printing and apps. The priority was to get them working again fast.",
+          "objective": "Provide a stable workstation, restore accounts, access and tools, and show the user simple checks they can do alone.",
+          "role": "Workstation install and setup, domain rejoin if needed, DHCP/DNS, share and printer checks, then follow-up with the user.",
+          "actions": [
+            "Prepare a clean workstation: updates, drivers, base settings",
+            "Check access: shares, printing, apps, browsing",
+            "Explain what was done and how to avoid it happening again",
+            "Have the user test their real tasks before closing"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "Assistance isn't just repairing: it means turning a technical problem into simple steps for the user.",
+          "impacts": [
+            {
+              "title": "Explain simply",
+              "text": "I describe what I do without jargon and leave two or three quick checks the user can redo alone (Wi-Fi, cable, restart)."
+            },
+            {
+              "title": "Close on real use",
+              "text": "The user tests their usual tasks. The ticket is only closed when the workstation actually works."
+            }
+          ],
+          "tags": [
+            "Workstation",
+            "Domain",
+            "Support",
+            "Coaching"
+          ]
+        },
+        "inventory": {
+          "tab": "Asset management",
+          "title": "Track the assets, avoid surprises",
+          "intro": "Asset management is the base of a clean IT system: knowing what hardware exists, where it is, what state it's in and who uses it. It's also what lets you anticipate failures and renewals.",
+          "missionLabel": "Featured assignment",
+          "mission": "Updating a client's asset inventory: checking hardware on-site, consolidating the data and updating the records to make maintenance and support easier.",
+          "context": "The client's inventory was incomplete: unlisted workstations, hardware that had changed hands, outdated details (model, serial number, location).",
+          "objective": "A reliable inventory of workstations, peripherals and network gear, with enough traceability to speed up support and plan renewals.",
+          "role": "On-site checks, data consolidation and inventory update. I also standardized some fields (names, locations, owners) so it stays readable over time.",
+          "actions": [
+            "Check workstations, screens, printers and visible network gear on-site",
+            "Update model, serial number, condition, location and user",
+            "Apply a naming rule (PC-XXX, ROOM-XXX) to find things fast",
+            "Spot ghost hardware: listed in the tool but missing on-site, and the other way round",
+            "Gather what support needs: OS, static IP, warranty, machine role"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "The point isn't “doing an inventory”, it's structuring data reliable enough to be used every day for support, maintenance and security.",
+          "impacts": [
+            {
+              "title": "Field, tool, check",
+              "text": "I collect, structure, then check that the information is consistent and reusable."
+            },
+            {
+              "title": "Fewer incidents",
+              "text": "A clean inventory speeds up troubleshooting (which hardware, where, for whom) and helps track updates."
+            }
+          ],
+          "tags": [
+            "Inventory",
+            "Traceability",
+            "GLPI",
+            "On-site"
+          ]
+        },
+        "communication": {
+          "tab": "External communication",
+          "title": "Communicate to convince",
+          "intro": "How Cekoya communicates externally (image, acquisition, credibility), and how I apply the same logic to my own projects: content and services.",
+          "missionLabel": "External communication at Cekoya",
+          "mission": "Cekoya relies on several complementary channels: a showcase website, LinkedIn, Google presence and reviews, partnerships and trade shows. The goal: be visible, earn trust and create opportunities.",
+          "context": "Website (first impression), LinkedIn (professional image and network), Google (being found and recommended), partnerships (credibility on the ground), trade shows (visibility and trust).",
+          "objective": "Communication that holds up: the same message everywhere, backed by reputation.",
+          "role": "Analysing the communication channels, then applying the same logic to my projects: show, reassure, convert. My content is the proof.",
+          "actions": [
+            "Content: attract with proof by showing the level (pacing, transitions, sound design)",
+            "Trust: clear expectations, stated deadlines, precise feedback",
+            "Offer: what's included, how it works, what gets delivered",
+            "Website: reassure from the first impression",
+            "LinkedIn: build credibility and make contacts"
+          ],
+          "proofTitle": "What it shows",
+          "proofText": "I know how to sell with proof: content that reassures, a clear pitch and a simple offer. It's the same base as effective external communication in a company.",
+          "impacts": [
+            {
+              "title": "One consistent message",
+              "text": "The same pitch on the website, LinkedIn and Google; partners and client feedback back it up."
+            },
+            {
+              "title": "Applied to my projects",
+              "text": "Show, reassure, convert: my edits are direct proof of quality for Y-Services."
+            }
+          ],
+          "tags": [
+            "Website",
+            "LinkedIn",
+            "Google",
+            "Partnerships"
+          ]
+        }
+      }
+    },
+    "infra": {
+      "title": "Training network (BTS)",
+      "meta": "{count} nodes",
+      "intro": "The infrastructure built during the BTS: a VMware server hosting the IPFire firewall, the LAN servers and a WordPress site in a DMZ, behind the school network. Hover or select a node to see its role.",
+      "hint": "Hover or select a node to see its role and what it connects to.",
+      "related": "Connected to",
+      "ungrouped": "School network",
+      "groups": {
+        "vmware": "VMware server",
+        "dmz": "DMZ"
+      },
+      "nodes": {
+        "school": {
+          "label": "School LAN",
+          "sub": "DHCP",
+          "role": "The school network: internet access comes in here, with an address assigned by DHCP."
+        },
+        "router": {
+          "label": "Router",
+          "sub": "192.168.1.1/24",
+          "role": "Main router, gateway to the school network."
+        },
+        "vswRed": {
+          "label": "vSwitch Red",
+          "sub": "192.168.1.0/24",
+          "role": "VMware virtual switch on the WAN side, connected to IPFire's Red interface."
+        },
+        "ipfire": {
+          "label": "IPFire",
+          "sub": "firewall",
+          "role": "Firewall VM: NAT, filtering and gateway between Red and Green. Red interface on 192.168.1.14/24, Green on 192.168.2.10/24.",
+          "tags": [
+            "NAT",
+            "Filtering",
+            "Red",
+            "Green"
+          ]
+        },
+        "vswGreen": {
+          "label": "vSwitch Green",
+          "sub": "192.168.2.0/24",
+          "role": "VMware virtual switch on the LAN side (Green zone)."
+        },
+        "glpi": {
+          "label": "GLPI",
+          "sub": "192.168.2.15",
+          "role": "Asset management: inventory, tickets and hardware tracking.",
+          "tags": [
+            "GLPI",
+            "FusionInventory"
+          ]
+        },
+        "fog": {
+          "label": "FOG",
+          "sub": "192.168.2.156",
+          "role": "Linux server for image deployment and cloning."
+        },
+        "winsrv": {
+          "label": "Windows Server",
+          "sub": "192.168.2.254",
+          "role": "Domain controller: Active Directory, DHCP, DNS and GPO.",
+          "tags": [
+            "AD DS",
+            "DHCP",
+            "DNS",
+            "GPO"
+          ]
+        },
+        "wordpress": {
+          "label": "WordPress",
+          "sub": "192.168.2.13",
+          "role": "Web server isolated in the DMZ, hosting the WordPress site."
+        },
+        "switch": {
+          "label": "Switch",
+          "sub": "physical LAN",
+          "role": "Physical switch carrying the LAN to the Wi-Fi access point."
+        },
+        "wifi": {
+          "label": "Wi-Fi AP",
+          "sub": "192.168.2.250",
+          "role": "Cisco Wi-Fi access point: wireless access to the LAN."
+        }
+      }
+    },
+    "watch": {
+      "title": "Tech watch",
+      "topic": "How server virtualization evolved, from VMware to today",
+      "sections": {
+        "before": {
+          "title": "Before virtualization",
+          "text": "One physical server, one service. The result: machines running at 10-20% of capacity, high costs, little flexibility and critical failures."
+        },
+        "vmware": {
+          "title": "VMware arrives",
+          "text": "In the late 1990s, the hypervisor separates hardware from the operating system: one physical machine hosts several isolated servers.",
+          "benefits": [
+            "Isolated environments",
+            "Fewer physical servers",
+            "Fast deployment through cloning",
+            "Better security through separation"
+          ]
+        },
+        "today": {
+          "title": "VMware today",
+          "text": "ESXi, vSphere and vCenter are still enterprise standards.",
+          "features": [
+            "vMotion: move a VM with no downtime",
+            "Snapshots: roll back to a previous state quickly",
+            "vSAN: distributed storage without a physical SAN",
+            "HA: automatic VM restart after a failure",
+            "Tanzu: Kubernetes integration"
+          ]
+        },
+        "broadcom": {
+          "title": "Since the Broadcom acquisition",
+          "text": "Broadcom closed its acquisition of VMware in November 2023, then replaced perpetual licenses with bundled subscriptions and dropped the free ESXi in early 2024. Many companies and homelabs started looking at Proxmox VE and Hyper-V, which is also why I practice all three."
+        },
+        "why": {
+          "title": "Why it matters",
+          "points": [
+            "Lower costs: hardware, power, maintenance",
+            "Faster, more flexible deployment",
+            "Isolation for better security",
+            "Service continuity (HA, clusters)",
+            "Easier move to the cloud"
+          ]
+        }
+      },
+      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
     }
   },
   "home": {
