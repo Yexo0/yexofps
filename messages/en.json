@@ -38,6 +38,10 @@
     "now": {
       "title": "Right now",
       "description": "What I'm doing right now (work-study, Valorant, editing) and whether I can reply, based on my schedule in Paris time."
+    },
+    "labSite": {
+      "title": "This site",
+      "description": "How yexofps.org is hosted on my VPS: the path of a request, the server, the stack and live figures."
     }
   },
   "common": {
@@ -122,7 +126,8 @@
       "reviews": "Client reviews",
       "converter": "Sensitivity converter",
       "valoSettings": "Valorant settings",
-      "now": "Right now (/now)"
+      "now": "Right now (/now)",
+      "site": "How this site is hosted"
     },
     "actions": {
       "copyPro": "Copy work email",
@@ -854,7 +859,8 @@
       "title": "Lab",
       "meta": "since {year}",
       "text": "My training ground since 2022: a pfSense firewall, Cisco and MikroTik switches, an ESXi host and Zabbix watching over all of it, plus a Hyper-V lab for school. Whatever I learn in class or at work, I rebuild here before I call it learned.",
-      "technologies": "Technologies used"
+      "technologies": "Technologies used",
+      "siteLink": "How this site is hosted"
     },
     "stats": {
       "machines": "Machines",
@@ -1355,6 +1361,98 @@
       "cover": "{album} cover",
       "progress": "Track progress",
       "open": "Listen to {song} on Spotify"
+    }
+  },
+  "hosting": {
+    "title": "This site",
+    "meta": "live",
+    "back": "Lab",
+    "intro": "yexofps.org runs on my own Linux VPS, which I manage myself. The figures below are read live from the server.",
+    "unavailable": "unavailable",
+    "tiles": {
+      "rtt": "Response time",
+      "rttSub": "from your browser",
+      "system": "Server up for",
+      "app": "App up for",
+      "appSub": "since last restart",
+      "deploy": "Last deploy"
+    },
+    "duration": {
+      "d": "{d}d {h}h",
+      "h": "{h}h {m}m",
+      "m": "{m} min",
+      "lt": "under a minute"
+    },
+    "path": {
+      "title": "The path of a request",
+      "chain": "From the browser to the app",
+      "visitor": "Your browser",
+      "cloudflareSub": "CDN and protection",
+      "proxy": "Reverse proxy",
+      "proxySub": "HTTPS termination",
+      "vps": "VPS",
+      "branches": "What the app does",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker"
+      },
+      "items": {
+        "pages": {
+          "title": "Pages",
+          "sub": "generated at build time, in French and English"
+        },
+        "valorant": {
+          "title": "Valorant API",
+          "sub": "the tracker, via HenrikDev"
+        },
+        "presence": {
+          "title": "Status API",
+          "sub": "live Discord via Lanyard, 15 s cache"
+        },
+        "host": {
+          "title": "Server API",
+          "sub": "the figures on this page"
+        },
+        "images": {
+          "title": "Images",
+          "sub": "resized and served by the server"
+        }
+      }
+    },
+    "server": {
+      "title": "The server",
+      "unavailable": "Server figures are unavailable right now.",
+      "provider": "Host",
+      "os": "System",
+      "cpu": "CPUs",
+      "cpuValue": "{n} vCPU",
+      "memory": "Memory in use",
+      "memoryValue": "{used} / {total} GB",
+      "load": "Load (1 min)",
+      "node": "Node.js",
+      "manager": "Run by",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker",
+        "none": "not detected"
+      },
+      "certificate": "HTTPS certificate",
+      "certificateValue": "{issuer} · expires in {days} d"
+    },
+    "stack": {
+      "title": "The stack",
+      "framework": "Framework",
+      "language": "Language",
+      "styles": "Styles",
+      "i18n": "Translations",
+      "fonts": "Fonts",
+      "fontsValue": "Geist, served by the site",
+      "data": "Content",
+      "dataValue": "config files, no database",
+      "tracking": "Tracking",
+      "trackingValue": "no third-party analytics"
     }
   }
 }

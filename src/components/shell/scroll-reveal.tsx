@@ -1,13 +1,32 @@
 // src/components/shell/scroll-reveal.tsx — Fait apparaître les cartes quand elles entrent dans l'écran
 // (fondu + léger glissement, défini dans globals.css). Une seule fois par carte, y compris après
 // une navigation entre espaces. Sans effet si l'utilisateur préfère réduire les animations (CSS).
+// Après une navigation avec transition de page, les cartes du premier écran arrivent avec la
+// transition (data-instant) au lieu d'un second fondu.
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "@/i18n/navigation";
 
 export function ScrollReveal() {
   const pathname = usePathname();
+  const firstPath = useRef(pathname);
+
+  // Navigation avec transition de page : les cartes du premier écran sont affichées tout de suite
+  // (avant la capture de la transition), sinon la carte principale ne pourrait pas se transformer.
+  useLayoutEffect(() => {
+    if (pathname === firstPath.current && !document.documentElement.dataset.navDir) return;
+    const supported = "startViewTransition" in document && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!supported) return;
+    document.querySelectorAll<HTMLElement>(".card:not([data-in])").forEach((card) => {
+      // La page s'ouvre en haut : visible si son haut est dans la hauteur de l'écran
+      const top = card.getBoundingClientRect().top + window.scrollY;
+      if (top < window.innerHeight) {
+        card.setAttribute("data-in", "");
+        card.setAttribute("data-instant", "");
+      }
+    });
+  }, [pathname]);
 
   useEffect(() => {
     // Le script tourne : on désactive le filet de sécurité CSS (affichage forcé après 2,5 s)

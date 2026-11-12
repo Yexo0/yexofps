@@ -9,6 +9,7 @@ import { localizedPath } from "@/lib/metadata";
 const SUB_PAGES = [
   { href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 },
   { href: "/now", changeFrequency: "weekly" as const, priority: 0.5 },
+  { href: "/lab/site", changeFrequency: "monthly" as const, priority: 0.5 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

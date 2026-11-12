@@ -1,5 +1,6 @@
-// next.config.ts — Config Next.js : plugin next-intl, images distantes autorisées et redirections 301
-// des anciennes URLs.
+// next.config.ts — Config Next.js : plugin next-intl, infos de build, transitions de page,
+// images distantes autorisées et redirections 301 des anciennes URLs.
+import { execSync } from "node:child_process";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -16,7 +17,25 @@ const LEGACY: [from: string, to: string][] = [
   ["pro", "career"],
 ];
 
+/** Commit déployé (affiché sur /lab/site) : vide si le build n'est pas fait depuis un dépôt git */
+function gitCommit(): string {
+  try {
+    return execSync("git rev-parse --short HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
+  } catch {
+    return "";
+  }
+}
+
 const nextConfig: NextConfig = {
+  // Infos de build, figées au moment du "npm run build" (= date du déploiement)
+  env: {
+    BUILD_TIME: new Date().toISOString(),
+    BUILD_COMMIT: gitCommit(),
+  },
+  experimental: {
+    // Transitions entre pages (<ViewTransition> de React, voir components/shell/page-transition)
+    viewTransition: true,
+  },
   images: {
     // Statut Discord en direct (/now) : pochettes Spotify, avatar et décoration Discord.
     // Les images passent par le serveur du site : les visiteurs ne contactent ni Spotify ni Discord.

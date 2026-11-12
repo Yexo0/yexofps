@@ -17,6 +17,7 @@ import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
 import { Statusline } from "@/components/shell/statusline";
 import { ScrollReveal } from "@/components/shell/scroll-reveal";
 import { CardSpotlight } from "@/components/shell/card-spotlight";
+import { PageTransition } from "@/components/shell/page-transition";
 import "../globals.css";
 
 type Props = {
@@ -81,7 +82,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <Rail />
             <div className="shell">
               <main id="main" tabIndex={-1} className="frame flex flex-col outline-none">
-                {children}
+                <PageTransition>{children}</PageTransition>
                 <div className="mt-auto pt-3">
                   <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
                 </div>

@@ -49,7 +49,8 @@ export function Card({
       id={id}
       aria-labelledby={headingId}
       className={cn("card", className)}
-      style={{ "--i": index } as CSSProperties}
+      // Carte principale (h1) : se transforme en celle de la page suivante lors d'une navigation
+      style={{ "--i": index, viewTransitionName: headingLevel === 1 ? "lead-card" : undefined } as CSSProperties}
     >
       {hideHeader ? (
         <Heading id={headingId} className="sr-only">

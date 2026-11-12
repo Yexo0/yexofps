@@ -56,9 +56,9 @@ export function Statusline({ deployedAt, year }: { deployedAt: string; year: num
       </span>
       <NowStatusSegment />
       <span className="flex items-center px-3">{t("footer.copyright", { year, name: SITE.name, author: SITE.author })}</span>
-      <span className="hidden items-center bg-surface-3 px-3 text-fg sm:flex">
+      <Link href="/lab/site" className="hidden items-center bg-surface-3 px-3 text-fg transition-colors hover:text-accent sm:flex">
         {t("status.deployed", { date: deployedAt })}
-      </span>
+      </Link>
     </footer>
   );
 }

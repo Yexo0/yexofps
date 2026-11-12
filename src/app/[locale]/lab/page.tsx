@@ -2,13 +2,13 @@
 import type { Metadata } from "next";
 import { useFormatter, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Archive, Activity, Layers, KeyRound, Network, ScrollText, Server } from "lucide-react";
+import { Archive, Activity, ArrowRight, Globe, Layers, KeyRound, Network, ScrollText, Server } from "lucide-react";
 import { HOSTS, LAB_MAP, LAB_SINCE, TECHNOLOGIES, VLANS, labStats, vmsOf, type Host } from "@/config/lab";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { PageSections } from "@/components/shell/page-sections";
 import { Accordion } from "@/components/ui/accordion";
-import { Chip, StatTile } from "@/components/ui/primitives";
+import { ButtonLink, Chip, StatTile } from "@/components/ui/primitives";
 import { NetworkMap } from "@/components/network-map/network-map";
 import { MAP_ICONS } from "@/components/network-map/icons";
 
@@ -69,6 +69,11 @@ function Overview() {
               </li>
             ))}
           </ul>
+          <ButtonLink href="/lab/site" variant="tonal" size="sm" className="self-start">
+            <Globe size={14} aria-hidden="true" />
+            {t("overview.siteLink")}
+            <ArrowRight size={14} aria-hidden="true" />
+          </ButtonLink>
         </div>
       </div>
     </Card>

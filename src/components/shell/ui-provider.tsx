@@ -6,6 +6,7 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { SPACES } from "@/config/spaces";
+import { markNavigation } from "@/lib/nav-direction";
 
 interface UIContextValue {
   paletteOpen: boolean;
@@ -60,6 +61,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
         if (!space) return;
         e.preventDefault();
         setHelpOpen(false);
+        markNavigation(`/${locale}${space.href === "/" ? "" : space.href}`);
         router.push(space.href);
         return;
       }
@@ -72,7 +74,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [router]);
+  }, [router, locale]);
 
   const value = useMemo(
     () => ({ paletteOpen, setPaletteOpen, helpOpen, setHelpOpen, switchLocale, otherLocale }),

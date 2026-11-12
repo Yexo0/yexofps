@@ -28,6 +28,7 @@ Sans clé, le site fonctionne : le tracker affiche un état « indisponible » e
 | Homelab (machines, VM, VLAN, schéma) | `src/config/lab.ts` |
 | Parcours (frise, compétences, missions, tutos) | `src/config/career.ts` |
 | Emploi du temps de la page /now (statut en direct, dispo pour répondre) | `src/config/now.ts` (lien Spotify : `SPOTIFY_URL` dans `site.ts`) |
+| Page « Ce site » (/lab/site) : hébergeur et reverse proxy affichés | `HOSTING` dans `src/config/site.ts` (le reste est lu en direct sur le serveur) |
 | Statut Discord en direct sur /now | `DISCORD_USER_ID` dans `src/config/site.ts` (il faut avoir rejoint le serveur Discord de Lanyard), jeux reconnus : `PRESENCE_ACTIVITIES` dans `src/config/now.ts` |
 | Settings Valorant (tous les onglets, réticule, affichage) | `src/config/valorant-settings.ts` (sensi et DPI : `MY_SENS` dans `site.ts`) |
 | Tous les textes | `messages/fr.json`, `messages/en.json` |

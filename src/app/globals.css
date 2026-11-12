@@ -819,6 +819,121 @@
   }
 }
 
+/* Page /lab/site : liaison entre deux étapes du chemin d'une requête, avec un paquet qui circule
+   (vertical sur mobile, horizontal à partir de md) */
+.path-link {
+  position: relative;
+  align-self: center;
+  flex-shrink: 0;
+  width: 2px;
+  height: 24px;
+  margin: 6px 0;
+  list-style: none;
+}
+.path-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: var(--line-strong);
+}
+.path-packet {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--glow-strong);
+  opacity: 0;
+  animation: packet-down 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: calc(var(--pi, 0) * 0.3s);
+}
+@media (min-width: 768px) {
+  .path-link {
+    width: 40px;
+    height: 2px;
+    margin: 0 8px;
+  }
+  .path-packet {
+    top: 50%;
+    left: 0;
+    animation-name: packet-right;
+  }
+}
+@keyframes packet-down {
+  0% { top: 0; opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes packet-right {
+  0% { left: 0; opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* Carte arrivée avec la transition de page (ScrollReveal) : pas de second fondu */
+[data-js] .card[data-instant] {
+  transition: border-color 300ms ease;
+}
+
+/* ─── Transitions entre pages (View Transitions, déclenchées par PageTransition) ───
+   Le reste de l'interface (rail, barre d'état) ne bouge pas ; le contenu glisse dans le sens
+   de la navigation (html[data-nav-dir]) et la carte principale se transforme en la suivante. */
+html {
+  --vt-dir: 0;
+}
+html[data-nav-dir="forward"] {
+  --vt-dir: 1;
+}
+html[data-nav-dir="back"] {
+  --vt-dir: -1;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+::view-transition-old(page) {
+  animation: vt-page-out 240ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(page) {
+  animation: vt-page-in 520ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+::view-transition-group(lead-card) {
+  animation-duration: 560ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Contenus des deux cartes ancrés en haut à gauche, rognés au cadre (pas d'étirement) */
+::view-transition-image-pair(lead-card) {
+  overflow: clip;
+  border-radius: var(--radius-card);
+}
+::view-transition-old(lead-card),
+::view-transition-new(lead-card) {
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  animation-duration: 560ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes vt-page-out {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * -28px)) scale(0.99);
+    filter: blur(6px);
+  }
+}
+@keyframes vt-page-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * 28px)) scale(0.99);
+    filter: blur(6px);
+  }
+}
+
 @keyframes dialog-in {
   from {
     opacity: 0;
@@ -976,6 +1091,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
   [data-js] .card:not([data-in]),
   [data-js] .card .stagger > *,
   [data-js] .card .map-fade {

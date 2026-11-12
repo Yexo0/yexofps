@@ -3,7 +3,7 @@
 "use client";
 
 import { Fragment, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Dialog } from "radix-ui";
 import {
   ArrowRight,
@@ -27,6 +27,7 @@ import { DOCS } from "@/config/career";
 import { useTheme } from "@/hooks/use-theme";
 import { useCopy } from "@/hooks/use-copy";
 import { cn } from "@/lib/utils";
+import { markNavigation } from "@/lib/nav-direction";
 import { useUI } from "./ui-provider";
 
 type Group = "spaces" | "sections" | "actions" | "links" | "products" | "docs";
@@ -51,6 +52,7 @@ const SECTIONS = [
   { id: "docs", href: "/career#docs" },
   { id: "labMap", href: "/lab#map" },
   { id: "labMachines", href: "/lab#machines" },
+  { id: "site", href: "/lab/site", keywords: "hebergement hosting vps serveur server uptime infra site" },
   { id: "ranks", href: "/gaming#ranks" },
   { id: "tracker", href: "/gaming#tracker" },
   { id: "matches", href: "/gaming#matches" },
@@ -100,6 +102,7 @@ function PaletteContent({ close }: { close: () => void }) {
   const tProducts = useTranslations("creator.services.products");
   const tDocs = useTranslations("career.docs.items");
   const router = useRouter();
+  const locale = useLocale();
   const { theme, toggleTheme } = useTheme();
   const { setHelpOpen, switchLocale } = useUI();
   const { copy } = useCopy();
@@ -111,6 +114,7 @@ function PaletteContent({ close }: { close: () => void }) {
   const items = useMemo<Item[]>(() => {
     const go = (href: string) => () => {
       close();
+      markNavigation(`/${locale}${href === "/" ? "" : href}`);
       router.push(href);
     };
     const act = (fn: () => void) => () => {
@@ -204,7 +208,7 @@ function PaletteContent({ close }: { close: () => void }) {
         run: act(() => openExternal(d.file)),
       })),
     ];
-  }, [t, tNav, tProducts, tDocs, router, theme, toggleTheme, switchLocale, setHelpOpen, copy, close]);
+  }, [t, tNav, tProducts, tDocs, router, locale, theme, toggleTheme, switchLocale, setHelpOpen, copy, close]);
 
   const results = useMemo(() => {
     const terms = normalize(query).split(/\s+/).filter(Boolean);

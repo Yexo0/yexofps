@@ -38,6 +38,10 @@
     "now": {
       "title": "En ce moment",
       "description": "Ce que je fais en ce moment (alternance, Valorant, montage) et si je suis dispo pour répondre, d'après mon emploi du temps à l'heure de Paris."
+    },
+    "labSite": {
+      "title": "Ce site",
+      "description": "Comment yexofps.org est hébergé sur mon VPS : chemin d'une requête, serveur, pile technique et chiffres lus en direct."
     }
   },
   "common": {
@@ -122,7 +126,8 @@
       "reviews": "Avis clients",
       "converter": "Convertisseur de sensibilité",
       "valoSettings": "Settings Valorant",
-      "now": "En ce moment (/now)"
+      "now": "En ce moment (/now)",
+      "site": "Comment ce site est hébergé"
     },
     "actions": {
       "copyPro": "Copier l'email pro",
@@ -854,7 +859,8 @@
       "title": "Lab",
       "meta": "depuis {year}",
       "text": "Mon terrain d'entraînement depuis 2022 : un pare-feu pfSense, des switchs Cisco et MikroTik, un hôte ESXi et Zabbix pour surveiller le tout, plus un lab Hyper-V pour l'école. Ce que j'apprends en cours ou en alternance, je le remonte ici avant de le considérer comme acquis.",
-      "technologies": "Technologies utilisées"
+      "technologies": "Technologies utilisées",
+      "siteLink": "Comment ce site est hébergé"
     },
     "stats": {
       "machines": "Machines",
@@ -1355,6 +1361,98 @@
       "cover": "Pochette de {album}",
       "progress": "Avancement du morceau",
       "open": "Écouter {song} sur Spotify"
+    }
+  },
+  "hosting": {
+    "title": "Ce site",
+    "meta": "en direct",
+    "back": "Lab",
+    "intro": "yexofps.org tourne sur mon propre VPS Linux, que j'administre moi-même. Les chiffres ci-dessous sont lus en direct sur le serveur.",
+    "unavailable": "indisponible",
+    "tiles": {
+      "rtt": "Temps de réponse",
+      "rttSub": "depuis ton navigateur",
+      "system": "Serveur allumé depuis",
+      "app": "Appli en ligne depuis",
+      "appSub": "dernier redémarrage",
+      "deploy": "Dernier déploiement"
+    },
+    "duration": {
+      "d": "{d} j {h} h",
+      "h": "{h} h {m} min",
+      "m": "{m} min",
+      "lt": "moins d'1 min"
+    },
+    "path": {
+      "title": "Le chemin d'une requête",
+      "chain": "Du navigateur à l'appli",
+      "visitor": "Ton navigateur",
+      "cloudflareSub": "CDN et protection",
+      "proxy": "Reverse proxy",
+      "proxySub": "terminaison HTTPS",
+      "vps": "VPS",
+      "branches": "Ce que fait l'appli",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker"
+      },
+      "items": {
+        "pages": {
+          "title": "Pages",
+          "sub": "générées au build, en français et en anglais"
+        },
+        "valorant": {
+          "title": "API Valorant",
+          "sub": "le tracker, via HenrikDev"
+        },
+        "presence": {
+          "title": "API statut",
+          "sub": "Discord en direct via Lanyard, cache de 15 s"
+        },
+        "host": {
+          "title": "API serveur",
+          "sub": "les chiffres de cette page"
+        },
+        "images": {
+          "title": "Images",
+          "sub": "redimensionnées et servies par le serveur"
+        }
+      }
+    },
+    "server": {
+      "title": "Le serveur",
+      "unavailable": "Chiffres du serveur indisponibles pour le moment.",
+      "provider": "Hébergeur",
+      "os": "Système",
+      "cpu": "Processeurs",
+      "cpuValue": "{n} vCPU",
+      "memory": "Mémoire utilisée",
+      "memoryValue": "{used} / {total} Go",
+      "load": "Charge (1 min)",
+      "node": "Node.js",
+      "manager": "Lancé par",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker",
+        "none": "non détecté"
+      },
+      "certificate": "Certificat HTTPS",
+      "certificateValue": "{issuer} · expire dans {days} j"
+    },
+    "stack": {
+      "title": "La pile",
+      "framework": "Framework",
+      "language": "Langage",
+      "styles": "Styles",
+      "i18n": "Traductions",
+      "fonts": "Polices",
+      "fontsValue": "Geist, servie par le site",
+      "data": "Contenu",
+      "dataValue": "fichiers de config, pas de base de données",
+      "tracking": "Suivi",
+      "trackingValue": "aucun outil de statistiques tiers"
     }
   }
 }

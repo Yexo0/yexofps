@@ -16,7 +16,7 @@ Never mention the work-study employer, its name or its city anywhere (texts, tra
 - **Fonts:** Geist + Geist Mono (`geist` package, no network at build)
 - **UI primitives:** Radix (`radix-ui`: Dialog, Accordion, Tabs), Lucide icons, brand SVGs in `src/components/icons/brands.tsx`
 - **i18n:** next-intl, `/fr/...` and `/en/...` prefixes, default `fr`
-- **External APIs:** HenrikDev Valorant API via `/api/valorant`; Lanyard (live Discord presence) via `/api/presence`
+- **External APIs:** HenrikDev Valorant API via `/api/valorant`; Lanyard (live Discord presence) via `/api/presence`. Own live endpoint: `/api/host` (server figures, no hostname/IP)
 
 ## Commands
 
@@ -40,7 +40,7 @@ npm run lint       # ESLint (must pass with no warning)
 | 06 Tools | `/tools` | `tools/page.tsx` |
 | 07 Contact | `/contact` | `contact/page.tsx` |
 
-Also: `gaming/settings/page.tsx` (Valorant settings, laid out like the in-game menu), `now/page.tsx` (what I'm doing right now, attached to the Contact space via `aliases` in `spaces.ts`), `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
+Also: `gaming/settings/page.tsx` (Valorant settings, laid out like the in-game menu), `lab/site/page.tsx` (how this site is hosted: live server figures from `/api/host` via `src/lib/host.ts`, request path, stack; `HOSTING` in `site.ts` for what can't be detected), `now/page.tsx` (what I'm doing right now, attached to the Contact space via `aliases` in `spaces.ts`), `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
 
 Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`, with or without locale) are 301-redirected in `next.config.ts`.
 
@@ -62,6 +62,7 @@ All visible text lives in `messages/fr.json` and `messages/en.json` (same keys a
 - `ui/` — Card (base of everything: icon pill, title, mono subtitle, meta, "next space" link), primitives (StatTile, Chip, Tag, buttons, Skeleton), Accordion, CopyButton, NextSpace, Reticle (viewfinder corners), DotDigits (dot-matrix numbers)
 - `network-map/` — interactive SVG map (hover/click → role, neighbours, traceroute path), list view on mobile
 - `valorant/` — settings menu (tabs/sub-tabs synced with the URL hash, read-only controls), crosshair SVG drawn from the config, summary tiles (sens, eDPI, cm/360, crosshair code)
+- `hosting/` — /lab/site live tiles (response time measured in the browser, uptimes, last deploy from `BUILD_TIME`/`BUILD_COMMIT` set in `next.config.ts`), request path diagram, server specs
 - `now/` — current activity card (schedule or live Discord), Spotify now playing, typical week (timeline + list), Contact banner and statusline segment
 - `gaming/`, `home/`, `career/`, `creator/`, `tools/` — space-specific pieces
 
@@ -78,7 +79,7 @@ Yaw: CS2 `0.022`, Valorant `0.07`, Apex `0.022`, OW2 `0.0066`. `cm360 = (360 × 
 
 ## Design rules
 
-Dark neutral background with a static topographic texture, an airy home page (hero, featured edit player, short fastfetch, gaming summary), bento grid of 20px-radius cards inside a thin rounded frame, single pastel accent (game color stripes on rank tiles are the only exception). No neon, flashy gradients, video, particles, emojis in the UI, blinking text or "hacker" clichés. Soft accent glow (`--glow*` tokens) is reserved for wayfinding only: primary action, current location (rail indicator, active section chip), live state, hovered card (border spotlight), traceroute path. Animations: soft Apple-like motion (scroll reveal via `ScrollReveal`, card content cascading in with `.stagger`, network links drawing in, edit timeline unrolling, dot-matrix digits lighting up, sliding rail indicator, blur-in hero title, smooth accordion/dialog/tab transitions, press feedback), all disabled with `prefers-reduced-motion`. Long spaces (career, lab, gaming, creator) have a sticky "on this page" `SectionNav` with scrollspy and reading progress.
+Dark neutral background with a static topographic texture, an airy home page (hero, featured edit player, short fastfetch, gaming summary), bento grid of 20px-radius cards inside a thin rounded frame, single pastel accent (game color stripes on rank tiles are the only exception). No neon, flashy gradients, video, particles, emojis in the UI, blinking text or "hacker" clichés. Soft accent glow (`--glow*` tokens) is reserved for wayfinding only: primary action, current location (rail indicator, active section chip), live state, hovered card (border spotlight), traceroute path. Animations: soft Apple-like motion (scroll reveal via `ScrollReveal`, card content cascading in with `.stagger`, network links drawing in, edit timeline unrolling, dot-matrix digits lighting up, sliding rail indicator, page transitions (React `<ViewTransition>` in `shell/page-transition.tsx`: content slides in the navigation direction from `html[data-nav-dir]`, the h1 card morphs as `lead-card`), blur-in hero title, smooth accordion/dialog/tab transitions, press feedback), all disabled with `prefers-reduced-motion`. Long spaces (career, lab, gaming, creator) have a sticky "on this page" `SectionNav` with scrollspy and reading progress.
 
 Tone: don't overplay ranks. Radiant (peak, a few months in 2024, now Immortal 3) appears only alongside the other ranks; the creator side is "monteur vidéo (Valorant)". Contrast AA in both themes.
 
