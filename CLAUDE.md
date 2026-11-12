@@ -40,7 +40,7 @@ npm run lint       # ESLint (must pass with no warning)
 | 06 Tools | `/tools` | `tools/page.tsx` |
 | 07 Contact | `/contact` | `contact/page.tsx` |
 
-Also: `gaming/settings/page.tsx` (Valorant settings, laid out like the in-game menu), `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
+Also: `gaming/settings/page.tsx` (Valorant settings, laid out like the in-game menu), `now/page.tsx` (what I'm doing right now, attached to the Contact space via `aliases` in `spaces.ts`), `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
 
 Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`, with or without locale) are 301-redirected in `next.config.ts`.
 
@@ -48,10 +48,11 @@ Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`
 
 - `theme.ts` — accent seed color (change it to re-theme the whole site)
 - `site.ts` — every URL (socials, emails, affiliate links, Payhip, TikTok videos), age (`PROFILE`), featured edit (`FEATURED_EDIT`: TikTok embed on click, or a local `video` file with a custom player), tracker account, Valorant peak, ranks, setup, products (`exampleUrl` / `previewUrl` buttons only show when set), reviews
-- `spaces.ts` — the 7 spaces (order = number = keyboard shortcut)
+- `spaces.ts` — the 7 spaces (order = number = keyboard shortcut); `aliases` attach extra pages to a space
 - `lab.ts` — the whole homelab (VLANs, hosts, VMs, map). Invented items carry `placeholder: true` + a comment
 - `career.ts` — timeline, skills, missions, PDF guides, BTS network map
 - `valorant-settings.ts` — every in-game Valorant setting read from screenshots (tabs → sub-tabs → sections → rows), crosshair (preview + profile code), display. Sens/DPI come from `MY_SENS` in `site.ts`
+- `now.ts` — weekly schedule (weekday / Saturday / Sunday, from wake-up to next wake-up) and availability per activity. The /now status, the Contact banner and the statusline segment are computed client-side in Europe/Paris time (`src/lib/now.ts`, `useNow`): no manual update. `SPOTIFY_URL` in `site.ts` shows the Spotify button during the music slot when set
 
 All visible text lives in `messages/fr.json` and `messages/en.json` (same keys as the config ids). Card subtitles are shell commands and stay literal, as do the Valorant setting labels (copied from the English game client).
 
@@ -61,6 +62,7 @@ All visible text lives in `messages/fr.json` and `messages/en.json` (same keys a
 - `ui/` — Card (base of everything: icon pill, title, mono subtitle, meta, "next space" link), primitives (StatTile, Chip, Tag, buttons, Skeleton), Accordion, CopyButton, NextSpace, Reticle (viewfinder corners), DotDigits (dot-matrix numbers)
 - `network-map/` — interactive SVG map (hover/click → role, neighbours, traceroute path), list view on mobile
 - `valorant/` — settings menu (tabs/sub-tabs synced with the URL hash, read-only controls), crosshair SVG drawn from the config, summary tiles (sens, eDPI, cm/360, crosshair code)
+- `now/` — current activity card, typical week (timeline + list), Contact banner and statusline segment
 - `gaming/`, `home/`, `career/`, `creator/`, `tools/` — space-specific pieces
 
 ### Tracker data flow

@@ -8,6 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { CopyButton } from "@/components/ui/copy-button";
 import { buttonClass } from "@/components/ui/primitives";
+import { NowBanner } from "@/components/now/now-chip";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -58,6 +59,7 @@ function ContactFile() {
       bodyClassName="gap-4"
     >
       <p className="max-w-[70ch] text-[15px] leading-relaxed text-muted">{t("intro")}</p>
+      <NowBanner />
       <div className="terminal px-3 py-3 sm:px-4 sm:py-4">
         <p className="px-2 pb-2">
           <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}

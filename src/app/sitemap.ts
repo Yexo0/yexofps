@@ -6,7 +6,10 @@ import { SITE } from "@/config/site";
 import { localizedPath } from "@/lib/metadata";
 
 /** Pages rattachées à un espace, en plus des 7 espaces */
-const SUB_PAGES = [{ href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 }];
+const SUB_PAGES = [
+  { href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 },
+  { href: "/now", changeFrequency: "weekly" as const, priority: 0.5 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

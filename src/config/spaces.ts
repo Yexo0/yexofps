@@ -19,6 +19,8 @@ export interface Space {
   icon: LucideIcon;
   /** Affiché dans la barre mobile principale (les autres passent dans "Plus"). */
   mobile: boolean;
+  /** Autres pages rattachées à cet espace (rail et barre d'état les montrent dans l'espace) */
+  aliases?: readonly string[];
 }
 
 export const SPACES: readonly Space[] = [
@@ -28,7 +30,7 @@ export const SPACES: readonly Space[] = [
   { id: "gaming", href: "/gaming", icon: Gamepad2, mobile: true },
   { id: "creator", href: "/creator", icon: Clapperboard, mobile: true },
   { id: "tools", href: "/tools", icon: SlidersHorizontal, mobile: false },
-  { id: "contact", href: "/contact", icon: Mail, mobile: false },
+  { id: "contact", href: "/contact", icon: Mail, mobile: false, aliases: ["/now"] },
 ];
 
 export function spaceIndex(id: SpaceId): number {
@@ -47,8 +49,8 @@ export function nextSpace(id: SpaceId): Space {
 
 /** Retrouve l'espace actif à partir du chemin (sans préfixe de langue). */
 export function spaceFromPath(pathname: string): Space {
-  const match = SPACES.filter((s) => s.href !== "/").find(
-    (s) => pathname === s.href || pathname.startsWith(`${s.href}/`),
+  const match = SPACES.filter((s) => s.href !== "/").find((s) =>
+    [s.href, ...(s.aliases ?? [])].some((href) => pathname === href || pathname.startsWith(`${href}/`)),
   );
   return match ?? SPACES[0];
 }

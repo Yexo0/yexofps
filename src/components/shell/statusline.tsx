@@ -1,5 +1,6 @@
 // src/components/shell/statusline.tsx — Barre d'état façon tmux en bas du cadre (remplace le footer).
-// Gauche : session + liste des "fenêtres" (les espaces, cliquables). Droite : langue, thème, copyright, date de déploiement.
+// Gauche : session + liste des "fenêtres" (les espaces, cliquables).
+// Droite : langue, thème, activité en cours (lien /now), copyright, date de déploiement.
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
@@ -8,6 +9,7 @@ import { SPACES, spaceFromPath } from "@/config/spaces";
 import { SITE } from "@/config/site";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
+import { NowStatusSegment } from "@/components/now/now-chip";
 
 export function Statusline({ deployedAt, year }: { deployedAt: string; year: number }) {
   const t = useTranslations("common");
@@ -48,9 +50,11 @@ export function Statusline({ deployedAt, year }: { deployedAt: string; year: num
         <span className="text-accent">*</span>
       </span>
 
-      <span className="ml-auto hidden items-center px-3 lg:flex">
+      <span aria-hidden="true" className="ml-auto" />
+      <span className="hidden items-center px-3 2xl:flex">
         {locale} · {t(`status.theme.${theme}`)} · <kbd className="ml-1 text-fg">Ctrl+K</kbd>
       </span>
+      <NowStatusSegment />
       <span className="flex items-center px-3">{t("footer.copyright", { year, name: SITE.name, author: SITE.author })}</span>
       <span className="hidden items-center bg-surface-3 px-3 text-fg sm:flex">
         {t("status.deployed", { date: deployedAt })}

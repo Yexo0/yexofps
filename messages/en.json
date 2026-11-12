@@ -34,6 +34,10 @@
     "valoSettings": {
       "title": "Valorant settings",
       "description": "All my Valorant settings: {sens} sensitivity at {dpi} DPI, crosshair code, keybinds, video, audio."
+    },
+    "now": {
+      "title": "Right now",
+      "description": "What I'm doing right now (work-study, Valorant, editing) and whether I can reply, based on my schedule in Paris time."
     }
   },
   "common": {
@@ -117,7 +121,8 @@
       "services": "Y-Services",
       "reviews": "Client reviews",
       "converter": "Sensitivity converter",
-      "valoSettings": "Valorant settings"
+      "valoSettings": "Valorant settings",
+      "now": "Right now (/now)"
     },
     "actions": {
       "copyPro": "Copy work email",
@@ -1252,6 +1257,81 @@
       "title": "Valorant settings",
       "text": "Sens, crosshair, keybinds, video, audio: my whole setup.",
       "open": "Open my settings"
+    }
+  },
+  "now": {
+    "title": "Right now",
+    "meta": "Paris time",
+    "loading": "Working out my status…",
+    "parisTime": "It's {time} in Paris",
+    "progressLabel": "Time slot progress",
+    "remaining": "{duration} left",
+    "next": "Next: {activity} at {time}",
+    "activities": {
+      "music": {
+        "title": "Music",
+        "text": "Some music before the day starts."
+      },
+      "work": {
+        "title": "At work or in class",
+        "text": "Work-study day, at the company or at school."
+      },
+      "valorant": {
+        "title": "Playing Valorant",
+        "text": "In a match or between two."
+      },
+      "editing": {
+        "title": "Editing",
+        "text": "Working on a Valorant video edit."
+      },
+      "grass": {
+        "title": "Outside, touching grass",
+        "text": "Away from the screen, for once."
+      },
+      "offline": {
+        "title": "Offline",
+        "text": "Asleep."
+      }
+    },
+    "short": {
+      "music": "music",
+      "work": "work",
+      "valorant": "valorant",
+      "editing": "editing",
+      "grass": "outside",
+      "offline": "offline"
+    },
+    "availability": {
+      "open": "Available to reply",
+      "slow": "Slower to reply",
+      "mail": "Unlikely to reply, except by email",
+      "asleep": "I'll reply when I wake up"
+    },
+    "actions": {
+      "mail": "Send an email",
+      "mailLabel": "the work email",
+      "discord": "Discord",
+      "spotify": "Listen on Spotify",
+      "valorant": "My latest matches",
+      "editing": "My edits",
+      "work": "My background"
+    },
+    "week": {
+      "title": "My typical week",
+      "tabs": "Day type",
+      "weekday": "Mon – Fri",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "now": "now"
+    },
+    "chip": {
+      "label": "Right now",
+      "aria": "Right now: {activity}"
+    },
+    "duration": {
+      "m": "{m} min",
+      "h": "{h}h",
+      "hm": "{h}h {m}min"
     }
   }
 }

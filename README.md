@@ -27,6 +27,7 @@ Sans clé, le site fonctionne : le tracker affiche un état « indisponible » e
 | Liens, emails, partenaires, produits, rangs, setup, compte du tracker | `src/config/site.ts` |
 | Homelab (machines, VM, VLAN, schéma) | `src/config/lab.ts` |
 | Parcours (frise, compétences, missions, tutos) | `src/config/career.ts` |
+| Emploi du temps de la page /now (statut en direct, dispo pour répondre) | `src/config/now.ts` (lien Spotify : `SPOTIFY_URL` dans `site.ts`) |
 | Settings Valorant (tous les onglets, réticule, affichage) | `src/config/valorant-settings.ts` (sensi et DPI : `MY_SENS` dans `site.ts`) |
 | Tous les textes | `messages/fr.json`, `messages/en.json` |
 

@@ -61,6 +61,7 @@ const SECTIONS = [
   { id: "services", href: "/creator#services" },
   { id: "reviews", href: "/creator#reviews" },
   { id: "converter", href: "/tools#converter" },
+  { id: "now", href: "/now", keywords: "now maintenant dispo disponible available statut status planning" },
 ] as const;
 
 const LINKS = [

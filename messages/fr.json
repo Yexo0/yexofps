@@ -34,6 +34,10 @@
     "valoSettings": {
       "title": "Settings Valorant",
       "description": "Tous mes réglages Valorant : sensibilité {sens} à {dpi} DPI, code du réticule, touches, vidéo, audio."
+    },
+    "now": {
+      "title": "En ce moment",
+      "description": "Ce que je fais en ce moment (alternance, Valorant, montage) et si je suis dispo pour répondre, d'après mon emploi du temps à l'heure de Paris."
     }
   },
   "common": {
@@ -117,7 +121,8 @@
       "services": "Y-Services",
       "reviews": "Avis clients",
       "converter": "Convertisseur de sensibilité",
-      "valoSettings": "Settings Valorant"
+      "valoSettings": "Settings Valorant",
+      "now": "En ce moment (/now)"
     },
     "actions": {
       "copyPro": "Copier l'email pro",
@@ -1252,6 +1257,81 @@
       "title": "Settings Valorant",
       "text": "Sensi, réticule, touches, vidéo, audio : toute ma config.",
       "open": "Ouvrir mes settings"
+    }
+  },
+  "now": {
+    "title": "En ce moment",
+    "meta": "heure de Paris",
+    "loading": "Calcul du statut…",
+    "parisTime": "Il est {time} à Paris",
+    "progressLabel": "Avancement du créneau",
+    "remaining": "encore {duration}",
+    "next": "Ensuite : {activity} à {time}",
+    "activities": {
+      "music": {
+        "title": "Musique",
+        "text": "Un peu de musique avant la journée."
+      },
+      "work": {
+        "title": "En alternance ou en cours",
+        "text": "Journée en entreprise ou à l'école."
+      },
+      "valorant": {
+        "title": "Sur Valorant",
+        "text": "En partie ou entre deux parties."
+      },
+      "editing": {
+        "title": "En montage",
+        "text": "Sur un montage vidéo Valorant."
+      },
+      "grass": {
+        "title": "Dehors, en train de toucher de l'herbe",
+        "text": "Loin de l'écran, pour une fois."
+      },
+      "offline": {
+        "title": "Hors ligne",
+        "text": "Je dors."
+      }
+    },
+    "short": {
+      "music": "musique",
+      "work": "alternance",
+      "valorant": "valorant",
+      "editing": "montage",
+      "grass": "dehors",
+      "offline": "hors ligne"
+    },
+    "availability": {
+      "open": "Dispo pour répondre",
+      "slow": "Réponse plus lente",
+      "mail": "Peu de chances que je réponde, sauf par mail",
+      "asleep": "Réponse à mon réveil"
+    },
+    "actions": {
+      "mail": "Écrire un mail",
+      "mailLabel": "l'email pro",
+      "discord": "Discord",
+      "spotify": "Écouter sur Spotify",
+      "valorant": "Mes dernières parties",
+      "editing": "Mes montages",
+      "work": "Mon parcours"
+    },
+    "week": {
+      "title": "Ma semaine type",
+      "tabs": "Type de jour",
+      "weekday": "Lun – Ven",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "now": "maintenant"
+    },
+    "chip": {
+      "label": "En ce moment",
+      "aria": "En ce moment : {activity}"
+    },
+    "duration": {
+      "m": "{m} min",
+      "h": "{h} h",
+      "hm": "{h} h {m} min"
     }
   }
 }

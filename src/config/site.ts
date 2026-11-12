@@ -28,6 +28,9 @@ export const SOCIALS = {
 
 export type SocialId = keyof typeof SOCIALS;
 
+/** Spotify, affiché sur /now pendant le créneau musique. Laisser undefined masque le bouton. */
+export const SPOTIFY_URL: string | undefined = undefined;
+
 export const EMAILS = {
   pro: "baptiste.dauvergne38@gmail.com",
   business: "yexobusiness@gmail.com",
