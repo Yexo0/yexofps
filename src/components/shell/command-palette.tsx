@@ -54,6 +54,7 @@ const SECTIONS = [
   { id: "ranks", href: "/gaming#ranks" },
   { id: "tracker", href: "/gaming#tracker" },
   { id: "matches", href: "/gaming#matches" },
+  { id: "valoSettings", href: "/gaming/settings", keywords: "crosshair reticule sensi sensitivity binds touches config" },
   { id: "setup", href: "/gaming#setup" },
   { id: "edits", href: "/creator#edits" },
   { id: "partners", href: "/creator#partners" },
@@ -131,6 +132,7 @@ function PaletteContent({ close }: { close: () => void }) {
         label: t(`sections.${s.id}`),
         hint: tNav(`spaces.${spaceFromPath(s.href.split("#")[0]).id}`),
         icon: <Hash size={16} />,
+        keywords: "keywords" in s ? s.keywords : undefined,
         run: go(s.href),
       })),
       {

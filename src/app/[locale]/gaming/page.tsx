@@ -3,15 +3,17 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Gamepad2, Keyboard } from "lucide-react";
+import { ArrowRight, Gamepad2, Keyboard, Settings2 } from "lucide-react";
 import { PARTNERS, RANKS, SETUP } from "@/config/site";
+import { settingsCount } from "@/config/valorant-settings";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { PageSections } from "@/components/shell/page-sections";
 import { CopyButton } from "@/components/ui/copy-button";
-import { ExternalButton } from "@/components/ui/primitives";
+import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { RankGrid } from "@/components/gaming/rank-grid";
 import { TrackerSection } from "@/components/gaming/tracker-section";
+import { CrosshairTile, SensTiles } from "@/components/valorant/summary";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -30,6 +32,7 @@ export default async function GamingPage({ params }: Props) {
       <div className="bento">
         <Ranks />
         <TrackerSection />
+        <ValorantSettings />
         <Setup />
       </div>
     </>
@@ -56,6 +59,33 @@ function Ranks() {
   );
 }
 
+function ValorantSettings() {
+  const t = useTranslations("valoSettings");
+  return (
+    <Card
+      id="settings"
+      icon={Settings2}
+      title={t("teaser.title")}
+      subtitle="cat ~/valorant/settings.ini"
+      meta={t("summary.meta", { count: settingsCount() })}
+      index={3}
+      className="md:col-span-6 lg:col-span-12"
+    >
+      <div className="grid items-center gap-4 lg:grid-cols-12 lg:gap-6">
+        <div className="flex flex-col items-start gap-3 lg:col-span-4">
+          <p className="max-w-[46ch] text-sm leading-relaxed text-muted">{t("teaser.text")}</p>
+          <ButtonLink href="/gaming/settings" variant="primary" size="sm">
+            {t("teaser.open")}
+            <ArrowRight size={14} aria-hidden="true" />
+          </ButtonLink>
+        </div>
+        <SensTiles className="lg:col-span-5" />
+        <CrosshairTile compact className="lg:col-span-3" />
+      </div>
+    </Card>
+  );
+}
+
 function Setup() {
   const t = useTranslations("gaming.setup");
   return (
@@ -66,7 +96,7 @@ function Setup() {
       subtitle="ls ~/setup"
       meta={t("meta", { count: SETUP.length })}
       next="creator"
-      index={3}
+      index={4}
       className="md:col-span-6 lg:col-span-12"
     >
       <ul className="stagger grid gap-2.5 sm:grid-cols-3">

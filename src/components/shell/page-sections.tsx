@@ -8,7 +8,7 @@ type Page = "career" | "lab" | "gaming" | "creator";
 const SECTIONS: Record<Page, string[]> = {
   career: ["intro", "timeline", "skills", "missions", "infra", "watch", "docs"],
   lab: ["overview", "map", "vlans", "resources", "machines"],
-  gaming: ["ranks", "tracker", "matches", "setup"],
+  gaming: ["ranks", "tracker", "matches", "settings", "setup"],
   creator: ["bio", "partners", "history", "edits", "reviews", "services", "order"],
 };
 

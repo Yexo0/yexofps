@@ -116,9 +116,9 @@ export function Converter() {
   const format = useFormatter();
   const [from, setFrom] = useState<GameKey>("valo");
   const [to, setTo] = useState<GameKey>("apex");
-  const [fromSens, setFromSens] = useState("0.35");
-  const [fromDpi, setFromDpi] = useState("800");
-  const [toDpi, setToDpi] = useState("800");
+  const [fromSens, setFromSens] = useState<string>(MY_SENS.sens);
+  const [fromDpi, setFromDpi] = useState<string>(MY_SENS.dpi);
+  const [toDpi, setToDpi] = useState<string>(MY_SENS.dpi);
   const [sameDpi, setSameDpi] = useState(true);
 
   const result = useMemo(
@@ -162,14 +162,14 @@ export function Converter() {
               value={fromSens}
               onChange={setFromSens}
               invalid={!result.ok && result.error === "invalidSens"}
-              placeholder="0.35"
+              placeholder={MY_SENS.sens}
             />
             <Field
               label={t("dpi")}
               value={fromDpi}
               onChange={setFromDpi}
               invalid={!result.ok && result.error === "invalidDpi"}
-              placeholder="800"
+              placeholder={MY_SENS.dpi}
             />
           </div>
         </div>
@@ -190,7 +190,7 @@ export function Converter() {
               onChange={setToDpi}
               disabled={sameDpi}
               invalid={!result.ok && result.error === "invalidTargetDpi"}
-              placeholder="800"
+              placeholder={MY_SENS.dpi}
             />
             <button
               type="button"

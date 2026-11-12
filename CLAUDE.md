@@ -40,7 +40,7 @@ npm run lint       # ESLint (must pass with no warning)
 | 06 Tools | `/tools` | `tools/page.tsx` |
 | 07 Contact | `/contact` | `contact/page.tsx` |
 
-Also: `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
+Also: `gaming/settings/page.tsx` (Valorant settings, laid out like the in-game menu), `opengraph-image.tsx` (per locale), `not-found.tsx`, `[...rest]` (localized 404), `src/app/icon.tsx`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`, `api/valorant/route.ts`.
 
 Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`, with or without locale) are 301-redirected in `next.config.ts`.
 
@@ -51,14 +51,16 @@ Old URLs (`/profil`, `/ranks`, `/shop`, `/tracker`, `/convert`, `/liens`, `/pro`
 - `spaces.ts` — the 7 spaces (order = number = keyboard shortcut)
 - `lab.ts` — the whole homelab (VLANs, hosts, VMs, map). Invented items carry `placeholder: true` + a comment
 - `career.ts` — timeline, skills, missions, PDF guides, BTS network map
+- `valorant-settings.ts` — every in-game Valorant setting read from screenshots (tabs → sub-tabs → sections → rows), crosshair (preview + profile code), display. Sens/DPI come from `MY_SENS` in `site.ts`
 
-All visible text lives in `messages/fr.json` and `messages/en.json` (same keys as the config ids). Card subtitles are shell commands and stay literal.
+All visible text lives in `messages/fr.json` and `messages/en.json` (same keys as the config ids). Card subtitles are shell commands and stay literal, as do the Valorant setting labels (copied from the English game client).
 
 ### Components (`src/components/`)
 
 - `shell/` — Rail (desktop, sliding active indicator) + bottom bar (mobile), UIProvider (shortcuts 1–7, Ctrl/⌘+K, ?), CommandPalette, ShortcutsDialog, Statusline (tmux-style footer), SectionNav/PageSections (sticky in-page nav), ScrollReveal, CardSpotlight (hover border light), Logo
 - `ui/` — Card (base of everything: icon pill, title, mono subtitle, meta, "next space" link), primitives (StatTile, Chip, Tag, buttons, Skeleton), Accordion, CopyButton, NextSpace, Reticle (viewfinder corners), DotDigits (dot-matrix numbers)
 - `network-map/` — interactive SVG map (hover/click → role, neighbours, traceroute path), list view on mobile
+- `valorant/` — settings menu (tabs/sub-tabs synced with the URL hash, read-only controls), crosshair SVG drawn from the config, summary tiles (sens, eDPI, cm/360, crosshair code)
 - `gaming/`, `home/`, `career/`, `creator/`, `tools/` — space-specific pieces
 
 ### Tracker data flow

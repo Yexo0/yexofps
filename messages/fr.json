@@ -30,6 +30,10 @@
     },
     "notFound": {
       "title": "Page introuvable"
+    },
+    "valoSettings": {
+      "title": "Settings Valorant",
+      "description": "Tous mes réglages Valorant, rangés comme dans le menu du jeu : sensibilité {sens} à {dpi} DPI, code du réticule, touches, vidéo, audio."
     }
   },
   "common": {
@@ -112,7 +116,8 @@
       "partners": "Partenaires et codes promo",
       "services": "Y-Services",
       "reviews": "Avis clients",
-      "converter": "Convertisseur de sensibilité"
+      "converter": "Convertisseur de sensibilité",
+      "valoSettings": "Settings Valorant"
     },
     "actions": {
       "copyPro": "Copier l'email pro",
@@ -1196,6 +1201,7 @@
       "ranks": "Rangs",
       "tracker": "Tracker",
       "matches": "Parties",
+      "settings": "Settings",
       "setup": "Setup"
     },
     "creator": {
@@ -1206,6 +1212,48 @@
       "reviews": "Avis",
       "services": "Y-Services",
       "order": "Commander"
+    }
+  },
+  "valoSettings": {
+    "summary": {
+      "title": "Settings Valorant",
+      "meta": "{count} réglages",
+      "back": "Gaming",
+      "tagline": "Ma config complète, comme dans le menu du jeu.",
+      "intro": "Tous mes réglages, onglet par onglet, dans le même ordre qu'en jeu. Les libellés sont ceux de mon client (en anglais) et les valeurs ont été relevées directement dans le jeu.",
+      "captured": "Relevé en jeu le {date}",
+      "sens": "Sensibilité",
+      "dpi": "DPI",
+      "edpi": "eDPI",
+      "cm360": "cm / 360°",
+      "display": "Affichage",
+      "crosshair": "Réticule",
+      "convert": "Convertir ma sensi vers un autre jeu"
+    },
+    "menu": {
+      "title": "Menu des paramètres",
+      "tabs": "Onglets des paramètres",
+      "subTabs": "Sous-onglets de {tab}",
+      "unbound": "non assignée",
+      "modified": "modifiée",
+      "muted": "coupé",
+      "approx": "environ {pct} %"
+    },
+    "crosshair": {
+      "description": "Aperçu du réticule : branches de {length} px, épaisseur {thickness} px, écart {offset} px, couleur {color}, sans contour ni point central.",
+      "codeLabel": "le code du réticule",
+      "zoom": "Zoom ×{zoom}",
+      "backgrounds": {
+        "stone": "Fond : mur clair",
+        "sky": "Fond : ciel",
+        "foliage": "Fond : végétation",
+        "dark": "Fond : sombre"
+      }
+    },
+    "teaser": {
+      "title": "Settings Valorant",
+      "text": "Sensi, réticule, touches, vidéo, audio : toute ma config, rangée onglet par onglet comme dans le menu du jeu.",
+      "open": "Ouvrir mes settings"
     }
   }
 }

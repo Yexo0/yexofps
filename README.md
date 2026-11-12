@@ -1,6 +1,6 @@
 # yexofps.org
 
-Site perso de Baptiste Dauvergne (Yexo) : parcours en administration systèmes et réseaux, homelab, rangs et tracker Valorant, edits et Y-Services, convertisseur de sensibilité.
+Site perso de Baptiste Dauvergne (Yexo) : parcours en administration systèmes et réseaux, homelab, rangs, tracker et settings Valorant, edits et Y-Services, convertisseur de sensibilité.
 
 Next.js 16 · TypeScript · Tailwind CSS v4 · next-intl (FR / EN) · auto-hébergé sur un VPS Ubuntu.
 
@@ -27,6 +27,7 @@ Sans clé, le site fonctionne : le tracker affiche un état « indisponible » e
 | Liens, emails, partenaires, produits, rangs, setup, compte du tracker | `src/config/site.ts` |
 | Homelab (machines, VM, VLAN, schéma) | `src/config/lab.ts` |
 | Parcours (frise, compétences, missions, tutos) | `src/config/career.ts` |
+| Settings Valorant (tous les onglets, réticule, affichage) | `src/config/valorant-settings.ts` (sensi et DPI : `MY_SENS` dans `site.ts`) |
 | Tous les textes | `messages/fr.json`, `messages/en.json` |
 
 Dans `src/config/lab.ts`, chaque élément inventé porte `placeholder: true` et un commentaire `PLACEHOLDER` : remplace-le par tes vraies infos.

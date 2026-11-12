@@ -193,4 +193,4 @@ export const REVIEWS = [
 
 /* ─── Sensibilité perso (bouton "ma config" du convertisseur) ── */
 
-export const MY_SENS = { game: "valo", sens: "0.35", dpi: "800" } as const;
+export const MY_SENS = { game: "valo", sens: "0.19", dpi: "1600" } as const;

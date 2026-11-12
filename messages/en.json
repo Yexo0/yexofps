@@ -30,6 +30,10 @@
     },
     "notFound": {
       "title": "Page not found"
+    },
+    "valoSettings": {
+      "title": "Valorant settings",
+      "description": "All my Valorant settings, laid out like the in-game menu: {sens} sensitivity at {dpi} DPI, crosshair code, keybinds, video, audio."
     }
   },
   "common": {
@@ -112,7 +116,8 @@
       "partners": "Partners and promo codes",
       "services": "Y-Services",
       "reviews": "Client reviews",
-      "converter": "Sensitivity converter"
+      "converter": "Sensitivity converter",
+      "valoSettings": "Valorant settings"
     },
     "actions": {
       "copyPro": "Copy work email",
@@ -1196,6 +1201,7 @@
       "ranks": "Ranks",
       "tracker": "Tracker",
       "matches": "Matches",
+      "settings": "Settings",
       "setup": "Setup"
     },
     "creator": {
@@ -1206,6 +1212,48 @@
       "reviews": "Reviews",
       "services": "Y-Services",
       "order": "Order"
+    }
+  },
+  "valoSettings": {
+    "summary": {
+      "title": "Valorant settings",
+      "meta": "{count} settings",
+      "back": "Gaming",
+      "tagline": "My full setup, laid out like the in-game menu.",
+      "intro": "Every setting, tab by tab, in the same order as in the game. Labels come straight from my client and values were read directly in game.",
+      "captured": "Read in game on {date}",
+      "sens": "Sensitivity",
+      "dpi": "DPI",
+      "edpi": "eDPI",
+      "cm360": "cm / 360°",
+      "display": "Display",
+      "crosshair": "Crosshair",
+      "convert": "Convert my sens to another game"
+    },
+    "menu": {
+      "title": "Settings menu",
+      "tabs": "Settings tabs",
+      "subTabs": "{tab} sub-tabs",
+      "unbound": "unbound",
+      "modified": "changed",
+      "muted": "muted",
+      "approx": "about {pct}%"
+    },
+    "crosshair": {
+      "description": "Crosshair preview: {length} px lines, {thickness} px thick, {offset} px gap, color {color}, no outline or center dot.",
+      "codeLabel": "the crosshair code",
+      "zoom": "Zoom ×{zoom}",
+      "backgrounds": {
+        "stone": "Background: light wall",
+        "sky": "Background: sky",
+        "foliage": "Background: foliage",
+        "dark": "Background: dark"
+      }
+    },
+    "teaser": {
+      "title": "Valorant settings",
+      "text": "Sens, crosshair, keybinds, video, audio: my whole setup, tab by tab, laid out like the in-game menu.",
+      "open": "Open my settings"
     }
   }
 }
