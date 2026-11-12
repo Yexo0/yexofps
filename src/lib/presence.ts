@@ -4,17 +4,22 @@
 import { PRESENCE_ACTIVITIES, type ActivityId } from "@/config/now";
 import type { NowStatus } from "./now";
 
-export type DiscordStatus = "online" | "idle" | "dnd" | "offline";
+/** "Ne pas déranger" s'affiche "en ligne" : il coupe juste les notifs, je lis quand même mes messages */
+export type DiscordStatus = "online" | "idle" | "offline";
 
 export interface Presence {
   discord: DiscordStatus;
+  /** Avatar et décoration de profil, en images statiques (pas d'animation, cohérent avec la DA) */
+  avatar?: { url: string; decoration?: string };
   /** Jeu ou appli reconnu en cours (le premier trouvé) */
   game?: { name: string; activity: ActivityId; since?: number };
   /** Morceau en écoute sur Spotify (horodatages en ms) */
   spotify?: { song: string; artist: string; album: string; art?: string; url?: string; start: number; end: number };
 }
 
-const STATUSES: readonly DiscordStatus[] = ["online", "idle", "dnd", "offline"];
+const STATUSES: Record<string, DiscordStatus> = { online: "online", dnd: "online", idle: "idle", offline: "offline" };
+const SNOWFLAKE = /^\d{17,20}$/;
+const IMAGE_HASH = /^(a_)?[a-f0-9]{32}$/;
 const KNOWN = new Map(Object.entries(PRESENCE_ACTIVITIES).map(([name, id]) => [name.toLowerCase(), { name, id }]));
 
 type Raw = Record<string, unknown>;
@@ -25,8 +30,22 @@ const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : u
 /** Réponse Lanyard (champ data) → Presence. Tolérant : un champ manquant est simplement ignoré. */
 export function reducePresence(data: unknown): Presence {
   const d = isObject(data) ? data : {};
-  const status = str(d.discord_status) as DiscordStatus | undefined;
-  const presence: Presence = { discord: status && STATUSES.includes(status) ? status : "offline" };
+  const presence: Presence = { discord: STATUSES[str(d.discord_status) ?? ""] ?? "offline" };
+
+  // Avatar Discord (CDN officiel, identifiants vérifiés). Version statique, même si l'avatar est animé.
+  const user = isObject(d.discord_user) ? d.discord_user : {};
+  const id = str(user.id);
+  const hash = str(user.avatar);
+  if (id && SNOWFLAKE.test(id) && hash && IMAGE_HASH.test(hash)) {
+    const decoration = isObject(user.avatar_decoration_data) ? str(user.avatar_decoration_data.asset) : undefined;
+    presence.avatar = {
+      url: `https://cdn.discordapp.com/avatars/${id}/${hash}.png?size=128`,
+      decoration:
+        decoration && IMAGE_HASH.test(decoration)
+          ? `https://cdn.discordapp.com/avatar-decoration-presets/${decoration}.png?size=160&passthrough=false`
+          : undefined,
+    };
+  }
 
   // Activités "Joue à" (type 0) reconnues uniquement
   const activities = Array.isArray(d.activities) ? d.activities.filter(isObject) : [];

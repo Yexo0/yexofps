@@ -11,6 +11,7 @@ import { EMAILS, SOCIALS, SPOTIFY_URL } from "@/config/site";
 import { formatMinutes } from "@/lib/now";
 import { useLive } from "@/hooks/use-now";
 import { SpotifyNow } from "./spotify-now";
+import { DiscordAvatar, hasAvatar } from "./discord-avatar";
 import { ButtonLink, ExternalButton, Skeleton, buttonClass } from "@/components/ui/primitives";
 import { CopyButton } from "@/components/ui/copy-button";
 
@@ -66,12 +67,17 @@ export function NowCard() {
       </div>
 
       <div className="flex items-start gap-4">
-        <span
-          aria-hidden="true"
-          className="glow grid h-14 w-14 shrink-0 place-items-center rounded-[16px] bg-accent-tint text-on-accent-container"
-        >
-          <Icon size={26} strokeWidth={1.75} />
-        </span>
+        {/* Avatar Discord quand le statut en direct est disponible, sinon l'icône de l'activité */}
+        {hasAvatar(presence) ? (
+          <DiscordAvatar presence={presence} size={56} className="m-1.5" />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="glow grid h-14 w-14 shrink-0 place-items-center rounded-[16px] bg-accent-tint text-on-accent-container"
+          >
+            <Icon size={26} strokeWidth={1.75} />
+          </span>
+        )}
         <div className="min-w-0">
           <h2 className="text-[26px] font-bold leading-tight tracking-tight">
             {t(`activities.${live.id}.title`, { name: live.name ?? "" })}

@@ -1,5 +1,5 @@
 // src/components/now/now-chip.tsx — Statut "en ce moment" en version courte, avec lien vers /now :
-// bandeau sur la page Contact (disponibilité), segment dans la barre d'état.
+// bandeau sur la page Contact (disponibilité, avec mon avatar Discord), segment dans la barre d'état.
 "use client";
 
 import { useTranslations } from "next-intl";
@@ -9,6 +9,7 @@ import { useLive } from "@/hooks/use-now";
 import { Link } from "@/i18n/navigation";
 import { Skeleton } from "@/components/ui/primitives";
 import { AVAILABILITY_ICONS } from "./now-card";
+import { DiscordAvatar, hasAvatar } from "./discord-avatar";
 
 /** Bandeau de disponibilité (page Contact) */
 export function NowBanner() {
@@ -16,7 +17,7 @@ export function NowBanner() {
   const state = useLive();
   if (!state) return <Skeleton className="h-[62px] w-full rounded-[14px]" />;
 
-  const { live } = state;
+  const { live, presence } = state;
   const activity = ACTIVITIES[live.id];
   const Icon = activity.icon;
   const AvailabilityIcon = AVAILABILITY_ICONS[activity.availability];
@@ -26,13 +27,17 @@ export function NowBanner() {
       href="/now"
       className="group tile flex items-center gap-3.5 px-4 py-3 transition-colors hover:bg-surface-3"
     >
-      <span
-        aria-hidden="true"
-        className="relative grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-accent-tint text-on-accent-container"
-      >
-        <Icon size={17} />
-        <span className="live-dot absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent ring-2 ring-surface-2" />
-      </span>
+      {hasAvatar(presence) ? (
+        <DiscordAvatar presence={presence} size={38} ringClassName="ring-surface-2" />
+      ) : (
+        <span
+          aria-hidden="true"
+          className="relative grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-accent-tint text-on-accent-container"
+        >
+          <Icon size={17} />
+          <span className="live-dot absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent ring-2 ring-surface-2" />
+        </span>
+      )}
       <span className="min-w-0 flex-1">
         <span className="block text-[14px] font-medium text-fg">
           <span className="text-muted">{t("chip.label")} · </span>

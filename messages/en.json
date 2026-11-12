@@ -1347,8 +1347,8 @@
       "label": "Discord: {status}",
       "online": "online",
       "idle": "away",
-      "dnd": "do not disturb",
-      "offline": "offline"
+      "offline": "offline",
+      "avatar": "My Discord avatar, {status}"
     },
     "spotify": {
       "label": "Listening to",

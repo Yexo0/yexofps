@@ -18,8 +18,13 @@ const LEGACY: [from: string, to: string][] = [
 
 const nextConfig: NextConfig = {
   images: {
-    // Pochettes Spotify du statut Discord en direct (/now), optimisées par le serveur du site
-    remotePatterns: [{ protocol: "https", hostname: "i.scdn.co", pathname: "/image/**" }],
+    // Statut Discord en direct (/now) : pochettes Spotify, avatar et décoration Discord.
+    // Les images passent par le serveur du site : les visiteurs ne contactent ni Spotify ni Discord.
+    remotePatterns: [
+      { protocol: "https", hostname: "i.scdn.co", pathname: "/image/**" },
+      { protocol: "https", hostname: "cdn.discordapp.com", pathname: "/avatars/**" },
+      { protocol: "https", hostname: "cdn.discordapp.com", pathname: "/avatar-decoration-presets/**" },
+    ],
   },
   async redirects() {
     return LEGACY.flatMap(([from, to]) => [
