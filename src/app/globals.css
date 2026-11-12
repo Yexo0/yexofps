@@ -163,6 +163,12 @@
     writing-mode: vertical-rl;
     transform: rotate(180deg);
   }
+  /* Écrans peu hauts (portables 768-800 px) : pas la place pour le nom, seul le numéro reste */
+  @media (max-height: 860px) {
+    .vertical-label {
+      display: none;
+    }
+  }
 
   /* ─── Grille bento ──────────────────────────────────── */
   .bento {
@@ -176,7 +182,9 @@
       gap: 12px;
     }
   }
-  @media (min-width: 1200px) {
+  /* 12 colonnes au même seuil que le préfixe lg: de Tailwind (1024 px), sinon les cartes
+     lg:col-span-* débordaient d'une grille encore à 6 colonnes entre 1024 et 1199 px */
+  @media (min-width: 1024px) {
     .bento {
       grid-template-columns: repeat(12, minmax(0, 1fr));
     }

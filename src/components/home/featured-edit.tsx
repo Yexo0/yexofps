@@ -12,14 +12,18 @@ import { useTranslations } from "next-intl";
 import { ExternalLink, Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
 import { FEATURED_EDIT } from "@/config/site";
 import { Reticle } from "@/components/ui/reticle";
+import { cn } from "@/lib/utils";
 
-/** video : chemin du fichier, transmis par la page seulement s'il existe dans public/ */
-export function FeaturedEdit({ video }: { video?: string }) {
+/**
+ * video : chemin du fichier, transmis par la page seulement s'il existe dans public/.
+ * landscape : vidéo 16:9 (sinon cadre vertical 9:16).
+ */
+export function FeaturedEdit({ video, landscape = false }: { video?: string; landscape?: boolean }) {
   const [failed, setFailed] = useState(false);
   if (!video || failed) return <TikTokPlayer />;
   return (
     <div className="flex flex-1 flex-col justify-center gap-3">
-      <NativePlayer src={video} onFail={() => setFailed(true)} />
+      <NativePlayer src={video} landscape={landscape} onFail={() => setFailed(true)} />
       <TikTokLink />
     </div>
   );
@@ -112,7 +116,7 @@ function TikTokPlayer() {
 
 /* ─── Lecteur maison (fichier hébergé sur le site) ─── */
 
-function NativePlayer({ src, onFail }: { src: string; onFail: () => void }) {
+function NativePlayer({ src, landscape, onFail }: { src: string; landscape: boolean; onFail: () => void }) {
   const t = useTranslations("home.edit");
   const ref = useRef<HTMLVideoElement>(null);
   /** L'utilisateur a mis en pause : on ne relance plus automatiquement */
@@ -177,7 +181,12 @@ function NativePlayer({ src, onFail }: { src: string; onFail: () => void }) {
   const VolumeIcon = muted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   return (
-    <div className="relative mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl bg-black">
+    <div
+      className={cn(
+        "relative w-full overflow-hidden rounded-2xl bg-black",
+        landscape ? "aspect-video" : "mx-auto aspect-[9/16] max-w-[340px]",
+      )}
+    >
       <video
         ref={ref}
         src={src}
@@ -205,7 +214,12 @@ function NativePlayer({ src, onFail }: { src: string; onFail: () => void }) {
 
       {/* Commandes */}
       {/* Fond opaque plutôt que flou : un flou par-dessus une vidéo est recalculé à chaque image */}
-      <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 rounded-2xl bg-black/70 p-2.5 text-white">
+      <div
+        className={cn(
+          "absolute bottom-3 left-3 flex flex-col gap-2 rounded-2xl bg-black/70 p-2.5 text-white",
+          landscape ? "right-3 sm:right-auto sm:w-[320px]" : "right-3",
+        )}
+      >
         <div className="h-1 overflow-hidden rounded-full bg-white/20" aria-hidden="true">
           <div className="h-full rounded-full bg-accent transition-[width] duration-200" style={{ width: `${progress * 100}%` }} />
         </div>

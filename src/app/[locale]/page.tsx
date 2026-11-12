@@ -9,6 +9,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Mail, Play } from "lucide-react";
 import { FEATURED_EDIT, PROFILE, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Reticle } from "@/components/ui/reticle";
 import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
@@ -40,34 +41,52 @@ export default async function HomePage({ params }: Props) {
 
 function Home() {
   const t = useTranslations("home");
+  const video = featuredVideo();
+  // Vidéo horizontale : grande carte sous le hero ; sinon (vertical ou TikTok) colonne étroite à droite
+  const landscape = Boolean(video) && FEATURED_EDIT.aspect === "landscape";
+
+  const edit = (
+    <Card
+      id="edit"
+      icon={Play}
+      title={t("edit.title")}
+      subtitle="mpv ~/edits/une.mp4"
+      meta={t("edit.meta")}
+      index={landscape ? 2 : 1}
+      className={landscape ? "md:col-span-6 lg:col-span-8" : "md:col-span-6 lg:col-span-4 lg:row-span-2"}
+    >
+      <FeaturedEdit video={video} landscape={landscape} />
+    </Card>
+  );
+
+  if (landscape) {
+    return (
+      <div className="bento lg:gap-4">
+        <Hero className="lg:col-span-7" />
+        <LiveCard index={1} className="md:col-span-6 lg:col-span-5" />
+        {edit}
+        <Fastfetch index={3} className="md:col-span-6 lg:col-span-4" />
+      </div>
+    );
+  }
 
   return (
     <div className="bento lg:gap-4">
-      <Hero />
-      <Card
-        id="edit"
-        icon={Play}
-        title={t("edit.title")}
-        subtitle="mpv ~/edits/une.mp4"
-        meta={t("edit.meta")}
-        index={1}
-        className="md:col-span-6 lg:col-span-4 lg:row-span-2"
-      >
-        <FeaturedEdit video={featuredVideo()} />
-      </Card>
+      <Hero className="lg:col-span-8" />
+      {edit}
       <Fastfetch index={2} className="md:col-span-3 lg:col-span-4" />
       <LiveCard index={3} className="md:col-span-3 lg:col-span-4" />
     </div>
   );
 }
 
-function Hero() {
+function Hero({ className }: { className?: string }) {
   const t = useTranslations("home.hero");
 
   return (
     <section
       aria-labelledby="hero-title"
-      className="card justify-between gap-10 md:col-span-6 lg:col-span-8 lg:p-10"
+      className={cn("card justify-between gap-10 md:col-span-6 lg:p-10", className)}
       style={{ ["--i" as string]: 0 }}
     >
       <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">

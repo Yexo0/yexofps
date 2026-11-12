@@ -63,13 +63,22 @@ export const TIKTOK_VIDEOS = {
  * - `video` : fichier hébergé sur le site, dans public/ (ex : "/videos/featured-edit.mp4"). Lu sans
  *   passer par TikTok ; s'il est absent ou illisible, repli sur le lecteur TikTok (chargé au clic).
  * - `poster` : image affichée avant lecture (optionnelle : sans elle, la première image de la vidéo).
+ * - `aspect` : format de la vidéo ; "landscape" (16:9) agrandit la carte sur l'accueil, "portrait"
+ *   (9:16, format TikTok) garde la colonne étroite.
  * - `url` / `tiktokId` : le même montage sur TikTok (lien "Voir sur TikTok" et repli).
  */
-export const FEATURED_EDIT: { tiktokId: string; url: string; poster?: string; video?: string } = {
+export const FEATURED_EDIT: {
+  tiktokId: string;
+  url: string;
+  poster?: string;
+  video?: string;
+  aspect: "landscape" | "portrait";
+} = {
   tiktokId: "7625315787451976982",
   url: "https://www.tiktok.com/@yexofps/video/7625315787451976982",
-  poster: undefined,
+  poster: "/videos/featured-edit.jpg",
   video: "/videos/featured-edit.mp4",
+  aspect: "landscape",
 };
 
 /** Edits mis en avant dans l'espace Créateur. Ajoute une entrée + son titre dans messages (creator.edits.items). */
