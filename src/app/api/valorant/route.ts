@@ -1,15 +1,32 @@
 // src/app/api/valorant/route.ts — Valorant proxy to HenrikDev API
+// Limité au compte configuré dans src/config/site.ts (TRACKER) : sans ça, n'importe qui
+// pouvait interroger n'importe quel joueur via ce proxy et consommer le quota de la clé.
 import { NextRequest, NextResponse } from "next/server";
+import { TRACKER } from "@/config/site";
+
+const ALLOWED_MODES = ["unrated", "competitive", "swiftplay", "deathmatch", "teamdeathmatch"];
+const MAX_SIZE = 10;
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
-    const region = searchParams.get("region") || "eu";
-    const name = searchParams.get("name") || "tanjiro";
-    const tag = searchParams.get("tag") || "33333";
-    const mode = searchParams.get("mode") || "unrated";
-    const size = searchParams.get("size") || "10";
+    const region = (searchParams.get("region") || TRACKER.region).toLowerCase();
+    const name = searchParams.get("name") || TRACKER.name;
+    const tag = searchParams.get("tag") || TRACKER.tag;
+    const mode = (searchParams.get("mode") || TRACKER.mode).toLowerCase();
+    const size = String(Math.min(Math.max(parseInt(searchParams.get("size") || "", 10) || TRACKER.size, 1), MAX_SIZE));
+
+    const isSiteAccount =
+      region === TRACKER.region.toLowerCase() &&
+      name.toLowerCase() === TRACKER.name.toLowerCase() &&
+      tag.toLowerCase() === TRACKER.tag.toLowerCase();
+    if (!isSiteAccount) {
+      return NextResponse.json({ error: "Account not allowed" }, { status: 403 });
+    }
+    if (!ALLOWED_MODES.includes(mode)) {
+      return NextResponse.json({ error: "Mode not allowed" }, { status: 400 });
+    }
 
     const apiKey = process.env.HENRIK_API_KEY;
     if (!apiKey) {
@@ -35,11 +52,8 @@ export async function GET(request: NextRequest) {
     }
 
     if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      return NextResponse.json(
-        { error: `HenrikDev API error: ${res.status} ${text.slice(0, 200)}` },
-        { status: res.status }
-      );
+      // Le corps de l'erreur amont n'est pas renvoyé au navigateur
+      return NextResponse.json({ error: `HenrikDev API error: ${res.status}` }, { status: res.status });
     }
 
     const json = await res.json();
@@ -101,14 +115,12 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(reduced, {
       headers: {
-        "Cache-Control": "public, max-age=60",
-        "Access-Control-Allow-Origin": "*",
+        // Même origine uniquement (plus d'Access-Control-Allow-Origin: *)
+        "Cache-Control": "public, max-age=60, s-maxage=60",
       },
     });
   } catch (e) {
-    return NextResponse.json(
-      { error: (e as Error)?.message || String(e) },
-      { status: 500 }
-    );
+    console.error("[api/valorant]", e);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }

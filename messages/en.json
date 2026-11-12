@@ -1,492 +1,343 @@
 {
-  "metadata": {
-    "title": "Yexo - Portfolio",
-    "description": "Yexo - Valorant content creator & video editor"
-  },
-  "nav": {
-    "home": "Home",
-    "back": "Back"
-  },
-  "footer": {
-    "copyright": "© 2026 Yexo. All rights reserved.",
-    "home": "Home",
-    "tagline": "Content Creator · Valorant",
-    "desc": "Gaming content creator and video editor.",
-    "contactTitle": "Socials & Contact",
-    "navTitle": "Navigation",
-    "navProfile": "Profile",
-    "navRanks": "Ranks",
-    "navShop": "Shop",
-    "navTracker": "Tracker",
-    "navConvert": "Converter",
-    "navLinks": "Links",
-    "contactLabel": "Contact :"
-  },
-  "langSwitch": {
-    "label": "FR"
-  },
-  "dashboard": {
-    "profile": { "title": "My Profile", "button": "Profile" },
-    "ranks": { "title": "Gaming Ranks", "button": "My Ranks" },
-    "shop": { "title": "Y-Services", "button": "Shop" },
-    "tracker": { "title": "My stats", "button": "Tracker" },
-    "convert": { "title": "Sens Converter", "button": "Convert" },
-    "links": { "title": "My Links", "button": "Links" },
-    "pro": { "title": "Professional", "button": "Pro" }
-  },
-  "profile": {
-    "name": "Yexo",
-    "tagline": "Content Creator · Video Editor",
-    "tagRadiant": "Valorant Radiant",
-    "tagEditor": "Video Editor",
-    "tagAge": "20 y/o",
-    "tagLocation": "France",
-    "aboutTitle": "About me",
-    "aboutText": "Hey! I'm Yexo, I'm 20 years old. I'm a Valorant content creator and passionate about video editing. I love sharing my creations and experiences with the gaming community.",
-    "partnersTitle": "My Partners",
-    "partnerDiscount": "{discount} with code: {code}",
-    "partnerAccess": "Access",
-    "socialsTitle": "Social Media",
-    "others": "Others",
-    "tl1year": "2021",
-    "tl1label": "Started competitive gaming",
-    "tl2year": "2022",
-    "tl2label": "First TikTok clips",
-    "tl3year": "2023",
-    "tl3label": "Valorant Immortal",
-    "tl4year": "2024",
-    "tl4label": "Valorant Radiant",
-    "tl5year": "2025",
-    "tl5label": "Y-Services launched"
-  },
-  "ranks": {
-    "name": "Yexo",
-    "tagline": "Just an ego player",
-    "ranksTitle": "RANKS",
-    "setupTitle": "GAMING SETUP",
-    "mouse": "Mouse",
-    "keyboard": "Keyboard",
-    "mousepad": "Mousepad"
-  },
-  "shop": {
-    "title": "Shop",
-    "liveBadge": "Open for orders",
-    "tagAe": "After Effects",
-    "tagVegas": "Vegas Pro",
-    "tagDelivery": "Fast delivery",
-    "subtitlePart1": "To buy:",
-    "subtitleContact": "contact me by email",
-    "subtitleOr": "or",
-    "subtitleDiscord": "open a ticket on my Discord",
-    "subtitleFastest": "(fastest response)",
-    "contactCta": "Contact / Discord Ticket",
-    "payhipCta": "Instant purchase (Payhip)",
-    "noticeDiscord": "Discord ticket = fastest",
-    "noticePrices": "Prices shown in €",
-    "noticeDelivery": "Delivery: files / resources + instructions if needed",
-    "productsTitle": "My products",
-    "buyContact": "Buy / Contact",
-    "preview": "Preview",
-    "viewExamples": "View examples",
-    "bestValue": "Best value",
-    "popular": "Popular",
-    "trustTitle": "Stats & reviews",
-    "statsTitle": "Quick stats",
-    "statsSub": "A few numbers to set expectations. For custom orders, Discord is always the fastest.",
-    "ordersLabel": "Orders delivered",
-    "ordersNote": "Presets + edits + patch deliveries",
-    "replyLabel": "Avg reply time",
-    "replyNote": "Fastest when you open a ticket",
-    "ratingLabel": "Client rating",
-    "ratingNote": "Based on client messages",
-    "reviewsTitle": "Client reviews",
-    "reviewsSub": "Short messages I often get after delivery.",
-    "reviewsDiscordCta": "You can see all reviews on Discord",
-    "payhipBuyCta": "Instant buy on Payhip",
-    "payhipTitle": "Payhip",
-    "payhipText": "For those who want an instant purchase without discussion: use Payhip.",
-    "payhipOpen": "Open my Payhip",
-    "payhipOrContact": "Or: contact me",
-    "contactTitle": "Contact me",
-    "discordFastest": "Discord (fastest)",
-    "discordText": "Open a ticket on my Discord for a fast response.",
-    "joinDiscord": "Join Discord",
-    "joinDiscordEdits": "Discord Edits",
-    "emailTitle": "Email",
-    "emailText": "For requests / orders: send me an email.",
-    "socialsTitle": "Socials",
-    "socialsText": "Examples, content, DMs if needed.",
-    "contactTip": "Tip: when contacting me, mention the product, your software and your goal.",
-    "products": {
-      "colorAe": { "title": "4K Valorant Color Correction", "desc": "After Effects 2024 • preset" },
-      "basicEdit": { "title": "Basic edit", "desc": "Simple, clean, effective • delivery time depends on request" },
-      "advancedEdit": { "title": "Advanced edit", "desc": "Transitions + rhythm + effects • price depends on complexity" },
-      "completePack": { "title": "Complete pack to edit like me", "desc": "Resources + presets + settings + 1h tutorial" },
-      "colorVegas": { "title": "4K Color Correction Vegas Pro", "desc": "Vegas Pro • preset" },
-      "antiCompression": { "title": "TikTok anti-compression patch", "desc": "To upload in 1080p 60fps" }
+  "meta": {
+    "home": {
+      "title": "Yexo · sysadmin and network engineer, Valorant video editor",
+      "description": "Baptiste Dauvergne, aka Yexo: work-study systems and network administrator, FPS player and Valorant video editor."
     },
-    "reviews": {
-      "saytroz": "The pack is nice, and yexo's always here to help if needed, thanks again",
-      "truthvlr": "The patch is crazyyy, uploads look way sharper.",
-      "s6nse": "+rep clips are clean",
-      "yakzu": "legit seller bought some clips"
+    "career": {
+      "title": "Career",
+      "description": "Baptiste Dauvergne's background: work-study IT infrastructure administrator in an IT department, bachelor's degree at EPSI Grenoble, BTS SIO SISR, skills and assignments."
+    },
+    "lab": {
+      "title": "Lab",
+      "description": "My homelab: pfSense, one VLAN per use, ESXi, Zabbix, WireGuard VPN and backups. Network map, machines and design choices."
+    },
+    "gaming": {
+      "title": "Gaming",
+      "description": "My ranks (Radiant in Valorant, Faceit level 10, Apex Master, Clash Royale Ultimate Champion), the live Valorant tracker and my setup."
+    },
+    "creator": {
+      "title": "Creator",
+      "description": "My Valorant video edits on TikTok, my partners and Y-Services: color grading presets, edits and an anti-compression patch."
+    },
+    "tools": {
+      "title": "Tools",
+      "description": "Sensitivity converter between Valorant, CS2, Apex Legends and Overwatch 2, with cm/360 and eDPI."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Work and business emails, Discord, TikTok, Instagram: every way to reach me."
+    },
+    "notFound": {
+      "title": "Page not found"
+    },
+    "valoSettings": {
+      "title": "Valorant settings",
+      "description": "All my Valorant settings: {sens} sensitivity at {dpi} DPI, crosshair code, keybinds, video, audio."
+    },
+    "now": {
+      "title": "Right now",
+      "description": "What I'm doing right now (work-study, Valorant, editing) and whether I can reply, based on my schedule in Paris time."
+    },
+    "labSite": {
+      "title": "This site",
+      "description": "How yexofps.org is hosted on my VPS: the path of a request, the server, the stack and live figures."
     }
   },
-  "tracker": {
-    "name": "Yexo",
-    "tagline": "Valorant Tracker (Yexo#iris • EU)",
-    "title": "TRACKER",
-    "matchesTitle": "LAST 10 UNRATED",
-    "refresh": "Refresh",
-    "auto": "Auto",
-    "loading": "Loading...",
-    "upToDate": "Up to date",
-    "error": "Error",
-    "cooldown": "Cooldown...",
-    "waiting": "Waiting...",
-    "noMatches": "No matches found (empty response).",
-    "fetchError": "Fetch failed. Check that /api/valorant exists and returns JSON.",
-    "rateLimit": "Rate limit reached (429). Wait a moment.",
-    "httpError": "HTTP Error",
-    "peakRr": "PEAK RR",
-    "ranked": "Ranked",
-    "last10": "Last 10",
-    "unrated": "Unrated",
-    "total": "Total",
-    "hsAvg": "Average over {count} matches",
-    "hsNa": "HS% not available",
-    "kills": "kills",
-    "deaths": "deaths",
-    "winsLosses": "{wins}W / {losses}L",
-    "resultsNa": "Results not available",
-    "totalMatches": "Total over {count} matches",
-    "hint": "Thats just my recent stats",
-    "modalKills": "KILLS",
-    "modalDeaths": "DEATHS",
-    "modalAssists": "ASSISTS",
-    "modalScore": "SCORE",
-    "modalHeadshots": "HEADSHOTS",
-    "modalBodyshots": "BODYSHOTS",
-    "modalLegshots": "LEGSHOTS",
-    "modalAccuracy": "ACCURACY BREAKDOWN",
-    "modalTotalShots": "total shots"
+  "common": {
+    "skipToContent": "Skip to content",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copiedLive": "Copied to clipboard",
+    "open": "Open",
+    "newTab": "opens in a new tab",
+    "retry": "Try again",
+    "close": "Close",
+    "write": "Write",
+    "download": "Download",
+    "placeholderNote": "sample value",
+    "footer": {
+      "copyright": "© {year} {name} · {author}"
+    },
+    "status": {
+      "session": "yexo",
+      "nav": "Spaces (status bar)",
+      "deployed": "self-hosted · deployed {date}",
+      "theme": {
+        "dark": "dark",
+        "light": "light"
+      }
+    }
   },
-  "converter": {
-    "name": "Yexo",
-    "tagline": "Sensitivity Converter (cm/360)",
-    "title": "CONVERT SENS",
-    "detailsTitle": "DETAILS",
-    "fromGame": "From (Game)",
-    "fromSens": "From Sens",
-    "fromDpi": "From DPI",
-    "toGame": "To (Game)",
-    "toDpi": "To DPI",
-    "resultSens": "Result Sens",
-    "sameDpi": "Same DPI",
-    "convert": "Convert",
-    "ready": "Ready",
-    "converted": "Converted",
-    "invalidSens": "Enter a valid sens",
-    "invalidDpi": "Enter a valid DPI",
-    "invalidTargetDpi": "Enter a valid target DPI",
-    "cm360Label": "cm/360",
-    "cm360Sub": "Same physical distance across games",
-    "edpiLabel": "eDPI",
-    "edpiSub": "From eDPI (sens × DPI)",
-    "edpiTo": "To eDPI: {value}",
-    "yawLabel": "Yaw Values",
-    "yawSub": "Conversion uses yaw + cm/360",
-    "in360": "{value} in / 360°"
-  },
-  "pro": {
-    "name": "Baptiste Dauvergne",
-    "tagline": "BTS SIO SISR • Networks, Systems & Cybersecurity",
-    "tabs": {
-      "overview": "Home",
-      "formation": "Education",
-      "profile": "Profile",
-      "skills": "Skills",
-      "infra": "Infrastructure",
-      "watch": "Tech Watch",
-      "tutorials": "Tutorials",
+  "nav": {
+    "main": "Main navigation",
+    "homeLogo": "Yexo, back to home",
+    "avatar": "Contact me",
+    "goToSpace": "Space {n}: {name}",
+    "more": "More",
+    "moreDescription": "Other spaces and tools",
+    "close": "Close",
+    "spaces": {
+      "home": "Home",
+      "career": "Career",
+      "lab": "Lab",
+      "gaming": "Gaming",
+      "creator": "Creator",
+      "tools": "Tools",
       "contact": "Contact"
     },
-    "overview": {
-      "title": "Professional Space",
-      "intro": "Student in BTS SIO (SISR option), passionate about networks, systems and cybersecurity. Explore my background, skills and projects here.",
-      "cards": {
-        "formation": "BTS SIO SISR — systems, networks, cybersecurity",
-        "experience": "Internship at Cekoya (Nîmes) — support, infrastructure, deployment",
-        "skills": "System administration, networking, virtualization, user support",
-        "passions": "Video editing, content creation, competitive gaming"
-      }
+    "tools": {
+      "search": "Search",
+      "themeLight": "Light mode",
+      "themeDark": "Dark mode",
+      "shortcuts": "Keyboard shortcuts",
+      "language": "Version française"
+    }
+  },
+  "palette": {
+    "title": "Command palette",
+    "placeholder": "Jump to a space, copy an email, open a guide…",
+    "results": "Results",
+    "empty": "Nothing matches “{query}”.",
+    "groups": {
+      "spaces": "Spaces",
+      "sections": "Sections",
+      "actions": "Actions",
+      "links": "Links",
+      "products": "Y-Services",
+      "docs": "PDF guides"
     },
-    "formation": {
-      "title": "BTS SIO — SISR",
-      "whatIs": "BTS SIO (IT Services for Organizations) is a training focused on business IT. The SISR option (Infrastructure Solutions, Systems and Networks) specializes in networks, systems and cybersecurity.",
-      "modules": {
-        "sysadmin": { "title": "System Administration", "desc": "Setting up and managing Windows and Linux environments. Virtualization, user management, services." },
-        "network": { "title": "Networks & Infrastructure", "desc": "IP addressing, VLAN, routing, topologies. Network configuration via Cisco Packet Tracer." },
-        "support": { "title": "Support & Assistance", "desc": "Diagnosis, incident resolution. Workstation installation and configuration." },
-        "security": { "title": "Cybersecurity", "desc": "Security awareness: updates, passwords, segmentation, network rules." }
-      },
-      "whySisr": "Why SISR?",
-      "whySisrText": "I identify with the infrastructure profile: understand, configure, secure and maintain reliable systems. My goal: build expertise in real professional environments.",
-      "education": {
-        "title": "Education Path",
-        "bts": "BTS SIO SISR option — In progress",
-        "but": "BUT Networks & Telecom — Valence (2023-2024)",
-        "bac": "Bac STI2D ITEC option — Pierre Termier High School (Grenoble)"
-      }
+    "sections": {
+      "timeline": "Career timeline",
+      "skills": "Skills",
+      "missions": "Internship assignments",
+      "infraBts": "BTS network map",
+      "watch": "Tech watch",
+      "docs": "PDF guides",
+      "labMap": "Homelab map",
+      "labMachines": "Lab machines",
+      "ranks": "Ranks",
+      "tracker": "Valorant tracker",
+      "matches": "Recent matches",
+      "setup": "Setup",
+      "edits": "TikTok edits",
+      "partners": "Partners and promo codes",
+      "services": "Y-Services",
+      "reviews": "Client reviews",
+      "converter": "Sensitivity converter",
+      "valoSettings": "Valorant settings",
+      "now": "Right now (/now)",
+      "site": "How this site is hosted"
     },
-    "profileTab": {
-      "title": "Professional Profile",
-      "subtitle": "Who I am, what I can do",
-      "about": {
-        "title": "About Me",
-        "p1": "I'm Baptiste Dauvergne, a BTS SIO student specializing in SISR (Infrastructure Solutions, Systems and Networks) in Nîmes, France. Passionate about IT and technology, I'm developing my skills in system administration, network infrastructure management and user support.",
-        "p2": "My goal is to keep growing in the fields of managed services and cybersecurity, combining technical rigor with a strong service mindset."
-      },
-      "competences": {
-        "title": "My Skills",
-        "categories": {
-          "admin": {
-            "title": "System & Network Administration",
-            "items": [
-              "IP addressing, VLANs, routing and network configuration",
-              "Creating & managing virtual machines (VMware, Proxmox)",
-              "IT asset management (inventory, tracking, updates)",
-              "Cybersecurity basics (hardening, firewall rules, patching)"
-            ]
-          },
-          "support": {
-            "title": "Support & Assistance",
-            "items": [
-              "User support (installation, troubleshooting, clear explanations)",
-              "Workstation & user environment configuration",
-              "Clear and professional communication (remote and on-site)",
-              "Ticket management and incident prioritization"
-            ]
-          },
-          "dev": {
-            "title": "Development",
-            "items": [
-              "Python (automation scripts, data processing)",
-              "C# (console applications, object-oriented logic)",
-              "HTML / CSS / JavaScript (website creation, interfaces)",
-              "Git / GitHub usage (versioning, collaboration)"
-            ]
-          },
-          "soft": {
-            "title": "Soft Skills",
-            "items": [
-              "Calm, organized and methodical",
-              "Good stress and priority management",
-              "Curious and creative problem-solver",
-              "Ability to work in teams and independently",
-              "Continuous improvement mindset"
-            ]
-          }
+    "actions": {
+      "copyPro": "Copy work email",
+      "copyBusiness": "Copy business email",
+      "themeLight": "Switch to light mode",
+      "themeDark": "Switch to dark mode",
+      "language": "Lire ce site en français",
+      "shortcuts": "Show keyboard shortcuts"
+    },
+    "footer": {
+      "navigate": "navigate",
+      "open": "open",
+      "close": "close"
+    }
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "subtitle": "man yexo",
+    "spaces": "Spaces",
+    "general": "General",
+    "palette": "Command palette",
+    "help": "Show this help",
+    "close": "Close a dialog",
+    "note": "Single-key shortcuts are disabled while typing in a field."
+  },
+  "creator": {
+    "services": {
+      "products": {
+        "colorAe": {
+          "title": "4K color correction · After Effects",
+          "desc": "Color grading preset for After Effects 2024, built for 4K Valorant clips.",
+          "imageAlt": "Before / after of the 4K color grading on a Valorant scene"
         },
-        "badges": ["VMware", "Cisco", "Windows Server", "Linux", "Python", "Git"]
-      },
-      "formation": {
-        "title": "Education & Career Path",
-        "bts": {
-          "title": "BTS SIO — SISR",
-          "location": "CCI High School, Nîmes",
-          "period": "2024 — 2026",
-          "items": [
-            "System and network administration",
-            "Virtualization and network services",
-            "User support and assistance",
-            "Cybersecurity and IT asset management"
-          ]
+        "basicEdit": {
+          "title": "Basic edit",
+          "desc": "A simple, clean edit. Turnaround depends on the request.",
+          "imageAlt": "Frame from a basic edit"
         },
-        "stage": {
-          "title": "Internship — Cekoya",
-          "location": "Nîmes",
-          "period": "2025",
-          "items": [
-            "Client IT support",
-            "Network configuration and equipment deployment",
-            "Inventory management and preventive maintenance"
-          ]
+        "advancedEdit": {
+          "title": "Advanced edit",
+          "desc": "Transitions, pacing and effects. Price depends on complexity.",
+          "imageAlt": "Frame from an advanced edit"
+        },
+        "completePack": {
+          "title": "Complete pack to edit like me",
+          "desc": "My resources, presets and settings, with a one-hour tutorial to edit like me.",
+          "imageAlt": "Pack contents: agents, sounds, color packs and tutorials"
+        },
+        "colorVegas": {
+          "title": "4K color correction · Vegas Pro",
+          "desc": "Color grading preset for Vegas Pro.",
+          "imageAlt": "Before / after of the color grading in Vegas Pro"
+        },
+        "antiCompression": {
+          "title": "TikTok anti-compression patch",
+          "desc": "To post on TikTok in 1080p at 60 frames per second.",
+          "imageAlt": "Anti-compression patch files"
         }
       },
-      "interests": {
-        "title": "Beyond Work",
-        "cards": {
-          "content": {
-            "title": "Content Creation",
-            "desc": "Video editing for Valorant content (Yexo). Working on pacing, transitions and sound design."
-          },
-          "watch": {
-            "title": "Tech Watch",
-            "desc": "Regularly following news in cybersecurity, cloud infrastructure and open-source solutions."
-          },
-          "projects": {
-            "title": "Personal Projects",
-            "desc": "Building automation scripts, experimenting with homelab setups and self-hosting."
-          }
-        }
-      }
+      "title": "Y-Services",
+      "meta": "{count} products",
+      "intro": "The presets, edits and tools I use for my own videos. To order, open a ticket on Discord (fastest), email me, or buy directly on Payhip.",
+      "order": "Order",
+      "orderLabel": "Order “{product}” on Discord",
+      "example": "See an example",
+      "preview": "Preview"
     },
-    "skills": {
-      "title": "Skills",
-      "subtitle": "Click on a skill to see the associated mission details.",
-      "missions": {
-        "gestion": {
-          "title": "Track assets, avoid surprises",
-          "subtitle": "IT Asset Management",
-          "intro": "IT asset management is the foundation for maintaining a clean IS: knowing what hardware exists, where it is, its condition and who uses it. It also enables anticipating failures, renewals and security.",
-          "missionLabel": "Featured mission",
-          "mission": "Client IT inventory update: on-site hardware verification, information consolidation and tracking update to facilitate maintenance and support.",
-          "context": "The client had an incomplete inventory: some workstations weren't registered, equipment had changed users, and several details (model, serial number, location) were outdated.",
-          "objective": "Obtain a reliable and usable inventory: workstations, peripherals, network equipment, with sufficient traceability to accelerate support and plan renewals.",
-          "role": "On-site surveys, data consolidation and inventory update. I also standardized certain fields (names, locations, managers) for long-term readability.",
-          "actions": ["Verify on-site: workstations, screens, printers, visible switches/routers", "Update key info: model, serial, condition, location, user", "Implement naming logic (e.g.: PC-XXX / ROOM-XXX) for quick retrieval", "Identify 'ghost' equipment (in the tool but absent on-site and vice versa)", "Centralize useful info for support (OS, fixed IP, warranties, machine role)"],
-          "proofTitle": "Why this proves my competence",
-          "proofText": "What makes the difference isn't just 'doing an inventory': it's the ability to structure and make data reliable so it's useful daily (support + maintenance + security).",
-          "impactTitle1": "Method & consistency",
-          "impactText1": "I work with a 'field → tool → verification' logic: I collect, structure, then verify that information is coherent and reusable.",
-          "impactTitle2": "Support & security impact",
-          "impactText2": "A clean inventory reduces incidents, speeds up troubleshooting (knowing what equipment, where, for whom), and helps track updates/changes.",
-          "tags": ["Inventory", "Traceability", "GLPI", "On-site"]
-        },
-        "communication": {
-          "title": "Communicate to convince and convert",
-          "subtitle": "External Communication",
-          "intro": "How Cekoya communicates externally (image, acquisition, credibility) and how I apply the same logic to my personal projects (content & services).",
-          "missionLabel": "External communication at Cekoya (Nîmes)",
-          "mission": "Cekoya relies on several complementary levers: showcase website, LinkedIn, Google (presence + reviews), partnerships and trade shows. The goal: be visible, inspire trust, generate opportunities.",
-          "context": "Showcase website (clarity & credibility), LinkedIn (professional image & network), Google (be found & recommended), Partnerships (field credibility), Trade shows (visibility & trust).",
-          "objective": "External communication works when coherent: same message everywhere (website, LinkedIn, Google), and a reputation that confirms that message.",
-          "role": "Analysis of communication levers, applying the same logic to personal projects: show, reassure, convert. Content serves as proof.",
-          "actions": ["Content: attract through proof — show quality level (rhythm, transitions, sound design)", "Trust: clarity & responsiveness — clear expectations, announced timelines, precise feedback", "Offer: readability & process — what's included, how it works, what's delivered", "Showcase website: reassure quickly (first impression)", "LinkedIn: build credibility + create contacts"],
-          "proofTitle": "What proves the competence",
-          "proofText": "I know how to 'sell through proof': my content reassures, my speech is clear, and my offer is simple. Same foundation as effective external communication in business.",
-          "impactTitle1": "Multi-channel coherence",
-          "impactText1": "Same message everywhere (website, LinkedIn, Google). Reputation confirms the message (partners, feedback, presence).",
-          "impactTitle2": "Personal application",
-          "impactText2": "I follow the same logic: show, reassure, convert. My content serves as direct proof of quality.",
-          "tags": ["Website", "LinkedIn", "Google", "Partnerships"]
-        },
-        "support": {
-          "title": "Diagnose fast, fix properly",
-          "subtitle": "Support & Network Incidents",
-          "intro": "During my internship at Cekoya (Nîmes), I participated in client IT support: network incidents, unavailable services, unstable workstations, printing, resource access. Support is mainly a method: identify, isolate, fix, then validate.",
-          "missionLabel": "Featured mission",
-          "mission": "Network incident: shares and printers unavailable on multiple workstations after equipment modification (router/switch). Goal: quickly restore service access without further impacting production.",
-          "context": "Multiple users report: inability to access shared folders, printers unfindable and unstable connections. The problem seems to affect a specific network zone.",
-          "objective": "Restore service access (shares, printers, apps) and verify stability. Once correction applied, validate with affected users.",
-          "role": "DHCP/DNS lead, VLAN error, defective cable/port, or addressing conflict. The idea is to isolate whether it's a workstation or network problem.",
-          "actions": ["Quickly check if the issue affects one or multiple workstations", "Check addressing: IP, gateway, DNS, DHCP lease and network coherence", "Test resource access: ping gateway, server, shares, printers", "Isolate the zone: switch port / VLAN / network equipment linked to affected workstations", "Apply correction then validate with a real case (shares + printing)"],
-          "proofTitle": "Why this proves my competence",
-          "proofText": "IT support requires both technique and rigor. My key point: I follow a clear method to reduce downtime while keeping a clean result (tests, validation, explanation if needed).",
-          "impactTitle1": "Reactivity & prioritization",
-          "impactText1": "I address what blocks most first (access to essential resources), then verify stability before closing. Goal: return to production ASAP.",
-          "impactTitle2": "Reliability & validation",
-          "impactText2": "A correction is never 'assumed': it's tested. I validate on a real workstation, then confirm with users that everything is back to normal.",
-          "tags": ["Diagnosis", "DHCP/DNS", "VLAN", "Validation"]
-        },
-        "projet": {
-          "title": "4G backup solution deployment",
-          "subtitle": "Technical Project",
-          "intro": "Mission completed during my internship at Cekoya (Nîmes), in a managed services context with professional clients (SMBs, stores, administrative structures).",
-          "missionLabel": "My mission: 4G router configuration",
-          "mission": "In this project, I was responsible for the technical part related to the 4G router: preparation, configuration, failover and tests. The goal: deliver a reliable configuration ready for on-site integration.",
-          "context": "A client experienced regular main Internet connection outages, directly impacting: access to business tools, IP telephony and employee productivity.",
-          "objective": "Ensure an automatically-activated backup connection, without manual intervention, to reduce the impact of outages on client activity.",
-          "role": "Responsible for the technical part: preparation, configuration, failover and tests. Team project with a reference technician for on-site integration.",
-          "actions": ["4G preparation: connection setup (SIM card / operator parameters), admin access security", "Failover configuration: automatic switching between main line and 4G", "Outage detection and automatic return when main connection becomes stable", "Simulated outage tests: verify 4G switch-over, connection stability", "Confirm automatic return to main line"],
-          "proofTitle": "Success criteria",
-          "proofText": "The solution is validated when the client maintains a functional connection despite an Internet outage, and the failover (and return) happens automatically and stably.",
-          "impactTitle1": "Reliability & autonomy",
-          "impactText1": "Stable solution, simple to maintain, reliable failover. Validation through realistic tests before production.",
-          "impactTitle2": "Teamwork",
-          "impactText2": "On-site integration and global validation done with the reference technician. Technical preparation done autonomously.",
-          "tags": ["Mikrotik", "Zyxel", "Failover", "4G"]
-        },
-        "assistance": {
-          "title": "Support and empower users",
-          "subtitle": "User Assistance",
-          "intro": "During my internship at Cekoya (Nîmes), I was often in contact with users (remotely or on-site). The goal: quickly resolve an incident while clearly explaining what's happening and what I'm doing.",
-          "missionLabel": "Featured mission",
-          "mission": "New workstation deployment and setup after incident, with user environment recovery and network verifications.",
-          "context": "A user couldn't work properly: slowdowns, crashes, and random access to resources (network drives/printing/applications). Priority: get them operational quickly.",
-          "objective": "Provide a stable workstation, recover work environment (accounts, access, tools), and guide the user to be autonomous on simple checks.",
-          "role": "Workstation installation and configuration, domain/network reintegration if needed, verifications (DHCP/DNS, shares, printers), then user accompaniment.",
-          "actions": ["Prepare a 'clean' workstation: updates, drivers, basic setup", "Verify connectivity: shares, printing, applications, browsing access", "Explain to user: what was done + how to prevent recurrence", "Validate: user tests their real tasks before closing"],
-          "proofTitle": "Why this proves my competence",
-          "proofText": "User assistance isn't just about 'fixing'. The key point I developed: the ability to translate a technical problem into simple actions for the user.",
-          "impactTitle1": "Clear communication",
-          "impactText1": "I explain what I do in simple terms, reassure the user, and give 2-3 quick checks they can redo alone (Wi-Fi, cable, restart, etc.).",
-          "impactTitle2": "Efficiency & validation",
-          "impactText2": "I validate on 'real' usage: the user tests their usual tasks (printing, apps, folders). Ticket closed only when workstation is truly functional.",
-          "tags": ["Workstation", "Domain", "Support", "Training"]
-        }
+    "bio": {
+      "title": "Creator",
+      "tagline": "I edit Valorant videos: pacing locked to the music, clean transitions, careful color grading.",
+      "text": "I've been posting as Yexo on TikTok since 2022. I mostly edit my own matches, with extra care for pacing, transitions and sound design. What I use for my videos, I also offer to others: color grading presets, custom edits and an anti-compression patch, all under Y-Services.",
+      "chips": {
+        "valorant": "Valorant player",
+        "editor": "Video editor",
+        "age": "{age} years old",
+        "location": "France"
       },
-      "labels": {
-        "context": "Context",
-        "objective": "Objective",
-        "role": "My role",
-        "actions": "What I did (concrete)",
-        "proof": "Why this proves my competence"
-      }
+      "photoAlt": "My editing station, with a Valorant video timeline on screen"
     },
-    "infra": {
-      "title": "Network Infrastructure",
-      "subtitle": "Network deployed during my training — full topology with firewall, servers and services.",
-      "legend": "Legend",
-      "redNetwork": "Red Network (WAN)",
-      "greenNetwork": "Green Network (LAN)",
-      "dmz": "DMZ",
-      "config": "Configuration",
-      "dhcpRange": "DHCP Range",
-      "gateway": "Gateway",
-      "dns": "DNS"
-    },
-    "watch": {
-      "title": "Tech Watch",
-      "topic": "Evolution of server virtualization (VMware)",
-      "sections": {
-        "before": {
-          "title": "Before virtualization",
-          "text": "Classic model: 1 physical server = 1 service. Limitations: resource underutilization (10-20%), high costs, poor flexibility, critical failures."
-        },
-        "vmware": {
-          "title": "VMware's arrival",
-          "text": "Late 1990s: hypervisor democratization. Separation of hardware from OS. One physical machine can host multiple isolated logical servers.",
-          "benefits": ["Environment isolation", "Consolidation (fewer physical servers)", "Fast deployment via cloning", "Better security through separation"]
-        },
-        "today": {
-          "title": "VMware Today",
-          "text": "Major player with ESXi, vSphere, vCenter, VMware Cloud.",
-          "features": ["vMotion: VM migration without interruption", "Advanced Snapshots: quick rollback", "vSAN: distributed storage without physical SAN", "HA: automatic VM restart on failure", "Kubernetes integration with Tanzu"]
-        },
-        "why": {
-          "title": "Why it matters",
-          "points": ["Reduce costs (hardware, energy, maintenance)", "Gain flexibility and faster deployment", "Improve security through isolation", "Ensure service continuity (HA, clusters)", "Easier cloud migration"]
-        }
-      },
-      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
-    },
-    "tutorials": {
-      "title": "My Tutorials",
-      "subtitle": "Technical guides created during my training.",
+    "history": {
+      "title": "History",
+      "meta": "{count} milestones",
       "items": {
-        "zabbix": { "title": "Zabbix", "desc": "Server + agents installation (Linux/Windows)" },
-        "vlan": { "title": "VLAN on ESXi", "desc": "Configuration & best practices" },
-        "gpo": { "title": "GPO (Group Policies)", "desc": "Create, link, apply policies in an AD domain" },
-        "ad": { "title": "Active Directory", "desc": "Installation, domain creation, OU, accounts, groups" },
-        "wifi": { "title": "Cisco Wi-Fi AP", "desc": "SSID configuration, security, access, Wi-Fi VLAN" },
-        "glpi": { "title": "GLPI & Fusion Inventory", "desc": "Inventory, agents, hardware/software collection" },
-        "ipfire": { "title": "IPFire (Firewall)", "desc": "Installation, zones, rules, NAT, filtering & security" },
-        "proxmox": { "title": "Proxmox", "desc": "Installation, VM/CT, storage, network, best practices" },
-        "esxi": { "title": "ESXi Users & Permissions", "desc": "Accounts, roles, permissions, security" },
-        "dhcpdns": { "title": "Windows Server: DHCP & DNS", "desc": "Scopes, reservations, DNS zones & records" }
+        "competitive": "Started competitive gaming",
+        "tiktok": "First edits on TikTok",
+        "immortal": "Immortal in Valorant",
+        "radiant": "Peaked Radiant for a few months",
+        "services": "Launched Y-Services",
+        "immortal3": "Playing less: back to Immortal 3"
       },
+      "tracks": {
+        "ranked": "ranked",
+        "edits": "edits",
+        "shop": "shop"
+      },
+      "now": "now",
+      "clips": {
+        "competitive": "Competitive",
+        "tiktok": "TikTok edits",
+        "immortal": "Immortal",
+        "radiant": "Radiant",
+        "services": "Y-Services",
+        "immortal3": "Immortal 3"
+      },
+      "then": "Then"
+    },
+    "edits": {
+      "title": "Edits",
+      "intro": "Two examples: a simple edit and a more advanced one. Everything else is on TikTok.",
+      "items": {
+        "basicEdit": "Basic edit example",
+        "advancedEdit": "Advanced edit example"
+      },
+      "all": "All my edits on TikTok",
+      "newTab": "opens in a new tab"
+    },
+    "partners": {
+      "title": "Partners",
+      "meta": "promo codes",
+      "discount": "−{discount}% with code {code}",
+      "visit": "Website",
+      "visitLabel": "Open {name}'s website (partner link)",
+      "codeLabel": "code {code}",
+      "note": "Partner links: using them supports me at no extra cost to you."
+    },
+    "order": {
+      "title": "How to order",
+      "discord": {
+        "title": "Discord ticket",
+        "text": "Fastest: open a ticket and describe what you need.",
+        "cta": "Open a ticket"
+      },
+      "email": {
+        "title": "Email",
+        "text": "For requests and orders.",
+        "cta": "Write",
+        "copyLabel": "business email"
+      },
+      "payhip": {
+        "title": "Payhip",
+        "text": "Instant purchase, no conversation needed.",
+        "cta": "Open Payhip"
+      },
+      "delivery": "Delivery: the files or resources, with instructions if needed. Prices shown in euros.",
+      "tip": "When you contact me, mention the product, your software and what you want to achieve."
+    },
+    "reviews": {
+      "title": "Client reviews",
+      "meta": "{count} reviews",
+      "intro": "Messages received after delivery, copied as is.",
+      "via": "via {platform}",
+      "quote": "“{text}”",
+      "all": "All reviews are on Discord",
+      "items": {
+        "saytroz": "The pack is nice, and yexo's always here to help if needed, thanks again",
+        "truthvlr": "The patch is crazyyy, uploads look way sharper.",
+        "s6nse": "+rep clips are clean",
+        "yakzu": "legit seller bought some clips"
+      }
+    }
+  },
+  "career": {
+    "docs": {
+      "items": {
+        "zabbix": {
+          "title": "Zabbix",
+          "desc": "Server and agent installation (Linux and Windows)"
+        },
+        "vlan": {
+          "title": "VLANs on ESXi",
+          "desc": "Configuration and best practices"
+        },
+        "gpo": {
+          "title": "GPO (Group Policy)",
+          "desc": "Create, link and apply policies in an AD domain"
+        },
+        "ad": {
+          "title": "Active Directory",
+          "desc": "Installation, domain creation, OUs, accounts and groups"
+        },
+        "wifi": {
+          "title": "Cisco Wi-Fi access point",
+          "desc": "SSID, security, access and Wi-Fi VLAN"
+        },
+        "glpi": {
+          "title": "GLPI and FusionInventory",
+          "desc": "Inventory, agents, hardware and software collection"
+        },
+        "ipfire": {
+          "title": "IPFire (firewall)",
+          "desc": "Installation, zones, rules, NAT and filtering"
+        },
+        "proxmox": {
+          "title": "Proxmox",
+          "desc": "Installation, VMs and containers, storage, networking"
+        },
+        "esxi": {
+          "title": "ESXi users and permissions",
+          "desc": "Accounts, roles, permissions and security"
+        },
+        "dhcpdns": {
+          "title": "Windows Server: DHCP and DNS",
+          "desc": "Scopes, reservations, DNS zones and records"
+        }
+      },
+      "title": "PDF guides",
+      "meta": "{count} PDFs",
+      "intro": "Technical guides I wrote during my studies, ready to download (in French).",
+      "pages": "{count} p.",
+      "downloadLabel": "Download the PDF ({count} pages)",
       "categories": {
         "system": "System",
         "network": "Network",
@@ -496,31 +347,1113 @@
         "itsm": "ITSM"
       }
     },
-    "contactTab": {
-      "title": "Contact",
-      "intro": "For any inquiries (internship, apprenticeship, collaboration, video editing, services), feel free to contact me.",
-      "emailPro": "Email (Pro)",
-      "emailBusiness": "Email (Business / Services)",
-      "links": "My Links",
-      "send": "Send",
-      "copy": "Copy",
-      "copied": "Copied!"
+    "intro": {
+      "meta": "sysadmin · network",
+      "role": "Work-study IT infrastructure administrator in an IT department",
+      "school": "Bachelor's in systems, network and database administration · EPSI Grenoble",
+      "p1": "Since November 2026, I've been a work-study IT infrastructure administrator in an IT department, alongside a bachelor's degree in systems, network and database administration at EPSI Grenoble. Before that, I completed a BTS SIO (SISR option) at Campus CCI in Nîmes, with an internship in managed IT services at Cekoya.",
+      "p2": "What I like about infrastructure: understanding why something works before touching it, and leaving a clean, documented setup behind. My homelab is where I test everything I'm not allowed to break anywhere else.",
+      "stats": {
+        "missions": "Detailed assignments",
+        "docs": "Guides written",
+        "homelab": "Homelab since"
+      },
+      "email": "Email me",
+      "emailLabel": "work email"
+    },
+    "elsewhere": {
+      "title": "Outside work",
+      "content": {
+        "title": "Content creation",
+        "text": "I edit Valorant videos as Yexo: pacing, transitions and sound design."
+      },
+      "watch": {
+        "title": "Tech watch",
+        "text": "I follow cybersecurity, cloud infrastructure and open-source news."
+      },
+      "homelab": {
+        "title": "Homelab and scripts",
+        "text": "Self-hosting, automation scripts and network labs at home, detailed in the Lab space."
+      }
+    },
+    "timeline": {
+      "title": "Career",
+      "meta": "{count} steps",
+      "current": "ongoing",
+      "seeMissions": "See the internship assignments",
+      "items": {
+        "workStudy": {
+          "date": "Since November 2026",
+          "title": "Work-study IT infrastructure administrator",
+          "place": "In an IT department",
+          "items": [
+            "On-site support for users",
+            "Handling tickets in GLPI"
+          ]
+        },
+        "bachelor": {
+          "date": "2026 – 2027",
+          "title": "Bachelor's in systems, network and database administration",
+          "place": "EPSI Grenoble · work-study"
+        },
+        "bts": {
+          "date": "2024 – 2026",
+          "title": "BTS SIO, SISR option",
+          "place": "Campus CCI, Nîmes",
+          "text": "The BTS SIO is a two-year French degree in business IT; the SISR option focuses on networks, systems and security. I picked SISR for the infrastructure side: understanding a network, configuring it, securing it and keeping it running.",
+          "items": [
+            "Windows and Linux administration, virtualization, accounts and services",
+            "IP addressing, VLANs, routing, labs in Cisco Packet Tracer",
+            "Incident diagnosis, workstation installation and setup",
+            "Security: updates, passwords, segmentation, network rules"
+          ]
+        },
+        "internship": {
+          "date": "Internship",
+          "title": "Internship at Cekoya",
+          "place": "Nîmes · managed IT services for business clients",
+          "items": [
+            "IT support for clients, remote and on-site",
+            "Network configuration and equipment deployment",
+            "Asset inventory and preventive maintenance"
+          ]
+        },
+        "but": {
+          "date": "2023 – 2024",
+          "title": "BUT Networks and Telecommunications",
+          "place": "Valence"
+        },
+        "bac": {
+          "date": "2023",
+          "title": "Baccalauréat STI2D, ITEC option",
+          "place": "Lycée Pierre Termier, Grenoble"
+        }
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "meta": "{count} areas",
+      "items": {
+        "support": {
+          "title": "Level 1 / 2 support",
+          "text": "Diagnose, isolate, fix, then confirm with the user. I handle tickets in GLPI, install and configure workstations, and explain what I did in plain words."
+        },
+        "windows": {
+          "title": "Windows Server and Active Directory",
+          "text": "Domain creation, OUs, accounts and groups, Group Policy (GPO), DHCP and DNS on Windows Server. The AD, GPO and DHCP/DNS guides are further down."
+        },
+        "virtualization": {
+          "title": "Virtualization",
+          "text": "VMware ESXi (VMs, vSwitches, users and permissions), Proxmox for VMs and containers, Hyper-V for school labs."
+        },
+        "network": {
+          "title": "Networking",
+          "text": "IP addressing, VLANs and inter-VLAN routing, MikroTik and Zyxel router configuration with 4G failover, Cisco Wi-Fi access points, IPFire and pfSense firewalls."
+        },
+        "linux": {
+          "title": "Linux",
+          "text": "Debian and Ubuntu servers: DHCP, FTP, MariaDB, inter-VLAN routing, a Zabbix server and its agents."
+        },
+        "inventory": {
+          "title": "Asset management",
+          "text": "Hardware and software inventory with GLPI and FusionInventory, image deployment with FOG, naming rules that let you find any machine in ten seconds."
+        },
+        "code": {
+          "title": "Code",
+          "text": "Python for automation scripts, C# for console apps, HTML, CSS and JavaScript for the web, Git to version all of it."
+        },
+        "soft": {
+          "title": "Soft skills",
+          "text": "I stay calm when things break, I fix what blocks the most people first, and I document what I do: the ten PDF guides below are proof. I work as well alone as in a pair."
+        }
+      }
+    },
+    "missions": {
+      "title": "Internship assignments",
+      "meta": "{count} assignments",
+      "labels": {
+        "context": "Context",
+        "objective": "Goal",
+        "role": "My role",
+        "actions": "What I did"
+      },
+      "items": {
+        "support": {
+          "tab": "Support and network incidents",
+          "title": "Diagnose fast, fix properly",
+          "intro": "During my internship at Cekoya, I took part in client support: network incidents, unavailable services, unstable workstations, printing, access to resources. Support is mostly a method: identify, isolate, fix, then confirm.",
+          "missionLabel": "Featured assignment",
+          "mission": "Network incident: shares and printers unreachable on several workstations after a router or switch change. Goal: restore access quickly without disrupting production further.",
+          "context": "Several users report unreachable shared folders, missing printers and unstable connections. The issue seems limited to one part of the network.",
+          "objective": "Restore access to shares, printers and apps, check stability, then confirm with the affected users.",
+          "role": "DHCP/DNS, a VLAN mistake, a faulty cable or port, an address conflict: the first step was to find out whether the workstations or the network were at fault.",
+          "actions": [
+            "Check whether one workstation or several are affected",
+            "Check addressing: IP, gateway, DNS, DHCP lease",
+            "Test access: ping the gateway, the server, shares and printers",
+            "Isolate the area: switch port, VLAN, equipment linked to the affected workstations",
+            "Fix, then confirm with a real case (a share and a print job)"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "Support takes technical skills, but above all a clear method to cut downtime while leaving a clean result.",
+          "impacts": [
+            {
+              "title": "Prioritize",
+              "text": "I fix what blocks the most first (access to essential resources), then check stability before closing."
+            },
+            {
+              "title": "Confirm",
+              "text": "A fix is never assumed: I test it on a real workstation, then check with users that everything is back to normal."
+            }
+          ],
+          "tags": [
+            "Diagnosis",
+            "DHCP/DNS",
+            "VLAN",
+            "Validation"
+          ]
+        },
+        "project": {
+          "tab": "4G backup link",
+          "title": "Deploying a 4G backup connection",
+          "intro": "Assignment carried out during my internship at Cekoya, in a managed-services context with business clients (small companies, shops, public bodies).",
+          "missionLabel": "My part: configuring the 4G router",
+          "mission": "I handled the technical side of the 4G router: preparation, configuration, failover and testing. The goal: deliver a reliable setup, ready to install at the client's site.",
+          "context": "A client kept losing its main internet connection, which blocked its business tools, IP phones and day-to-day work.",
+          "objective": "Switch automatically to a backup connection, with no manual action, to limit the impact of outages.",
+          "role": "Preparation, configuration, failover and testing on my own; on-site integration with a senior technician.",
+          "actions": [
+            "Prepare the 4G link: SIM card, carrier settings, secured admin access",
+            "Configure automatic failover between the main line and 4G",
+            "Detect the outage and fail back once the main line is stable",
+            "Simulate outages to check the switch to 4G and its stability",
+            "Confirm the automatic return to the main line"
+          ],
+          "proofTitle": "Success criteria",
+          "proofText": "The setup passes when the client keeps a working connection during an outage, and both failover and failback happen on their own, reliably.",
+          "impacts": [
+            {
+              "title": "Reliability",
+              "text": "Simple to maintain, failover tested in realistic conditions before going live."
+            },
+            {
+              "title": "Working in a pair",
+              "text": "Technical preparation on my own, on-site integration and final validation with the senior technician."
+            }
+          ],
+          "tags": [
+            "MikroTik",
+            "Zyxel",
+            "Failover",
+            "4G"
+          ]
+        },
+        "assistance": {
+          "tab": "User assistance",
+          "title": "Fix it, then help the user help themselves",
+          "intro": "During my internship at Cekoya, I was often in direct contact with users, remotely or on-site. The goal: solve the incident quickly while explaining what's going on and what I'm doing.",
+          "missionLabel": "Featured assignment",
+          "mission": "Deploying a new workstation after an incident, with the user's environment restored and network checks.",
+          "context": "A user could no longer work: slowdowns, crashes, random access to network drives, printing and apps. The priority was to get them working again fast.",
+          "objective": "Provide a stable workstation, restore accounts, access and tools, and show the user simple checks they can do alone.",
+          "role": "Workstation install and setup, domain rejoin if needed, DHCP/DNS, share and printer checks, then follow-up with the user.",
+          "actions": [
+            "Prepare a clean workstation: updates, drivers, base settings",
+            "Check access: shares, printing, apps, browsing",
+            "Explain what was done and how to avoid it happening again",
+            "Have the user test their real tasks before closing"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "Assistance isn't just repairing: it means turning a technical problem into simple steps for the user.",
+          "impacts": [
+            {
+              "title": "Explain simply",
+              "text": "I describe what I do without jargon and leave two or three quick checks the user can redo alone (Wi-Fi, cable, restart)."
+            },
+            {
+              "title": "Close on real use",
+              "text": "The user tests their usual tasks. The ticket is only closed when the workstation actually works."
+            }
+          ],
+          "tags": [
+            "Workstation",
+            "Domain",
+            "Support",
+            "Coaching"
+          ]
+        },
+        "inventory": {
+          "tab": "Asset management",
+          "title": "Track the assets, avoid surprises",
+          "intro": "Asset management is the base of a clean IT system: knowing what hardware exists, where it is, what state it's in and who uses it. It's also what lets you anticipate failures and renewals.",
+          "missionLabel": "Featured assignment",
+          "mission": "Updating a client's asset inventory: checking hardware on-site, consolidating the data and updating the records to make maintenance and support easier.",
+          "context": "The client's inventory was incomplete: unlisted workstations, hardware that had changed hands, outdated details (model, serial number, location).",
+          "objective": "A reliable inventory of workstations, peripherals and network gear, with enough traceability to speed up support and plan renewals.",
+          "role": "On-site checks, data consolidation and inventory update. I also standardized some fields (names, locations, owners) so it stays readable over time.",
+          "actions": [
+            "Check workstations, screens, printers and visible network gear on-site",
+            "Update model, serial number, condition, location and user",
+            "Apply a naming rule (PC-XXX, ROOM-XXX) to find things fast",
+            "Spot ghost hardware: listed in the tool but missing on-site, and the other way round",
+            "Gather what support needs: OS, static IP, warranty, machine role"
+          ],
+          "proofTitle": "Why it matters",
+          "proofText": "The point isn't “doing an inventory”, it's structuring data reliable enough to be used every day for support, maintenance and security.",
+          "impacts": [
+            {
+              "title": "Field, tool, check",
+              "text": "I collect, structure, then check that the information is consistent and reusable."
+            },
+            {
+              "title": "Fewer incidents",
+              "text": "A clean inventory speeds up troubleshooting (which hardware, where, for whom) and helps track updates."
+            }
+          ],
+          "tags": [
+            "Inventory",
+            "Traceability",
+            "GLPI",
+            "On-site"
+          ]
+        },
+        "communication": {
+          "tab": "External communication",
+          "title": "Communicate to convince",
+          "intro": "How Cekoya communicates externally (image, acquisition, credibility), and how I apply the same logic to my own projects: content and services.",
+          "missionLabel": "External communication at Cekoya",
+          "mission": "Cekoya relies on several complementary channels: a showcase website, LinkedIn, Google presence and reviews, partnerships and trade shows. The goal: be visible, earn trust and create opportunities.",
+          "context": "Website (first impression), LinkedIn (professional image and network), Google (being found and recommended), partnerships (credibility on the ground), trade shows (visibility and trust).",
+          "objective": "Communication that holds up: the same message everywhere, backed by reputation.",
+          "role": "Analysing the communication channels, then applying the same logic to my projects: show, reassure, convert. My content is the proof.",
+          "actions": [
+            "Content: attract with proof by showing the level (pacing, transitions, sound design)",
+            "Trust: clear expectations, stated deadlines, precise feedback",
+            "Offer: what's included, how it works, what gets delivered",
+            "Website: reassure from the first impression",
+            "LinkedIn: build credibility and make contacts"
+          ],
+          "proofTitle": "What it shows",
+          "proofText": "I know how to sell with proof: content that reassures, a clear pitch and a simple offer. It's the same base as effective external communication in a company.",
+          "impacts": [
+            {
+              "title": "One consistent message",
+              "text": "The same pitch on the website, LinkedIn and Google; partners and client feedback back it up."
+            },
+            {
+              "title": "Applied to my projects",
+              "text": "Show, reassure, convert: my edits are direct proof of quality for Y-Services."
+            }
+          ],
+          "tags": [
+            "Website",
+            "LinkedIn",
+            "Google",
+            "Partnerships"
+          ]
+        }
+      }
+    },
+    "infra": {
+      "title": "Training network (BTS)",
+      "meta": "{count} nodes",
+      "intro": "The infrastructure built during the BTS: a VMware server hosting the IPFire firewall, the LAN servers and a WordPress site in a DMZ, behind the school network. Hover or select a node to see its role.",
+      "hint": "Hover or select a node: its role, its neighbours and the path from the school network show up here.",
+      "related": "Connected to",
+      "ungrouped": "School network",
+      "groups": {
+        "vmware": "VMware server",
+        "dmz": "DMZ"
+      },
+      "nodes": {
+        "school": {
+          "label": "School LAN",
+          "sub": "DHCP",
+          "role": "The school network: internet access comes in here, with an address assigned by DHCP."
+        },
+        "router": {
+          "label": "Router",
+          "sub": "192.168.1.1/24",
+          "role": "Main router, gateway to the school network."
+        },
+        "vswRed": {
+          "label": "vSwitch Red",
+          "sub": "192.168.1.0/24",
+          "role": "VMware virtual switch on the WAN side, connected to IPFire's Red interface."
+        },
+        "ipfire": {
+          "label": "IPFire",
+          "sub": "firewall",
+          "role": "Firewall VM: NAT, filtering and gateway between Red and Green. Red interface on 192.168.1.14/24, Green on 192.168.2.10/24.",
+          "tags": [
+            "NAT",
+            "Filtering",
+            "Red",
+            "Green"
+          ]
+        },
+        "vswGreen": {
+          "label": "vSwitch Green",
+          "sub": "192.168.2.0/24",
+          "role": "VMware virtual switch on the LAN side (Green zone)."
+        },
+        "glpi": {
+          "label": "GLPI",
+          "sub": "192.168.2.15",
+          "role": "Asset management: inventory, tickets and hardware tracking.",
+          "tags": [
+            "GLPI",
+            "FusionInventory"
+          ]
+        },
+        "fog": {
+          "label": "FOG",
+          "sub": "192.168.2.156",
+          "role": "Linux server for image deployment and cloning."
+        },
+        "winsrv": {
+          "label": "Windows Server",
+          "sub": "192.168.2.254",
+          "role": "Domain controller: Active Directory, DHCP, DNS and GPO.",
+          "tags": [
+            "AD DS",
+            "DHCP",
+            "DNS",
+            "GPO"
+          ]
+        },
+        "wordpress": {
+          "label": "WordPress",
+          "sub": "192.168.2.13",
+          "role": "Web server isolated in the DMZ, hosting the WordPress site."
+        },
+        "switch": {
+          "label": "Switch",
+          "sub": "physical LAN",
+          "role": "Physical switch carrying the LAN to the Wi-Fi access point."
+        },
+        "wifi": {
+          "label": "Wi-Fi AP",
+          "sub": "192.168.2.250",
+          "role": "Cisco Wi-Fi access point: wireless access to the LAN."
+        }
+      }
+    },
+    "watch": {
+      "title": "Tech watch",
+      "topic": "How server virtualization evolved, from VMware to today",
+      "sections": {
+        "before": {
+          "title": "Before virtualization",
+          "text": "One physical server, one service. The result: machines running at 10-20% of capacity, high costs, little flexibility and critical failures."
+        },
+        "vmware": {
+          "title": "VMware arrives",
+          "text": "In the late 1990s, the hypervisor separates hardware from the operating system: one physical machine hosts several isolated servers.",
+          "benefits": [
+            "Isolated environments",
+            "Fewer physical servers",
+            "Fast deployment through cloning",
+            "Better security through separation"
+          ]
+        },
+        "today": {
+          "title": "VMware today",
+          "text": "ESXi, vSphere and vCenter are still enterprise standards.",
+          "features": [
+            "vMotion: move a VM with no downtime",
+            "Snapshots: roll back to a previous state quickly",
+            "vSAN: distributed storage without a physical SAN",
+            "HA: automatic VM restart after a failure",
+            "Tanzu: Kubernetes integration"
+          ]
+        },
+        "broadcom": {
+          "title": "Since the Broadcom acquisition",
+          "text": "Broadcom closed its acquisition of VMware in November 2023, then replaced perpetual licenses with bundled subscriptions and dropped the free ESXi in early 2024. Many companies and homelabs started looking at Proxmox VE and Hyper-V, which is also why I practice all three."
+        },
+        "why": {
+          "title": "Why it matters",
+          "points": [
+            "Lower costs: hardware, power, maintenance",
+            "Faster, more flexible deployment",
+            "Isolation for better security",
+            "Service continuity (HA, clusters)",
+            "Easier move to the cloud"
+          ]
+        }
+      },
+      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
     }
   },
-  "links": {
-    "title": "MY links",
-    "subtitle": "Everything you need to contact me.",
-    "socialsTitle": "Social media",
-    "discordTitle": "Discord",
-    "contactTitle": "Contact",
-    "emailPro": "Email (Pro)",
-    "emailBusiness": "Email (Business)",
-    "sendMail": "Send a mail",
-    "sendMailBiz": "Send a mail (Business)",
-    "openMail": "Open mail app",
-    "joinServer": "Join the Server",
-    "editingServices": "Editing Services",
-    "copyHint": "Tips: click on copy to get my e-mail",
-    "copied": "Copied!"
+  "home": {
+    "hero": {
+      "avatarAlt": "Yexo's profile picture",
+      "realName": "Baptiste Dauvergne · {age} · France",
+      "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
+      "contact": "Contact me",
+      "whoami": {
+        "label": "Choose which profile to show",
+        "yexo": {
+          "title": "Yexo, the gaming and editing side.",
+          "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services.",
+          "path": "See my edits"
+        },
+        "baptiste": {
+          "title": "Baptiste, the infrastructure side.",
+          "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it.",
+          "path": "See my career"
+        }
+      }
+    },
+    "fastfetch": {
+      "keys": {
+        "hosts": "Hosts",
+        "firewall": "Firewall",
+        "hypervisors": "Hypervisors",
+        "network": "Network",
+        "cpu": "CPU",
+        "memory": "Memory",
+        "storage": "Storage",
+        "monitoring": "Monitoring",
+        "backups": "Backups",
+        "site": "Site",
+        "ranks": "Ranks",
+        "edits": "Editing"
+      },
+      "values": {
+        "hosts": "{machines} machines · {vms} VMs",
+        "network": "{vlans} VLANs · DMZ · WireGuard",
+        "threads": "{threads} threads",
+        "backups": "Veeam → NAS → off-site copy"
+      }
+    },
+    "edit": {
+      "title": "Featured edit",
+      "meta": "TikTok",
+      "posterAlt": "Frame from the edit",
+      "play": "Play the edit",
+      "tiktokNote": "Plays in the TikTok player, with volume control. Nothing loads from TikTok until you click.",
+      "open": "Watch on TikTok",
+      "frameTitle": "Valorant edit by Yexo (TikTok player)",
+      "controls": {
+        "play": "Play",
+        "pause": "Pause",
+        "mute": "Mute",
+        "unmute": "Unmute",
+        "volume": "Volume"
+      },
+      "videoLabel": "Yexo's Valorant video edit"
+    },
+    "gaming": {
+      "title": "Gaming",
+      "ranks": "Best ranks",
+      "recent": "{count, plural, one {Last match} other {Last # matches}}"
+    }
+  },
+  "lab": {
+    "units": {
+      "gb": "GB",
+      "tb": "TB"
+    },
+    "overview": {
+      "title": "Lab",
+      "meta": "since {year}",
+      "text": "My training ground since 2022: a pfSense firewall, Cisco and MikroTik switches, an ESXi host and Zabbix watching over all of it, plus a Hyper-V lab for school. Whatever I learn in class or at work, I rebuild here before I call it learned.",
+      "technologies": "Technologies used",
+      "siteLink": "How this site is hosted"
+    },
+    "stats": {
+      "machines": "Machines",
+      "guests": "Guests",
+      "threads": "Threads",
+      "memory": "Memory"
+    },
+    "map": {
+      "title": "Network map",
+      "meta": "{count} nodes",
+      "hint": "Hover or select a node: its role, its neighbours and the path from the internet show up here.",
+      "related": "Connected to",
+      "ungrouped": "Network core",
+      "links": {
+        "tunnel": "WireGuard tunnel"
+      }
+    },
+    "nodes": {
+      "internet": {
+        "label": "Internet",
+        "sub": "WAN",
+        "role": "Internet uplink. The ISP box runs in bridge mode: pfSense holds the public address, and only the WireGuard port is open."
+      },
+      "vps01": {
+        "sub": "public site",
+        "role": "Ubuntu VPS hosting this site behind Nginx and Let's Encrypt. It joins the homelab through a site-to-site WireGuard tunnel: metrics to Zabbix, backups to the NAS, access to the staging site in the DMZ."
+      },
+      "fw01": {
+        "sub": "pfSense",
+        "role": "Firewall and router between VLANs: every flow from one to another goes through an explicit rule. It also runs the WireGuard admin VPN and the Unbound DNS resolver."
+      },
+      "sw-core": {
+        "sub": "L2 core",
+        "role": "MikroTik core switch: 802.1Q trunks to pfSense and the hosts, per-VLAN access ports for everything else."
+      },
+      "sw-lab": {
+        "sub": "Cisco IOS",
+        "role": "Cisco practice switch: I use it to work on the IOS CLI and to connect the PC running the Hyper-V lab."
+      },
+      "ap01": {
+        "sub": "Wi-Fi 6",
+        "role": "Wi-Fi access point: one network for personal devices (VLAN 50) and an isolated one for guests and IoT (VLAN 60)."
+      },
+      "esxi01": {
+        "sub": "ESXi",
+        "role": "Main hypervisor: a second-hand tower, picked for being quiet and having ECC RAM. One port group per VLAN on the vSwitch."
+      },
+      "nas01": {
+        "sub": "backups",
+        "role": "RAID 1 NAS: target for the Veeam and VPS backups, with an encrypted off-site copy every week."
+      },
+      "dc01": {
+        "sub": "test AD",
+        "role": "Test domain controller (lab.yexo.lan): I rebuild GPOs and AD structures here before using them anywhere else."
+      },
+      "zbx01": {
+        "sub": "monitoring",
+        "role": "Zabbix: SNMP for pfSense, switches and the NAS, VMware template for ESXi, agent 2 on the VMs and on the VPS through the tunnel. Alerts go to Discord."
+      },
+      "bkp01": {
+        "sub": "Veeam",
+        "role": "Nightly VM backups to the NAS, with 14 restore points. One test restore a month: a backup you never restored isn't a backup."
+      },
+      "rp01": {
+        "sub": "reverse proxy",
+        "role": "Nginx reverse proxy in the DMZ. It only receives traffic coming from the VPS through the tunnel and can't open anything towards the LAN."
+      },
+      "hv-lab": {
+        "sub": "school lab",
+        "role": "PC running the Hyper-V school lab: a Debian server (DHCP, FTP, MariaDB, inter-VLAN routing), a Windows Server, a Windows client and a Linux client, on an isolated vSwitch."
+      },
+      "clients": {
+        "label": "clients",
+        "sub": "home · IoT",
+        "role": "PCs, phones, console and IoT devices. IoT and guests only get internet access."
+      }
+    },
+    "vlans": {
+      "title": "VLANs",
+      "meta": "{count} VLANs",
+      "items": {
+        "admin": "Management interfaces: pfSense, ESXi, switches, access point and NAS. Reachable only through the WireGuard VPN.",
+        "srv": "Internal servers: test AD, Zabbix, GLPI, Veeam and Docker. The home network only reaches the ports it needs (DNS, web).",
+        "dmz": "What's exposed: reverse proxy and the site's staging copy. Reachable only through the VPS tunnel, with no way into the LAN.",
+        "lab": "The Hyper-V school lab, isolated from everything else with internet access only. I can break anything there safely.",
+        "home": "Personal network: PCs, phones and console. Internet and internal DNS.",
+        "iot": "Guests and IoT devices: internet only, with client isolation."
+      }
+    },
+    "machines": {
+      "title": "Machines",
+      "meta": "{count} devices",
+      "os": "OS",
+      "cpu": "CPU",
+      "ram": "RAM",
+      "storage": "Disks",
+      "coresThreads": "{cores} c / {threads} t",
+      "vms": "{count, plural, one {# hosted VM} other {# hosted VMs}}",
+      "kinds": {
+        "firewall": "firewall",
+        "switch": "switch",
+        "ap": "Wi-Fi",
+        "hypervisor": "hypervisor",
+        "nas": "NAS",
+        "workstation": "workstation",
+        "vps": "VPS"
+      }
+    },
+    "resources": {
+      "title": "Resources",
+      "text": "Each use gets its own VLAN, and pfSense filters everything that crosses from one to another. On the ISP box, only the WireGuard port is open: anything public goes through the VPS, then through the tunnel to the reverse proxy in the DMZ. VMs are backed up every night to the NAS, with an off-site copy every week. Zabbix watches the hardware, the VMs and the VPS, and warns me before anyone else notices an outage.",
+      "access": {
+        "title": "Admin access",
+        "text": "WireGuard VPN into VLAN 10, one key per device, nothing else open on the ISP box."
+      },
+      "backups": {
+        "title": "3-2-1 backups",
+        "text": "VMs backed up nightly to the NAS, encrypted off-site copy weekly, restore tested monthly."
+      },
+      "monitoring": {
+        "title": "Monitoring",
+        "text": "Zabbix watches hardware, VMs and the VPS, with alerts on Discord."
+      }
+    }
+  },
+  "gaming": {
+    "ranks": {
+      "title": "Ranks",
+      "meta": "{count} games",
+      "peak": "Peak rank",
+      "alt": "{rank} rank icon in {game}",
+      "items": {
+        "valorant": {
+          "rank": "Radiant",
+          "current": "Currently Immortal 3"
+        },
+        "faceit": {
+          "rank": "Level 10",
+          "platform": "CS:GO / CS2"
+        },
+        "apex": {
+          "rank": "Master"
+        },
+        "clashRoyale": {
+          "rank": "Ultimate Champion"
+        }
+      }
+    },
+    "tracker": {
+      "title": "Live Valorant",
+      "peak": "Peak rank",
+      "peakSeason": "Episode {episode} · Act {act}",
+      "peakStillHere": "The peak stays visible: it doesn't depend on the API.",
+      "recent": "{count, plural, one {Last match} other {Last # matches}}",
+      "loading": "Loading recent matches…",
+      "empty": "No recent matches found on this account.",
+      "errors": {
+        "rateLimit": "Too many requests to the API. Try again in a minute.",
+        "unavailable": "Stats are unavailable right now.",
+        "network": "Can't reach the server."
+      },
+      "retry": "Try again",
+      "retryIn": "Try again ({seconds}s)",
+      "resultsSummary": "{wins} wins and {losses} losses in recent matches",
+      "result": {
+        "win": "Win",
+        "loss": "Loss",
+        "unknown": "Unknown result"
+      },
+      "stats": {
+        "kd": "K/D",
+        "hs": "HS%",
+        "winrate": "Win rate",
+        "kda": "K / D / A",
+        "hsSub": "Average over {count} matches",
+        "hsNa": "No shots recorded",
+        "kdSub": "{kills} kills · {deaths} deaths",
+        "winSub": "{wins} W · {losses} L",
+        "winNa": "Results unavailable",
+        "kdaSub": "Total over {count} matches"
+      },
+      "trackerTitle": "Valorant tracker",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing…",
+      "auto": "Auto",
+      "autoLabel": "Automatic refresh every 90 seconds",
+      "status": {
+        "loading": "Loading…",
+        "ready": "Updated at {time}",
+        "empty": "No matches",
+        "error": "Unavailable"
+      }
+    },
+    "intro": {
+      "title": "Gaming",
+      "tagline": "Mostly Valorant, with stints in CS, Apex and Clash Royale. I play less than I used to, but the aim stuck around."
+    },
+    "matches": {
+      "title": "Recent matches",
+      "meta": "unrated",
+      "unavailable": "The match list will show up as soon as the API responds again.",
+      "note": "Click a match to see the shot breakdown. Data from the HenrikDev API.",
+      "columns": {
+        "score": "Score",
+        "kda": "K/D/A",
+        "hs": "HS%"
+      },
+      "detail": {
+        "kills": "Kills",
+        "deaths": "Deaths",
+        "assists": "Assists",
+        "score": "Score",
+        "headshots": "Head",
+        "bodyshots": "Body",
+        "legshots": "Legs",
+        "accuracy": "Shot breakdown",
+        "shots": "shots",
+        "close": "Close"
+      }
+    },
+    "setup": {
+      "title": "Setup",
+      "meta": "{count} items",
+      "items": {
+        "mouse": "Mouse",
+        "keyboard": "Keyboard",
+        "mousepad": "Mousepad"
+      },
+      "partner": "−{discount}% with code {code}",
+      "codeLabel": "the promo code"
+    }
+  },
+  "tools": {
+    "converter": {
+      "title": "Sensitivity converter",
+      "meta": "{count} games",
+      "intro": "Switch games without relearning your aim: the converter keeps the same mouse distance for a full turn (cm/360).",
+      "from": "Source",
+      "to": "Target",
+      "game": "Game",
+      "sens": "Sensitivity",
+      "dpi": "DPI",
+      "targetDpi": "Target DPI",
+      "sameDpi": "Same DPI",
+      "swap": "Swap source and target",
+      "mine": "My setup: {sens} at {dpi} DPI",
+      "result": "Target sensitivity",
+      "in": "to enter in {game}",
+      "cm360Sub": "Same physical distance across games",
+      "in360": "{value} inches per turn",
+      "edpiSub": "Sensitivity × DPI",
+      "edpiTo": "{value} on target",
+      "errors": {
+        "invalidSens": "Enter a valid sensitivity.",
+        "invalidDpi": "Enter a valid DPI.",
+        "invalidTargetDpi": "Enter a valid target DPI."
+      }
+    },
+    "how": {
+      "title": "How it works",
+      "text": "Each game multiplies your sensitivity by a coefficient, the yaw. The converter works out how far your mouse travels for a full turn, then the sensitivity that gives the same distance in the target game.",
+      "formula": "Formulas",
+      "yaw": "Yaw values",
+      "note": "Result rounded to 4 decimals. The dot is the decimal separator, as in games."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "meta": "{count} channels",
+    "intro": "Every way to reach me, in one place. For a Y-Services order, a Discord ticket is still the fastest.",
+    "keys": {
+      "proEmail": "email.work",
+      "businessEmail": "email.business",
+      "discord": "discord",
+      "discordEdits": "discord.edits",
+      "tiktok": "tiktok",
+      "instagram": "instagram.personal",
+      "instagramFps": "instagram.fps",
+      "linktree": "linktree"
+    },
+    "comments": {
+      "proEmail": "work-study, internships, professional topics",
+      "businessEmail": "orders, partnerships, collaborations",
+      "discord": "the server, with tickets to place an order",
+      "discordEdits": "the server dedicated to editing",
+      "tiktok": "my video edits",
+      "instagram": "personal account",
+      "instagramFps": "FPS account",
+      "linktree": "all my links in one place"
+    },
+    "write": "Write",
+    "open": "Open",
+    "writeLabel": "Write to {email}",
+    "openLabel": "Open {name} (new tab)",
+    "subjects": {
+      "pro": "Contact from yexofps.org",
+      "business": "Business request from yexofps.org"
+    },
+    "routing": {
+      "title": "Who to contact",
+      "pro": {
+        "title": "Work-study, internship, professional topic",
+        "text": "Write to the work address, with the topic of your request in the subject line."
+      },
+      "order": {
+        "title": "Y-Services order",
+        "text": "Open a ticket on Discord, it's the fastest. The business email works too."
+      },
+      "collab": {
+        "title": "Partnership or collaboration",
+        "text": "Use the business email and describe your project in a few lines."
+      },
+      "tip": "For an order, mention the product, your software and what you want to achieve."
+    }
+  },
+  "og": {
+    "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
+    "chips": {
+      "sysadmin": "Systems and networks",
+      "fps": "FPS · Valorant",
+      "video": "Video editing"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This page doesn't exist or moved when the site was redesigned. Shortcuts 1 to 7 and search (Ctrl+K) still work.",
+    "home": "Back to home",
+    "contact": "Report a broken link"
+  },
+  "sectionNav": {
+    "label": "On this page",
+    "career": {
+      "intro": "Profile",
+      "timeline": "Timeline",
+      "skills": "Skills",
+      "missions": "Assignments",
+      "infra": "BTS network",
+      "watch": "Tech watch",
+      "docs": "Guides"
+    },
+    "lab": {
+      "overview": "Overview",
+      "map": "Map",
+      "vlans": "VLANs",
+      "resources": "Resources",
+      "machines": "Machines"
+    },
+    "gaming": {
+      "ranks": "Ranks",
+      "tracker": "Tracker",
+      "matches": "Matches",
+      "settings": "Settings",
+      "setup": "Setup"
+    },
+    "creator": {
+      "bio": "Bio",
+      "partners": "Partners",
+      "history": "History",
+      "edits": "Edits",
+      "reviews": "Reviews",
+      "services": "Y-Services",
+      "order": "Order"
+    }
+  },
+  "valoSettings": {
+    "summary": {
+      "title": "Valorant settings",
+      "meta": "{count} settings",
+      "back": "Gaming",
+      "captured": "Updated {date}",
+      "sens": "Sensitivity",
+      "dpi": "DPI",
+      "edpi": "eDPI",
+      "cm360": "cm / 360°",
+      "display": "Display",
+      "crosshair": "Crosshair",
+      "convert": "Convert my sens to another game"
+    },
+    "menu": {
+      "title": "Settings menu",
+      "tabs": "Settings tabs",
+      "subTabs": "{tab} sub-tabs",
+      "unbound": "unbound",
+      "modified": "changed",
+      "muted": "muted",
+      "approx": "about {pct}%"
+    },
+    "crosshair": {
+      "description": "Crosshair preview: {length} px lines, {thickness} px thick, {offset} px gap, color {color}, no outline or center dot.",
+      "codeLabel": "the crosshair code",
+      "zoom": "Zoom ×{zoom}",
+      "backgrounds": {
+        "stone": "Background: light wall",
+        "sky": "Background: sky",
+        "foliage": "Background: foliage",
+        "dark": "Background: dark"
+      }
+    },
+    "teaser": {
+      "title": "Valorant settings",
+      "text": "Sens, crosshair, keybinds, video, audio: my whole setup.",
+      "open": "Open my settings"
+    }
+  },
+  "now": {
+    "title": "Right now",
+    "meta": "Paris time",
+    "loading": "Working out my status…",
+    "parisTime": "It's {time} in Paris",
+    "progressLabel": "Time slot progress",
+    "remaining": "{duration} left",
+    "next": "Next: {activity} at {time}",
+    "activities": {
+      "music": {
+        "title": "Music",
+        "text": "Some music before the day starts."
+      },
+      "work": {
+        "title": "At work or in class",
+        "text": "Work-study day, at the company or at school."
+      },
+      "valorant": {
+        "title": "Playing Valorant",
+        "text": "In a match or between two."
+      },
+      "editing": {
+        "title": "Editing",
+        "text": "Working on a Valorant video edit."
+      },
+      "grass": {
+        "title": "Outside, touching grass",
+        "text": "Away from the screen, for once."
+      },
+      "offline": {
+        "title": "Offline",
+        "text": "Asleep."
+      },
+      "game": {
+        "title": "Playing {name}",
+        "text": "In a match."
+      }
+    },
+    "short": {
+      "music": "music",
+      "work": "work",
+      "valorant": "valorant",
+      "editing": "editing",
+      "grass": "outside",
+      "offline": "offline",
+      "game": "{name}"
+    },
+    "availability": {
+      "open": "Available to reply",
+      "slow": "Slower to reply",
+      "mail": "Unlikely to reply, except by email",
+      "asleep": "I'll reply when I wake up"
+    },
+    "actions": {
+      "mail": "Send an email",
+      "mailLabel": "the work email",
+      "discord": "Discord",
+      "spotify": "Listen on Spotify",
+      "valorant": "My latest matches",
+      "editing": "My edits",
+      "work": "My background"
+    },
+    "week": {
+      "title": "My typical week",
+      "tabs": "Day type",
+      "weekday": "Mon – Fri",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "now": "now"
+    },
+    "chip": {
+      "label": "Right now",
+      "aria": "Right now: {activity}"
+    },
+    "duration": {
+      "m": "{m} min",
+      "h": "{h}h",
+      "hm": "{h}h {m}min"
+    },
+    "since": "for {duration}",
+    "source": {
+      "discord": "live",
+      "schedule": "schedule"
+    },
+    "discord": {
+      "label": "Discord: {status}",
+      "online": "online",
+      "idle": "away",
+      "offline": "offline",
+      "avatar": "My Discord avatar, {status}"
+    },
+    "spotify": {
+      "label": "Listening to",
+      "cover": "{album} cover",
+      "progress": "Track progress",
+      "open": "Listen to {song} on Spotify"
+    }
+  },
+  "hosting": {
+    "title": "This site",
+    "meta": "live",
+    "back": "Lab",
+    "intro": "yexofps.org runs on my own Linux VPS, which I manage myself. The figures below are read live from the server.",
+    "unavailable": "unavailable",
+    "tiles": {
+      "rtt": "Response time",
+      "rttSub": "from your browser",
+      "system": "Server up for",
+      "app": "App up for",
+      "appSub": "since last restart",
+      "deploy": "Last deploy"
+    },
+    "duration": {
+      "d": "{d}d {h}h",
+      "h": "{h}h {m}m",
+      "m": "{m} min",
+      "lt": "under a minute"
+    },
+    "path": {
+      "title": "The path of a request",
+      "chain": "From the browser to the app",
+      "visitor": "Your browser",
+      "cloudflareSub": "CDN and protection",
+      "proxy": "Reverse proxy",
+      "proxySub": "HTTPS termination",
+      "vps": "VPS",
+      "branches": "What the app does",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker"
+      },
+      "items": {
+        "pages": {
+          "title": "Pages",
+          "sub": "generated at build time, in French and English"
+        },
+        "valorant": {
+          "title": "Valorant API",
+          "sub": "the tracker, via HenrikDev"
+        },
+        "presence": {
+          "title": "Status API",
+          "sub": "live Discord via Lanyard, 15 s cache"
+        },
+        "host": {
+          "title": "Server API",
+          "sub": "the figures on this page"
+        },
+        "images": {
+          "title": "Images",
+          "sub": "resized and served by the server"
+        }
+      }
+    },
+    "server": {
+      "title": "The server",
+      "unavailable": "Server figures are unavailable right now.",
+      "provider": "Host",
+      "os": "System",
+      "cpu": "CPUs",
+      "cpuValue": "{n} vCPU",
+      "memory": "Memory in use",
+      "memoryValue": "{used} / {total} GB",
+      "load": "Load (1 min)",
+      "node": "Node.js",
+      "manager": "Run by",
+      "managers": {
+        "pm2": "PM2",
+        "systemd": "systemd",
+        "docker": "Docker",
+        "none": "not detected"
+      },
+      "certificate": "HTTPS certificate",
+      "certificateValue": "{issuer} · expires in {days} d"
+    },
+    "stack": {
+      "title": "The stack",
+      "framework": "Framework",
+      "language": "Language",
+      "styles": "Styles",
+      "i18n": "Translations",
+      "fonts": "Fonts",
+      "fontsValue": "Geist, served by the site",
+      "data": "Content",
+      "dataValue": "config files, no database",
+      "tracking": "Tracking",
+      "trackingValue": "no third-party analytics"
+    }
   }
 }

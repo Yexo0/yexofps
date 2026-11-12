@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# yexofps.org
 
-## Getting Started
+Site perso de Baptiste Dauvergne (Yexo) : parcours en administration systèmes et réseaux, homelab, rangs, tracker et settings Valorant, edits et Y-Services, convertisseur de sensibilité.
 
-First, run the development server:
+Next.js 16 · TypeScript · Tailwind CSS v4 · next-intl (FR / EN) · auto-hébergé sur un VPS Ubuntu.
+
+## Lancer le projet
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le tracker Valorant a besoin d'une clé HenrikDev dans `.env.local` :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+HENRIK_API_KEY=ta_cle
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sans clé, le site fonctionne : le tracker affiche un état « indisponible » et le peak reste visible.
 
-## Learn More
+## Modifier le contenu
 
-To learn more about Next.js, take a look at the following resources:
+| Quoi | Où |
+|------|----|
+| Couleur d'accent (toute la palette en découle) | `src/config/theme.ts` |
+| Liens, emails, partenaires, produits, rangs, setup, compte du tracker | `src/config/site.ts` |
+| Homelab (machines, VM, VLAN, schéma) | `src/config/lab.ts` |
+| Parcours (frise, compétences, missions, tutos) | `src/config/career.ts` |
+| Emploi du temps de la page /now (statut en direct, dispo pour répondre) | `src/config/now.ts` (lien Spotify : `SPOTIFY_URL` dans `site.ts`) |
+| Page « Ce site » (/lab/site) : hébergeur et reverse proxy affichés | `HOSTING` dans `src/config/site.ts` (le reste est lu en direct sur le serveur) |
+| Statut Discord en direct sur /now | `DISCORD_USER_ID` dans `src/config/site.ts` (il faut avoir rejoint le serveur Discord de Lanyard), jeux reconnus : `PRESENCE_ACTIVITIES` dans `src/config/now.ts` |
+| Settings Valorant (tous les onglets, réticule, affichage) | `src/config/valorant-settings.ts` (sensi et DPI : `MY_SENS` dans `site.ts`) |
+| Tous les textes | `messages/fr.json`, `messages/en.json` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dans `src/config/lab.ts`, chaque élément inventé porte `placeholder: true` et un commentaire `PLACEHOLDER` : remplace-le par tes vraies infos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Vidéo à la une (accueil)
 
-## Deploy on Vercel
+Le lecteur de l'accueil lit `public/videos/featured-edit.mp4`, hébergé sur le site (rien n'est demandé à TikTok). Sans ce fichier, l'accueil affiche le lecteur TikTok, chargé au clic.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Avant de l'ajouter, compresse-le (720 × 1280, démarrage rapide, quelques Mo au lieu de 30) :
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+ffmpeg -i montage.mp4 -vf "scale=-2:1280" -c:v libx264 -preset slow -crf 24 -c:a aac -b:a 128k -movflags +faststart featured-edit.mp4
+```
+
+Image d'aperçu facultative (puis `poster: "/videos/featured-edit.jpg"` dans `FEATURED_EDIT`) :
+
+```bash
+ffmpeg -ss 0.5 -i featured-edit.mp4 -frames:v 1 -q:v 3 featured-edit.jpg
+```
+
+Le navigateur garde la vidéo en cache 7 jours : pour la remplacer, change aussi son nom de fichier (et `video` dans `FEATURED_EDIT`).
+
+## Vérifications avant de déployer
+
+```bash
+npm run lint
+npm run build
+```

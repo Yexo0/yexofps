@@ -1,12 +1,11 @@
-// src/i18n/request.ts
+// src/i18n/request.ts — Chargement des messages côté serveur.
+import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
 export default getRequestConfig(async ({ requestLocale }) => {
-  let locale = await requestLocale;
-  if (!locale || !routing.locales.includes(locale as "en" | "fr")) {
-    locale = routing.defaultLocale;
-  }
+  const requested = await requestLocale;
+  const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
   return {
     locale,
     messages: (await import(`../../messages/${locale}.json`)).default,

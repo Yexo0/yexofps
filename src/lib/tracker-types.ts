@@ -72,13 +72,3 @@ export function computeStats(matches: MatchData[]): TrackerStats {
     matchCount: matches.length,
   };
 }
-
-export function fmtPct(x: number): string {
-  if (!isFinite(x)) return "—";
-  return (x * 100).toFixed(1) + "%";
-}
-
-export function fmtNum(x: number, digits = 2): string {
-  if (!isFinite(x)) return "—";
-  return Number(x).toFixed(digits);
-}

@@ -1,159 +1,143 @@
-// src/app/[locale]/page.tsx — Dashboard
+// src/app/[locale]/page.tsx — 01 Accueil, volontairement aéré : hero, montage à la une (avec le son),
+// fastfetch court (côté infra) et carte Gaming (rangs + dernières parties).
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-import { User, Gamepad2, Store, Link as LinkIcon, Crosshair, ArrowLeftRight, Briefcase } from "lucide-react";
-import { DashboardReveal } from "@/components/dashboard/dashboard-reveal";
-import { Orbitron } from "next/font/google";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Mail, Play } from "lucide-react";
+import { FEATURED_EDIT, PROFILE, SOCIALS } from "@/config/site";
+import { pageMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+import { Reticle } from "@/components/ui/reticle";
+import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
+import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
+import { LiveCard } from "@/components/home/live-card";
+import { Fastfetch } from "@/components/home/fastfetch";
+import { Whoami } from "@/components/home/whoami";
+import { FeaturedEdit } from "@/components/home/featured-edit";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700", "900"] });
+/** Vidéo à la une seulement si le fichier existe dans public/ (vérifié au build) : sinon lecteur TikTok */
+function featuredVideo(): string | undefined {
+  const video = FEATURED_EDIT.video;
+  return video && existsSync(join(process.cwd(), "public", video)) ? video : undefined;
+}
 
-const NAV_ITEMS = [
-  { key: "profile", href: "/profil", icon: User, accent: "purple" },
-  { key: "ranks", href: "/ranks", icon: Gamepad2, accent: "blue" },
-  { key: "shop", href: "/shop", icon: Store, accent: "pink" },
-  { key: "tracker", href: "/tracker", icon: Crosshair, accent: "cyan" },
-  { key: "convert", href: "/convert", icon: ArrowLeftRight, accent: "green" },
-  { key: "links", href: "/liens", icon: LinkIcon, accent: "purple" },
-] as const;
+type Props = { params: Promise<{ locale: string }> };
 
-const PRO_ITEM = { key: "pro", href: "/pro", icon: Briefcase, accent: "amber" } as const;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return pageMetadata({ locale, path: "/", title: t("home.title"), description: t("home.description"), absoluteTitle: true });
+}
 
-const ACCENT_BG: Record<string, string> = {
-  purple: "rgba(167, 139, 250, 0.10)",
-  blue: "rgba(96, 165, 250, 0.10)",
-  pink: "rgba(244, 114, 182, 0.10)",
-  cyan: "rgba(34, 211, 238, 0.10)",
-  green: "rgba(110, 227, 183, 0.10)",
-  amber: "rgba(251, 191, 36, 0.10)",
-};
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <Home />;
+}
 
-const ACCENT_GLOW: Record<string, string> = {
-  purple: "0 0 25px rgba(167, 139, 250, 0.12), 0 0 60px rgba(167, 139, 250, 0.05)",
-  blue: "0 0 25px rgba(96, 165, 250, 0.12), 0 0 60px rgba(96, 165, 250, 0.05)",
-  pink: "0 0 25px rgba(244, 114, 182, 0.12), 0 0 60px rgba(244, 114, 182, 0.05)",
-  cyan: "0 0 25px rgba(34, 211, 238, 0.12), 0 0 60px rgba(34, 211, 238, 0.05)",
-  green: "0 0 25px rgba(110, 227, 183, 0.12), 0 0 60px rgba(110, 227, 183, 0.05)",
-  amber: "0 0 25px rgba(251, 191, 36, 0.12), 0 0 60px rgba(251, 191, 36, 0.05)",
-};
+function Home() {
+  const t = useTranslations("home");
+  const video = featuredVideo();
+  // Vidéo horizontale : grande carte sous le hero ; sinon (vertical ou TikTok) colonne étroite à droite
+  const landscape = Boolean(video) && FEATURED_EDIT.aspect === "landscape";
 
-const ACCENT_BORDER: Record<string, string> = {
-  purple: "rgba(167, 139, 250, 0.25)",
-  blue: "rgba(96, 165, 250, 0.25)",
-  pink: "rgba(244, 114, 182, 0.25)",
-  cyan: "rgba(34, 211, 238, 0.25)",
-  green: "rgba(110, 227, 183, 0.25)",
-  amber: "rgba(251, 191, 36, 0.25)",
-};
-
-const ACCENT_TEXT: Record<string, string> = {
-  purple: "text-purple-400",
-  blue: "text-blue-400",
-  pink: "text-pink-400",
-  cyan: "text-cyan-400",
-  green: "text-emerald-400",
-  amber: "text-amber-400",
-};
-
-function DashCard({
-  href,
-  accent,
-  icon: Icon,
-  title,
-  label,
-}: {
-  href: string;
-  accent: string;
-  icon: React.ElementType;
-  title: string;
-  label: string;
-}) {
-  return (
-    <Link
-      href={href as "/profil"}
-      className="dashboard-card no-underline group"
+  const edit = (
+    <Card
+      id="edit"
+      icon={Play}
+      title={t("edit.title")}
+      subtitle="mpv ~/edits/une.mp4"
+      meta={t("edit.meta")}
+      index={landscape ? 2 : 1}
+      className={landscape ? "md:col-span-6 lg:col-span-8" : "md:col-span-6 lg:col-span-4 lg:row-span-2"}
     >
-      <div
-        className="glass-panel gradient-border !p-7 sm:!p-8 cursor-pointer hover:scale-[1.025] transition-all duration-300 flex flex-col items-center text-center gap-4"
-        style={{
-          "--card-glow": ACCENT_GLOW[accent],
-          "--card-border": ACCENT_BORDER[accent],
-        } as React.CSSProperties}
-      >
-        <span
-          className="dash-icon w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300"
-          style={{ background: ACCENT_BG[accent] }}
-        >
-          <Icon className={`w-6 h-6 ${ACCENT_TEXT[accent]}`} />
-        </span>
-        <h2 className="text-[1.2rem] sm:text-[1.3rem] font-bold text-white leading-tight">
-          {title}
-        </h2>
-        <span className="text-[0.75rem] text-white/30 font-medium uppercase tracking-widest">
-          {label}
-        </span>
+      <FeaturedEdit video={video} landscape={landscape} />
+    </Card>
+  );
+
+  if (landscape) {
+    return (
+      <div className="bento lg:gap-4">
+        <Hero className="lg:col-span-7" />
+        <LiveCard index={1} className="md:col-span-6 lg:col-span-5" />
+        {edit}
+        <Fastfetch index={3} className="md:col-span-6 lg:col-span-4" />
       </div>
-    </Link>
+    );
+  }
+
+  return (
+    <div className="bento lg:gap-4">
+      <Hero className="lg:col-span-8" />
+      {edit}
+      <Fastfetch index={2} className="md:col-span-3 lg:col-span-4" />
+      <LiveCard index={3} className="md:col-span-3 lg:col-span-4" />
+    </div>
   );
 }
 
-export default function DashboardPage() {
-  const t = useTranslations("dashboard");
+function Hero({ className }: { className?: string }) {
+  const t = useTranslations("home.hero");
 
   return (
-    <DashboardReveal>
-      <div className="min-h-screen flex flex-col items-center px-5 sm:px-6 pt-[56px] pb-4">
-        {/* Avatar + Identity */}
-        <div className="dashboard-avatar flex flex-col items-center gap-3 mb-10">
-          <div className="avatar-wrapper w-[120px] h-[120px]">
+    <section
+      aria-labelledby="hero-title"
+      className={cn("card justify-between gap-10 md:col-span-6 lg:p-10", className)}
+      style={{ ["--i" as string]: 0 }}
+    >
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
+        <span className="absolute -left-24 -top-28 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)] opacity-80" />
+      </span>
+      <div className="relative">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end">
+          <span className="relative shrink-0 p-2.5">
+            <Reticle size={12} inset={0} />
             <Image
-              src="/images/IMG_4549.png"
-              alt="Yexo avatar"
-              width={120}
-              height={120}
-              className="w-full h-full object-cover bg-[#111]"
-              priority
+              src="/images/avatar.webp"
+              alt={t("avatarAlt")}
+              width={128}
+              height={128}
+              preload
+              className="h-24 w-24 rounded-xl object-cover sm:h-28 sm:w-28"
             />
-          </div>
-          <div className="text-center">
+          </span>
+          <div className="min-w-0">
             <h1
-              className={`${orbitron.className} hero-title text-[2rem] sm:text-[2.3rem] font-black tracking-[0.08em]`}
+              id="hero-title"
+              className="hero-title text-[64px] font-bold leading-[0.9] tracking-[-0.04em] text-fg sm:text-[88px] xl:text-[104px]"
             >
-              YEXO
+              Yexo
             </h1>
-            <p className="text-white/40 text-[0.7rem] sm:text-xs mt-1.5 font-medium uppercase tracking-[0.25em]">
-              Content Creator &bull; Valorant
-            </p>
+            <p className="label mt-3">{t("realName", { age: PROFILE.age })}</p>
           </div>
         </div>
 
-        {/* Nav Grid — larger cards */}
-        <div className="w-full max-w-[780px] grid grid-cols-2 gap-4 sm:gap-5">
-          {NAV_ITEMS.map((item) => (
-            <DashCard
-              key={item.key}
-              href={item.href}
-              accent={item.accent}
-              icon={item.icon}
-              title={t(`${item.key}.title`)}
-              label={t(`${item.key}.button`)}
-            />
-          ))}
-        </div>
-
-        {/* Pro Card — centered below */}
-        <div className="w-full max-w-[780px] flex justify-center mt-4 sm:mt-5">
-          <div className="w-full max-w-[calc(50%-10px)]">
-            <DashCard
-              href={PRO_ITEM.href}
-              accent={PRO_ITEM.accent}
-              icon={PRO_ITEM.icon}
-              title={t(`${PRO_ITEM.key}.title`)}
-              label={t(`${PRO_ITEM.key}.button`)}
-            />
-          </div>
+        <p className="mt-9 max-w-[30ch] text-[24px] font-bold leading-[1.2] tracking-tight text-fg sm:text-[30px]">
+          {t("tagline")}
+        </p>
+        <div className="mt-6">
+          <Whoami />
         </div>
       </div>
-    </DashboardReveal>
+
+      <div className="stagger relative flex flex-wrap items-center gap-2.5">
+        <ExternalButton href={SOCIALS.tiktok.url} variant="primary" aria-label={`TikTok ${SOCIALS.tiktok.handle}`}>
+          <TikTokIcon size={16} />
+          TikTok
+        </ExternalButton>
+        <ExternalButton href={SOCIALS.discord.url} variant="tonal">
+          <DiscordIcon size={17} />
+          Discord
+        </ExternalButton>
+        <ButtonLink href="/contact" variant="tonal">
+          <Mail size={16} aria-hidden="true" />
+          {t("contact")}
+        </ButtonLink>
+      </div>
+    </section>
   );
 }
