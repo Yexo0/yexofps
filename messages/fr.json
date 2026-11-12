@@ -33,7 +33,7 @@
     },
     "valoSettings": {
       "title": "Settings Valorant",
-      "description": "Tous mes réglages Valorant, rangés comme dans le menu du jeu : sensibilité {sens} à {dpi} DPI, code du réticule, touches, vidéo, audio."
+      "description": "Tous mes réglages Valorant : sensibilité {sens} à {dpi} DPI, code du réticule, touches, vidéo, audio."
     }
   },
   "common": {
@@ -1219,9 +1219,7 @@
       "title": "Settings Valorant",
       "meta": "{count} réglages",
       "back": "Gaming",
-      "tagline": "Ma config complète, comme dans le menu du jeu.",
-      "intro": "Tous mes réglages, onglet par onglet, dans le même ordre qu'en jeu. Les libellés sont ceux de mon client (en anglais) et les valeurs ont été relevées directement dans le jeu.",
-      "captured": "Relevé en jeu le {date}",
+      "captured": "Mis à jour le {date}",
       "sens": "Sensibilité",
       "dpi": "DPI",
       "edpi": "eDPI",
@@ -1252,7 +1250,7 @@
     },
     "teaser": {
       "title": "Settings Valorant",
-      "text": "Sensi, réticule, touches, vidéo, audio : toute ma config, rangée onglet par onglet comme dans le menu du jeu.",
+      "text": "Sensi, réticule, touches, vidéo, audio : toute ma config.",
       "open": "Ouvrir mes settings"
     }
   }

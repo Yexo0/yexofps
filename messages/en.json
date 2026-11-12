@@ -33,7 +33,7 @@
     },
     "valoSettings": {
       "title": "Valorant settings",
-      "description": "All my Valorant settings, laid out like the in-game menu: {sens} sensitivity at {dpi} DPI, crosshair code, keybinds, video, audio."
+      "description": "All my Valorant settings: {sens} sensitivity at {dpi} DPI, crosshair code, keybinds, video, audio."
     }
   },
   "common": {
@@ -1219,9 +1219,7 @@
       "title": "Valorant settings",
       "meta": "{count} settings",
       "back": "Gaming",
-      "tagline": "My full setup, laid out like the in-game menu.",
-      "intro": "Every setting, tab by tab, in the same order as in the game. Labels come straight from my client and values were read directly in game.",
-      "captured": "Read in game on {date}",
+      "captured": "Updated {date}",
       "sens": "Sensitivity",
       "dpi": "DPI",
       "edpi": "eDPI",
@@ -1252,7 +1250,7 @@
     },
     "teaser": {
       "title": "Valorant settings",
-      "text": "Sens, crosshair, keybinds, video, audio: my whole setup, tab by tab, laid out like the in-game menu.",
+      "text": "Sens, crosshair, keybinds, video, audio: my whole setup.",
       "open": "Open my settings"
     }
   }

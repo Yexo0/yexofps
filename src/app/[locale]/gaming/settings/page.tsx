@@ -52,31 +52,29 @@ function Summary() {
       index={0}
       className="md:col-span-6 lg:col-span-12"
     >
-      <div className="grid gap-5 lg:grid-cols-12 lg:gap-6">
-        <div className="flex flex-col items-start gap-3 lg:col-span-5">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
           <ButtonLink href="/gaming" variant="ghost" size="sm" className="-ml-2">
             <ArrowLeft size={14} aria-hidden="true" />
             {t("back")}
           </ButtonLink>
-          <p className="max-w-[34ch] text-[22px] font-bold leading-tight tracking-tight">{t("tagline")}</p>
-          <p className="max-w-[60ch] text-sm leading-relaxed text-muted">{t("intro")}</p>
-          <p className="font-mono text-[11.5px] text-dim">{t("captured", { date: captured })}</p>
-          <ButtonLink href="/tools#converter" variant="tonal" size="sm" className="mt-1">
-            <SlidersHorizontal size={14} aria-hidden="true" />
-            {t("convert")}
-          </ButtonLink>
-        </div>
-        <div className="flex min-w-0 flex-col gap-2.5 lg:col-span-7">
-          <SensTiles />
-          <div className="grid gap-2.5 sm:grid-cols-2">
-            <CrosshairTile />
-            <StatTile
-              label={t("display")}
-              value={VALO_DISPLAY.resolution}
-              unit={`${VALO_DISPLAY.ratio} · ${VALO_DISPLAY.hz} Hz`}
-              className="[&_span:first-child]:text-[24px]"
-            />
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="font-mono text-[11.5px] text-dim">{t("captured", { date: captured })}</p>
+            <ButtonLink href="/tools#converter" variant="tonal" size="sm">
+              <SlidersHorizontal size={14} aria-hidden="true" />
+              {t("convert")}
+            </ButtonLink>
           </div>
+        </div>
+        <SensTiles />
+        <div className="grid gap-2.5 sm:grid-cols-2">
+          <CrosshairTile />
+          <StatTile
+            label={t("display")}
+            value={VALO_DISPLAY.resolution}
+            unit={`${VALO_DISPLAY.ratio} · ${VALO_DISPLAY.hz} Hz`}
+            className="[&_span:first-child]:text-[24px]"
+          />
         </div>
       </div>
     </Card>
