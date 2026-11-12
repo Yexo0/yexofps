@@ -26,7 +26,7 @@ export function RankGrid({ className }: { className?: string }) {
     t.has(`items.${r.id}.platform`) ? `${r.game} · ${t(`items.${r.id}.platform`)}` : r.game;
 
   return (
-    <ul className={cn("grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-3", className)}>
+    <ul className={cn("stagger grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-3", className)}>
       <li className="tile relative flex flex-col items-center justify-center gap-3 px-4 py-6 text-center sm:row-span-3">
         <GameStripe color={featured.color} />
         <Image

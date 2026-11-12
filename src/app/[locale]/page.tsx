@@ -8,7 +8,6 @@ import { Mail, Play } from "lucide-react";
 import { PROFILE, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
-import { NextSpace } from "@/components/ui/next-space";
 import { Reticle } from "@/components/ui/reticle";
 import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
@@ -63,7 +62,10 @@ function Hero() {
       className="card justify-between gap-10 md:col-span-6 lg:col-span-8 lg:p-10"
       style={{ ["--i" as string]: 0 }}
     >
-      <div>
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
+        <span className="absolute -left-24 -top-28 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,var(--glow)_0%,transparent_65%)] opacity-80" />
+      </span>
+      <div className="relative">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end">
           <span className="relative shrink-0 p-2.5">
             <Reticle size={12} inset={0} />
@@ -95,7 +97,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2.5">
+      <div className="stagger relative flex flex-wrap items-center gap-2.5">
         <ExternalButton href={SOCIALS.tiktok.url} variant="primary" aria-label={`TikTok ${SOCIALS.tiktok.handle}`}>
           <TikTokIcon size={16} />
           TikTok
@@ -108,13 +110,7 @@ function Hero() {
           <Mail size={16} aria-hidden="true" />
           {t("contact")}
         </ButtonLink>
-        <span className="ml-auto hidden sm:block">
-          <NextSpace to="career" />
-        </span>
       </div>
-      <span className="sm:hidden">
-        <NextSpace to="career" />
-      </span>
     </section>
   );
 }

@@ -22,6 +22,7 @@ import { EDITS, EMAILS, ORDER_URL, PARTNERS, PRODUCTS, PROFILE, REVIEWS, SOCIALS
 import { pageMetadata } from "@/lib/metadata";
 import { formatPrice } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
+import { PageSections } from "@/components/shell/page-sections";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Chip, ExternalButton, buttonClass } from "@/components/ui/primitives";
 import { DiscordIcon, InstagramIcon, TikTokIcon } from "@/components/icons/brands";
@@ -40,15 +41,18 @@ export default async function CreatorPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <div className="bento">
-      <Bio />
-      <Partners />
-      <CreatorHistory />
-      <Edits />
-      <Reviews />
-      <Services />
-      <Order />
-    </div>
+    <>
+      <PageSections page="creator" />
+      <div className="bento">
+        <Bio />
+        <Partners />
+        <CreatorHistory />
+        <Edits />
+        <Reviews />
+        <Services />
+        <Order />
+      </div>
+    </>
   );
 }
 
@@ -71,7 +75,7 @@ function Bio() {
         <div className="flex flex-col gap-4">
           <p className="text-[22px] font-bold leading-tight tracking-tight">{t("tagline")}</p>
           <p className="text-[15px] leading-relaxed text-muted">{t("text")}</p>
-          <ul className="flex flex-wrap gap-1.5">
+          <ul className="stagger flex flex-wrap gap-1.5">
             <li>
               <Chip icon={Video}>{t("chips.editor")}</Chip>
             </li>
@@ -150,7 +154,7 @@ function Edits() {
       bodyClassName="gap-4"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
-      <ul className="grid gap-2.5 sm:grid-cols-2">
+      <ul className="stagger grid gap-2.5 sm:grid-cols-2">
         {EDITS.map((edit, i) => (
           <li key={edit.id}>
             <a
@@ -211,7 +215,7 @@ function Partners() {
       index={1}
       className="md:col-span-6 lg:col-span-5"
     >
-      <ul className="flex flex-col gap-2">
+      <ul className="stagger flex flex-col gap-2">
         {PARTNERS.map((p) => (
           <li key={p.id} className="tile flex flex-wrap items-center gap-4 px-4 py-4">
             <Image src={p.logo} alt="" width={48} height={48} className="h-12 w-12 rounded-xl bg-white object-contain" />
@@ -253,7 +257,7 @@ function Services() {
       bodyClassName="gap-4"
     >
       <p className="max-w-[80ch] text-sm leading-relaxed text-muted">{t("intro")}</p>
-      <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="stagger grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {PRODUCTS.map((p) => (
           <li key={p.id} className="group tile flex flex-col overflow-hidden">
             <div className="relative aspect-[16/9] overflow-hidden bg-surface-3">
@@ -321,7 +325,7 @@ function Order() {
       className="md:col-span-6 lg:col-span-12"
       bodyClassName="gap-2"
     >
-      <ol className="grid gap-2 lg:grid-cols-3">
+      <ol className="stagger grid gap-2 lg:grid-cols-3">
         <li className="tile flex flex-col gap-3 px-4 py-4">
           <div className="flex items-start gap-3">
             <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent font-mono text-[11px] text-on-accent">1</span>
@@ -387,7 +391,7 @@ function Reviews() {
       bodyClassName="gap-3"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
-      <ul className="grid gap-2">
+      <ul className="stagger grid gap-2">
         {REVIEWS.map((r) => (
           <li key={r.id}>
             <figure className="tile flex h-full flex-col gap-3 px-4 py-4">

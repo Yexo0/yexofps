@@ -40,7 +40,12 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-    scroll-padding-top: 16px;
+    scroll-padding-top: 84px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -148,6 +153,13 @@
     }
   }
 
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .vertical-label {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
@@ -186,9 +198,65 @@
     padding: 18px;
     transition:
       opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: calc(var(--i, 0) * 70ms);
-    scroll-margin-top: 16px;
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 300ms ease;
+    transition-delay: calc(var(--i, 0) * 70ms), calc(var(--i, 0) * 70ms), 0ms;
+    scroll-margin-top: 84px;
+  }
+
+  /* Halo de bordure qui suit la souris : montre la carte qu'on regarde (position posée par CardSpotlight) */
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 50%),
+      var(--spot),
+      transparent 75%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    opacity: 0;
+    transition: opacity 400ms ease;
+    pointer-events: none;
+  }
+  /* Lumière douce sous le curseur, derrière le contenu de la carte */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      460px circle at var(--mx, 50%) var(--my, 50%),
+      var(--spot-fill),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 400ms ease;
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .card:hover::after,
+    .card:hover::before {
+      opacity: 1;
+    }
+    /* Carte survolée : bordure un peu plus marquée, pastille d'icône qui s'allume */
+    .card:hover {
+      border-color: var(--line-strong);
+    }
+    .card:hover .icon-pill {
+      box-shadow:
+        0 0 0 1px var(--glow-ring),
+        0 0 18px -4px var(--glow-strong);
+    }
   }
   @media (min-width: 768px) {
     .card {
@@ -210,6 +278,7 @@
     border-radius: 999px;
     background: var(--accent-tint);
     color: var(--accent);
+    transition: box-shadow 400ms ease;
   }
 
   .label {
@@ -252,9 +321,20 @@
   .btn-primary {
     background: var(--accent);
     color: var(--on-accent);
+    box-shadow:
+      0 0 0 1px var(--glow-ring),
+      0 6px 22px -8px var(--glow);
+    transition:
+      background-color 150ms ease,
+      box-shadow 300ms ease,
+      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn-primary:hover {
     background: color-mix(in oklab, var(--accent) 88%, var(--text));
+    box-shadow:
+      0 0 0 1px var(--glow-ring),
+      0 10px 30px -8px var(--glow-strong);
+    transform: translateY(-1px);
   }
   .btn-tonal {
     background: var(--surface-3);
@@ -395,6 +475,106 @@
     animation-name: dialog-top-in;
   }
 
+  /* ─── Guidage visuel ────────────────────────────────── */
+  /* Lueur réservée à ce qui compte : action principale, position actuelle */
+  .glow {
+    box-shadow:
+      0 0 0 1px var(--glow-ring),
+      0 0 26px -4px var(--glow);
+  }
+
+  /* Pastille "en direct" : un anneau qui s'étend doucement */
+  .live-dot {
+    position: relative;
+  }
+  .live-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    opacity: 0;
+    animation: live-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  /* Contenu d'une carte qui arrive en cascade quand la carte apparaît */
+  [data-js] .card .stagger > * {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  [data-js] .card:not([data-in]) .stagger > * {
+    animation: reveal-fallback 1ms 2.5s forwards;
+  }
+  [data-js] .card[data-in] .stagger > * {
+    animation: fade-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(180ms + var(--si, 0) * 55ms);
+  }
+  .stagger > :nth-child(2) { --si: 1; }
+  .stagger > :nth-child(3) { --si: 2; }
+  .stagger > :nth-child(4) { --si: 3; }
+  .stagger > :nth-child(5) { --si: 4; }
+  .stagger > :nth-child(6) { --si: 5; }
+  .stagger > :nth-child(7) { --si: 6; }
+  .stagger > :nth-child(8) { --si: 7; }
+  .stagger > :nth-child(9) { --si: 8; }
+  .stagger > :nth-child(n + 10) { --si: 9; }
+
+  /* Lien "espace suivant" : pilule, lueur au survol, petit coup de coude à l'apparition */
+  .next-space {
+    transition:
+      background-color 200ms ease,
+      box-shadow 300ms ease;
+  }
+  .next-space:hover {
+    box-shadow:
+      0 0 0 1px var(--glow-ring),
+      0 0 22px -6px var(--glow);
+  }
+  [data-js] .card[data-in] .next-space .nudge {
+    animation: nudge 900ms cubic-bezier(0.16, 1, 0.3, 1) 900ms 2;
+  }
+
+  /* Schéma réseau : les liens se tracent quand la carte apparaît */
+  [data-js] .card .map-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  [data-js] .card[data-in] .map-draw {
+    animation: draw 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation-delay: calc(250ms + var(--li, 0) * 70ms);
+  }
+  [data-js] .card .map-fade {
+    opacity: 0;
+  }
+  [data-js] .card[data-in] .map-fade {
+    animation: fade-in 500ms ease both;
+    animation-delay: calc(250ms + var(--li, 0) * 70ms);
+  }
+
+  /* Chemin du traceroute et nœud sélectionné : légère lueur */
+  .map-trace {
+    filter: drop-shadow(0 0 4px var(--glow-strong));
+  }
+
+  /* Timeline de montage : les clips se déroulent, la tête de lecture avance */
+  [data-js] .card .clip-grow {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  [data-js] .card[data-in] .clip-grow {
+    animation: clip-grow 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(200ms + var(--ci, 0) * 110ms);
+  }
+  [data-js] .card[data-in] .playhead {
+    animation: playhead 1400ms cubic-bezier(0.65, 0, 0.35, 1) 300ms both;
+  }
+
+  /* Chiffres en matrice de points : les points s'allument colonne par colonne */
+  [data-js] .card[data-in] .dot-on {
+    animation: dot-on 420ms ease both;
+    animation-delay: calc(200ms + var(--dc, 0) * 28ms);
+  }
+
   /* ─── Accordéon : ouverture en douceur ──────────────── */
   .accordion-content {
     overflow: hidden;
@@ -516,6 +696,65 @@
   }
 }
 
+@keyframes live-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.6);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes clip-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes playhead {
+  from {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot-on {
+  from {
+    opacity: 0.12;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes blur-in {
   from {
     opacity: 0;
@@ -549,9 +788,20 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-js] .card:not([data-in]) {
+  [data-js] .card:not([data-in]),
+  [data-js] .card .stagger > *,
+  [data-js] .card .map-fade {
     opacity: 1;
     transform: none;
+  }
+  [data-js] .card .map-draw {
+    stroke-dashoffset: 0;
+  }
+  [data-js] .card .clip-grow {
+    transform: none;
+  }
+  .live-dot::after {
+    display: none;
   }
   *,
   *::before,

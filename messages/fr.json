@@ -781,11 +781,13 @@
         "label": "Choisir le profil affiché",
         "yexo": {
           "title": "Yexo, côté jeu et montage.",
-          "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services."
+          "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services.",
+          "path": "Voir mes montages"
         },
         "baptiste": {
           "title": "Baptiste, côté infra.",
-          "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer."
+          "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer.",
+          "path": "Voir mon parcours"
         }
       }
     },
@@ -1171,5 +1173,39 @@
     "text": "Cette page n'existe pas ou a changé d'adresse avec la refonte du site. Les raccourcis 1 à 7 et la recherche (Ctrl+K) restent disponibles.",
     "home": "Retour à l'accueil",
     "contact": "Me signaler un lien cassé"
+  },
+  "sectionNav": {
+    "label": "Sur cette page",
+    "career": {
+      "intro": "Profil",
+      "timeline": "Frise",
+      "skills": "Compétences",
+      "missions": "Missions",
+      "infra": "Réseau BTS",
+      "watch": "Veille",
+      "docs": "Tutos"
+    },
+    "lab": {
+      "overview": "Aperçu",
+      "map": "Schéma",
+      "vlans": "VLAN",
+      "resources": "Ressources",
+      "machines": "Machines"
+    },
+    "gaming": {
+      "ranks": "Rangs",
+      "tracker": "Tracker",
+      "matches": "Parties",
+      "setup": "Setup"
+    },
+    "creator": {
+      "bio": "Bio",
+      "partners": "Partenaires",
+      "history": "Historique",
+      "edits": "Montages",
+      "reviews": "Avis",
+      "services": "Y-Services",
+      "order": "Commander"
+    }
   }
 }

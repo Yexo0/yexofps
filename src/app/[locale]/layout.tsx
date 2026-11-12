@@ -16,6 +16,7 @@ import { CommandPalette } from "@/components/shell/command-palette";
 import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
 import { Statusline } from "@/components/shell/statusline";
 import { ScrollReveal } from "@/components/shell/scroll-reveal";
+import { CardSpotlight } from "@/components/shell/card-spotlight";
 import "../globals.css";
 
 type Props = {
@@ -88,6 +89,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <CommandPalette />
             <ShortcutsDialog />
             <ScrollReveal />
+            <CardSpotlight />
           </UIProvider>
         </NextIntlClientProvider>
       </body>

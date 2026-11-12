@@ -41,7 +41,7 @@ export function LiveCard({ className, index }: { className?: string; index?: num
       {/* Meilleurs rangs, en petit et à égalité */}
       <div>
         <p className="label mb-2">{t("ranks")}</p>
-        <ul className="grid grid-cols-2 gap-1.5">
+        <ul className="stagger grid grid-cols-2 gap-1.5">
           {RANKS.map((r) => (
             <li key={r.id} className="tile flex items-center gap-2.5 px-3 py-2.5">
               <Image
@@ -82,7 +82,7 @@ export function LiveCard({ className, index }: { className?: string; index?: num
       )}
 
       {status === "ready" && (
-        <dl className="grid grid-cols-3 gap-2">
+        <dl className="stagger grid grid-cols-3 gap-2">
           {tiles.map((tile) => (
             <div key={tile.label} className="tile flex flex-col-reverse px-3 py-3">
               <dt className="label mt-1">{tile.label}</dt>

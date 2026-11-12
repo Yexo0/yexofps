@@ -5,8 +5,13 @@
 import { Tabs } from "radix-ui";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { NextSpace } from "@/components/ui/next-space";
+import type { SpaceId } from "@/config/spaces";
 
 const PROFILES = ["yexo", "baptiste"] as const;
+
+/** Où mène chaque profil : le créateur vers ses montages, le pro vers son parcours */
+const PATHS: Record<(typeof PROFILES)[number], SpaceId> = { yexo: "creator", baptiste: "career" };
 
 export function Whoami() {
   const t = useTranslations("home.hero.whoami");
@@ -40,6 +45,9 @@ export function Whoami() {
           <p>
             <span className="font-semibold text-fg">{t(`${p}.title`)}</span> {t(`${p}.text`)}
           </p>
+          <div className="mt-3">
+            <NextSpace to={PATHS[p]} label={t(`${p}.path`)} />
+          </div>
         </Tabs.Content>
       ))}
     </Tabs.Root>

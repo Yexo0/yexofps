@@ -70,7 +70,7 @@ export function Fastfetch({ className, index }: { className?: string; index?: nu
             </p>
           </div>
         </div>
-        <dl className="mt-2">
+        <dl className="stagger mt-2">
           {lines.map(([k, v]) => (
             <div key={k} className="flex min-w-0 flex-wrap gap-x-2 sm:flex-nowrap">
               <dt className="key shrink-0">{k}:</dt>

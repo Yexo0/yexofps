@@ -63,7 +63,7 @@ function ContactFile() {
           <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
           <span className="text-fg">cat contact.txt</span>
         </p>
-        <ul className="flex flex-col">
+        <ul className="stagger flex flex-col">
           {LINES.map((line) => {
             const name = t(`keys.${line.id}`);
             return (
@@ -131,7 +131,7 @@ function Routing() {
       index={1}
       next="home"
       className="md:col-span-6 lg:col-span-4"
-      bodyClassName="gap-2"
+      bodyClassName="stagger gap-2"
     >
       {items.map(({ id, icon: Icon }) => (
         <div key={id} className="tile flex gap-3 px-4 py-3.5">

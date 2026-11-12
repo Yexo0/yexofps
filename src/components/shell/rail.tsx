@@ -73,11 +73,10 @@ function RailItem({ space, active, n, name }: { space: Space; active: boolean; n
         aria-current={active ? "page" : undefined}
         aria-label={`${n}. ${name}`}
         className={cn(
-          "group relative grid h-10 w-10 place-items-center rounded-xl transition-colors duration-150",
-          active ? "bg-accent-tint text-accent" : "text-muted hover:bg-surface-3 hover:text-fg",
+          "group relative z-[1] grid h-10 w-10 place-items-center rounded-xl transition-colors duration-200",
+          active ? "text-accent" : "text-muted hover:bg-surface-3 hover:text-fg",
         )}
       >
-        {active && <Reticle size={6} inset={0} />}
         <Icon size={18} aria-hidden="true" />
         <Tip>
           <span className="mr-1.5 font-mono text-dim">{n}</span>
@@ -105,7 +104,15 @@ export function Rail() {
           <Logo size={36} />
         </Link>
 
-        <ul className="mt-6 flex flex-col items-center gap-1.5">
+        <ul className="relative mt-6 flex flex-col items-center gap-1.5">
+          {/* Indicateur "vous êtes ici" : glisse d'un espace à l'autre */}
+          <span
+            aria-hidden="true"
+            className="glow pointer-events-none absolute left-0 top-0 h-10 w-10 rounded-xl bg-accent-tint transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)]"
+            style={{ transform: `translateY(${(activeIndex - 1) * 46}px)` }}
+          >
+            <Reticle size={6} inset={0} />
+          </span>
           {SPACES.map((space, i) => (
             <RailItem
               key={space.id}
@@ -119,10 +126,16 @@ export function Rail() {
 
         {/* Espace actif : numéro + nom à la verticale */}
         <div className="mt-6 flex min-h-0 flex-1 flex-col items-center gap-3 overflow-hidden" aria-hidden="true">
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-surface-3 font-mono text-[11px] text-muted">
+          <span
+            key={`n-${active.id}`}
+            className="grid h-6 w-6 animate-[fade-in_400ms_ease_both] place-items-center rounded-full bg-accent-tint font-mono text-[11px] text-accent"
+          >
             {activeIndex}
           </span>
-          <span className="vertical-label text-[13px] font-semibold tracking-wide text-fg">
+          <span
+            key={`l-${active.id}`}
+            className="vertical-label animate-[fade-up_600ms_cubic-bezier(.16,1,.3,1)_both] text-[13px] font-semibold tracking-wide text-fg"
+          >
             {t(`spaces.${active.id}`)}
           </span>
         </div>
@@ -197,8 +210,8 @@ function MobileBar({ active }: { active: Space }) {
               >
                 <span
                   className={cn(
-                    "grid h-7 w-12 place-items-center rounded-full transition-colors",
-                    isActive && "bg-accent text-on-accent",
+                    "grid h-7 w-12 place-items-center rounded-full transition-[background-color,box-shadow] duration-300",
+                    isActive && "glow bg-accent text-on-accent",
                   )}
                 >
                   <Icon size={18} aria-hidden="true" />
@@ -214,7 +227,7 @@ function MobileBar({ active }: { active: Space }) {
               <span
                 className={cn(
                   "grid h-7 w-12 place-items-center rounded-full",
-                  moreActive && "bg-accent text-on-accent",
+                  moreActive && "glow bg-accent text-on-accent",
                 )}
               >
                 <Ellipsis size={18} aria-hidden="true" />

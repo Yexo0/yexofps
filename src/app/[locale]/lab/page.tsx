@@ -6,6 +6,7 @@ import { Archive, Activity, Layers, KeyRound, Network, ScrollText, Server } from
 import { HOSTS, LAB_MAP, LAB_SINCE, TECHNOLOGIES, VLANS, labStats, vmsOf, type Host } from "@/config/lab";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
+import { PageSections } from "@/components/shell/page-sections";
 import { Accordion } from "@/components/ui/accordion";
 import { Chip, StatTile } from "@/components/ui/primitives";
 import { NetworkMap } from "@/components/network-map/network-map";
@@ -23,13 +24,16 @@ export default async function LabPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <div className="bento">
-      <Overview />
-      <MapCard />
-      <Vlans />
-      <Resources />
-      <Machines />
-    </div>
+    <>
+      <PageSections page="lab" />
+      <div className="bento">
+        <Overview />
+        <MapCard />
+        <Vlans />
+        <Resources />
+        <Machines />
+      </div>
+    </>
   );
 }
 
@@ -52,13 +56,13 @@ function Overview() {
       <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
         <p className="max-w-[62ch] text-[17px] leading-relaxed text-muted lg:col-span-6">{t("overview.text")}</p>
         <div className="flex flex-col gap-3 lg:col-span-6">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="stagger grid grid-cols-2 gap-2 sm:grid-cols-4">
             <StatTile value={s.machines} label={t("stats.machines")} />
             <StatTile value={s.vms} unit="VM" label={t("stats.guests")} />
             <StatTile value={s.threads} label={t("stats.threads")} />
             <StatTile value={s.ramGb} unit={t("units.gb")} label={t("stats.memory")} />
           </div>
-          <ul className="flex flex-wrap gap-1.5" aria-label={t("overview.technologies")}>
+          <ul className="stagger flex flex-wrap gap-1.5" aria-label={t("overview.technologies")}>
             {TECHNOLOGIES.map((tech) => (
               <li key={tech.label}>
                 <Chip icon={MAP_ICONS[tech.icon]}>{tech.label}</Chip>
@@ -243,7 +247,7 @@ function Machines() {
       next="gaming"
       className="md:col-span-6 lg:col-span-12"
     >
-      <ul className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
+      <ul className="stagger grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
         {HOSTS.map((h) => (
           <HostTile key={h.id} host={h} />
         ))}
@@ -272,7 +276,7 @@ function Resources() {
     >
       <div className="flex flex-col gap-5">
         <p className="max-w-[70ch] text-[15px] leading-relaxed text-muted">{t("text")}</p>
-        <ul className="grid gap-2 sm:grid-cols-3">
+        <ul className="stagger grid gap-2 sm:grid-cols-3">
           {items.map(({ id, icon: Icon }) => (
             <li key={id} className="tile px-4 py-3.5">
               <Icon size={16} aria-hidden="true" className="text-accent" />

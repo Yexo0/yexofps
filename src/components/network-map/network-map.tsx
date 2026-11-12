@@ -210,7 +210,7 @@ export function NetworkMap({
 
           {links
             .filter((l) => l.kind !== "logical")
-            .map((l) => {
+            .map((l, li) => {
               const a = byId.get(l.from);
               const b = byId.get(l.to);
               if (!a || !b) return null;
@@ -220,8 +220,13 @@ export function NetworkMap({
               const dimmed = !!related && !isActive;
               return (
                 <g key={`${l.from}-${l.to}`} aria-hidden="true" opacity={dimmed ? 0.3 : 1}>
+                  {/* Calque animé séparé : l'animation ne doit pas écraser l'estompage ci-dessus */}
+                  <g className="map-fade" style={{ ["--li" as string]: li }}>
                   <path
                     d={p.d}
+                    pathLength={l.kind === "dashed" ? undefined : 1}
+                    className={cn(l.kind !== "dashed" && "map-draw", traced && "map-trace")}
+                    style={{ ["--li" as string]: li }}
                     fill="none"
                     stroke={isActive ? "var(--accent)" : "var(--text-dim)"}
                     strokeOpacity={isActive ? 1 : 0.55}
@@ -245,18 +250,19 @@ export function NetworkMap({
                       {l.label}
                     </text>
                   )}
+                  </g>
                 </g>
               );
             })}
 
-          {nodes.map((n) => {
+          {nodes.map((n, ni) => {
             const Icon = MAP_ICONS[n.icon];
             const isActive = n.id === active;
             const isPinned = n.id === pinned;
             const dimmed = !!related && !related.has(n.id) && !path.includes(n.id);
             return (
+              <g key={n.id} className="map-fade" style={{ ["--li" as string]: ni }}>
               <g
-                key={n.id}
                 transform={`translate(${n.x} ${n.y})`}
                 role="button"
                 tabIndex={0}
@@ -275,6 +281,7 @@ export function NetworkMap({
                   width={W}
                   height={H}
                   rx={12}
+                  className={isActive || isPinned ? "map-trace" : undefined}
                   fill={isActive || isPinned ? "var(--accent-tint)" : "var(--surface-2)"}
                   stroke={isActive || isPinned ? "var(--accent)" : "var(--line-strong)"}
                   strokeWidth={isActive || isPinned ? 1.5 : 1}
@@ -293,6 +300,7 @@ export function NetworkMap({
                 <text x={42} y={35} fill="var(--text-dim)" fontFamily="var(--font-mono)" fontSize={10.5}>
                   {n.sub}
                 </text>
+              </g>
               </g>
             );
           })}

@@ -7,6 +7,7 @@ import { Gamepad2, Keyboard } from "lucide-react";
 import { PARTNERS, RANKS, SETUP } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
+import { PageSections } from "@/components/shell/page-sections";
 import { CopyButton } from "@/components/ui/copy-button";
 import { ExternalButton } from "@/components/ui/primitives";
 import { RankGrid } from "@/components/gaming/rank-grid";
@@ -24,11 +25,14 @@ export default async function GamingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <div className="bento">
-      <Ranks />
-      <TrackerSection />
-      <Setup />
-    </div>
+    <>
+      <PageSections page="gaming" />
+      <div className="bento">
+        <Ranks />
+        <TrackerSection />
+        <Setup />
+      </div>
+    </>
   );
 }
 
@@ -65,7 +69,7 @@ function Setup() {
       index={3}
       className="md:col-span-6 lg:col-span-12"
     >
-      <ul className="grid gap-2.5 sm:grid-cols-3">
+      <ul className="stagger grid gap-2.5 sm:grid-cols-3">
         {SETUP.map((item) => {
           const partner = "partner" in item ? PARTNERS.find((p) => p.id === item.partner) : undefined;
           return (

@@ -27,6 +27,7 @@ import { EMAILS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
+import { PageSections } from "@/components/shell/page-sections";
 import { NextSpace } from "@/components/ui/next-space";
 import { Accordion } from "@/components/ui/accordion";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -46,16 +47,19 @@ export default async function CareerPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   return (
-    <div className="bento">
-      <Intro />
-      <Elsewhere />
-      <Timeline />
-      <Skills />
-      <Missions />
-      <InfraBts />
-      <Watch />
-      <Docs />
-    </div>
+    <>
+      <PageSections page="career" />
+      <div className="bento">
+        <Intro />
+        <Elsewhere />
+        <Timeline />
+        <Skills />
+        <Missions />
+        <InfraBts />
+        <Watch />
+        <Docs />
+      </div>
+    </>
   );
 }
 
@@ -83,7 +87,7 @@ function Intro() {
         <p>{t("p1")}</p>
         <p>{t("p2")}</p>
       </div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="stagger grid grid-cols-3 gap-2">
         <StatTile value={MISSIONS.length} label={t("stats.missions")} />
         <StatTile value={DOCS.length} unit="PDF" label={t("stats.docs")} />
         <StatTile value={LAB_SINCE} label={t("stats.homelab")} />
@@ -116,7 +120,7 @@ function Elsewhere() {
       subtitle="cat ~/.plan"
       index={1}
       className="md:col-span-6 lg:col-span-4"
-      bodyClassName="gap-2"
+      bodyClassName="stagger gap-2"
     >
       {items.map(({ id, icon: Icon }) => (
         <div key={id} className="tile flex gap-3 px-4 py-3.5">
@@ -145,7 +149,7 @@ function Timeline() {
       index={2}
       className="md:col-span-6 lg:col-span-7"
     >
-      <ol className="relative flex flex-col gap-5 pl-6 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-line-strong">
+      <ol className="stagger relative flex flex-col gap-5 pl-6 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-line-strong">
         {TIMELINE.map((item) => {
           const hasItems = t.has(`items.${item.id}.items`);
           const hasTags = t.has(`items.${item.id}.tags`);
@@ -421,7 +425,7 @@ function Docs() {
       className="md:col-span-6 lg:col-span-5"
     >
       <p className="mb-3 text-sm text-muted">{t("intro")}</p>
-      <ul className="flex flex-col gap-1.5">
+      <ul className="stagger flex flex-col gap-1.5">
         {DOCS.map((d) => (
           <li key={d.id}>
             <a

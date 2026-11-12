@@ -781,11 +781,13 @@
         "label": "Choose which profile to show",
         "yexo": {
           "title": "Yexo, the gaming and editing side.",
-          "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services."
+          "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services.",
+          "path": "See my edits"
         },
         "baptiste": {
           "title": "Baptiste, the infrastructure side.",
-          "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it."
+          "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it.",
+          "path": "See my career"
         }
       }
     },
@@ -1171,5 +1173,39 @@
     "text": "This page doesn't exist or moved when the site was redesigned. Shortcuts 1 to 7 and search (Ctrl+K) still work.",
     "home": "Back to home",
     "contact": "Report a broken link"
+  },
+  "sectionNav": {
+    "label": "On this page",
+    "career": {
+      "intro": "Profile",
+      "timeline": "Timeline",
+      "skills": "Skills",
+      "missions": "Assignments",
+      "infra": "BTS network",
+      "watch": "Tech watch",
+      "docs": "Guides"
+    },
+    "lab": {
+      "overview": "Overview",
+      "map": "Map",
+      "vlans": "VLANs",
+      "resources": "Resources",
+      "machines": "Machines"
+    },
+    "gaming": {
+      "ranks": "Ranks",
+      "tracker": "Tracker",
+      "matches": "Matches",
+      "setup": "Setup"
+    },
+    "creator": {
+      "bio": "Bio",
+      "partners": "Partners",
+      "history": "History",
+      "edits": "Edits",
+      "reviews": "Reviews",
+      "services": "Y-Services",
+      "order": "Order"
+    }
   }
 }

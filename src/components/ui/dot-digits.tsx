@@ -44,7 +44,7 @@ export function DotDigits({
   const height = 7 * step - gap;
 
   let col = 0;
-  const dots: { x: number; y: number; on: boolean }[] = [];
+  const dots: { x: number; y: number; on: boolean; c: number }[] = [];
   chars.forEach((c, i) => {
     const glyph = GLYPHS[c];
     const w = widths[i];
@@ -52,7 +52,7 @@ export function DotDigits({
     for (let row = 0; row < 7; row++) {
       for (let j = 0; j < w; j++) {
         const bit = (glyph[row] >> (4 - (j + shift))) & 1;
-        dots.push({ x: (col + j) * step + dot / 2, y: row * step + dot / 2, on: bit === 1 });
+        dots.push({ x: (col + j) * step + dot / 2, y: row * step + dot / 2, on: bit === 1, c: col + j });
       }
     }
     col += w + 1;
@@ -70,6 +70,8 @@ export function DotDigits({
             r={dot / 2}
             fill={d.on ? "currentColor" : "var(--text-dim)"}
             opacity={d.on ? 1 : 0.13}
+            className={d.on ? "dot-on" : undefined}
+            style={d.on ? { ["--dc" as string]: d.c } : undefined}
           />
         ))}
       </svg>

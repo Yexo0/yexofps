@@ -60,7 +60,7 @@ function Tools() {
         </div>
         <div>
           <p className="label mb-2">{t("how.yaw")}</p>
-          <dl className="flex flex-col gap-1">
+          <dl className="stagger flex flex-col gap-1">
             {GAME_KEYS.map((k) => (
               <div key={k} className="tile flex items-center justify-between px-3.5 py-2 text-sm">
                 <dt>{GAMES[k].name}</dt>

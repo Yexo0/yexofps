@@ -81,7 +81,7 @@ export function EditTimeline({ now }: { now: number }) {
               </span>
             ))}
           </div>
-          {TRACKS.map((track) => (
+          {TRACKS.map((track, ti) => (
             <div key={track.id} className="relative h-11 border-b border-line">
               {track.clips.map((id, i) => {
                 const from = fromOf(id);
@@ -93,10 +93,14 @@ export function EditTimeline({ now }: { now: number }) {
                   <span
                     key={id}
                     className={cn(
-                      "absolute top-1.5 flex h-8 items-center gap-1.5 overflow-hidden rounded-md border-l-2 px-2 text-[11.5px] font-semibold text-fg",
+                      "clip-grow absolute top-1.5 flex h-8 items-center gap-1.5 overflow-hidden rounded-md border-l-2 px-2 text-[11.5px] font-semibold text-fg",
                       track.id === "ranked" ? "border-accent bg-accent-tint" : "border-accent-mid bg-surface-3",
                     )}
-                    style={{ left: `calc(${pct(from)}% + 1px)`, width: `calc(${pct(to) - pct(from)}% - 3px)` }}
+                    style={{
+                      left: `calc(${pct(from)}% + 1px)`,
+                      width: `calc(${pct(to) - pct(from)}% - 3px)`,
+                      ["--ci" as string]: ti * 2 + i,
+                    }}
                   >
                     {m.image ? (
                       <Image src={m.image} alt="" width={16} height={16} className="h-4 w-4 shrink-0 object-contain" />
@@ -109,7 +113,7 @@ export function EditTimeline({ now }: { now: number }) {
               })}
             </div>
           ))}
-          <span className="absolute bottom-0 top-0 w-px bg-accent" style={{ left: `${pct(now)}%` }}>
+          <span className="playhead absolute bottom-0 top-0 w-px bg-accent shadow-[0_0_10px_var(--glow-strong)]" style={{ left: `${pct(now)}%` }}>
             <span className="absolute -left-1 top-4 h-2.5 w-[9px] rounded-sm bg-accent" />
             <span className="absolute -bottom-5 -translate-x-1/2 font-mono text-[10px] text-accent">{t("now")}</span>
           </span>

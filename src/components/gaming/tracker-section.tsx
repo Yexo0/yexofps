@@ -76,7 +76,7 @@ export function TrackerSection() {
               aria-hidden="true"
               className={cn(
                 "h-2 w-2 rounded-full",
-                status === "ready" && "bg-accent",
+                status === "ready" && "live-dot bg-accent",
                 status === "loading" && "bg-surface-hover",
                 (status === "error" || status === "empty") && "ring-1 ring-inset ring-line-strong",
               )}
@@ -134,7 +134,7 @@ export function TrackerSection() {
         )}
 
         {status === "ready" && (
-          <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <dl className="stagger grid grid-cols-2 gap-2 sm:grid-cols-4">
             {tiles.map((tile) => (
               <div key={tile.label} className="tile flex flex-col px-4 py-3.5">
                 <dd className="order-1 text-[24px] font-bold leading-none tracking-tight tabular-nums">{tile.value}</dd>
@@ -186,7 +186,7 @@ export function TrackerSection() {
         )}
 
         {status === "ready" && data && (
-          <ul className="flex flex-col gap-1.5">
+          <ul className="stagger flex flex-col gap-1.5">
             {data.matches.map((m, i) => {
               const hs = matchHs(m);
               return (

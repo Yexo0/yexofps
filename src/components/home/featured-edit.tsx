@@ -86,7 +86,7 @@ function TikTokPlayer() {
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <Reticle size={14} inset={12} />
             <span className="relative flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-accent text-on-accent transition-transform duration-300 group-hover:scale-105">
+              <span className="glow live-dot grid h-12 w-12 place-items-center rounded-full bg-accent text-on-accent transition-transform duration-300 group-hover:scale-105">
                 <Play size={20} fill="currentColor" aria-hidden="true" />
               </span>
               <span className="text-sm font-semibold text-white">{t("play")}</span>
