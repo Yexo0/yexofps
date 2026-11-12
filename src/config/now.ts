@@ -1,7 +1,7 @@
 // src/config/now.ts — Mon emploi du temps type, source de la page /now et du statut affiché
 // sur Contact et dans la barre d'état. Le statut est calculé à l'heure de Paris, chez le visiteur :
 // rien à mettre à jour à la main, il suffit de modifier ce fichier si le planning change.
-import { Clapperboard, Gamepad2, Headphones, Laptop, Moon, Trees, type LucideIcon } from "lucide-react";
+import { Clapperboard, Gamepad2, Headphones, Joystick, Laptop, Moon, Trees, type LucideIcon } from "lucide-react";
 
 export const NOW_TIMEZONE = "Europe/Paris";
 
@@ -11,7 +11,8 @@ export const NOW_TIMEZONE = "Europe/Paris";
  */
 export type Availability = "open" | "slow" | "mail" | "asleep";
 
-export type ActivityId = "music" | "work" | "valorant" | "editing" | "grass" | "offline";
+/** "game" : autre jeu détecté par Discord (titre "Sur {nom du jeu}"), jamais dans le planning */
+export type ActivityId = "music" | "work" | "valorant" | "editing" | "grass" | "offline" | "game";
 
 export const ACTIVITIES: Record<ActivityId, { icon: LucideIcon; availability: Availability }> = {
   music: { icon: Headphones, availability: "slow" },
@@ -20,6 +21,7 @@ export const ACTIVITIES: Record<ActivityId, { icon: LucideIcon; availability: Av
   editing: { icon: Clapperboard, availability: "open" },
   grass: { icon: Trees, availability: "slow" },
   offline: { icon: Moon, availability: "asleep" },
+  game: { icon: Joystick, availability: "open" },
 };
 
 export type DayType = "weekday" | "saturday" | "sunday";
@@ -61,3 +63,18 @@ export const SCHEDULE: Record<DayType, readonly (readonly [string, ActivityId])[
 };
 
 export const DAY_TYPES: readonly DayType[] = ["weekday", "saturday", "sunday"];
+
+/**
+ * Statut Discord en direct (DISCORD_USER_ID dans site.ts) : jeux et applis reconnus, par leur nom
+ * sur Discord (casse ignorée). Seuls ceux-là sont affichés, les autres activités restent privées.
+ * Quand l'un d'eux tourne, il remplace le planning ; sinon le planning s'applique.
+ */
+export const PRESENCE_ACTIVITIES: Record<string, ActivityId> = {
+  VALORANT: "valorant",
+  "Adobe Premiere Pro": "editing",
+  "Adobe After Effects": "editing",
+  "DaVinci Resolve": "editing",
+  CapCut: "editing",
+  "Counter-Strike 2": "game",
+  "Apex Legends": "game",
+};

@@ -1291,6 +1291,10 @@
       "offline": {
         "title": "Offline",
         "text": "Asleep."
+      },
+      "game": {
+        "title": "Playing {name}",
+        "text": "In a match."
       }
     },
     "short": {
@@ -1299,7 +1303,8 @@
       "valorant": "valorant",
       "editing": "editing",
       "grass": "outside",
-      "offline": "offline"
+      "offline": "offline",
+      "game": "{name}"
     },
     "availability": {
       "open": "Available to reply",
@@ -1332,6 +1337,24 @@
       "m": "{m} min",
       "h": "{h}h",
       "hm": "{h}h {m}min"
+    },
+    "since": "for {duration}",
+    "source": {
+      "discord": "live",
+      "schedule": "schedule"
+    },
+    "discord": {
+      "label": "Discord: {status}",
+      "online": "online",
+      "idle": "away",
+      "dnd": "do not disturb",
+      "offline": "offline"
+    },
+    "spotify": {
+      "label": "Listening to",
+      "cover": "{album} cover",
+      "progress": "Track progress",
+      "open": "Listen to {song} on Spotify"
     }
   }
 }

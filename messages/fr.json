@@ -1291,6 +1291,10 @@
       "offline": {
         "title": "Hors ligne",
         "text": "Je dors."
+      },
+      "game": {
+        "title": "Sur {name}",
+        "text": "En partie."
       }
     },
     "short": {
@@ -1299,7 +1303,8 @@
       "valorant": "valorant",
       "editing": "montage",
       "grass": "dehors",
-      "offline": "hors ligne"
+      "offline": "hors ligne",
+      "game": "{name}"
     },
     "availability": {
       "open": "Dispo pour répondre",
@@ -1332,6 +1337,24 @@
       "m": "{m} min",
       "h": "{h} h",
       "hm": "{h} h {m} min"
+    },
+    "since": "depuis {duration}",
+    "source": {
+      "discord": "en direct",
+      "schedule": "planning"
+    },
+    "discord": {
+      "label": "Discord : {status}",
+      "online": "en ligne",
+      "idle": "absent",
+      "dnd": "ne pas déranger",
+      "offline": "hors ligne"
+    },
+    "spotify": {
+      "label": "En écoute",
+      "cover": "Pochette de {album}",
+      "progress": "Avancement du morceau",
+      "open": "Écouter {song} sur Spotify"
     }
   }
 }

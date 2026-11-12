@@ -62,6 +62,8 @@ export function parisClock(date: Date): { weekday: number; minutes: number } {
 }
 
 export interface NowStatus {
+  /** Instant du calcul (ms) */
+  at: number;
   /** Type de la journée en cours (avant le réveil, c'est encore la veille) */
   dayType: DayType;
   /** Minutes depuis minuit, dans le repère de la journée en cours (peut dépasser 1440) */
@@ -88,6 +90,7 @@ export function nowStatus(date: Date): NowStatus {
   const current = slots[index];
   const next = slots[index + 1] ?? daySlots(dayType((weekday + 1) % 7))[0];
   return {
+    at: date.getTime(),
     dayType: type,
     minutes,
     current,

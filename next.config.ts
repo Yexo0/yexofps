@@ -1,4 +1,5 @@
-// next.config.ts — Config Next.js : plugin next-intl et redirections 301 des anciennes URLs.
+// next.config.ts — Config Next.js : plugin next-intl, images distantes autorisées et redirections 301
+// des anciennes URLs.
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -16,6 +17,10 @@ const LEGACY: [from: string, to: string][] = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // Pochettes Spotify du statut Discord en direct (/now), optimisées par le serveur du site
+    remotePatterns: [{ protocol: "https", hostname: "i.scdn.co", pathname: "/image/**" }],
+  },
   async redirects() {
     return LEGACY.flatMap(([from, to]) => [
       // Avec préfixe de langue : /fr/profil, /en/shop…

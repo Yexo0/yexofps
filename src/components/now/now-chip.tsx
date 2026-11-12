@@ -5,7 +5,7 @@
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { ACTIVITIES } from "@/config/now";
-import { useNow } from "@/hooks/use-now";
+import { useLive } from "@/hooks/use-now";
 import { Link } from "@/i18n/navigation";
 import { Skeleton } from "@/components/ui/primitives";
 import { AVAILABILITY_ICONS } from "./now-card";
@@ -13,10 +13,11 @@ import { AVAILABILITY_ICONS } from "./now-card";
 /** Bandeau de disponibilité (page Contact) */
 export function NowBanner() {
   const t = useTranslations("now");
-  const now = useNow();
-  if (!now) return <Skeleton className="h-[62px] w-full rounded-[14px]" />;
+  const state = useLive();
+  if (!state) return <Skeleton className="h-[62px] w-full rounded-[14px]" />;
 
-  const activity = ACTIVITIES[now.current.id];
+  const { live } = state;
+  const activity = ACTIVITIES[live.id];
   const Icon = activity.icon;
   const AvailabilityIcon = AVAILABILITY_ICONS[activity.availability];
 
@@ -35,7 +36,7 @@ export function NowBanner() {
       <span className="min-w-0 flex-1">
         <span className="block text-[14px] font-medium text-fg">
           <span className="text-muted">{t("chip.label")} · </span>
-          {t(`activities.${now.current.id}.title`)}
+          {t(`activities.${live.id}.title`, { name: live.name ?? "" })}
         </span>
         <span className="mt-0.5 flex items-center gap-1.5 text-[12.5px] text-muted">
           <AvailabilityIcon size={13} aria-hidden="true" className="shrink-0 text-accent" />
@@ -54,16 +55,17 @@ export function NowBanner() {
 /** Segment de la barre d'état façon tmux : "● now: valorant" */
 export function NowStatusSegment() {
   const t = useTranslations("now");
-  const now = useNow();
-  if (!now) return null;
+  const state = useLive();
+  if (!state) return null;
+  const { live } = state;
   return (
     <Link
       href="/now"
-      aria-label={t("chip.aria", { activity: t(`activities.${now.current.id}.title`) })}
+      aria-label={t("chip.aria", { activity: t(`activities.${live.id}.title`, { name: live.name ?? "" }) })}
       className="hidden items-center gap-1.5 px-3 transition-colors hover:text-fg sm:flex"
     >
       <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
-      now: <span className="text-fg">{t(`short.${now.current.id}`)}</span>
+      now: <span className="text-fg">{t(`short.${live.id}`, { name: live.name?.toLowerCase() ?? "" })}</span>
     </Link>
   );
 }

@@ -28,6 +28,12 @@ export const SOCIALS = {
 
 export type SocialId = keyof typeof SOCIALS;
 
+/**
+ * Identifiant Discord (numérique) pour le statut en direct sur /now, via Lanyard (api.lanyard.rest).
+ * Il faut avoir rejoint le serveur Discord de Lanyard. Laisser undefined : seul le planning est utilisé.
+ */
+export const DISCORD_USER_ID: string | undefined = undefined;
+
 /** Spotify, affiché sur /now pendant le créneau musique. Laisser undefined masque le bouton. */
 export const SPOTIFY_URL: string | undefined = "https://open.spotify.com/user/31wjlquoxlm6dmvakh6lfyk5kqfa";
 
