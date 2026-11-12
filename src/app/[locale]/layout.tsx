@@ -64,6 +64,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       data-theme={DEFAULT_THEME}
+      data-scroll-behavior="smooth"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >

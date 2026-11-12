@@ -502,7 +502,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
-  [data-js] .card:not([data-in]) .stagger > * {
+  [data-js]:not([data-reveal]) .card:not([data-in]) .stagger > * {
     animation: reveal-fallback 1ms 2.5s forwards;
   }
   [data-js] .card[data-in] .stagger > * {
@@ -627,10 +627,13 @@
 /* ─── Animations (douces, façon Apple) ─────────────────── */
 
 /* Apparition des cartes au défilement : fondu + léger glissement, une seule fois.
-   data-in est posé par ScrollReveal ; filet de sécurité : tout s'affiche après 2,5 s. */
+   data-in est posé par ScrollReveal. Filet de sécurité : si le script ne démarre pas
+   (pas de data-reveal sur <html>), tout s'affiche après 2,5 s. */
 [data-js] .card:not([data-in]) {
   opacity: 0;
   transform: translateY(18px) scale(0.985);
+}
+[data-js]:not([data-reveal]) .card:not([data-in]) {
   animation: reveal-fallback 1ms 2.5s forwards;
 }
 
@@ -784,6 +787,16 @@
   }
   50% {
     opacity: 0.5;
+  }
+}
+
+/* Impression : tout le contenu, sans animation */
+@media print {
+  [data-js] .card,
+  [data-js] .card .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 

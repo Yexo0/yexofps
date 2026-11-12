@@ -10,6 +10,8 @@ export function ScrollReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Le script tourne : on désactive le filet de sécurité CSS (affichage forcé après 2,5 s)
+    document.documentElement.setAttribute("data-reveal", "");
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
