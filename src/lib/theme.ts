@@ -29,7 +29,7 @@ type Tokens = Record<string, string>;
 
 const dark: Tokens = {
   "--bg": hex(neutral, 4),
-  "--surface": alpha(neutral, 10, 0.78),
+  "--surface": alpha(neutral, 10, 0.9),
   "--surface-solid": hex(neutral, 10),
   "--surface-2": hex(neutral, 15),
   "--surface-3": hex(neutral, 22),
@@ -55,14 +55,13 @@ const dark: Tokens = {
   "--accent-mid": hex(primary, 60),
   "--accent-low": hex(primary, 40),
   "--texture-opacity": "0.2",
-  "--texture-blend": "screen",
   "--texture-filter": "none",
   "--shadow": "0 1px 0 rgba(255,255,255,0.03) inset, 0 12px 32px rgba(0,0,0,0.28)",
 };
 
 const light: Tokens = {
   "--bg": hex(neutral, 94),
-  "--surface": alpha(neutral, 99, 0.82),
+  "--surface": alpha(neutral, 99, 0.92),
   "--surface-solid": hex(neutral, 99),
   "--surface-2": hex(neutral, 95),
   "--surface-3": hex(neutral, 90),
@@ -87,7 +86,6 @@ const light: Tokens = {
   "--accent-mid": hex(primary, 60),
   "--accent-low": hex(primary, 80),
   "--texture-opacity": "0.12",
-  "--texture-blend": "multiply",
   "--texture-filter": "invert(1)",
   "--shadow": "0 1px 2px rgba(0,0,0,0.04), 0 10px 28px rgba(0,0,0,0.06)",
 };
@@ -111,6 +109,15 @@ export const themeColor = { dark: hex(neutral, 4), light: hex(neutral, 94) };
  * Pose aussi data-js : les animations d'apparition ne s'activent que si JavaScript tourne.
  */
 export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}})();`;
+
+/**
+ * Script placé juste après le contenu : lance tout de suite l'apparition des cartes du premier écran,
+ * sans attendre le chargement de React (sur un appareil lent, plusieurs secondes de gagnées).
+ * Il ne touche pas aux cartes (React les reprend telles quelles) : il ajoute dans <head> une feuille
+ * de style qui les cible par leur position, puis ScrollReveal prend le relais et la retire.
+ * Les cartes plus bas restent gérées par ScrollReveal au défilement.
+ */
+export const earlyRevealScript = `(function(){var m=document.getElementById("main");if(!m)return;var h=window.innerHeight,css=[],cards=[];function path(e){var p=[];while(e&&e!==m){var i=1,s=e;while((s=s.previousElementSibling))i++;p.unshift(e.tagName.toLowerCase()+":nth-child("+i+")");e=e.parentElement}return"#main>"+p.join(">")}m.querySelectorAll(".card").forEach(function(c){if(c.getBoundingClientRect().top>=h)return;var s=path(c);cards.push(c);css.push(s+"{animation:early-in 700ms cubic-bezier(.16,1,.3,1) calc(var(--i,0)*70ms) both}"+s+" .stagger>*{animation:fade-up 650ms cubic-bezier(.16,1,.3,1) calc(180ms + var(--si,0)*55ms) both}")});if(!css.length)return;var st=document.createElement("style");st.id="early-reveal";st.textContent=css.join("");document.head.appendChild(st);window.__earlyCards=cards})();`;
 
 /** Couleurs en hexadécimal pour les images générées (favicon, Open Graph) — mode sombre */
 export const brand = {

@@ -70,7 +70,6 @@
     background-size: cover;
     background-position: center;
     opacity: var(--texture-opacity);
-    mix-blend-mode: var(--texture-blend);
     filter: var(--texture-filter);
   }
 
@@ -193,8 +192,8 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow);
-    -webkit-backdrop-filter: blur(14px) saturate(1.05);
-    backdrop-filter: blur(14px) saturate(1.05);
+    /* Pas de backdrop-filter : recalculé à chaque image au défilement, il divisait la fluidité par 3
+       sur les machines modestes. Le fond quasi opaque (--surface) donne le même rendu. */
     padding: 18px;
     transition:
       opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -812,6 +811,18 @@
   animation: reveal-fallback 1ms 2.5s forwards;
 }
 
+/* Apparition immédiate des cartes du premier écran (earlyRevealScript, avant React) */
+@keyframes early-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes reveal-fallback {
   to {
     opacity: 1;
@@ -863,15 +874,16 @@
     animation-name: packet-right;
   }
 }
+/* En transform (pas top/left) : animé par le compositeur, sans recalcul de mise en page */
 @keyframes packet-down {
-  0% { top: 0; opacity: 0; }
+  0% { transform: translateY(0); opacity: 0; }
   15%, 85% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  100% { transform: translateY(24px); opacity: 0; }
 }
 @keyframes packet-right {
-  0% { left: 0; opacity: 0; }
+  0% { transform: translateX(0); opacity: 0; }
   15%, 85% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
+  100% { transform: translateX(40px); opacity: 0; }
 }
 
 /* Carte arrivée avec la transition de page (ScrollReveal) : pas de second fondu */
@@ -917,6 +929,28 @@ html[data-nav-dir="back"] {
   object-position: left top;
   animation-duration: 560ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Écrans tactiles (souvent moins puissants) : même mouvement, sans flou */
+@media (pointer: coarse) {
+  ::view-transition-old(page) {
+    animation-name: vt-page-out-lite;
+  }
+  ::view-transition-new(page) {
+    animation-name: vt-page-in-lite;
+  }
+}
+@keyframes vt-page-out-lite {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * -20px));
+  }
+}
+@keyframes vt-page-in-lite {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * 20px));
+  }
 }
 
 @keyframes vt-page-out {

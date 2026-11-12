@@ -70,7 +70,7 @@ export function SectionNav({ items, label }: { items: SectionItem[]; label: stri
 
   return (
     <nav aria-label={label} className="sticky top-2 z-30 mb-2.5 md:top-3 md:mb-3">
-      <div className="relative flex items-center overflow-hidden rounded-full border border-line bg-surface-solid/85 p-1 shadow-[var(--shadow)] backdrop-blur-md">
+      <div className="relative flex items-center overflow-hidden rounded-full border border-line bg-surface-solid/95 p-1 shadow-[var(--shadow)]">
         <span className="label hidden shrink-0 pl-3.5 pr-2 lg:inline">{label}</span>
         <ul ref={listRef} className="no-scrollbar flex min-w-0 gap-1 overflow-x-auto">
           {items.map((item) => {

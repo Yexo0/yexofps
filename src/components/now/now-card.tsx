@@ -35,12 +35,15 @@ export function NowCard() {
 
   if (!state) {
     return (
-      <div className="flex flex-col gap-4" aria-busy="true">
+      // Même hauteur que la carte finale : pas de saut de mise en page à l'arrivée du statut
+      <div className="flex flex-col gap-5" aria-busy="true">
         <span className="sr-only">{t("loading")}</span>
-        <Skeleton className="h-4 w-40" />
-        <Skeleton className="h-16 w-full" />
-        <Skeleton className="h-10 w-3/4" />
-        <Skeleton className="h-2 w-full" />
+        <Skeleton className="h-4 w-48" />
+        <Skeleton className="h-16 w-3/4" />
+        <Skeleton className="h-[46px] w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-5 w-2/3" />
+        <Skeleton className="h-9 w-56" />
       </div>
     );
   }

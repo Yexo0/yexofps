@@ -59,15 +59,17 @@ export const TIKTOK_VIDEOS = {
 } as const;
 
 /**
- * Montage mis en avant sur l'accueil (lecteur avec réglage du son).
- * - `video` : fichier hébergé sur le site (ex : "/videos/edit.mp4" dans public/). Si présent, lecteur maison.
- * - sinon : lecteur TikTok intégré, chargé seulement au clic (pas de cookies TikTok avant).
+ * Montage mis en avant sur l'accueil (lecteur maison avec réglage du son).
+ * - `video` : fichier hébergé sur le site, dans public/ (ex : "/videos/featured-edit.mp4"). Lu sans
+ *   passer par TikTok ; s'il est absent ou illisible, repli sur le lecteur TikTok (chargé au clic).
+ * - `poster` : image affichée avant lecture (optionnelle : sans elle, la première image de la vidéo).
+ * - `url` / `tiktokId` : le même montage sur TikTok (lien "Voir sur TikTok" et repli).
  */
-export const FEATURED_EDIT: { tiktokId: string; url: string; poster: string; video?: string } = {
-  tiktokId: "7600126324421840150",
-  url: "https://www.tiktok.com/@yexofps/video/7600126324421840150",
-  poster: "/images/products/advanced-edit.webp",
-  video: undefined,
+export const FEATURED_EDIT: { tiktokId: string; url: string; poster?: string; video?: string } = {
+  tiktokId: "7625315787451976982",
+  url: "https://www.tiktok.com/@yexofps/video/7625315787451976982",
+  poster: undefined,
+  video: "/videos/featured-edit.mp4",
 };
 
 /** Edits mis en avant dans l'espace Créateur. Ajoute une entrée + son titre dans messages (creator.edits.items). */

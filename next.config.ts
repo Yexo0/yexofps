@@ -1,5 +1,5 @@
 // next.config.ts — Config Next.js : plugin next-intl, infos de build, transitions de page,
-// images distantes autorisées et redirections 301 des anciennes URLs.
+// images distantes autorisées, cache des fichiers statiques et redirections 301 des anciennes URLs.
 import { execSync } from "node:child_process";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
@@ -44,6 +44,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.discordapp.com", pathname: "/avatars/**" },
       { protocol: "https", hostname: "cdn.discordapp.com", pathname: "/avatar-decoration-presets/**" },
     ],
+  },
+  // Fichiers de public/ : mis en cache 7 jours par le navigateur (Next met max-age=0 par défaut).
+  // Pour remplacer la vidéo à la une, changer son nom de fichier (sinon l'ancienne reste en cache).
+  async headers() {
+    const week = "public, max-age=604800, stale-while-revalidate=86400";
+    return ["/videos/:path*", "/images/:path*", "/textures/:path*"].map((source) => ({
+      source,
+      headers: [{ key: "Cache-Control", value: week }],
+    }));
   },
   async redirects() {
     return LEGACY.flatMap(([from, to]) => [

@@ -99,7 +99,10 @@ export function useValorantTracker({ autoRefresh = false }: { autoRefresh?: bool
   // Rafraîchissement automatique
   useEffect(() => {
     if (!autoOn) return;
-    const id = setInterval(refresh, TRACKER.autoRefreshMs);
+    // Onglet masqué : on ne consomme ni quota ni batterie
+    const id = setInterval(() => {
+      if (!document.hidden) refresh();
+    }, TRACKER.autoRefreshMs);
     return () => clearInterval(id);
   }, [autoOn, refresh]);
 

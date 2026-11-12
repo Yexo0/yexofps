@@ -61,7 +61,15 @@ export function NowBanner() {
 export function NowStatusSegment() {
   const t = useTranslations("now");
   const state = useLive();
-  if (!state) return null;
+  // Avant le calcul du statut : même emplacement réservé (sinon la barre change de largeur au chargement)
+  if (!state) {
+    return (
+      <span aria-hidden="true" className="hidden items-center gap-1.5 px-3 sm:flex">
+        <span className="h-1.5 w-1.5 rounded-full bg-surface-hover" />
+        now: <span className="h-2.5 w-16 rounded bg-surface-3" />
+      </span>
+    );
+  }
   const { live } = state;
   return (
     <Link

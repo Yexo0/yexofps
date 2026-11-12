@@ -1,11 +1,13 @@
 // src/app/[locale]/page.tsx — 01 Accueil, volontairement aéré : hero, montage à la une (avec le son),
 // fastfetch court (côté infra) et carte Gaming (rangs + dernières parties).
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Mail, Play } from "lucide-react";
-import { PROFILE, SOCIALS } from "@/config/site";
+import { FEATURED_EDIT, PROFILE, SOCIALS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { Reticle } from "@/components/ui/reticle";
@@ -15,6 +17,12 @@ import { LiveCard } from "@/components/home/live-card";
 import { Fastfetch } from "@/components/home/fastfetch";
 import { Whoami } from "@/components/home/whoami";
 import { FeaturedEdit } from "@/components/home/featured-edit";
+
+/** Vidéo à la une seulement si le fichier existe dans public/ (vérifié au build) : sinon lecteur TikTok */
+function featuredVideo(): string | undefined {
+  const video = FEATURED_EDIT.video;
+  return video && existsSync(join(process.cwd(), "public", video)) ? video : undefined;
+}
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -45,7 +53,7 @@ function Home() {
         index={1}
         className="md:col-span-6 lg:col-span-4 lg:row-span-2"
       >
-        <FeaturedEdit />
+        <FeaturedEdit video={featuredVideo()} />
       </Card>
       <Fastfetch index={2} className="md:col-span-3 lg:col-span-4" />
       <LiveCard index={3} className="md:col-span-3 lg:col-span-4" />
@@ -74,7 +82,7 @@ function Hero() {
               alt={t("avatarAlt")}
               width={128}
               height={128}
-              priority
+              preload
               className="h-24 w-24 rounded-xl object-cover sm:h-28 sm:w-28"
             />
           </span>

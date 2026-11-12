@@ -9,7 +9,7 @@ import { GeistMono } from "geist/font/mono";
 import { routing } from "@/i18n/routing";
 import { SITE } from "@/config/site";
 import { DEFAULT_THEME } from "@/config/theme";
-import { themeColor, themeCss, themeScript } from "@/lib/theme";
+import { earlyRevealScript, themeColor, themeCss, themeScript } from "@/lib/theme";
 import { Rail } from "@/components/shell/rail";
 import { UIProvider } from "@/components/shell/ui-provider";
 import { CommandPalette } from "@/components/shell/command-palette";
@@ -83,6 +83,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <div className="shell">
               <main id="main" tabIndex={-1} className="frame flex flex-col outline-none">
                 <PageTransition>{children}</PageTransition>
+                <script dangerouslySetInnerHTML={{ __html: earlyRevealScript }} />
                 <div className="mt-auto pt-3">
                   <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
                 </div>

@@ -173,7 +173,7 @@ export function Rail() {
           aria-label={t("avatar")}
           className="mt-3 block overflow-hidden rounded-full ring-1 ring-line"
         >
-          <Image src="/images/avatar.webp" alt="" width={36} height={36} className="h-9 w-9 object-cover" />
+          <Image src="/images/avatar.webp" alt="" width={36} height={36} loading="eager" className="h-9 w-9 object-cover" />
         </Link>
       </nav>
 
@@ -195,7 +195,7 @@ function MobileBar({ active }: { active: Space }) {
   return (
     <nav
       aria-label={t("main")}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface-solid/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface-solid/[0.97] pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="mx-auto grid max-w-lg grid-cols-6 px-1">
         {primary.map((space) => {

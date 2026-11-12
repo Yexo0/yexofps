@@ -85,7 +85,7 @@ export function SettingsMenu() {
       {/* Barre d'onglets collante : on sait toujours où on est en faisant défiler */}
       <div
         ref={headerRef}
-        className="sticky top-2 z-20 -mx-2 rounded-[16px] border border-line bg-surface-solid/90 px-2 pt-2 shadow-[var(--shadow)] backdrop-blur-md md:top-3"
+        className="sticky top-2 z-20 -mx-2 rounded-[16px] border border-line bg-surface-solid/95 px-2 pt-2 shadow-[var(--shadow)] md:top-3"
       >
         <Tabs.List
           aria-label={t("tabs")}

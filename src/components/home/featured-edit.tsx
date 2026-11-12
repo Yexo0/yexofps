@@ -1,7 +1,9 @@
 // src/components/home/featured-edit.tsx — Montage à la une, avec réglage du son.
 // Deux modes selon FEATURED_EDIT (src/config/site.ts) :
-// - `video` renseigné : lecteur maison (lecture/pause, couper le son, curseur de volume, progression) ;
-// - sinon : image + bouton, puis lecteur TikTok intégré chargé seulement au clic (vie privée, performance).
+// - `video` renseigné : lecteur maison (lecture/pause, couper le son, curseur de volume, progression).
+//   Lecture auto sans le son seulement quand le lecteur est à l'écran (pause sinon : batterie, processeur),
+//   jamais en mode économie de données ni en mouvement réduit. Fichier absent ou illisible : repli TikTok ;
+// - sinon : aperçu + bouton, puis lecteur TikTok intégré chargé seulement au clic (vie privée, performance).
 "use client";
 
 import Image from "next/image";
@@ -11,11 +13,13 @@ import { ExternalLink, Pause, Play, Volume1, Volume2, VolumeX } from "lucide-rea
 import { FEATURED_EDIT } from "@/config/site";
 import { Reticle } from "@/components/ui/reticle";
 
-export function FeaturedEdit() {
-  if (!FEATURED_EDIT.video) return <TikTokPlayer />;
+/** video : chemin du fichier, transmis par la page seulement s'il existe dans public/ */
+export function FeaturedEdit({ video }: { video?: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!video || failed) return <TikTokPlayer />;
   return (
     <div className="flex flex-1 flex-col justify-center gap-3">
-      <NativePlayer src={FEATURED_EDIT.video} />
+      <NativePlayer src={video} onFail={() => setFailed(true)} />
       <TikTokLink />
     </div>
   );
@@ -75,14 +79,20 @@ function TikTokPlayer() {
             className="group absolute inset-0 flex items-end justify-start p-4 text-left"
           >
             {/* Image horizontale : fond flouté plein cadre + image entière au centre (pas d'agrandissement flou) */}
-            <Image src={FEATURED_EDIT.poster} alt="" fill sizes="340px" className="scale-125 object-cover opacity-60 blur-2xl" />
-            <Image
-              src={FEATURED_EDIT.poster}
-              alt={t("posterAlt")}
-              fill
-              sizes="340px"
-              className="zoom-media object-contain"
-            />
+            {FEATURED_EDIT.poster ? (
+              <>
+                <Image src={FEATURED_EDIT.poster} alt="" fill sizes="340px" className="scale-125 object-cover opacity-60 blur-2xl" />
+                <Image
+                  src={FEATURED_EDIT.poster}
+                  alt={t("posterAlt")}
+                  fill
+                  sizes="340px"
+                  className="zoom-media object-contain"
+                />
+              </>
+            ) : (
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-surface-3 to-black" />
+            )}
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <Reticle size={14} inset={12} />
             <span className="relative flex items-center gap-3">
@@ -102,28 +112,51 @@ function TikTokPlayer() {
 
 /* ─── Lecteur maison (fichier hébergé sur le site) ─── */
 
-function NativePlayer({ src }: { src: string }) {
+function NativePlayer({ src, onFail }: { src: string; onFail: () => void }) {
   const t = useTranslations("home.edit");
   const ref = useRef<HTMLVideoElement>(null);
+  /** L'utilisateur a mis en pause : on ne relance plus automatiquement */
+  const userPaused = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [volume, setVolume] = useState(0.6);
   const [progress, setProgress] = useState(0);
 
-  // Lecture automatique, sans le son, seulement si l'utilisateur n'a pas demandé moins d'animations
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    video.play().catch(() => {
-      // lecture auto refusée par le navigateur : l'utilisateur lancera la vidéo lui-même
-    });
-  }, []);
+    // Erreur survenue avant l'hydratation (fichier absent) : l'événement a déjà été manqué
+    if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+      onFail();
+      return;
+    }
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !connection?.saveData;
+    if (!autoplay) return;
+    // Lecture sans le son tant que le lecteur est visible, pause dès qu'il sort de l'écran
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        // isIntersecting reste vrai dès qu'un pixel dépasse : on se fie à la part visible
+        const visible = entry.intersectionRatio >= 0.4;
+        if (visible && !userPaused.current) {
+          video.play().catch(() => {
+            // lecture auto refusée par le navigateur : l'utilisateur lancera la vidéo lui-même
+          });
+        } else if (!visible && !video.paused) {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.4] },
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [onFail]);
 
   function togglePlay() {
     const video = ref.current;
     if (!video) return;
-    if (video.paused) video.play();
+    userPaused.current = !video.paused;
+    if (video.paused) void video.play();
     else video.pause();
   }
 
@@ -149,11 +182,13 @@ function NativePlayer({ src }: { src: string }) {
         ref={ref}
         src={src}
         poster={FEATURED_EDIT.poster}
+        aria-label={t("videoLabel")}
         muted
         loop
         playsInline
         preload="metadata"
         onClick={togglePlay}
+        onError={onFail}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onVolumeChange={(e) => {
@@ -169,7 +204,8 @@ function NativePlayer({ src }: { src: string }) {
       <Reticle size={14} inset={12} />
 
       {/* Commandes */}
-      <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 rounded-2xl bg-black/55 p-2.5 text-white backdrop-blur-md">
+      {/* Fond opaque plutôt que flou : un flou par-dessus une vidéo est recalculé à chaque image */}
+      <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 rounded-2xl bg-black/70 p-2.5 text-white">
         <div className="h-1 overflow-hidden rounded-full bg-white/20" aria-hidden="true">
           <div className="h-full rounded-full bg-accent transition-[width] duration-200" style={{ width: `${progress * 100}%` }} />
         </div>

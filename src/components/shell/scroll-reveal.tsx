@@ -16,6 +16,8 @@ export function ScrollReveal() {
   // (avant la capture de la transition), sinon la carte principale ne pourrait pas se transformer.
   useLayoutEffect(() => {
     if (pathname === firstPath.current && !document.documentElement.dataset.navDir) return;
+    // Feuille de l'apparition immédiate : ciblait les cartes de la page d'arrivée, plus celles-ci
+    document.getElementById("early-reveal")?.remove();
     const supported = "startViewTransition" in document && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!supported) return;
     document.querySelectorAll<HTMLElement>(".card:not([data-in])").forEach((card) => {
@@ -27,6 +29,20 @@ export function ScrollReveal() {
       }
     });
   }, [pathname]);
+
+  // Relais de l'apparition immédiate (earlyRevealScript) : ces cartes sont marquées comme apparues,
+  // puis la feuille temporaire est retirée une fois leurs animations terminées
+  useEffect(() => {
+    const early = (window as Window & { __earlyCards?: Element[] }).__earlyCards;
+    if (!early) return;
+    delete (window as Window & { __earlyCards?: Element[] }).__earlyCards;
+    early.forEach((card) => {
+      card.setAttribute("data-in", "");
+      card.setAttribute("data-instant", "");
+    });
+    const id = setTimeout(() => document.getElementById("early-reveal")?.remove(), 2_000);
+    return () => clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     // Le script tourne : on désactive le filet de sécurité CSS (affichage forcé après 2,5 s)
