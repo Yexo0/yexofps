@@ -84,3 +84,11 @@ export const BTS_MAP = {
     { id: "dmz", x: 380, y: 262, w: 180, h: 92 },
   ],
 } as const;
+
+/** Parcours rejoués sur le schéma du BTS (titres : career.infra.scenarios.items.<id>) */
+export const BTS_SCENARIOS = [
+  { id: "web", path: ["school", "router", "vswRed", "ipfire", "wordpress"] },
+  { id: "ticket", path: ["wifi", "switch", "vswGreen", "glpi"] },
+  { id: "deploy", path: ["fog", "vswGreen", "switch"] },
+  { id: "domain", path: ["wifi", "switch", "vswGreen", "winsrv"] },
+] as const;

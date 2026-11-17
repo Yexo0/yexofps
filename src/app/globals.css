@@ -840,6 +840,33 @@ html {
     filter: drop-shadow(0 0 4px var(--glow-strong));
   }
 
+  /* Scénarios du schéma : trait qui se dessine pendant le trajet du paquet, tirets qui circulent
+     ensuite dans le sens du flux, pastille "en cours" qui tourne */
+  .map-flow-draw {
+    stroke-dasharray: 1;
+    animation: flow-draw 720ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  .map-flow-run {
+    stroke-dasharray: 2 10;
+    animation: flow-run 900ms linear infinite;
+  }
+  .map-spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 900ms linear infinite;
+  }
+  .pipe-spin {
+    animation: spin 800ms linear infinite;
+  }
+  .pipe-fill {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .pipe-fill-on {
+    transform: none;
+  }
+
   /* Timeline de montage : les clips se déroulent, la tête de lecture avance */
   [data-js] .card .clip-grow {
     transform: scaleX(0);
@@ -1620,6 +1647,27 @@ html[data-nav-dir="back"] {
     opacity: 1;
     filter: blur(0);
     transform: none;
+  }
+}
+
+@keyframes flow-draw {
+  from {
+    stroke-dashoffset: var(--from, 1);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flow-run {
+  to {
+    stroke-dashoffset: calc(var(--dir, -1) * 12);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 

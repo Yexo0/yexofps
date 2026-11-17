@@ -21,7 +21,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { BTS_MAP, DOCS, MISSIONS, SKILLS, TIMELINE } from "@/config/career";
+import { BTS_MAP, BTS_SCENARIOS, DOCS, MISSIONS, SKILLS, TIMELINE } from "@/config/career";
 import { LAB_SINCE } from "@/config/lab";
 import { EMAILS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -339,8 +339,16 @@ function InfraBts() {
             },
           ]),
         )}
-        labels={{ title: t("title"), hint: t("hint"), related: t("related"), ungrouped: t("ungrouped"), trace: "traceroute" }}
+        labels={{
+          title: t("title"),
+          hint: t("hint"),
+          related: t("related"),
+          ungrouped: t("ungrouped"),
+          trace: "traceroute",
+          scenarios: { title: t("scenarios.title"), play: t("scenarios.play"), pause: t("scenarios.pause") },
+        }}
         root="school"
+        scenarios={BTS_SCENARIOS.map((s) => ({ id: s.id, label: t(`scenarios.items.${s.id}`), path: s.path }))}
       />
     </Card>
   );

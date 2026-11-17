@@ -768,6 +768,17 @@
           "sub": "192.168.2.250",
           "role": "Borne Wi-Fi Cisco : accès sans fil au LAN."
         }
+      },
+      "scenarios": {
+        "title": "Scénarios",
+        "play": "Lire les scénarios",
+        "pause": "Mettre en pause",
+        "items": {
+          "web": "Site en DMZ",
+          "ticket": "Ticket GLPI",
+          "deploy": "Déploiement FOG",
+          "domain": "Connexion au domaine"
+        }
       }
     },
     "watch": {
@@ -926,6 +937,17 @@
       "ungrouped": "Cœur du réseau",
       "links": {
         "tunnel": "tunnel WireGuard"
+      },
+      "scenarios": {
+        "title": "Scénarios",
+        "play": "Lire les scénarios",
+        "pause": "Mettre en pause",
+        "items": {
+          "remote": "Accès depuis l'extérieur",
+          "backup": "Sauvegarde nocturne",
+          "alert": "Alerte → Discord",
+          "wifi": "Wi-Fi → Internet"
+        }
       }
     },
     "nodes": {

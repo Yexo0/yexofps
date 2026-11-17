@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { useFormatter, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Archive, Activity, ArrowRight, Globe, Layers, KeyRound, Network, ScrollText, Server } from "lucide-react";
-import { HOSTS, LAB_MAP, LAB_SINCE, TECHNOLOGIES, VLANS, labStats, vmsOf, type Host } from "@/config/lab";
+import { HOSTS, LAB_MAP, LAB_SCENARIOS, LAB_SINCE, TECHNOLOGIES, VLANS, labStats, vmsOf, type Host } from "@/config/lab";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { PageSections } from "@/components/shell/page-sections";
@@ -119,8 +119,10 @@ function MapCard() {
           related: t("map.related"),
           ungrouped: t("map.ungrouped"),
           trace: "traceroute",
+          scenarios: { title: t("map.scenarios.title"), play: t("map.scenarios.play"), pause: t("map.scenarios.pause") },
         }}
         root="internet"
+        scenarios={LAB_SCENARIOS.map((s) => ({ id: s.id, label: t(`map.scenarios.items.${s.id}`), path: s.path }))}
       />
     </Card>
   );

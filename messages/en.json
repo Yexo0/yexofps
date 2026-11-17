@@ -768,6 +768,17 @@
           "sub": "192.168.2.250",
           "role": "Cisco Wi-Fi access point: wireless access to the LAN."
         }
+      },
+      "scenarios": {
+        "title": "Scenarios",
+        "play": "Play scenarios",
+        "pause": "Pause",
+        "items": {
+          "web": "DMZ website",
+          "ticket": "GLPI ticket",
+          "deploy": "FOG deployment",
+          "domain": "Domain logon"
+        }
       }
     },
     "watch": {
@@ -926,6 +937,17 @@
       "ungrouped": "Network core",
       "links": {
         "tunnel": "WireGuard tunnel"
+      },
+      "scenarios": {
+        "title": "Scenarios",
+        "play": "Play scenarios",
+        "pause": "Pause",
+        "items": {
+          "remote": "Remote access",
+          "backup": "Nightly backup",
+          "alert": "Alert → Discord",
+          "wifi": "Wi-Fi → Internet"
+        }
       }
     },
     "nodes": {

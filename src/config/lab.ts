@@ -311,6 +311,15 @@ export const LAB_MAP = {
   ] satisfies LabMapGroup[],
 } as const;
 
+/** Parcours rejoués sur le schéma, façon pipeline (titres : lab.map.scenarios.items.<id>).
+ *  Chaque étape doit être reliée à la suivante par un lien du schéma. */
+export const LAB_SCENARIOS = [
+  { id: "remote", path: ["internet", "vps01", "fw01", "sw-core", "esxi01", "rp01"] },
+  { id: "backup", path: ["bkp01", "esxi01", "sw-core", "nas01"] },
+  { id: "alert", path: ["zbx01", "esxi01", "sw-core", "fw01", "internet"] },
+  { id: "wifi", path: ["clients", "ap01", "sw-core", "fw01", "internet"] },
+] as const;
+
 /* ─── Totaux (calculés, jamais saisis à la main) ────────── */
 
 export function labStats() {
