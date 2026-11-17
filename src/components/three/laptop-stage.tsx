@@ -101,7 +101,8 @@ function Rig({ pointer, progress, reduced }: StageInput) {
     l.position.lerpVectors(from, to, out);
     l.position.y += Math.sin(t * 1.1) * 0.05 * k;
     l.scale.setScalar(0.15 + 0.85 * Math.min(1, out));
-    l.rotation.y = -0.4 + Math.sin(t * 0.6) * 0.35 + x * 0.3;
+    // Rotation bornée : le logo reste toujours lisible (jamais vu par la tranche)
+    l.rotation.y = -0.25 + Math.sin(t * 0.6) * 0.22 + x * 0.12;
     l.rotation.x = Math.sin(t * 0.8) * 0.08 - y * 0.15;
   });
 
