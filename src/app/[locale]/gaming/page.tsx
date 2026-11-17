@@ -50,11 +50,11 @@ function Ranks() {
       meta={t("ranks.meta", { count: RANKS.length })}
       headingLevel={1}
       index={0}
-      className="md:col-span-6 lg:col-span-5"
+      className="md:col-span-6 lg:col-span-12"
       bodyClassName="gap-5"
     >
-      <p className="max-w-[34ch] text-[22px] font-bold leading-tight tracking-tight">{t("intro.tagline")}</p>
-      <RankGrid className="flex-1" />
+      <RankGrid />
+      <p className="max-w-[60ch] text-[17px] leading-snug text-muted">{t("intro.tagline")}</p>
     </Card>
   );
 }

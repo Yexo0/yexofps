@@ -1163,6 +1163,10 @@
       },
       "partner": "−{discount} % avec le code {code}",
       "codeLabel": "le code promo"
+    },
+    "hero": {
+      "current": "Rang actuel · Valorant",
+      "currentValue": "Immortal 3"
     }
   },
   "tools": {

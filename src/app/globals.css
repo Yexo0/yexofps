@@ -1257,6 +1257,17 @@ html {
     opacity: 0;
   }
 
+  /* Carton-titre de l'espace Création : voile coloré sur l'image de montage, sous le logo 3D */
+  .logo-title {
+    background: var(--inset);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .logo-title-veil {
+    background:
+      radial-gradient(70% 60% at 50% 50%, transparent, var(--inset) 95%),
+      linear-gradient(135deg, color-mix(in oklab, var(--accent) 30%, transparent), transparent 60%, color-mix(in oklab, var(--accent-2) 24%, transparent));
+  }
+
   /* Tuiles d'espaces */
   .space-tile {
     flex: 1;

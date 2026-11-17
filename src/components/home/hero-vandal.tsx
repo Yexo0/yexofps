@@ -5,77 +5,27 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useStage } from "@/components/three/use-stage";
 
 const VandalStage = dynamic(() => import("@/components/three/vandal-stage"), { ssr: false });
 
-function hasWebGL(): boolean {
-  try {
-    const c = document.createElement("canvas");
-    return Boolean(c.getContext("webgl2") ?? c.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
-
 export function HeroVandal({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const pointer = useRef({ x: 0, y: 0 });
   const progress = useRef(0);
-  const [ready, setReady] = useState<{ accent: string; accent2: string; reduced: boolean } | null>(null);
-  const [active, setActive] = useState(false);
+  const { ready, active, pointer } = useStage(ref);
 
-  useEffect(() => {
-    if (!hasWebGL()) return;
-    const cs = getComputedStyle(document.documentElement);
-    // Montage après le premier affichage : ne retarde pas le contenu
-    const id = requestAnimationFrame(() =>
-      setReady({
-        accent: cs.getPropertyValue("--accent").trim() || "#ff4655",
-        accent2: cs.getPropertyValue("--accent-2").trim() || "#f2c14e",
-        reduced: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-      }),
-    );
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  // Rendu actif seulement si visible à l'écran et onglet au premier plan
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || !ready) return;
-    let inView = false;
-    const update = () => setActive(inView && !document.hidden && !ready.reduced);
-    const io = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      update();
-    });
-    io.observe(el);
-    document.addEventListener("visibilitychange", update);
-    return () => {
-      io.disconnect();
-      document.removeEventListener("visibilitychange", update);
-    };
-  }, [ready]);
-
-  // Souris (sur toute la page) et défilement à travers le hero
+  // Défilement à travers le hero : l'arme pivote et remonte en sortant
   useEffect(() => {
     const el = ref.current;
     if (!el || !ready || ready.reduced) return;
-    const onMove = (e: PointerEvent) => {
-      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
-    };
     const onScroll = () => {
       const r = el.getBoundingClientRect();
       progress.current = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
     };
     onScroll();
-    window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, [ready]);
 
   return (

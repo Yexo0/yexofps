@@ -28,6 +28,7 @@ import { Chip, ExternalButton, buttonClass } from "@/components/ui/primitives";
 import { DiscordIcon, InstagramIcon, TikTokIcon } from "@/components/icons/brands";
 import { EditTimeline } from "@/components/creator/edit-timeline";
 import { Waveform } from "@/components/creator/waveform";
+import { LogoTitle } from "@/components/creator/logo-title";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -71,9 +72,9 @@ function Bio() {
       index={0}
       className="md:col-span-6 lg:col-span-7"
     >
-      <div className="grid gap-5 sm:grid-cols-[1fr_180px]">
+      <div className="grid gap-5 sm:grid-cols-[1fr_240px]">
         <div className="flex flex-col gap-4">
-          <p className="text-[22px] font-bold leading-tight tracking-tight">{t("tagline")}</p>
+          <p className="text-[24px] font-bold leading-tight tracking-tight">{t("tagline")}</p>
           <p className="text-[15px] leading-relaxed text-muted">{t("text")}</p>
           <ul className="stagger flex flex-wrap gap-1.5">
             <li>
@@ -90,13 +91,7 @@ function Bio() {
             </li>
           </ul>
         </div>
-        <Image
-          src="/images/creator/editing-setup.webp"
-          alt={t("photoAlt")}
-          width={360}
-          height={380}
-          className="hidden h-full max-h-[240px] w-full rounded-2xl object-cover sm:block"
-        />
+        <LogoTitle image="/images/creator/editing-setup.webp" alt={t("photoAlt")} className="h-[220px] sm:h-full sm:min-h-[240px]" />
       </div>
       <div className="mt-6 flex flex-wrap gap-2.5">
         <ExternalButton href={SOCIALS.tiktok.url} variant="primary">
