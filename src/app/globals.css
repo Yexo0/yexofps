@@ -1360,6 +1360,11 @@ html {
     opacity: 0;
   }
 
+  /* Veille repliée (Parcours) : résumé en bouton, sans le triangle natif */
+  .watch-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
   /* Carton-titre de l'espace Création : voile coloré sur l'image de montage, sous le logo 3D */
   .logo-title {
     background: var(--inset);

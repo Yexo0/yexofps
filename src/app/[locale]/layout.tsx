@@ -22,6 +22,7 @@ import { PageTransition } from "@/components/shell/page-transition";
 import { Backdrop } from "@/components/shell/backdrop";
 import { SpaceSync } from "@/components/shell/space-sync";
 import { AimCursor } from "@/components/shell/aim-cursor";
+import { Credits } from "@/components/shell/credits";
 import "../globals.css";
 
 // Police des titres et gros chiffres (fichier local, aucune requête réseau au build)
@@ -100,6 +101,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <script dangerouslySetInnerHTML={{ __html: earlyRevealScript }} />
                 <div className="mt-auto pt-3">
                   <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
+                  <Credits />
                 </div>
               </main>
             </div>

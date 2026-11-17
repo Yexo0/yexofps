@@ -67,6 +67,12 @@
         "dark": "dark",
         "light": "light"
       }
+    },
+    "credits": {
+      "models": "3D models:",
+      "license": "{license} license",
+      "riot": "Yexo isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",
+      "modified": "adapted for the web (compression)"
     }
   },
   "nav": {
@@ -825,7 +831,8 @@
           ]
         }
       },
-      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
+      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin",
+      "more": "Read the tech watch"
     }
   },
   "home": {

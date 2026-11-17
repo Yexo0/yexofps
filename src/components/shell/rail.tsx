@@ -251,7 +251,7 @@ export function Rail() {
           ))}
         </div>
 
-        <Link href="/contact" aria-label={t("avatar")} className="rail-row mt-3 pl-[18px]">
+        <Link href="/contact" aria-label={t("avatar")} className="rail-row relative mt-3 pl-[18px]">
           <span className="block shrink-0 overflow-hidden rounded-[5px] ring-1 ring-line">
             <Image src="/images/avatar.webp" alt="" width={36} height={36} loading="eager" className="h-9 w-9 object-cover" />
           </span>
