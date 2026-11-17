@@ -14,7 +14,7 @@ const LEGACY: [from: string, to: string][] = [
   ["tracker", "gaming#tracker"],
   ["convert", "tools"],
   ["liens", "contact"],
-  ["pro", "career"],
+  ["pro", "baptiste"],
 ];
 
 /** Commit déployé (affiché sur /lab/site) : vide si le build n'est pas fait depuis un dépôt git */

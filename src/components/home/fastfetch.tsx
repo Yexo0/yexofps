@@ -20,7 +20,8 @@ const SWATCHES = [
   "var(--text)",
 ];
 
-export function Fastfetch({ className, index }: { className?: string; index?: number }) {
+/** `pro` : version de la page Baptiste, sans les rangs (on reste hors univers Valorant) */
+export function Fastfetch({ className, index, pro = false }: { className?: string; index?: number; pro?: boolean }) {
   const t = useTranslations("home.fastfetch");
   const tUnits = useTranslations("lab.units");
   const tRanks = useTranslations("gaming.ranks.items");
@@ -37,8 +38,8 @@ export function Fastfetch({ className, index }: { className?: string; index?: nu
     [t("keys.memory"), `${s.ramGb} ${tUnits("gb")} · ${t("values.threads", { threads: s.threads })}`],
     [t("keys.monitoring"), monitoring],
     [t("keys.site"), `Next.js · ${os("vps01")}`],
-    [t("keys.ranks"), RANKS.map((r) => tRanks(`${r.id}.rank`)).join(" · ")],
-    [t("keys.edits"), `TikTok ${SOCIALS.tiktok.handle}`],
+    ...(pro ? [] : ([[t("keys.ranks"), RANKS.map((r) => tRanks(`${r.id}.rank`)).join(" · ")]] as [string, string][])),
+    [t("keys.edits"), pro ? `After Effects · TikTok ${SOCIALS.tiktok.handle}` : `TikTok ${SOCIALS.tiktok.handle}`],
   ];
 
   return (

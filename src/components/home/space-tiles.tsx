@@ -6,7 +6,7 @@ import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { SPACES } from "@/config/spaces";
+import { SPACES, type SpaceId } from "@/config/spaces";
 
 /** Visuel de fond des tuiles qui en ont un (les autres gardent leur grande icône) */
 const IMAGES: Partial<Record<(typeof SPACES)[number]["id"], string>> = {
@@ -14,9 +14,13 @@ const IMAGES: Partial<Record<(typeof SPACES)[number]["id"], string>> = {
   creator: "/images/creator/editing-setup.webp",
 };
 
-export function SpaceTiles({ className }: { className?: string }) {
+/** `order` : ordre des espaces affichés (par défaut celui du rail, sans l'accueil) */
+export function SpaceTiles({ className, order }: { className?: string; order?: readonly SpaceId[] }) {
   const t = useTranslations("nav.rail");
   const tHome = useTranslations("home.explore");
+  const spaces = order
+    ? order.map((id) => SPACES.find((s) => s.id === id)!).filter(Boolean)
+    : SPACES.filter((s) => s.id !== "home");
 
   return (
     <section aria-labelledby="explore-title" className={className}>
@@ -24,7 +28,7 @@ export function SpaceTiles({ className }: { className?: string }) {
         {tHome("title")}
       </h2>
       <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-3">
-        {SPACES.filter((s) => s.id !== "home").map((space, i) => {
+        {spaces.map((space, i) => {
           const Icon = space.icon;
           const n = SPACES.indexOf(space) + 1;
           const image = IMAGES[space.id];

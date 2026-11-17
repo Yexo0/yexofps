@@ -1,4 +1,5 @@
-// src/components/shell/aim-cursor.tsx — Curseur = mon vrai réticule Valorant (dessiné depuis CROSSHAIR).
+// src/components/shell/aim-cursor.tsx — Curseur = mon vrai réticule Valorant (dessiné depuis CROSSHAIR) ;
+// dans l'univers "pro" (page Baptiste), un point d'ancrage façon logiciel de montage.
 // Sur un élément cliquable, quatre coins viennent l'encadrer ; les boutons sont légèrement attirés
 // par le curseur (aimant) ; un clic fait "tirer" le réticule. Les champs de saisie gardent le curseur
 // texte du système. Uniquement avec une souris (pointeur fin) ; en mouvement réduit, pas de lissage
@@ -143,7 +144,13 @@ export function AimCursor() {
       ))}
       <div ref={cross} className="aim-cross">
         <span className="aim-shot">
-          <CrosshairSvg size={48} zoom={1.25} />
+          {/* Univers Valorant : mon réticule ; univers pro (page Baptiste) : point d'ancrage de logiciel de montage */}
+          <CrosshairSvg size={48} zoom={1.25} className="aim-valo" />
+          <svg width="60" height="60" viewBox="-30 -30 60 60" className="aim-anchor" aria-hidden="true">
+            <circle r="7" fill="none" stroke="var(--accent)" strokeWidth="1.6" />
+            <path d="M-14 0H-7M7 0H14M0 -14V-7M0 7V14" stroke="var(--accent)" strokeWidth="1.6" />
+            <circle r="1.6" fill="var(--text)" />
+          </svg>
         </span>
       </div>
     </div>

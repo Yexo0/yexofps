@@ -368,6 +368,18 @@ html {
     opacity: var(--backdrop-lines);
     will-change: transform;
   }
+  .backdrop-set {
+    position: absolute;
+    inset: 0;
+    transition: opacity 900ms ease;
+  }
+  .backdrop-set-studio,
+  :root[data-space="pro"] .backdrop-set-valo {
+    opacity: 0;
+  }
+  :root[data-space="pro"] .backdrop-set-studio {
+    opacity: 1;
+  }
   .backdrop-number {
     position: absolute;
     right: -0.03em;
@@ -1142,6 +1154,17 @@ html {
     display: block;
     filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.6));
   }
+  .aim-shot > svg {
+    position: absolute;
+    inset: 0;
+  }
+  .aim-anchor,
+  :root[data-space="pro"] .aim-valo {
+    display: none;
+  }
+  :root[data-space="pro"] .aim-anchor {
+    display: block;
+  }
   /* Tir : petit recul du réticule et onde d'impact */
   .aim-shot::after {
     content: "";
@@ -1229,6 +1252,10 @@ html {
     font-size: clamp(118px, 17vw, 260px);
     line-height: 0.8;
     margin-left: -0.035em;
+  }
+  /* Nom long (profil Baptiste) : plus petit pour tenir dans la colonne de gauche */
+  .hero-name.hero-name-long {
+    font-size: clamp(84px, 10.5vw, 168px);
   }
   /* Arme 3D : en haut sur mobile, à droite sur grand écran */
   .hero-3d {

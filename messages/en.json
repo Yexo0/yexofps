@@ -42,6 +42,10 @@
     "labSite": {
       "title": "This site",
       "description": "How yexofps.org is hosted on my VPS: the path of a request, the server, the stack and live figures."
+    },
+    "baptiste": {
+      "title": "Baptiste · systems and network admin, motion design",
+      "description": "The professional side of Yexo: work-study IT infrastructure administrator in an IT department, homelab, and editing in After Effects."
     }
   },
   "common": {
@@ -72,7 +76,8 @@
       "models": "3D models:",
       "license": "{license} license",
       "riot": "Yexo isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",
-      "modified": "adapted for the web (compression)"
+      "modified": "adapted for the web (compression)",
+      "trademarks": "After Effects is a trademark of Adobe."
     }
   },
   "nav": {
@@ -164,7 +169,8 @@
       "converter": "Sensitivity converter",
       "valoSettings": "Valorant settings",
       "now": "Right now (/now)",
-      "site": "How this site is hosted"
+      "site": "How this site is hosted",
+      "baptiste": "Baptiste, professional side"
     },
     "actions": {
       "copyPro": "Copy work email",
@@ -838,7 +844,7 @@
   "home": {
     "hero": {
       "avatarAlt": "Yexo's profile picture",
-      "realName": "Baptiste Dauvergne · {age} · France",
+      "realName": "Baptiste · {age} · France",
       "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
       "contact": "Contact me",
       "whoami": {
@@ -916,6 +922,29 @@
     "explore": {
       "title": "Explore the site",
       "open": "Open"
+    },
+    "pro": {
+      "punch": "I run systems and networks, and I animate images in After Effects.",
+      "callouts": {
+        "machine": "Workstation · admin and editing",
+        "ae": "After Effects · motion design"
+      },
+      "actions": {
+        "career": "My background",
+        "lab": "My homelab"
+      },
+      "stats": {
+        "label": "In numbers",
+        "role": "IT infrastructure · IT department",
+        "roleValue": "Work-study",
+        "vms": "Homelab · {machines} machines",
+        "vlans": "Segmented network · DMZ",
+        "ae": "Editing and motion design"
+      },
+      "timeline": {
+        "title": "Background in short",
+        "all": "Full background"
+      }
     }
   },
   "lab": {

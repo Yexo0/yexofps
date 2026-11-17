@@ -6,6 +6,8 @@ export const SITE = {
   url: "https://yexofps.org",
   name: "Yexo",
   author: "Baptiste Dauvergne",
+  /** Nom affiché sur les pages (prénom seul) ; `author` reste dans les métadonnées */
+  displayName: "Baptiste",
   since: 2021,
 } as const;
 
@@ -128,6 +130,14 @@ export const MODEL_CREDITS = [
     license: "CC BY 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
     url: "https://sketchfab.com/3d-models/radiant-gun-buddy-valorant-740f4234ac52446fb67b19202e27dfeb",
+  },
+  {
+    id: "laptop",
+    title: "CyberPunk Laptop",
+    author: "Vivien Deroche",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    url: "https://sketchfab.com/3d-models/cyberpunk-laptop-8330c89e8431451db3aa9d15c5836ddf",
   },
   {
     id: "logo",

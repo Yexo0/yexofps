@@ -71,7 +71,7 @@ function Intro() {
     <Card
       id="intro"
       icon={Briefcase}
-      title="Baptiste Dauvergne"
+      title="Baptiste"
       subtitle="~/parcours"
       meta={t("meta")}
       headingLevel={1}

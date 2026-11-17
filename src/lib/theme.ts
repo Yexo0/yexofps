@@ -8,8 +8,8 @@ import {
   argbFromHex,
   hexFromArgb,
 } from "@material/material-color-utilities";
-import { NEUTRAL_CHROMA, NEUTRAL_SEED, SPACE_SEEDS, SPACE_SEEDS_2 } from "@/config/theme";
-import { SPACES, type SpaceId } from "@/config/spaces";
+import { NEUTRAL_CHROMA, NEUTRAL_SEED, SPACE_SEEDS, SPACE_SEEDS_2, THEME_OVERRIDES, type ThemeKey } from "@/config/theme";
+import { SPACES } from "@/config/spaces";
 
 const neutralHue = Hct.fromInt(argbFromHex(NEUTRAL_SEED)).hue;
 const neutral = TonalPalette.fromHueAndChroma(neutralHue, NEUTRAL_CHROMA);
@@ -72,7 +72,7 @@ const lightNeutrals: Tokens = {
 
 /* ─── Accents (un jeu par espace) ─────────────────────── */
 
-function darkAccent(id: SpaceId): Tokens {
+function darkAccent(id: ThemeKey): Tokens {
   const p = accentPalette(SPACE_SEEDS[id]);
   const p2 = accentPalette(SPACE_SEEDS_2[id]);
   return {
@@ -98,7 +98,7 @@ function darkAccent(id: SpaceId): Tokens {
   };
 }
 
-function lightAccent(id: SpaceId): Tokens {
+function lightAccent(id: ThemeKey): Tokens {
   const p = accentPalette(SPACE_SEEDS[id]);
   const p2 = accentPalette(SPACE_SEEDS_2[id]);
   return {
@@ -132,11 +132,14 @@ export const themeCss =
   `:root,[data-theme="dark"]{color-scheme:dark;${block(darkNeutrals)}${block(darkAccent("home"))}}` +
   `[data-theme="light"]{color-scheme:light;${block(lightNeutrals)}${block(lightAccent("home"))}}` +
   // Espace de la page (html[data-space]) ou élément coloré à part (data-accent, ex : tuiles d'espaces)
-  SPACES.map(
-    (s) =>
-      `${s.id === "home" ? "" : `:root[data-space="${s.id}"],`}[data-accent="${s.id}"]{${block(darkAccent(s.id))}}` +
-      `${s.id === "home" ? "" : `:root[data-theme="light"][data-space="${s.id}"],`}[data-theme="light"] [data-accent="${s.id}"]{${block(lightAccent(s.id))}}`,
-  ).join("");
+  // Univers à part (THEME_OVERRIDES), sur le même modèle
+  (Object.keys(SPACE_SEEDS) as ThemeKey[])
+    .map(
+      (id) =>
+        `${id === "home" ? "" : `:root[data-space="${id}"],`}[data-accent="${id}"]{${block(darkAccent(id))}}` +
+        `${id === "home" ? "" : `:root[data-theme="light"][data-space="${id}"],`}[data-theme="light"] [data-accent="${id}"]{${block(lightAccent(id))}}`,
+    )
+    .join("");
 
 /** Couleur du navigateur (barre d'adresse mobile) */
 export const themeColor = { dark: hex(neutral, 4), light: hex(neutral, 93) };
@@ -149,7 +152,7 @@ const spaceRoutes = SPACES.filter((s) => s.href !== "/").map((s) => [s.id, [s.hr
  * (localStorage) et la couleur de l'espace de la page, pour éviter un flash.
  * Pose aussi data-js : les animations d'apparition ne s'activent que si JavaScript tourne.
  */
-export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}var p=location.pathname.replace(/^\\/(fr|en)(?=\\/|$)/,"")||"/",r=${JSON.stringify(spaceRoutes)},s="home";for(var i=0;i<r.length;i++){for(var j=0;j<r[i][1].length;j++){var h=r[i][1][j];if(p===h||p.indexOf(h+"/")===0){s=r[i][0];}}}d.setAttribute("data-space",s);})();`;
+export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}var p=location.pathname.replace(/^\\/(fr|en)(?=\\/|$)/,"").replace(/\\/$/,"")||"/",r=${JSON.stringify(spaceRoutes)},o=${JSON.stringify(THEME_OVERRIDES)},s="home";for(var i=0;i<r.length;i++){for(var j=0;j<r[i][1].length;j++){var h=r[i][1][j];if(p===h||p.indexOf(h+"/")===0){s=r[i][0];}}}if(o[p])s=o[p];d.setAttribute("data-space",s);})();`;
 
 /**
  * Script placé juste après le contenu : lance tout de suite l'apparition des cartes du premier écran,

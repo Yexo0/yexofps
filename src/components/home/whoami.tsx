@@ -1,55 +1,53 @@
-// src/components/home/whoami.tsx — Bascule "whoami --as yexo | baptiste" : les deux facettes du profil.
-// Les deux textes sont rendus dans le HTML (forceMount) ; seul l'onglet actif est visible.
-"use client";
-
-import { Tabs } from "radix-ui";
+// src/components/home/whoami.tsx — Sélecteur "whoami --as yexo | baptiste" : les deux facettes du profil
+// sont deux pages. yexo = accueil (univers Valorant), baptiste = /baptiste (côté pro, After Effects).
+// Changer de profil change de page : couleurs, fond, 3D et curseur basculent avec la transition.
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { NextSpace } from "@/components/ui/next-space";
 import type { SpaceId } from "@/config/spaces";
 
-const PROFILES = ["yexo", "baptiste"] as const;
+export const PROFILES = ["yexo", "baptiste"] as const;
+export type Profile = (typeof PROFILES)[number];
+
+/** Page de chaque profil */
+export const PROFILE_HREF: Record<Profile, "/" | "/baptiste"> = { yexo: "/", baptiste: "/baptiste" };
 
 /** Où mène chaque profil : le créateur vers ses montages, le pro vers son parcours */
-const PATHS: Record<(typeof PROFILES)[number], SpaceId> = { yexo: "creator", baptiste: "career" };
+const PATHS: Record<Profile, SpaceId> = { yexo: "creator", baptiste: "career" };
 
-export function Whoami() {
+export function Whoami({ current }: { current: Profile }) {
   const t = useTranslations("home.hero.whoami");
   return (
-    <Tabs.Root defaultValue="yexo" className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-2 font-mono text-[12.5px]">
+    <div className="flex flex-col gap-3">
+      <nav aria-label={t("label")} className="flex flex-wrap items-center gap-2 font-mono text-[12.5px]">
         <span className="text-accent">$</span>
         <span className="text-muted">whoami --as</span>
-        <Tabs.List aria-label={t("label")} className="flex gap-1 rounded-full bg-surface-2 p-1">
+        <ul className="flex gap-1 rounded-[5px] bg-surface-2 p-1">
           {PROFILES.map((p) => (
-            <Tabs.Trigger
-              key={p}
-              value={p}
-              className={cn(
-                "rounded-full px-3 py-1 text-muted transition-colors hover:text-fg",
-                "data-[state=active]:bg-accent data-[state=active]:text-on-accent",
-              )}
-            >
-              {p}
-            </Tabs.Trigger>
+            <li key={p}>
+              <Link
+                href={PROFILE_HREF[p]}
+                aria-current={p === current ? "page" : undefined}
+                className={cn(
+                  "block rounded-[3px] px-3 py-1 transition-colors",
+                  p === current ? "bg-accent text-on-accent" : "text-muted hover:bg-surface-3 hover:text-fg",
+                )}
+              >
+                {p}
+              </Link>
+            </li>
           ))}
-        </Tabs.List>
+        </ul>
+      </nav>
+      <div className="max-w-[68ch] text-[15px] leading-relaxed text-muted">
+        <p>
+          <span className="font-semibold text-fg">{t(`${current}.title`)}</span> {t(`${current}.text`)}
+        </p>
+        <div className="mt-3">
+          <NextSpace to={PATHS[current]} label={t(`${current}.path`)} />
+        </div>
       </div>
-      {PROFILES.map((p) => (
-        <Tabs.Content
-          key={p}
-          value={p}
-          forceMount
-          className="tab-in max-w-[68ch] text-[15px] leading-relaxed text-muted outline-none data-[state=inactive]:hidden"
-        >
-          <p>
-            <span className="font-semibold text-fg">{t(`${p}.title`)}</span> {t(`${p}.text`)}
-          </p>
-          <div className="mt-3">
-            <NextSpace to={PATHS[p]} label={t(`${p}.path`)} />
-          </div>
-        </Tabs.Content>
-      ))}
-    </Tabs.Root>
+    </div>
   );
 }

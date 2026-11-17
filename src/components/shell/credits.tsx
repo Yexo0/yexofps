@@ -25,7 +25,9 @@ export function Credits() {
         {" — "}
         {t("modified")}.
       </p>
-      <p>{t("riot")}</p>
+      <p>
+        {t("riot")} {t("trademarks")}
+      </p>
     </div>
   );
 }

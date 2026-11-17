@@ -7,6 +7,7 @@ import { localizedPath } from "@/lib/metadata";
 
 /** Pages rattachées à un espace, en plus des 7 espaces */
 const SUB_PAGES = [
+  { href: "/baptiste", changeFrequency: "monthly" as const, priority: 0.9 },
   { href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 },
   { href: "/now", changeFrequency: "weekly" as const, priority: 0.5 },
   { href: "/lab/site", changeFrequency: "monthly" as const, priority: 0.5 },

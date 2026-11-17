@@ -2,7 +2,9 @@
 // 1. dégradés teintés par l'espace (CSS, seule couche si WebGL est absent) ;
 // 2. fumée lente en WebGL (shader maison), aux couleurs de l'espace ;
 // 3. lignes "tactiques" (diagonales graduées, repères, crochets) en SVG, avec une légère parallaxe
-//    au défilement et à la souris, et le numéro de l'espace en très grand, en contour.
+//    au défilement et à la souris, et le numéro de l'espace en très grand, en contour. Dans l'univers
+//    "pro" (page Baptiste), elles laissent place à des motifs de logiciel de montage (zones de sécurité,
+//    éditeur de courbes, timeline et images clés).
 // Coût maîtrisé : la fumée est calculée en basse résolution (elle est floue de toute façon), à 30 i/s,
 // en pause quand l'onglet est caché ; une seule image fixe si les animations sont réduites ou si
 // la machine est modeste. La parallaxe n'anime que des transform (compositeur).
@@ -276,6 +278,63 @@ function NearLines() {
   );
 }
 
+/* ─── Univers "pro" (page Baptiste) : motifs de logiciel de montage au lieu des lignes tactiques ─── */
+
+// Graduations d'une règle de timeline (bas droite) et images clés sur deux pistes
+const RULER = Array.from({ length: 34 }, (_, i) => ({ x: 900 + i * 20, major: i % 5 === 0 }));
+const KEYS = [
+  { x: 940, y: 912 },
+  { x: 1060, y: 912 },
+  { x: 1220, y: 912 },
+  { x: 1000, y: 884 },
+  { x: 1300, y: 884 },
+  { x: 1420, y: 884 },
+];
+
+function StudioFar() {
+  return (
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+      <g fill="none" stroke="var(--line-strong)" strokeWidth="1" vectorEffect="non-scaling-stroke">
+        {/* Zones de sécurité (action / titre), en coins, et croix centrale */}
+        <path d="M80 90V50H120M1480 50H1520V90M1520 910V950H1480M120 950H80V910" />
+        <path d="M160 100H1440V900H160Z" strokeDasharray="2 8" />
+        <path d="M790 500h20M800 490v20" stroke="var(--text-dim)" />
+        {/* Tiers de l'image */}
+        <path d="M640 100V900M960 100V900M160 366H1440M160 633H1440" strokeDasharray="1 11" />
+      </g>
+    </svg>
+  );
+}
+
+function StudioNear() {
+  return (
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
+      <g fill="none" strokeWidth="1.25" vectorEffect="non-scaling-stroke">
+        {/* Éditeur de courbes : un ease-in-out avec ses poignées */}
+        <path d="M70 700V940H430" stroke="var(--line-strong)" />
+        <path d="M86 924C236 924 266 724 414 724" stroke="var(--accent)" />
+        <path d="M86 924H236M414 724H266" stroke="var(--text-dim)" />
+        {/* Règle de timeline et tête de lecture */}
+        <path d="M900 940H1560" stroke="var(--line-strong)" />
+        {RULER.map((r) => (
+          <path key={r.x} d={`M${r.x} 940v${r.major ? -12 : -5}`} stroke="var(--line-strong)" />
+        ))}
+        <path d="M1150 860V960" stroke="var(--accent-2)" />
+      </g>
+      <g fill="var(--accent)">
+        <rect x={82} y={920} width="8" height="8" />
+        <rect x={410} y={720} width="8" height="8" />
+        <rect x={232} y={920} width="7" height="7" fill="var(--text-dim)" />
+        <rect x={262} y={720} width="7" height="7" fill="var(--text-dim)" />
+        {KEYS.map((k) => (
+          <rect key={`${k.x}-${k.y}`} x={k.x - 5} y={k.y - 5} width="10" height="10" transform={`rotate(45 ${k.x} ${k.y})`} />
+        ))}
+        <path d="M1144 852h12l-6 8z" fill="var(--accent-2)" />
+      </g>
+    </svg>
+  );
+}
+
 export function Backdrop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const farRef = useRef<HTMLDivElement>(null);
@@ -289,11 +348,22 @@ export function Backdrop() {
     <div aria-hidden="true" className="backdrop">
       <div className="backdrop-base" />
       <canvas ref={canvasRef} className="backdrop-smoke" />
+      {/* Deux jeux de lignes par plan : tactique (espaces) et montage (univers pro), en fondu enchaîné */}
       <div ref={farRef} className="backdrop-lines">
-        <FarLines />
+        <div className="backdrop-set backdrop-set-valo">
+          <FarLines />
+        </div>
+        <div className="backdrop-set backdrop-set-studio">
+          <StudioFar />
+        </div>
       </div>
       <div ref={nearRef} className="backdrop-lines backdrop-lines-near">
-        <NearLines />
+        <div className="backdrop-set backdrop-set-valo">
+          <NearLines />
+        </div>
+        <div className="backdrop-set backdrop-set-studio">
+          <StudioNear />
+        </div>
       </div>
       <span key={n} className="backdrop-number">
         {String(n).padStart(2, "0")}

@@ -55,7 +55,7 @@ export function Statusline({ deployedAt, year }: { deployedAt: string; year: num
         {locale} · {t(`status.theme.${theme}`)} · <kbd className="ml-1 text-fg">Ctrl+K</kbd>
       </span>
       <NowStatusSegment />
-      <span className="flex items-center px-3">{t("footer.copyright", { year, name: SITE.name, author: SITE.author })}</span>
+      <span className="flex items-center px-3">{t("footer.copyright", { year, name: SITE.name, author: SITE.displayName })}</span>
       <Link href="/lab/site" className="hidden items-center bg-surface-3 px-3 text-fg transition-colors hover:text-accent sm:flex">
         {t("status.deployed", { date: deployedAt })}
       </Link>
