@@ -21,6 +21,7 @@ import { CardSpotlight } from "@/components/shell/card-spotlight";
 import { PageTransition } from "@/components/shell/page-transition";
 import { Backdrop } from "@/components/shell/backdrop";
 import { SpaceSync } from "@/components/shell/space-sync";
+import { AimCursor } from "@/components/shell/aim-cursor";
 import "../globals.css";
 
 // Police des titres et gros chiffres (fichier local, aucune requête réseau au build)
@@ -106,6 +107,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <ShortcutsDialog />
             <ScrollReveal />
             <CardSpotlight />
+            <AimCursor />
           </UIProvider>
         </NextIntlClientProvider>
       </body>

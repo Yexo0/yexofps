@@ -108,6 +108,7 @@ export function Rail() {
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   // Après un clic sur un lien, le rail reste fermé tant que la souris ne l'a pas quitté
   const suppressed = useRef(false);
+  const opening = useRef(false);
   useRailSpace(open);
   useEffect(() => {
     current.current = pathname;
@@ -122,6 +123,7 @@ export function Rail() {
 
   const close = () => {
     suppressed.current = true;
+    opening.current = false;
     clearTimeout(timer.current);
     setOpen(false);
   };
@@ -132,13 +134,19 @@ export function Rail() {
         aria-label={t("main")}
         data-open={open || undefined}
         className="rail fixed inset-y-0 left-0 z-40 hidden flex-col py-4 md:flex"
-        onPointerEnter={(e) => {
-          if (e.pointerType === "touch" || suppressed.current) return;
-          schedule(true, 90);
+        onPointerMove={(e) => {
+          // Ouverture sur un vrai mouvement de souris (pas sur l'événement émis au chargement
+          // quand le curseur est déjà au-dessus du rail)
+          if (open || e.pointerType === "touch" || suppressed.current || (!e.movementX && !e.movementY)) return;
+          if (!opening.current) {
+            opening.current = true;
+            schedule(true, 90);
+          }
         }}
         onPointerLeave={(e) => {
           if (e.pointerType === "touch") return;
           suppressed.current = false;
+          opening.current = false;
           schedule(false, 160);
         }}
         onFocus={(e) => {
