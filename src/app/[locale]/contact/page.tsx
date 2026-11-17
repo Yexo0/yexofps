@@ -58,6 +58,26 @@ function ContactFile() {
       className="md:col-span-6 lg:col-span-8"
       bodyClassName="gap-4"
     >
+      {/* L'essentiel en très grand : e-mail et Discord */}
+      <div className="stagger grid gap-2 sm:grid-cols-2">
+        <a href={`mailto:${EMAILS.pro}`} className="contact-big tile group flex min-w-0 flex-col gap-2 px-5 py-5">
+          <span className="label">{t("keys.proEmail")}</span>
+          <span className="display break-all normal-case text-[clamp(24px,2.6vw,38px)] text-fg transition-colors group-hover:text-accent">
+            {EMAILS.pro}
+          </span>
+        </a>
+        <a
+          href={SOCIALS.discord.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-big tile group flex min-w-0 flex-col gap-2 px-5 py-5"
+        >
+          <span className="label">{t("keys.discord")}</span>
+          <span className="display break-all normal-case text-[clamp(24px,2.6vw,38px)] text-fg transition-colors group-hover:text-accent">
+            {SOCIALS.discord.handle}
+          </span>
+        </a>
+      </div>
       <p className="max-w-[70ch] text-[15px] leading-relaxed text-muted">{t("intro")}</p>
       <NowBanner />
       <div className="terminal px-3 py-3 sm:px-4 sm:py-4">

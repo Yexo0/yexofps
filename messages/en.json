@@ -42,6 +42,10 @@
     "labSite": {
       "title": "This site",
       "description": "How yexofps.org is hosted on my VPS: the path of a request, the server, the stack and live figures."
+    },
+    "baptiste": {
+      "title": "Baptiste · systems and network admin, motion design",
+      "description": "The professional side of Yexo: work-study IT infrastructure administrator in an IT department, homelab, and editing in After Effects."
     }
   },
   "common": {
@@ -67,6 +71,13 @@
         "dark": "dark",
         "light": "light"
       }
+    },
+    "credits": {
+      "models": "3D models:",
+      "license": "{license} license",
+      "riot": "Yexo isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",
+      "modified": "adapted for the web (compression)",
+      "trademarks": "After Effects is a trademark of Adobe."
     }
   },
   "nav": {
@@ -92,6 +103,37 @@
       "themeDark": "Dark mode",
       "shortcuts": "Keyboard shortcuts",
       "language": "Version française"
+    },
+    "rail": {
+      "home": {
+        "title": "Home",
+        "desc": "Who I am, in short"
+      },
+      "career": {
+        "title": "Career",
+        "desc": "Studies, work-study, skills"
+      },
+      "lab": {
+        "title": "Homelab",
+        "desc": "My infra at home"
+      },
+      "gaming": {
+        "title": "Gaming",
+        "desc": "Ranks and live stats"
+      },
+      "creator": {
+        "title": "Creator",
+        "desc": "Edits and Y-Services"
+      },
+      "tools": {
+        "title": "Tools",
+        "desc": "Sensitivity converter"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "Write to me, see what I'm up to"
+      },
+      "settings": "Settings"
     }
   },
   "palette": {
@@ -127,7 +169,8 @@
       "converter": "Sensitivity converter",
       "valoSettings": "Valorant settings",
       "now": "Right now (/now)",
-      "site": "How this site is hosted"
+      "site": "How this site is hosted",
+      "baptiste": "Baptiste, professional side"
     },
     "actions": {
       "copyPro": "Copy work email",
@@ -737,6 +780,17 @@
           "sub": "192.168.2.250",
           "role": "Cisco Wi-Fi access point: wireless access to the LAN."
         }
+      },
+      "scenarios": {
+        "title": "Scenarios",
+        "play": "Play scenarios",
+        "pause": "Pause",
+        "items": {
+          "web": "DMZ website",
+          "ticket": "GLPI ticket",
+          "deploy": "FOG deployment",
+          "domain": "Domain logon"
+        }
       }
     },
     "watch": {
@@ -783,13 +837,14 @@
           ]
         }
       },
-      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
+      "sources": "Sources: Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin",
+      "more": "Read the tech watch"
     }
   },
   "home": {
     "hero": {
       "avatarAlt": "Yexo's profile picture",
-      "realName": "Baptiste Dauvergne · {age} · France",
+      "realName": "Baptiste · {age} · France",
       "tagline": "Work-study sysadmin and network engineer, FPS player and Valorant video editor.",
       "contact": "Contact me",
       "whoami": {
@@ -804,6 +859,11 @@
           "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it.",
           "path": "See my career"
         }
+      },
+      "punch": "I edit Valorant clips and keep servers running.",
+      "callouts": {
+        "weapon": "Vandal · Champions skin",
+        "main": "Main weapon"
       }
     },
     "fastfetch": {
@@ -846,9 +906,45 @@
       "videoLabel": "Yexo's Valorant video edit"
     },
     "gaming": {
-      "title": "Gaming",
+      "title": "Live stats",
       "ranks": "Best ranks",
       "recent": "{count, plural, one {Last match} other {Last # matches}}"
+    },
+    "stats": {
+      "label": "In numbers",
+      "current": "Current rank · Valorant",
+      "currentValue": "Immortal 3",
+      "peak": "Radiant peak · episode {episode}",
+      "faceit": "Faceit · CS2",
+      "faceitValue": "Level 10",
+      "lab": "Homelab · {machines} machines"
+    },
+    "explore": {
+      "title": "Explore the site",
+      "open": "Open"
+    },
+    "pro": {
+      "punch": "I run systems and networks, and I animate images in After Effects.",
+      "callouts": {
+        "machine": "Workstation · admin and editing",
+        "ae": "After Effects · motion design"
+      },
+      "actions": {
+        "career": "My background",
+        "lab": "My homelab"
+      },
+      "stats": {
+        "label": "In numbers",
+        "role": "IT infrastructure · IT department",
+        "roleValue": "Work-study",
+        "vms": "Homelab · {machines} machines",
+        "vlans": "Segmented network · DMZ",
+        "ae": "Editing and motion design"
+      },
+      "timeline": {
+        "title": "Background in short",
+        "all": "Full background"
+      }
     }
   },
   "lab": {
@@ -877,6 +973,17 @@
       "ungrouped": "Network core",
       "links": {
         "tunnel": "WireGuard tunnel"
+      },
+      "scenarios": {
+        "title": "Scenarios",
+        "play": "Play scenarios",
+        "pause": "Pause",
+        "items": {
+          "remote": "Remote access",
+          "backup": "Nightly backup",
+          "alert": "Alert → Discord",
+          "wifi": "Wi-Fi → Internet"
+        }
       }
     },
     "nodes": {
@@ -1092,6 +1199,10 @@
       },
       "partner": "−{discount}% with code {code}",
       "codeLabel": "the promo code"
+    },
+    "hero": {
+      "current": "Current rank · Valorant",
+      "currentValue": "Immortal 3"
     }
   },
   "tools": {

@@ -21,7 +21,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { BTS_MAP, DOCS, MISSIONS, SKILLS, TIMELINE } from "@/config/career";
+import { BTS_MAP, BTS_SCENARIOS, DOCS, MISSIONS, SKILLS, TIMELINE } from "@/config/career";
 import { LAB_SINCE } from "@/config/lab";
 import { EMAILS } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -71,7 +71,7 @@ function Intro() {
     <Card
       id="intro"
       icon={Briefcase}
-      title="Baptiste Dauvergne"
+      title="Baptiste"
       subtitle="~/parcours"
       meta={t("meta")}
       headingLevel={1}
@@ -339,8 +339,16 @@ function InfraBts() {
             },
           ]),
         )}
-        labels={{ title: t("title"), hint: t("hint"), related: t("related"), ungrouped: t("ungrouped"), trace: "traceroute" }}
+        labels={{
+          title: t("title"),
+          hint: t("hint"),
+          related: t("related"),
+          ungrouped: t("ungrouped"),
+          trace: "traceroute",
+          scenarios: { title: t("scenarios.title"), play: t("scenarios.play"), pause: t("scenarios.pause") },
+        }}
         root="school"
+        scenarios={BTS_SCENARIOS.map((s) => ({ id: s.id, label: t(`scenarios.items.${s.id}`), path: s.path }))}
       />
     </Card>
   );
@@ -366,46 +374,54 @@ function Watch() {
       bodyClassName="gap-3"
     >
       <p className="text-[15px] font-semibold">{t("topic")}</p>
-      <div className="grid gap-2 sm:grid-cols-2">
-        <section className="tile px-4 py-3.5">
-          <h3 className="label mb-1.5">{t("sections.before.title")}</h3>
-          <p className="text-[13px] leading-relaxed text-muted">{t("sections.before.text")}</p>
-        </section>
-        {lists.map(({ id, key }) => (
-          <section key={id} className="tile px-4 py-3.5">
-            <h3 className="label mb-1.5">{t(`sections.${id}.title`)}</h3>
-            <p className="text-[13px] leading-relaxed text-muted">{t(`sections.${id}.text`)}</p>
-            <ul className="mt-2 flex flex-col gap-1 text-[13px] text-muted">
-              {(t.raw(`sections.${id}.${key}`) as string[]).map((line) => (
-                <li key={line} className="flex gap-2">
-                  <span aria-hidden="true" className="text-accent">
-                    ›
-                  </span>
-                  {line}
-                </li>
-              ))}
-            </ul>
+      {/* Le détail de la veille est replié : moins de texte à l'écran, contenu intact */}
+      <details className="watch-details group">
+        <summary className={buttonClass("tonal", "sm", "self-start list-none")}>
+          {t("more")}
+        </summary>
+        <div className="mt-3 flex flex-col gap-3">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <section className="tile px-4 py-3.5">
+            <h3 className="label mb-1.5">{t("sections.before.title")}</h3>
+            <p className="text-[13px] leading-relaxed text-muted">{t("sections.before.text")}</p>
           </section>
-        ))}
-        <section className="tile bg-accent-tint px-4 py-3.5">
-          <h3 className="label mb-1.5 text-on-accent-container">{t("sections.broadcom.title")}</h3>
-          <p className="text-[13px] leading-relaxed text-fg">{t("sections.broadcom.text")}</p>
-        </section>
-      </div>
-      <section className="tile px-4 py-3.5">
-        <h3 className="label mb-1.5">{t("sections.why.title")}</h3>
-        <ul className="grid gap-1 text-[13px] text-muted sm:grid-cols-2">
-          {(t.raw("sections.why.points") as string[]).map((line) => (
-            <li key={line} className="flex gap-2">
-              <span aria-hidden="true" className="text-accent">
-                ›
-              </span>
-              {line}
-            </li>
+          {lists.map(({ id, key }) => (
+            <section key={id} className="tile px-4 py-3.5">
+              <h3 className="label mb-1.5">{t(`sections.${id}.title`)}</h3>
+              <p className="text-[13px] leading-relaxed text-muted">{t(`sections.${id}.text`)}</p>
+              <ul className="mt-2 flex flex-col gap-1 text-[13px] text-muted">
+                {(t.raw(`sections.${id}.${key}`) as string[]).map((line) => (
+                  <li key={line} className="flex gap-2">
+                    <span aria-hidden="true" className="text-accent">
+                      ›
+                    </span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
-        </ul>
-      </section>
-      <p className="font-mono text-[11px] text-dim">{t("sources")}</p>
+          <section className="tile bg-accent-tint px-4 py-3.5">
+            <h3 className="label mb-1.5 text-on-accent-container">{t("sections.broadcom.title")}</h3>
+            <p className="text-[13px] leading-relaxed text-fg">{t("sections.broadcom.text")}</p>
+          </section>
+        </div>
+        <section className="tile px-4 py-3.5">
+          <h3 className="label mb-1.5">{t("sections.why.title")}</h3>
+          <ul className="grid gap-1 text-[13px] text-muted sm:grid-cols-2">
+            {(t.raw("sections.why.points") as string[]).map((line) => (
+              <li key={line} className="flex gap-2">
+                <span aria-hidden="true" className="text-accent">
+                  ›
+                </span>
+                {line}
+              </li>
+            ))}
+          </ul>
+        </section>
+        <p className="font-mono text-[11px] text-dim">{t("sources")}</p>
+        </div>
+      </details>
     </Card>
   );
 }

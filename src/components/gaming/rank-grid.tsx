@@ -1,24 +1,25 @@
-// src/components/gaming/rank-grid.tsx — Grille des rangs : une grande tuile pour le rang principal,
-// des petites tuiles pour les autres. Chaque tuile porte un liseré fin de la couleur du jeu.
+// src/components/gaming/rank-grid.tsx — Rangs de l'espace Gaming, du plus important au moins important :
+// le rang actuel en très grand, le peak (avec le gun buddy Radiant qui se balance), puis les autres jeux.
+// Le peak Radiant reste aux côtés des autres rangs (règle de ton du site). Chaque tuile de jeu porte
+// un liseré fin de la couleur du jeu.
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
-import { RANKS } from "@/config/site";
+import { RANKS, VALORANT_PEAK } from "@/config/site";
+import { CountUp } from "@/components/ui/count-up";
 import { cn } from "@/lib/utils";
+import { PeakBuddy } from "./peak-buddy";
 
 type Rank = (typeof RANKS)[number];
 
 function GameStripe({ color }: { color: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="absolute left-4 top-0 h-[2px] w-9 rounded-b-full"
-      style={{ backgroundColor: color }}
-    />
-  );
+  return <span aria-hidden="true" className="absolute left-0 top-3 h-8 w-[3px]" style={{ backgroundColor: color }} />;
 }
 
 export function RankGrid({ className }: { className?: string }) {
   const t = useTranslations("gaming.ranks");
+  const tTracker = useTranslations("gaming.tracker");
+  const tHero = useTranslations("gaming.hero");
   const featured = RANKS.find((r) => r.featured) ?? RANKS[0];
   const others = RANKS.filter((r) => r.id !== featured.id);
 
@@ -26,41 +27,68 @@ export function RankGrid({ className }: { className?: string }) {
     t.has(`items.${r.id}.platform`) ? `${r.game} · ${t(`items.${r.id}.platform`)}` : r.game;
 
   return (
-    <ul className={cn("stagger grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-3", className)}>
-      <li className="tile relative flex flex-col items-center justify-center gap-3 px-4 py-6 text-center sm:row-span-3">
-        <GameStripe color={featured.color} />
-        <Image
-          src={featured.image}
-          alt={t("alt", { rank: t(`items.${featured.id}.rank`), game: featured.game })}
-          width={112}
-          height={112}
-          className="h-24 w-24 object-contain sm:h-28 sm:w-28"
-        />
-        <div>
-          <p className="text-2xl font-bold tracking-tight">{t(`items.${featured.id}.rank`)}</p>
-          <p className="mt-0.5 font-mono text-xs text-muted">{gameLabel(featured)}</p>
-        </div>
-        <p className="label">{t("peak")}</p>
-        {t.has(`items.${featured.id}.current`) && (
-          <p className="text-[12.5px] text-muted">{t(`items.${featured.id}.current`)}</p>
-        )}
-      </li>
-      {others.map((r) => (
-        <li key={r.id} className="tile relative flex items-center gap-3.5 px-4 py-3.5">
-          <GameStripe color={r.color} />
+    <div className={cn("grid gap-3 lg:grid-cols-12 lg:gap-4", className)}>
+      {/* Rang actuel : l'info la plus importante, en très grand */}
+      <div className="rank-current relative flex flex-col justify-end gap-2 overflow-hidden px-1 py-2 lg:col-span-5">
+        <p className="label">{tHero("current")}</p>
+        <div className="flex items-center gap-4">
           <Image
-            src={r.image}
-            alt={t("alt", { rank: t(`items.${r.id}.rank`), game: r.game })}
-            width={44}
-            height={44}
-            className="h-11 w-11 shrink-0 object-contain"
+            src="/images/ranks/valorant-immortal.png"
+            alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
+            width={140}
+            height={140}
+            className="rank-current-icon h-24 w-24 shrink-0 object-contain sm:h-32 sm:w-32"
           />
-          <div className="min-w-0">
-            <p className="truncate text-[15px] font-bold leading-tight">{t(`items.${r.id}.rank`)}</p>
-            <p className="mt-0.5 truncate font-mono text-[11.5px] text-muted">{gameLabel(r)}</p>
+          <p className="display whitespace-nowrap text-[clamp(52px,5.4vw,86px)] text-fg">{tHero("currentValue")}</p>
+        </div>
+      </div>
+
+      {/* Peak : Radiant, avec le buddy suspendu qui réagit à la souris */}
+      <div data-buddy-zone className="tile relative flex min-h-[220px] flex-col justify-between overflow-hidden px-5 py-5 lg:col-span-4">
+        <GameStripe color={featured.color} />
+        <PeakBuddy className="pointer-events-none absolute -top-2 right-2 h-[210px] w-[130px]" />
+        <div className="relative flex items-center gap-3">
+          <Image
+            src={featured.image}
+            alt={t("alt", { rank: t(`items.${featured.id}.rank`), game: featured.game })}
+            width={64}
+            height={64}
+            className="h-14 w-14 shrink-0 object-contain"
+          />
+          <div>
+            <p className="label">{t("peak")}</p>
+            <p className="display text-[40px] text-fg">{t(`items.${featured.id}.rank`)}</p>
           </div>
-        </li>
-      ))}
-    </ul>
+        </div>
+        <div className="relative">
+          <p className="display text-[52px] text-accent-2">
+            <CountUp value={VALORANT_PEAK.rr} /> <span className="text-[26px]">RR</span>
+          </p>
+          <p className="font-mono text-[11.5px] text-muted">
+            {tTracker("peakSeason", { episode: VALORANT_PEAK.episode, act: VALORANT_PEAK.act })}
+          </p>
+        </div>
+      </div>
+
+      {/* Autres jeux */}
+      <ul className="stagger flex flex-col gap-2 lg:col-span-3">
+        {others.map((r, i) => (
+          <li key={r.id} className="tile relative flex flex-1 items-center gap-3.5 px-4 py-3.5" style={{ "--si": i } as CSSProperties}>
+            <GameStripe color={r.color} />
+            <Image
+              src={r.image}
+              alt={t("alt", { rank: t(`items.${r.id}.rank`), game: r.game })}
+              width={44}
+              height={44}
+              className="h-11 w-11 shrink-0 object-contain"
+            />
+            <div className="min-w-0">
+              <p className="display truncate text-[24px] text-fg">{t(`items.${r.id}.rank`)}</p>
+              <p className="mt-1 truncate font-mono text-[11px] text-muted">{gameLabel(r)}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

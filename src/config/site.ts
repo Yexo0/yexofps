@@ -6,6 +6,8 @@ export const SITE = {
   url: "https://yexofps.org",
   name: "Yexo",
   author: "Baptiste Dauvergne",
+  /** Nom affiché sur les pages (prénom seul) ; `author` reste dans les métadonnées */
+  displayName: "Baptiste",
   since: 2021,
 } as const;
 
@@ -105,6 +107,45 @@ export const PARTNERS = [
     discount: 10,
     logo: "/images/partners/iqunix.webp",
     url: "https://iqunix.com/yexovlr",
+  },
+] as const;
+
+/* ─── Modèles 3D (crédits affichés en bas de chaque page) ── */
+// Fichiers optimisés dans public/models/ (compression meshopt, textures webp, Vandal simplifiée).
+// Les licences CC BY imposent de citer l'auteur, la source et la licence, et de signaler la modification.
+
+export const MODEL_CREDITS = [
+  {
+    id: "vandal",
+    title: "Champions Vandal | Valorant",
+    author: "MisterM4n",
+    license: "Sketchfab Standard",
+    licenseUrl: "https://sketchfab.com/licenses",
+    url: "https://sketchfab.com/3d-models/champions-vandal-valorant-98e52436582b44f9902716b8834784d6",
+  },
+  {
+    id: "buddy",
+    title: "Radiant Gun Buddy | Valorant",
+    author: "ILilMitch",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    url: "https://sketchfab.com/3d-models/radiant-gun-buddy-valorant-740f4234ac52446fb67b19202e27dfeb",
+  },
+  {
+    id: "laptop",
+    title: "CyberPunk Laptop",
+    author: "Vivien Deroche",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    url: "https://sketchfab.com/3d-models/cyberpunk-laptop-8330c89e8431451db3aa9d15c5836ddf",
+  },
+  {
+    id: "logo",
+    title: "Valorant logotype",
+    author: "False_idol",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    url: "https://sketchfab.com/3d-models/valorant-logotype-55d73adcba464fb787037368af8b761b",
   },
 ] as const;
 

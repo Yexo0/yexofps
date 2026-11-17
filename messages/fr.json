@@ -42,6 +42,10 @@
     "labSite": {
       "title": "Ce site",
       "description": "Comment yexofps.org est hébergé sur mon VPS : chemin d'une requête, serveur, pile technique et chiffres lus en direct."
+    },
+    "baptiste": {
+      "title": "Baptiste · admin systèmes et réseaux, motion design",
+      "description": "Le côté pro de Yexo : alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, homelab, et montage sur After Effects."
     }
   },
   "common": {
@@ -67,6 +71,13 @@
         "dark": "sombre",
         "light": "clair"
       }
+    },
+    "credits": {
+      "models": "Modèles 3D :",
+      "license": "licence {license}",
+      "riot": "Yexo n'est pas approuvé par Riot Games et ne reflète pas les opinions de Riot Games ni de quiconque officiellement impliqué dans la production ou la gestion des propriétés de Riot Games. Riot Games et toutes les propriétés associées sont des marques commerciales ou des marques déposées de Riot Games, Inc.",
+      "modified": "adaptés pour le web (compression)",
+      "trademarks": "After Effects est une marque d'Adobe."
     }
   },
   "nav": {
@@ -92,6 +103,37 @@
       "themeDark": "Mode sombre",
       "shortcuts": "Raccourcis clavier",
       "language": "English version"
+    },
+    "rail": {
+      "home": {
+        "title": "Accueil",
+        "desc": "Qui je suis, en bref"
+      },
+      "career": {
+        "title": "Parcours",
+        "desc": "Études, alternance, compétences"
+      },
+      "lab": {
+        "title": "Homelab",
+        "desc": "Mon infra à la maison"
+      },
+      "gaming": {
+        "title": "Gaming",
+        "desc": "Rangs et stats en direct"
+      },
+      "creator": {
+        "title": "Création",
+        "desc": "Montages et Y-Services"
+      },
+      "tools": {
+        "title": "Outils",
+        "desc": "Convertisseur de sensibilité"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "M'écrire, savoir où j'en suis"
+      },
+      "settings": "Réglages"
     }
   },
   "palette": {
@@ -127,7 +169,8 @@
       "converter": "Convertisseur de sensibilité",
       "valoSettings": "Settings Valorant",
       "now": "En ce moment (/now)",
-      "site": "Comment ce site est hébergé"
+      "site": "Comment ce site est hébergé",
+      "baptiste": "Baptiste, côté pro"
     },
     "actions": {
       "copyPro": "Copier l'email pro",
@@ -737,6 +780,17 @@
           "sub": "192.168.2.250",
           "role": "Borne Wi-Fi Cisco : accès sans fil au LAN."
         }
+      },
+      "scenarios": {
+        "title": "Scénarios",
+        "play": "Lire les scénarios",
+        "pause": "Mettre en pause",
+        "items": {
+          "web": "Site en DMZ",
+          "ticket": "Ticket GLPI",
+          "deploy": "Déploiement FOG",
+          "domain": "Connexion au domaine"
+        }
       }
     },
     "watch": {
@@ -783,13 +837,14 @@
           ]
         }
       },
-      "sources": "Sources : Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin"
+      "sources": "Sources : Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin",
+      "more": "Lire la veille"
     }
   },
   "home": {
     "hero": {
       "avatarAlt": "Photo de profil de Yexo",
-      "realName": "Baptiste Dauvergne · {age} ans · France",
+      "realName": "Baptiste · {age} ans · France",
       "tagline": "Admin systèmes et réseaux en alternance, joueur de FPS et monteur vidéo sur Valorant.",
       "contact": "Me contacter",
       "whoami": {
@@ -804,6 +859,11 @@
           "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer.",
           "path": "Voir mon parcours"
         }
+      },
+      "punch": "Je monte des clips Valorant et je fais tourner des serveurs.",
+      "callouts": {
+        "weapon": "Vandal · skin Champions",
+        "main": "Arme principale"
       }
     },
     "fastfetch": {
@@ -846,9 +906,45 @@
       "videoLabel": "Montage vidéo Valorant de Yexo"
     },
     "gaming": {
-      "title": "Gaming",
+      "title": "Stats en direct",
       "ranks": "Meilleurs rangs",
       "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}"
+    },
+    "stats": {
+      "label": "En chiffres",
+      "current": "Rang actuel · Valorant",
+      "currentValue": "Immortal 3",
+      "peak": "Peak Radiant · épisode {episode}",
+      "faceit": "Faceit · CS2",
+      "faceitValue": "Niveau 10",
+      "lab": "Homelab · {machines} machines"
+    },
+    "explore": {
+      "title": "Explorer le site",
+      "open": "Ouvrir"
+    },
+    "pro": {
+      "punch": "J'administre des systèmes et des réseaux, et j'anime des images sur After Effects.",
+      "callouts": {
+        "machine": "Poste de travail · admin et montage",
+        "ae": "After Effects · motion design"
+      },
+      "actions": {
+        "career": "Mon parcours",
+        "lab": "Mon homelab"
+      },
+      "stats": {
+        "label": "En chiffres",
+        "role": "Gestionnaire d'infra · DSI",
+        "roleValue": "Alternance",
+        "vms": "Homelab · {machines} machines",
+        "vlans": "Réseau segmenté · DMZ",
+        "ae": "Montage et motion design"
+      },
+      "timeline": {
+        "title": "Parcours en bref",
+        "all": "Tout le parcours"
+      }
     }
   },
   "lab": {
@@ -877,6 +973,17 @@
       "ungrouped": "Cœur du réseau",
       "links": {
         "tunnel": "tunnel WireGuard"
+      },
+      "scenarios": {
+        "title": "Scénarios",
+        "play": "Lire les scénarios",
+        "pause": "Mettre en pause",
+        "items": {
+          "remote": "Accès depuis l'extérieur",
+          "backup": "Sauvegarde nocturne",
+          "alert": "Alerte → Discord",
+          "wifi": "Wi-Fi → Internet"
+        }
       }
     },
     "nodes": {
@@ -1092,6 +1199,10 @@
       },
       "partner": "−{discount} % avec le code {code}",
       "codeLabel": "le code promo"
+    },
+    "hero": {
+      "current": "Rang actuel · Valorant",
+      "currentValue": "Immortal 3"
     }
   },
   "tools": {

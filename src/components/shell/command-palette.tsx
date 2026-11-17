@@ -44,6 +44,7 @@ interface Item {
 
 /** Sections accessibles directement (ancre dans un espace) */
 const SECTIONS = [
+  { id: "baptiste", href: "/baptiste", keywords: "pro baptiste after effects motion design infra alternance cv" },
   { id: "timeline", href: "/career#timeline" },
   { id: "skills", href: "/career#skills" },
   { id: "missions", href: "/career#missions" },

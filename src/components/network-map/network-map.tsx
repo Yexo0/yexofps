@@ -2,13 +2,18 @@
 // Nœuds = petites cartes (icône, nom mono, sous-titre) reliées par des courbes fines ;
 // groupes en pointillés avec label mono. Survol, focus ou clic sur un nœud : le panneau
 // en dessous affiche son rôle et les nœuds qui y sont reliés.
+// Scénarios (optionnels) : quand personne ne touche au schéma, des parcours réels sont rejoués
+// façon pipeline (paquet qui circule, étapes en attente / en cours / faites), voir scenarios.tsx.
 // Desktop : SVG. Mobile : liste groupée avec le même contenu.
 "use client";
 
-import { useMemo, useState, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { ChevronDown, MousePointerClick } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MAP_ICONS, type MapIcon } from "./icons";
+import { Packet, ScenarioBar, StepBadge, useScenarioPlayer, type MapScenario } from "./scenarios";
+
+export type { MapScenario };
 
 export interface MapNode {
   id: string;
@@ -45,6 +50,8 @@ export interface MapLabels {
   ungrouped: string;
   /** ex : "traceroute" */
   trace: string;
+  /** Barre des scénarios (titre, lecture, pause) */
+  scenarios?: { title: string; play: string; pause: string };
 }
 
 const W = 150;
@@ -111,9 +118,12 @@ export function NetworkMap({
   details,
   labels,
   root,
+  scenarios = [],
 }: {
   /** Point de départ du traceroute (par défaut : premier nœud) */
   root?: string;
+  /** Parcours rejoués automatiquement (le premier démarre quand le schéma est visible) */
+  scenarios?: readonly MapScenario[];
   width: number;
   height: number;
   nodes: readonly MapNode[];
@@ -127,6 +137,26 @@ export function NetworkMap({
   const active = hovered ?? pinned;
 
   const byId = useMemo(() => new Map(nodes.map((n) => [n.id, n])), [nodes]);
+
+  // Lecture des scénarios : seulement à l'écran, en pause pendant le survol / la sélection
+  const wrapper = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = wrapper.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const player = useScenarioPlayer(scenarios, { paused: !!active, visible });
+  const scene = scenarios.length && !active ? player.scene : undefined;
+  const sceneIndex = (id: string) => (scene ? scene.path.indexOf(id) : -1);
+  /** Segment du scénario entre deux nœuds voisins dans le parcours : index de l'étape d'arrivée */
+  const sceneSegment = (a: string, b: string) => {
+    const i = sceneIndex(a);
+    const j = sceneIndex(b);
+    return i >= 0 && j >= 0 && Math.abs(i - j) === 1 ? Math.max(i, j) : -1;
+  };
 
   /** Voisins de chaque nœud (tous types de liens, y compris logiques) */
   const neighbors = useMemo(() => {
@@ -172,8 +202,29 @@ export function NetworkMap({
   const neighborsOf = (id: string) =>
     [...(neighbors.get(id) ?? [])].map((nid) => byId.get(nid)).filter((n): n is MapNode => !!n);
 
+  // Paquet en route : de l'étape précédente vers l'étape en cours
+  let packet: { d: string; reverse: boolean; key: string } | null = null;
+  if (scene && visible && player.step >= 1 && player.step < scene.path.length) {
+    const fromId = scene.path[player.step - 1];
+    const toId = scene.path[player.step];
+    const link = links.find((l) => (l.from === fromId && l.to === toId) || (l.from === toId && l.to === fromId));
+    const a = link && byId.get(link.from);
+    const b = link && byId.get(link.to);
+    if (link && a && b) packet = { d: linkPath(a, b).d, reverse: link.from !== fromId, key: `${scene.id}-${player.step}` };
+  }
+
   return (
-    <div className="flex flex-col gap-3">
+    <div ref={wrapper} className="flex flex-col gap-3">
+      {scenarios.length > 0 && labels.scenarios && (
+        <ScenarioBar
+          scenarios={scenarios}
+          player={player}
+          nodeLabel={(id) => byId.get(id)?.label ?? id}
+          labels={labels.scenarios}
+          muted={!!active}
+        />
+      )}
+
       {/* ─── Desktop : SVG ─── */}
       <div className="hidden md:block">
         <svg
@@ -190,7 +241,7 @@ export function NetworkMap({
                 y={g.y}
                 width={g.w}
                 height={g.h}
-                rx={14}
+                rx={6}
                 fill="none"
                 stroke="var(--line-strong)"
                 strokeDasharray="4 5"
@@ -216,10 +267,15 @@ export function NetworkMap({
               if (!a || !b) return null;
               const p = linkPath(a, b);
               const traced = onPath(l.from, l.to);
-              const isActive = traced || (!!active && (l.from === active || l.to === active));
-              const dimmed = !!related && !isActive;
+              const seg = scene ? sceneSegment(l.from, l.to) : -1;
+              const segDone = seg >= 0 && seg < player.step;
+              const segLive = seg >= 0 && seg === player.step;
+              const isActive = traced || segDone || (!!active && (l.from === active || l.to === active));
+              const dimmed = (!!related && !isActive) || (!!scene && seg < 0);
+              // Sens du parcours sur ce lien (pour l'animation du trait et des tirets)
+              const forward = seg >= 0 && sceneIndex(l.to) > sceneIndex(l.from);
               return (
-                <g key={`${l.from}-${l.to}`} aria-hidden="true" opacity={dimmed ? 0.3 : 1}>
+                <g key={`${l.from}-${l.to}`} aria-hidden="true" opacity={dimmed ? 0.3 : 1} style={{ transition: "opacity 300ms ease" }}>
                   {/* Calque animé séparé : l'animation ne doit pas écraser l'estompage ci-dessus */}
                   <g className="map-fade" style={{ ["--li" as string]: li }}>
                   <path
@@ -233,6 +289,30 @@ export function NetworkMap({
                     strokeWidth={traced ? 2.2 : isActive ? 1.5 : 1.1}
                     strokeDasharray={l.kind === "dashed" ? "5 5" : undefined}
                   />
+                  {/* Scénario : le trait se dessine pendant le trajet, puis des tirets circulent dans le sens du flux */}
+                  {segLive && player.step < (scene?.path.length ?? 0) && (
+                    <path
+                      key={`live-${scene?.id}-${player.step}`}
+                      d={p.d}
+                      pathLength={1}
+                      fill="none"
+                      stroke="var(--accent)"
+                      strokeWidth={2.2}
+                      className="map-flow-draw map-trace"
+                      style={{ ["--from" as string]: forward ? 1 : -1 }}
+                    />
+                  )}
+                  {segDone && visible && !player.reduced && (
+                    <path
+                      d={p.d}
+                      fill="none"
+                      stroke="var(--on-accent-container)"
+                      strokeOpacity={0.8}
+                      strokeWidth={1.6}
+                      className="map-flow-run"
+                      style={{ ["--dir" as string]: forward ? -1 : 1 }}
+                    />
+                  )}
                   <circle cx={p.x1} cy={p.y1} r={2.4} fill={isActive ? "var(--accent)" : "var(--text-dim)"} />
                   <circle cx={p.x2} cy={p.y2} r={2.4} fill={isActive ? "var(--accent)" : "var(--text-dim)"} />
                   {l.label && (
@@ -255,11 +335,16 @@ export function NetworkMap({
               );
             })}
 
+          {packet && <Packet key={packet.key} d={packet.d} reverse={packet.reverse} />}
+
           {nodes.map((n, ni) => {
             const Icon = MAP_ICONS[n.icon];
-            const isActive = n.id === active;
+            const si = scene ? sceneIndex(n.id) : -1;
+            const stepState = si >= 0 ? player.stateOf(si) : null;
+            const isActive = n.id === active || stepState === "running";
             const isPinned = n.id === pinned;
-            const dimmed = !!related && !related.has(n.id) && !path.includes(n.id);
+            const isDone = stepState === "done";
+            const dimmed = (!!related && !related.has(n.id) && !path.includes(n.id)) || (!!scene && si < 0);
             return (
               <g key={n.id} className="map-fade" style={{ ["--li" as string]: ni }}>
               <g
@@ -273,18 +358,19 @@ export function NetworkMap({
                 onBlur={() => setHovered(null)}
                 onClick={() => togglePin(n.id)}
                 onKeyDown={(e) => onNodeKey(e, n.id)}
-                opacity={dimmed ? 0.35 : 1}
+                opacity={dimmed ? 0.4 : 1}
                 className="cursor-pointer outline-none"
-                style={{ transition: "opacity 150ms ease" }}
+                style={{ transition: "opacity 300ms ease" }}
               >
                 <rect
                   width={W}
                   height={H}
-                  rx={12}
+                  rx={5}
                   className={isActive || isPinned ? "map-trace" : undefined}
-                  fill={isActive || isPinned ? "var(--accent-tint)" : "var(--surface-2)"}
-                  stroke={isActive || isPinned ? "var(--accent)" : "var(--line-strong)"}
+                  fill={isActive || isPinned || isDone ? "var(--accent-tint)" : "var(--surface-2)"}
+                  stroke={isActive || isPinned ? "var(--accent)" : isDone ? "var(--glow-ring)" : "var(--line-strong)"}
                   strokeWidth={isActive || isPinned ? 1.5 : 1}
+                  style={{ transition: "fill 300ms ease, stroke 300ms ease" }}
                 />
                 <Icon
                   x={12}
@@ -300,6 +386,7 @@ export function NetworkMap({
                 <text x={42} y={35} fill="var(--text-dim)" fontFamily="var(--font-mono)" fontSize={10.5}>
                   {n.sub}
                 </text>
+                {stepState && <StepBadge state={stepState} x={W - 2} y={2} />}
               </g>
               </g>
             );

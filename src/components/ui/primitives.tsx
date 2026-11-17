@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
+import { CountUp } from "./count-up";
 
 /* ─── Tuile de stat : gros chiffre, petite unité, label mono ─── */
 
@@ -21,15 +22,11 @@ export function StatTile({
   size?: "md" | "lg";
 }) {
   return (
-    <div className={cn("tile flex min-w-0 flex-col justify-between gap-1 px-4 py-3.5", className)}>
+    <div className={cn("tile flex min-w-0 flex-col justify-between gap-2 px-4 py-4", className)}>
       <p className="flex items-baseline gap-1.5 leading-none">
-        <span
-          className={cn(
-            "font-bold tracking-tight text-fg tabular-nums",
-            size === "lg" ? "text-[40px]" : "text-[30px]",
-          )}
-        >
-          {value}
+        <span className={cn("display text-fg tabular-nums", size === "lg" ? "text-[56px]" : "text-[42px]")}>
+          {/* Nombre : défile jusqu'à sa valeur quand la tuile arrive à l'écran */}
+          {typeof value === "number" ? <CountUp value={value} /> : value}
         </span>
         {unit && <span className="font-mono text-[11px] text-muted">{unit}</span>}
       </p>

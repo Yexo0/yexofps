@@ -11,7 +11,7 @@ import type { MatchData } from "@/lib/tracker-types";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/primitives";
-import { AgentAvatar, PeakTile, ResultDots, ResultTag, TrackerNotice, matchHs, playerScore, useStatFormat } from "./tracker-parts";
+import { AgentAvatar, ResultDots, ResultTag, TrackerNotice, matchHs, playerScore, useStatFormat } from "./tracker-parts";
 import { MatchDialog } from "./match-dialog";
 
 export function TrackerSection() {
@@ -66,7 +66,7 @@ export function TrackerSection() {
         subtitle={`valorant --live --mode ${TRACKER.mode}`}
         meta={account}
         index={1}
-        className="md:col-span-6 lg:col-span-7"
+        className="md:col-span-6 lg:col-span-5"
         bodyClassName="gap-3"
       >
         {/* Barre d'état et commandes */}
@@ -119,10 +119,8 @@ export function TrackerSection() {
           </button>
         </div>
 
-        <PeakTile />
-
         {status === "loading" && (
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-hidden="true">
+          <div className="grid grid-cols-2 gap-2" aria-hidden="true">
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="tile px-4 py-3.5">
                 <Skeleton className="h-7 w-16" />
@@ -134,10 +132,10 @@ export function TrackerSection() {
         )}
 
         {status === "ready" && (
-          <dl className="stagger grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <dl className="stagger grid grid-cols-2 gap-2">
             {tiles.map((tile) => (
-              <div key={tile.label} className="tile flex flex-col px-4 py-3.5">
-                <dd className="order-1 text-[24px] font-bold leading-none tracking-tight tabular-nums">{tile.value}</dd>
+              <div key={tile.label} className="tile flex flex-col px-4 py-4">
+                <dd className="display order-1 text-[44px] tabular-nums text-fg">{tile.value}</dd>
                 <dt className="label order-2 mt-2">{tile.label}</dt>
                 <dd className="order-3 mt-1 text-[11.5px] text-dim">{tile.sub}</dd>
               </div>
@@ -161,7 +159,7 @@ export function TrackerSection() {
         subtitle={`valorant matches --last ${data?.matches.length ?? TRACKER.size}`}
         meta={tm("meta")}
         index={2}
-        className="md:col-span-6 lg:col-span-12"
+        className="md:col-span-6 lg:col-span-7"
         bodyClassName="gap-3"
       >
         {status === "ready" && data && (

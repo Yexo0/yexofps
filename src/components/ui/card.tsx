@@ -57,21 +57,19 @@ export function Card({
           {title}
         </Heading>
       ) : (
-        <header className="mb-5 flex items-start gap-3">
+        <header className="mb-5 flex items-center gap-3">
           {Icon && (
             <span className="icon-pill" aria-hidden="true">
-              <Icon size={17} strokeWidth={2} />
+              <Icon size={16} strokeWidth={2.2} />
             </span>
           )}
           <div className="min-w-0 flex-1">
-            <Heading id={headingId} className="text-[15px] font-bold leading-tight text-fg">
+            <Heading id={headingId} className="display text-[22px] text-fg sm:text-[24px]">
               {title}
             </Heading>
-            {subtitle && (
-              <p className="mt-0.5 truncate font-mono text-[11.5px] text-dim">{subtitle}</p>
-            )}
+            {subtitle && <p className="mt-1 truncate font-mono text-[10px] text-dim opacity-80">{subtitle}</p>}
           </div>
-          {meta && <div className="shrink-0 pt-0.5 font-mono text-[11.5px] text-dim">{meta}</div>}
+          {meta && <div className="shrink-0 font-mono text-[10.5px] text-dim">{meta}</div>}
         </header>
       )}
       <div className={cn("flex min-w-0 flex-1 flex-col", bodyClassName)}>{children}</div>

@@ -242,7 +242,7 @@ export function Converter() {
         <dl className="grid grid-cols-2 gap-2">
           <div className="tile flex flex-col px-4 py-3.5">
             <dd className="order-1 flex items-baseline gap-1.5 leading-none">
-              <span className="text-[26px] font-bold tabular-nums">{result.ok ? num(result.cm) : "—"}</span>
+              <span className="display text-[44px] tabular-nums text-fg">{result.ok ? num(result.cm) : "—"}</span>
               <span className="font-mono text-[11px] text-muted">cm</span>
             </dd>
             <dt className="label order-2 mt-2">cm/360</dt>
@@ -251,7 +251,7 @@ export function Converter() {
             </dd>
           </div>
           <div className="tile flex flex-col px-4 py-3.5">
-            <dd className="order-1 text-[26px] font-bold leading-none tabular-nums">
+            <dd className="display order-1 text-[44px] tabular-nums text-fg">
               {result.ok ? num(result.edpiFrom, 0) : "—"}
             </dd>
             <dt className="label order-2 mt-2">eDPI</dt>
