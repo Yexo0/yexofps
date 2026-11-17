@@ -92,6 +92,37 @@
       "themeDark": "Mode sombre",
       "shortcuts": "Raccourcis clavier",
       "language": "English version"
+    },
+    "rail": {
+      "home": {
+        "title": "Accueil",
+        "desc": "Qui je suis, en bref"
+      },
+      "career": {
+        "title": "Parcours",
+        "desc": "Études, alternance, compétences"
+      },
+      "lab": {
+        "title": "Homelab",
+        "desc": "Mon infra à la maison"
+      },
+      "gaming": {
+        "title": "Gaming",
+        "desc": "Rangs et stats en direct"
+      },
+      "creator": {
+        "title": "Création",
+        "desc": "Montages et Y-Services"
+      },
+      "tools": {
+        "title": "Outils",
+        "desc": "Convertisseur de sensibilité"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "M'écrire, savoir où j'en suis"
+      },
+      "settings": "Réglages"
     }
   },
   "palette": {
@@ -804,6 +835,11 @@
           "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer.",
           "path": "Voir mon parcours"
         }
+      },
+      "punch": "Je monte des clips Valorant et je fais tourner des serveurs.",
+      "callouts": {
+        "weapon": "Vandal · skin Champions",
+        "main": "Arme principale"
       }
     },
     "fastfetch": {
@@ -846,9 +882,22 @@
       "videoLabel": "Montage vidéo Valorant de Yexo"
     },
     "gaming": {
-      "title": "Gaming",
+      "title": "Stats en direct",
       "ranks": "Meilleurs rangs",
       "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}"
+    },
+    "stats": {
+      "label": "En chiffres",
+      "current": "Rang actuel · Valorant",
+      "currentValue": "Immortal 3",
+      "peak": "Peak Radiant · épisode {episode}",
+      "faceit": "Faceit · CS2",
+      "faceitValue": "Niveau 10",
+      "lab": "Homelab · {machines} machines"
+    },
+    "explore": {
+      "title": "Explorer le site",
+      "open": "Ouvrir"
     }
   },
   "lab": {

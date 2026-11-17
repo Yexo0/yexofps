@@ -1,8 +1,8 @@
-// src/components/shell/rail.tsx — Navigation : rail vertical (desktop) et barre en bas (mobile).
+// src/components/shell/rail.tsx — Navigation : rail vertical extensible (desktop) et barre en bas (mobile).
 "use client";
 
 import Image from "next/image";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Dialog } from "radix-ui";
 import { Ellipsis, Keyboard, Moon, Search, Sun, X } from "lucide-react";
@@ -15,19 +15,6 @@ import { cn } from "@/lib/utils";
 import { Reticle } from "@/components/ui/reticle";
 import { Logo } from "./logo";
 import { useUI } from "./ui-provider";
-
-/* ─── Bulle d'aide au survol / focus (desktop) ─── */
-
-function Tip({ children }: { children: ReactNode }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 z-50 -translate-y-1/2 whitespace-nowrap rounded-lg bg-surface-3 px-2.5 py-1 text-xs font-medium text-fg opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-    >
-      {children}
-    </span>
-  );
-}
 
 /* ─── Outils (recherche, thème, raccourcis, langue, réseaux) ─── */
 
@@ -63,27 +50,48 @@ function useTools() {
 }
 
 /* ─── Rail desktop ─── */
+// Replié : une colonne d'icônes. Au survol (ou au clavier), il s'élargit vers la droite et montre
+// le titre et une courte description de chaque espace ; la page ne passe pas dessous : elle se
+// réduit légèrement vers la droite (transform sur .shell, voir useRailSpace), puis reprend sa place.
 
-function RailItem({ space, active, n, name }: { space: Space; active: boolean; n: number; name: string }) {
-  const Icon = space.icon;
+const RAIL_CLOSED = 72;
+const RAIL_OPEN = 264;
+const ROW = 46; // hauteur d'une ligne d'espace + espacement (indicateur glissant)
+
+/** Applique ou retire la réduction de la page quand le rail s'ouvre ou se ferme */
+function useRailSpace(open: boolean) {
+  useEffect(() => {
+    const root = document.documentElement;
+    const shell = document.querySelector<HTMLElement>(".shell");
+    if (!shell) return;
+    if (!open) {
+      root.removeAttribute("data-rail");
+      return;
+    }
+    // Le cadre (de 84 px à la largeur - 12 px) doit commencer après le rail ouvert, ancré à droite
+    const place = () => {
+      const w = window.innerWidth;
+      const scale = Math.min(1, (w - 12 - (RAIL_OPEN + 12)) / (w - 12 - (RAIL_CLOSED + 12)));
+      shell.style.setProperty("--rail-s", scale.toFixed(4));
+      shell.style.setProperty("--rail-oy", `${window.scrollY + window.innerHeight / 2}px`);
+    };
+    place();
+    root.setAttribute("data-rail", "open");
+    window.addEventListener("scroll", place, { passive: true });
+    window.addEventListener("resize", place);
+    return () => {
+      window.removeEventListener("scroll", place);
+      window.removeEventListener("resize", place);
+    };
+  }, [open]);
+}
+
+function RailLabel({ title, desc, i }: { title: string; desc?: string; i: number }) {
   return (
-    <li>
-      <Link
-        href={space.href}
-        aria-current={active ? "page" : undefined}
-        aria-label={`${n}. ${name}`}
-        className={cn(
-          "group relative z-[1] grid h-10 w-10 place-items-center rounded-xl transition-colors duration-200",
-          active ? "text-accent" : "text-muted hover:bg-surface-3 hover:text-fg",
-        )}
-      >
-        <Icon size={18} aria-hidden="true" />
-        <Tip>
-          <span className="mr-1.5 font-mono text-dim">{n}</span>
-          {name}
-        </Tip>
-      </Link>
-    </li>
+    <span className="rail-label min-w-0" style={{ ["--ri" as string]: i }}>
+      <span className="block truncate text-[13.5px] font-semibold leading-tight text-fg">{title}</span>
+      {desc && <span className="block truncate text-[11px] leading-tight text-dim">{desc}</span>}
+    </span>
   );
 }
 
@@ -93,87 +101,153 @@ export function Rail() {
   const active = spaceFromPath(pathname);
   const activeIndex = SPACES.indexOf(active) + 1;
   const { actions, links } = useTools();
+  // Ouvert "sur" une page donnée : un changement de page le referme de lui-même
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
+  const current = useRef(pathname);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  // Après un clic sur un lien, le rail reste fermé tant que la souris ne l'a pas quitté
+  const suppressed = useRef(false);
+  useRailSpace(open);
+  useEffect(() => {
+    current.current = pathname;
+  }, [pathname]);
+
+  const setOpen = (next: boolean) => setOpenOn(next ? current.current : null);
+  const schedule = (next: boolean, delay: number) => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setOpen(next), delay);
+  };
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const close = () => {
+    suppressed.current = true;
+    clearTimeout(timer.current);
+    setOpen(false);
+  };
 
   return (
     <>
       <nav
         aria-label={t("main")}
-        className="fixed inset-y-0 left-0 z-40 hidden w-[72px] flex-col items-center py-4 md:flex"
+        data-open={open || undefined}
+        className="rail fixed inset-y-0 left-0 z-40 hidden flex-col py-4 md:flex"
+        onPointerEnter={(e) => {
+          if (e.pointerType === "touch" || suppressed.current) return;
+          schedule(true, 90);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "touch") return;
+          suppressed.current = false;
+          schedule(false, 160);
+        }}
+        onFocus={(e) => {
+          if (e.target instanceof HTMLElement && e.target.matches(":focus-visible")) schedule(true, 0);
+        }}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) schedule(false, 0);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") close();
+        }}
+        onClick={(e) => {
+          if (e.target instanceof Element && e.target.closest("a[href]")) close();
+        }}
       >
-        <Link href="/" aria-label={t("homeLogo")} className="rounded-xl">
+        <span aria-hidden="true" className="rail-panel" />
+
+        <Link href="/" aria-label={t("homeLogo")} className="rail-row relative pl-[18px]">
           <Logo size={36} />
+          <span className="rail-label" style={{ ["--ri" as string]: 0 }}>
+            <span className="display block text-[22px] text-fg">Yexo</span>
+            <span className="block font-mono text-[10px] text-dim">yexofps.org</span>
+          </span>
         </Link>
 
-        <ul className="relative mt-6 flex flex-col items-center gap-1.5">
-          {/* Indicateur "vous êtes ici" : glisse d'un espace à l'autre */}
+        <ul className="relative mt-6 flex flex-col gap-1.5 px-4">
+          {/* Indicateur "vous êtes ici" : glisse d'un espace à l'autre, s'étire quand le rail s'ouvre */}
           <span
             aria-hidden="true"
-            className="glow pointer-events-none absolute left-0 top-0 h-10 w-10 rounded-xl bg-accent-tint transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)]"
-            style={{ transform: `translateY(${(activeIndex - 1) * 46}px)` }}
+            className="rail-indicator pointer-events-none absolute left-4 top-0 h-10"
+            style={{ transform: `translateY(${(activeIndex - 1) * ROW}px)` }}
           >
-            <Reticle size={6} inset={0} />
+            <span className="rail-indicator-row" />
+            <span className="glow relative block h-10 w-10 rounded-[5px] bg-accent-tint">
+              <Reticle size={6} inset={0} />
+            </span>
           </span>
-          {SPACES.map((space, i) => (
-            <RailItem
-              key={space.id}
-              space={space}
-              n={i + 1}
-              name={t(`spaces.${space.id}`)}
-              active={space.id === active.id}
-            />
-          ))}
+          {SPACES.map((space, i) => {
+            const Icon = space.icon;
+            const isActive = space.id === active.id;
+            const name = t(`rail.${space.id}.title`);
+            return (
+              <li key={space.id}>
+                <Link
+                  href={space.href}
+                  aria-current={isActive ? "page" : undefined}
+                  aria-label={`${i + 1}. ${name}`}
+                  className={cn("rail-link group", isActive ? "text-accent" : "text-muted hover:text-fg")}
+                >
+                  <span className="relative z-[1] grid h-10 w-10 shrink-0 place-items-center">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
+                  <span className="rail-num" style={{ ["--ri" as string]: i + 1 }} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <RailLabel title={name} desc={t(`rail.${space.id}.desc`)} i={i + 1} />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
-        {/* Espace actif : numéro + nom à la verticale */}
-        <div className="mt-6 flex min-h-0 flex-1 flex-col items-center gap-3 overflow-hidden" aria-hidden="true">
+        {/* Espace actif : numéro + nom à la verticale (rail replié) */}
+        <div className="rail-current mt-6 flex min-h-0 flex-1 flex-col items-center gap-3 overflow-hidden" aria-hidden="true">
           <span
             key={`n-${active.id}`}
-            className="grid h-6 w-6 animate-[fade-in_400ms_ease_both] place-items-center rounded-full bg-accent-tint font-mono text-[11px] text-accent"
+            className="grid h-6 w-6 animate-[fade-in_400ms_ease_both] place-items-center rounded-[4px] bg-accent-tint font-mono text-[11px] text-accent"
           >
             {activeIndex}
           </span>
           <span
             key={`l-${active.id}`}
-            className="vertical-label animate-[fade-up_600ms_cubic-bezier(.16,1,.3,1)_both] text-[13px] font-semibold tracking-wide text-fg"
+            className="vertical-label display animate-[fade-up_600ms_cubic-bezier(.16,1,.3,1)_both] text-[18px] tracking-wide text-fg"
           >
             {t(`spaces.${active.id}`)}
           </span>
         </div>
 
-        <div className="flex flex-col items-center gap-0.5">
-          {actions.map((a) => (
-            <button
-              key={a.id}
-              type="button"
-              onClick={a.onClick}
-              aria-label={a.label}
-              className="icon-btn group relative"
-            >
-              <span aria-hidden="true">{a.icon}</span>
-              <Tip>{a.label}</Tip>
+        <div className="flex flex-col gap-0.5 px-4">
+          {actions.map((a, i) => (
+            <button key={a.id} type="button" onClick={a.onClick} aria-label={a.label} className="rail-link rail-tool">
+              <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center">
+                {a.icon}
+              </span>
+              <RailLabel title={a.label} i={8 + i} />
             </button>
           ))}
-          {links.map((l) => (
+          {links.map((l, i) => (
             <a
               key={l.id}
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={l.label}
-              className="icon-btn group relative"
+              className="rail-link rail-tool"
             >
-              {l.icon}
-              <Tip>{l.label}</Tip>
+              <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center">
+                {l.icon}
+              </span>
+              <RailLabel title={l.label} i={12 + i} />
             </a>
           ))}
         </div>
 
-        <Link
-          href="/contact"
-          aria-label={t("avatar")}
-          className="mt-3 block overflow-hidden rounded-full ring-1 ring-line"
-        >
-          <Image src="/images/avatar.webp" alt="" width={36} height={36} loading="eager" className="h-9 w-9 object-cover" />
+        <Link href="/contact" aria-label={t("avatar")} className="rail-row mt-3 pl-[18px]">
+          <span className="block shrink-0 overflow-hidden rounded-[5px] ring-1 ring-line">
+            <Image src="/images/avatar.webp" alt="" width={36} height={36} loading="eager" className="h-9 w-9 object-cover" />
+          </span>
+          <RailLabel title={t("avatar")} desc="Baptiste · Yexo" i={14} />
         </Link>
       </nav>
 

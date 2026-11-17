@@ -92,6 +92,37 @@
       "themeDark": "Dark mode",
       "shortcuts": "Keyboard shortcuts",
       "language": "Version française"
+    },
+    "rail": {
+      "home": {
+        "title": "Home",
+        "desc": "Who I am, in short"
+      },
+      "career": {
+        "title": "Career",
+        "desc": "Studies, work-study, skills"
+      },
+      "lab": {
+        "title": "Homelab",
+        "desc": "My infra at home"
+      },
+      "gaming": {
+        "title": "Gaming",
+        "desc": "Ranks and live stats"
+      },
+      "creator": {
+        "title": "Creator",
+        "desc": "Edits and Y-Services"
+      },
+      "tools": {
+        "title": "Tools",
+        "desc": "Sensitivity converter"
+      },
+      "contact": {
+        "title": "Contact",
+        "desc": "Write to me, see what I'm up to"
+      },
+      "settings": "Settings"
     }
   },
   "palette": {
@@ -804,6 +835,11 @@
           "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it.",
           "path": "See my career"
         }
+      },
+      "punch": "I edit Valorant clips and keep servers running.",
+      "callouts": {
+        "weapon": "Vandal · Champions skin",
+        "main": "Main weapon"
       }
     },
     "fastfetch": {
@@ -846,9 +882,22 @@
       "videoLabel": "Yexo's Valorant video edit"
     },
     "gaming": {
-      "title": "Gaming",
+      "title": "Live stats",
       "ranks": "Best ranks",
       "recent": "{count, plural, one {Last match} other {Last # matches}}"
+    },
+    "stats": {
+      "label": "In numbers",
+      "current": "Current rank · Valorant",
+      "currentValue": "Immortal 3",
+      "peak": "Radiant peak · episode {episode}",
+      "faceit": "Faceit · CS2",
+      "faceitValue": "Level 10",
+      "lab": "Homelab · {machines} machines"
+    },
+    "explore": {
+      "title": "Explore the site",
+      "open": "Open"
     }
   },
   "lab": {
