@@ -5,25 +5,35 @@
 //    au défilement et à la souris, et le numéro de l'espace en très grand, en contour. Dans l'univers
 //    "pro" (page Baptiste), elles laissent place à des motifs de logiciel de montage (zones de sécurité,
 //    éditeur de courbes, timeline et images clés).
-// Coût maîtrisé : la fumée est calculée en basse résolution (elle est floue de toute façon), à 30 i/s,
-// en pause quand l'onglet est caché ; une seule image fixe si les animations sont réduites ou si
-// la machine est modeste. La parallaxe n'anime que des transform (compositeur).
+// Coût maîtrisé : la fumée démarre après le chargement de la page (navigateur au repos), est calculée
+// en basse résolution (elle est floue de toute façon), à 30 i/s, en pause quand l'onglet est caché.
+// Sur téléphone : version allégée (résolution plus basse, 20 i/s, 3 octaves de bruit au lieu de 5).
+// Une seule image fixe si les animations sont réduites, si la machine est modeste, si WebGL tourne
+// sans GPU (rendu logiciel) ou si la cadence mesurée s'effondre. La parallaxe n'anime que des
+// transform (compositeur).
 "use client";
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "@/i18n/navigation";
 import { SPACES, spaceFromPath } from "@/config/spaces";
+import { afterLoadIdle, isPhone, isSoftwareRenderer } from "@/lib/defer";
 
 /* ─── Fumée (WebGL 1, un seul triangle plein écran) ─── */
 
 const VERT = `attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
 
-const FRAG = `precision mediump float;
+/**
+ * Shader de la fumée. `octaves` : détail du bruit (5 = version complète). Avec moins d'octaves, la
+ * somme est ramenée à celle de 5 octaves pour garder la même densité de fumée.
+ */
+function fragment(octaves: number) {
+  const norm = octaves === 5 ? "" : `*${((1 - 0.5 ** 5) / (1 - 0.5 ** octaves)).toFixed(4)}`;
+  return `precision mediump float;
 uniform vec2 r;uniform float t;uniform vec3 bg;uniform vec4 c1;uniform vec4 c2;uniform vec2 m;uniform float s;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
 return mix(mix(h(i),h(i+vec2(1.,0.)),u.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),u.x),u.y);}
-float fbm(vec2 p){float v=0.,a=.5;mat2 k=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<5;i++){v+=a*n(p);p=k*p;a*=.5;}return v;}
+float fbm(vec2 p){float v=0.,a=.5;mat2 k=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<${octaves};i++){v+=a*n(p);p=k*p;a*=.5;}return v${norm};}
 void main(){
 vec2 uv=gl_FragCoord.xy/r;
 vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
@@ -41,22 +51,215 @@ col=mix(col,c2.rgb,smoothstep(.5,1.,w.x)*mask*c2.a);
 col*=1.-.25*smoothstep(.55,1.2,length(uv-.5));
 gl_FragColor=vec4(col,1.);
 }`;
+}
+
+/** Réglages de la fumée : complète (ordinateur) ou allégée (téléphone) */
+const PROFILES = {
+  // scale : résolution interne / taille de l'écran ; interval : ms minimum entre deux images ;
+  // minFps : en dessous, sur la durée, la fumée se fige (garde-fou des appareils trop lents)
+  full: { scale: 0.34, interval: 33, octaves: 5, minFps: 20 },
+  lite: { scale: 0.25, interval: 46, octaves: 3, minFps: 12 },
+} as const;
 
 type RGBA = [number, number, number, number];
 
-/** Couleur CSS calculée (n'importe quel format) → RGBA 0-1, via un canvas 2D de 1 px */
+/**
+ * Couleur calculée d'une propriété CSS enregistrée (<color>) → RGBA 0-1. Le navigateur la donne en
+ * rgb()/rgba() : lecture directe du texte, sans canvas. Autre format (rare) : canvas 2D de 1 px,
+ * créé seulement dans ce cas.
+ */
 function makeColorReader() {
-  const c = document.createElement("canvas");
-  c.width = c.height = 1;
-  const ctx = c.getContext("2d", { willReadFrequently: true });
-  return (css: string): RGBA => {
+  let ctx: CanvasRenderingContext2D | null | undefined;
+  const viaCanvas = (css: string): RGBA => {
+    if (ctx === undefined) {
+      const c = document.createElement("canvas");
+      c.width = c.height = 1;
+      ctx = c.getContext("2d");
+    }
     if (!ctx) return [0, 0, 0, 0];
     ctx.clearRect(0, 0, 1, 1);
     ctx.fillStyle = "#000";
-    ctx.fillStyle = css.trim() || "transparent";
+    ctx.fillStyle = css || "transparent";
     ctx.fillRect(0, 0, 1, 1);
     const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
     return [r / 255, g / 255, b / 255, a / 255];
+  };
+  return (raw: string): RGBA => {
+    const css = raw.trim();
+    const m = /^rgba?\(([^)]*)\)$/i.exec(css);
+    if (m) {
+      const [r, g, b, a = "1"] = m[1].split(/[\s,/]+/).filter(Boolean);
+      const v = [r, g, b].map((x) => (x?.endsWith("%") ? parseFloat(x) * 2.55 : parseFloat(x)) / 255);
+      const alpha = a.endsWith("%") ? parseFloat(a) / 100 : parseFloat(a);
+      if (v.every(Number.isFinite) && Number.isFinite(alpha)) return [v[0], v[1], v[2], alpha];
+    }
+    if (css === "transparent") return [0, 0, 0, 0];
+    return viaCanvas(css);
+  };
+}
+
+/** Démarre la fumée sur le canvas ; renvoie la fonction d'arrêt (ou rien si WebGL est indisponible) */
+function startSmoke(canvas: HTMLCanvasElement): (() => void) | undefined {
+  const gl = canvas.getContext("webgl", { antialias: false, depth: false, alpha: false, powerPreference: "low-power" });
+  if (!gl) return;
+
+  const profile = isPhone() ? PROFILES.lite : PROFILES.full;
+  const compile = (type: number, src: string) => {
+    const sh = gl.createShader(type)!;
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    return sh;
+  };
+  const prog = gl.createProgram()!;
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragment(profile.octaves)));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, "p");
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const u = (name: string) => gl.getUniformLocation(prog, name);
+  const uR = u("r"), uT = u("t"), uBg = u("bg"), uC1 = u("c1"), uC2 = u("c2"), uM = u("m"), uS = u("s");
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const nav = navigator as Navigator & { deviceMemory?: number };
+  // Image fixe d'office : machine modeste, ou WebGL sans GPU (chaque image bloquerait la page)
+  const modest = (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2 || isSoftwareRenderer(gl);
+  /** Cadence effondrée constatée en cours de route (voir watchdog) */
+  let slow = false;
+  const read = makeColorReader();
+  const root = document.documentElement;
+
+  let bg: RGBA = [0, 0, 0, 1], c1: RGBA = [0, 0, 0, 0], c2: RGBA = [0, 0, 0, 0];
+  // Couleurs relues pendant la transition d'espace / de thème (propriétés CSS animées), puis figées
+  let colorsUntil = performance.now() + 1200;
+  const readColors = () => {
+    const cs = getComputedStyle(root);
+    bg = read(cs.getPropertyValue("--bg"));
+    c1 = read(cs.getPropertyValue("--haze"));
+    c2 = read(cs.getPropertyValue("--haze-2"));
+  };
+  readColors();
+
+  const resize = () => {
+    canvas.width = Math.max(2, Math.round(window.innerWidth * profile.scale));
+    canvas.height = Math.max(2, Math.round(window.innerHeight * profile.scale));
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  };
+  resize();
+
+  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  const start = performance.now() - 20_000 * Math.random();
+  /** Instant affiché par l'image fixe (celui où l'animation s'est figée, le cas échéant) */
+  let stillAt = start + 20_000;
+  let frame = 0;
+  let timer = 0;
+  let last = 0;
+
+  const draw = (now: number) => {
+    if (now < colorsUntil) readColors();
+    mouse.x += (mouse.tx - mouse.x) * 0.04;
+    mouse.y += (mouse.ty - mouse.y) * 0.04;
+    gl.uniform2f(uR, canvas.width, canvas.height);
+    gl.uniform1f(uT, (now - start) / 1000);
+    gl.uniform3f(uBg, bg[0], bg[1], bg[2]);
+    gl.uniform4f(uC1, c1[0], c1[1], c1[2], c1[3]);
+    gl.uniform4f(uC2, c2[0], c2[1], c2[2], c2[3]);
+    gl.uniform2f(uM, mouse.x, mouse.y);
+    gl.uniform1f(uS, Math.min(window.scrollY, 4000) / window.innerHeight * 0.12);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // Fondu d'apparition (CSS) une fois la première image dessinée
+    if (!("ready" in canvas.dataset)) canvas.dataset.ready = "";
+  };
+
+  // Garde-fou : cadence mesurée par fenêtres de 2 s ; deux fenêtres lentes d'affilée → image fixe
+  let windowStart = 0, windowFrames = 0, slowWindows = 0, prevFrame = 0;
+  const watchdog = (now: number) => {
+    // Longue interruption (fenêtre masquée, onglet en arrière-plan) : une pause, pas une lenteur
+    if (!windowStart || now - prevFrame > 1000) {
+      windowStart = now;
+      windowFrames = 0;
+    } else {
+      windowFrames++;
+    }
+    prevFrame = now;
+    if (now - windowStart < 2000) return;
+    const fps = (windowFrames * 1000) / (now - windowStart);
+    slowWindows = fps < profile.minFps ? slowWindows + 1 : 0;
+    windowStart = now;
+    windowFrames = 0;
+    if (slowWindows >= 2) {
+      slow = true;
+      stillAt = now;
+    }
+  };
+
+  const still = () => reduced.matches || modest || slow;
+  const loop = (now: number) => {
+    frame = requestAnimationFrame(loop);
+    if (now - last < profile.interval) return;
+    last = now;
+    draw(now);
+    watchdog(now);
+    if (slow) cancelAnimationFrame(frame);
+  };
+  /** Image fixe : redessinée à la prochaine image, puis une fois la transition de couleur finie */
+  const paintStill = () => {
+    cancelAnimationFrame(frame);
+    window.clearTimeout(timer);
+    frame = requestAnimationFrame(() => {
+      readColors();
+      draw(stillAt);
+    });
+    if (performance.now() < colorsUntil) {
+      timer = window.setTimeout(paintStill, colorsUntil - performance.now());
+    }
+  };
+  const play = () => {
+    cancelAnimationFrame(frame);
+    window.clearTimeout(timer);
+    if (still()) return paintStill();
+    windowStart = 0;
+    if (!document.hidden) frame = requestAnimationFrame(loop);
+  };
+  play();
+
+  const onVisibility = () => {
+    if (!document.hidden) return play();
+    cancelAnimationFrame(frame);
+    window.clearTimeout(timer);
+  };
+  const onResize = () => {
+    resize();
+    if (still()) paintStill();
+  };
+  const onMove = (e: PointerEvent) => {
+    mouse.tx = e.clientX / window.innerWidth - 0.5;
+    mouse.ty = 0.5 - e.clientY / window.innerHeight;
+  };
+  const mo = new MutationObserver(() => {
+    colorsUntil = performance.now() + 1200;
+    if (still()) paintStill();
+  });
+  mo.observe(root, { attributes: true, attributeFilter: ["data-space", "data-theme"] });
+  document.addEventListener("visibilitychange", onVisibility);
+  window.addEventListener("resize", onResize);
+  window.addEventListener("pointermove", onMove, { passive: true });
+  reduced.addEventListener("change", play);
+
+  return () => {
+    cancelAnimationFrame(frame);
+    window.clearTimeout(timer);
+    mo.disconnect();
+    document.removeEventListener("visibilitychange", onVisibility);
+    window.removeEventListener("resize", onResize);
+    window.removeEventListener("pointermove", onMove);
+    reduced.removeEventListener("change", play);
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
   };
 }
 
@@ -64,121 +267,14 @@ function useSmoke(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl", { antialias: false, depth: false, alpha: false, powerPreference: "low-power" });
-    if (!gl) return;
-
-    const compile = (type: number, src: string) => {
-      const sh = gl.createShader(type)!;
-      gl.shaderSource(sh, src);
-      gl.compileShader(sh);
-      return sh;
-    };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, "p");
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const u = (name: string) => gl.getUniformLocation(prog, name);
-    const uR = u("r"), uT = u("t"), uBg = u("bg"), uC1 = u("c1"), uC2 = u("c2"), uM = u("m"), uS = u("s");
-
-    canvas.dataset.ready = "";
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const nav = navigator as Navigator & { deviceMemory?: number };
-    const modest = (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2;
-    const read = makeColorReader();
-    const root = document.documentElement;
-
-    let bg: RGBA = [0, 0, 0, 1], c1: RGBA = [0, 0, 0, 0], c2: RGBA = [0, 0, 0, 0];
-    // Couleurs relues pendant la transition d'espace / de thème (propriétés CSS animées), puis figées
-    let colorsUntil = performance.now() + 1200;
-    const readColors = () => {
-      const cs = getComputedStyle(root);
-      bg = read(cs.getPropertyValue("--bg"));
-      c1 = read(cs.getPropertyValue("--haze"));
-      c2 = read(cs.getPropertyValue("--haze-2"));
-    };
-
-    const scale = 0.34;
-    const resize = () => {
-      canvas.width = Math.max(2, Math.round(window.innerWidth * scale));
-      canvas.height = Math.max(2, Math.round(window.innerHeight * scale));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    };
-    resize();
-
-    const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-    const start = performance.now() - 20_000 * Math.random();
-    let frame = 0;
-    let last = 0;
-
-    const draw = (now: number) => {
-      if (now < colorsUntil) readColors();
-      mouse.x += (mouse.tx - mouse.x) * 0.04;
-      mouse.y += (mouse.ty - mouse.y) * 0.04;
-      gl.uniform2f(uR, canvas.width, canvas.height);
-      gl.uniform1f(uT, (now - start) / 1000);
-      gl.uniform3f(uBg, bg[0], bg[1], bg[2]);
-      gl.uniform4f(uC1, c1[0], c1[1], c1[2], c1[3]);
-      gl.uniform4f(uC2, c2[0], c2[1], c2[2], c2[3]);
-      gl.uniform2f(uM, mouse.x, mouse.y);
-      gl.uniform1f(uS, Math.min(window.scrollY, 4000) / window.innerHeight * 0.12);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-    };
-
-    const still = () => reduced.matches || modest;
-    const loop = (now: number) => {
-      frame = requestAnimationFrame(loop);
-      if (now - last < 33) return; // ~30 images/s
-      last = now;
-      draw(now);
-    };
-    const play = () => {
-      cancelAnimationFrame(frame);
-      if (still()) {
-        // Image fixe (redessinée après une transition de couleur)
-        readColors();
-        draw(start + 20_000);
-        if (performance.now() < colorsUntil) frame = requestAnimationFrame(play);
-        return;
-      }
-      if (!document.hidden) frame = requestAnimationFrame(loop);
-    };
-    play();
-
-    const onVisibility = () => (document.hidden ? cancelAnimationFrame(frame) : play());
-    const onResize = () => {
-      resize();
-      if (still()) play();
-    };
-    const onMove = (e: PointerEvent) => {
-      mouse.tx = e.clientX / window.innerWidth - 0.5;
-      mouse.ty = 0.5 - e.clientY / window.innerHeight;
-    };
-    const mo = new MutationObserver(() => {
-      colorsUntil = performance.now() + 1200;
-      if (still()) play();
+    let stop: (() => void) | undefined;
+    // Après le chargement et l'hydratation : le premier affichage et le texte passent avant
+    const cancel = afterLoadIdle(() => {
+      stop = startSmoke(canvas);
     });
-    mo.observe(root, { attributes: true, attributeFilter: ["data-space", "data-theme"] });
-    document.addEventListener("visibilitychange", onVisibility);
-    window.addEventListener("resize", onResize);
-    window.addEventListener("pointermove", onMove, { passive: true });
-    reduced.addEventListener("change", play);
-
     return () => {
-      cancelAnimationFrame(frame);
-      mo.disconnect();
-      document.removeEventListener("visibilitychange", onVisibility);
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("pointermove", onMove);
-      reduced.removeEventListener("change", play);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      cancel();
+      stop?.();
     };
   }, [canvasRef]);
 }
