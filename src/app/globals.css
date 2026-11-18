@@ -717,6 +717,26 @@ html {
     font-weight: 500;
   }
 
+  /* Page Contact : adresses en grand, coupées seulement à un endroit lisible (<wbr> avant le « @ »
+     ou après le « / » d'un lien), jamais au milieu d'un mot */
+  .contact-value {
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.05;
+    text-transform: none;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  /* Statut en grand (NowCard size="lg") : la disponibilité en bandeau teinté, lisible d'un coup d'œil */
+  .now-availability {
+    padding: 14px 16px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    box-shadow: inset 0 0 0 1px var(--glow-ring);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
   /* ─── Champs ────────────────────────────────────────── */
   .field {
     width: 100%;

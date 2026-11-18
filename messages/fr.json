@@ -1249,6 +1249,16 @@
   "contact": {
     "title": "Contact",
     "meta": "{count} canaux",
+    "statusMeta": "statut en direct",
+    "channels": {
+      "title": "Me joindre",
+      "join": "Rejoindre",
+      "linkLabel": "le lien Discord"
+    },
+    "links": {
+      "title": "Réseaux",
+      "meta": "{count} liens"
+    },
     "intro": "Tous les moyens de me joindre au même endroit. Pour une commande Y-Services, le ticket Discord reste le plus rapide.",
     "keys": {
       "proEmail": "email.pro",
@@ -1480,6 +1490,11 @@
       "cover": "Pochette de {album}",
       "progress": "Avancement du morceau",
       "open": "Écouter {song} sur Spotify"
+    },
+    "today": {
+      "title": "Aujourd'hui",
+      "week": "Voir ma semaine",
+      "nextOpen": "Dispo pour répondre dès {time} · {activity}"
     }
   },
   "hosting": {

@@ -1,9 +1,11 @@
 // src/components/now/now-card.tsx — Activité en cours (heure de Paris) : titre, disponibilité,
 // avancement du créneau (ou durée si vue en direct sur Discord), activité suivante, morceau Spotify
 // en écoute et actions utiles (mail, Discord, Spotify…).
+// size="lg" (page Contact) : statut mis en avant, titre en très grand, disponibilité en bandeau coloré.
 "use client";
 
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Clock, ExternalLink, Mail, MessageCircle, Moon, type LucideIcon } from "lucide-react";
 import { ACTIVITIES, type ActivityId, type Availability } from "@/config/now";
@@ -29,9 +31,10 @@ export function durationParts(minutes: number) {
   return { key: h === 0 ? "m" : m === 0 ? "h" : "hm", values: { h, m } } as const;
 }
 
-export function NowCard() {
+export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
   const t = useTranslations("now");
   const state = useLive();
+  const lg = size === "lg";
 
   if (!state) {
     return (
@@ -39,7 +42,7 @@ export function NowCard() {
       <div className="flex flex-col gap-5" aria-busy="true">
         <span className="sr-only">{t("loading")}</span>
         <Skeleton className="h-4 w-48" />
-        <Skeleton className="h-16 w-3/4" />
+        <Skeleton className={cn("w-3/4", lg ? "h-[92px]" : "h-16")} />
         <Skeleton className="h-[46px] w-full" />
         <Skeleton className="h-10 w-full" />
         <Skeleton className="h-5 w-2/3" />
@@ -72,25 +75,36 @@ export function NowCard() {
       <div className="flex items-start gap-4">
         {/* Avatar Discord quand le statut en direct est disponible, sinon l'icône de l'activité */}
         {hasAvatar(presence) ? (
-          <DiscordAvatar presence={presence} size={56} className="m-1.5" />
+          <DiscordAvatar presence={presence} size={lg ? 72 : 56} className="m-1.5" />
         ) : (
           <span
             aria-hidden="true"
-            className="glow grid h-14 w-14 shrink-0 place-items-center rounded-[16px] bg-accent-tint text-on-accent-container"
+            className={cn(
+              "glow grid shrink-0 place-items-center rounded-[16px] bg-accent-tint text-on-accent-container",
+              lg ? "h-[72px] w-[72px]" : "h-14 w-14",
+            )}
           >
-            <Icon size={26} strokeWidth={1.75} />
+            <Icon size={lg ? 32 : 26} strokeWidth={1.75} />
           </span>
         )}
         <div className="min-w-0">
-          <h2 className="text-[26px] font-bold leading-tight tracking-tight">
+          <h2
+            className={
+              lg
+                ? "display text-[clamp(34px,3.6vw,52px)] leading-[0.92] text-fg"
+                : "text-[26px] font-bold leading-tight tracking-tight"
+            }
+          >
             {t(`activities.${live.id}.title`, { name: live.name ?? "" })}
           </h2>
-          <p className="mt-1 text-sm leading-relaxed text-muted">{t(`activities.${live.id}.text`)}</p>
+          <p className={cn("leading-relaxed text-muted", lg ? "mt-2 text-[15px]" : "mt-1 text-sm")}>
+            {t(`activities.${live.id}.text`)}
+          </p>
         </div>
       </div>
 
-      <p className="tile flex items-center gap-2.5 px-4 py-3 text-[14px] font-medium">
-        <AvailabilityIcon size={16} aria-hidden="true" className="shrink-0 text-accent" />
+      <p className={cn("flex items-center gap-2.5", lg ? "now-availability" : "tile px-4 py-3 text-[14px] font-medium")}>
+        <AvailabilityIcon size={lg ? 18 : 16} aria-hidden="true" className="shrink-0 text-accent" />
         {t(`availability.${activity.availability}`)}
       </p>
 
@@ -123,10 +137,13 @@ export function NowCard() {
             </div>
           </div>
 
-          <p className="flex items-center gap-2 text-[13.5px] text-muted">
-            <NextIcon size={15} aria-hidden="true" className="shrink-0 text-dim" />
-            {t("next", { activity: t(`activities.${next.id}.title`, { name: "" }), time: formatMinutes(next.start) })}
-          </p>
+          {/* En grand (page Contact), la frise du jour (TodayStrip) montre déjà la suite */}
+          {!lg && (
+            <p className="flex items-center gap-2 text-[13.5px] text-muted">
+              <NextIcon size={15} aria-hidden="true" className="shrink-0 text-dim" />
+              {t("next", { activity: t(`activities.${next.id}.title`, { name: "" }), time: formatMinutes(next.start) })}
+            </p>
+          )}
         </>
       )}
 

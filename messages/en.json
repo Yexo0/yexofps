@@ -1249,6 +1249,16 @@
   "contact": {
     "title": "Contact",
     "meta": "{count} channels",
+    "statusMeta": "live status",
+    "channels": {
+      "title": "Reach me",
+      "join": "Join",
+      "linkLabel": "the Discord link"
+    },
+    "links": {
+      "title": "Socials",
+      "meta": "{count} links"
+    },
     "intro": "Every way to reach me, in one place. For a Y-Services order, a Discord ticket is still the fastest.",
     "keys": {
       "proEmail": "email.work",
@@ -1480,6 +1490,11 @@
       "cover": "{album} cover",
       "progress": "Track progress",
       "open": "Listen to {song} on Spotify"
+    },
+    "today": {
+      "title": "Today",
+      "week": "See my week",
+      "nextOpen": "Available to reply from {time} · {activity}"
     }
   },
   "hosting": {
