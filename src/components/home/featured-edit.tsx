@@ -1,8 +1,11 @@
 // src/components/home/featured-edit.tsx — Montage à la une, avec réglage du son.
 // Deux modes selon FEATURED_EDIT (src/config/site.ts) :
 // - `video` renseigné : lecteur maison (lecture/pause, couper le son, curseur de volume, progression).
-//   Lecture auto sans le son seulement quand le lecteur est à l'écran (pause sinon : batterie, processeur),
-//   jamais en mode économie de données ni en mouvement réduit. Fichier absent ou illisible : repli TikTok ;
+//   Rien n'est téléchargé au chargement de la page : la source n'est posée qu'à l'approche du lecteur
+//   et, avec preload="none", les données n'arrivent qu'au lancement de la lecture (à l'écran ou au clic) ;
+//   l'affiche passe par next/image (taille adaptée à l'écran) et couvre la vidéo jusqu'à sa 1re image. Lecture auto sans le son seulement quand
+//   le lecteur est à l'écran (pause sinon : batterie, processeur), jamais en mode économie de données
+//   ni en mouvement réduit. Fichier absent ou illisible : repli TikTok ;
 // - sinon : aperçu + bouton, puis lecteur TikTok intégré chargé seulement au clic (vie privée, performance).
 "use client";
 
@@ -121,18 +124,38 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
   const ref = useRef<HTMLVideoElement>(null);
   /** L'utilisateur a mis en pause : on ne relance plus automatiquement */
   const userPaused = useRef(false);
+  /** Clic sur lecture avant que la source soit posée : la lecture suit son arrivée */
+  const playOnSource = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
   const [volume, setVolume] = useState(0.6);
   const [progress, setProgress] = useState(0);
+  /** Source posée à l'approche du lecteur : écrite dans le HTML, le navigateur la téléchargeait dès le chargement */
+  const [source, setSource] = useState<string>();
+  /** Première image affichée : l'affiche (next/image) laisse place à la vidéo */
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    // Erreur survenue avant l'hydratation (fichier absent) : l'événement a déjà été manqué
-    if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
-      onFail();
-      return;
+    const near = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setSource(src);
+        near.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+    near.observe(video);
+    return () => near.disconnect();
+  }, [src]);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || !source) return;
+    if (playOnSource.current) {
+      playOnSource.current = false;
+      void video.play().catch(() => {});
     }
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     const autoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !connection?.saveData;
@@ -154,11 +177,16 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
     );
     io.observe(video);
     return () => io.disconnect();
-  }, [onFail]);
+  }, [source]);
 
   function togglePlay() {
     const video = ref.current;
     if (!video) return;
+    if (!source) {
+      playOnSource.current = true;
+      setSource(src);
+      return;
+    }
     userPaused.current = !video.paused;
     if (video.paused) void video.play();
     else video.pause();
@@ -189,15 +217,15 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
     >
       <video
         ref={ref}
-        src={src}
-        poster={FEATURED_EDIT.poster}
+        src={source}
         aria-label={t("videoLabel")}
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         onClick={togglePlay}
         onError={onFail}
+        onPlaying={() => setStarted(true)}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onVolumeChange={(e) => {
@@ -210,6 +238,16 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
         }}
         className="absolute inset-0 h-full w-full cursor-pointer object-cover"
       />
+      {/* Affiche à la taille de l'écran (WebP/AVIF via next/image), au lieu de l'attribut poster plein format */}
+      {FEATURED_EDIT.poster && !started && (
+        <Image
+          src={FEATURED_EDIT.poster}
+          alt=""
+          fill
+          sizes={landscape ? "(min-width: 1024px) 60vw, 100vw" : "340px"}
+          className="pointer-events-none object-cover"
+        />
+      )}
       <Reticle size={14} inset={12} />
 
       {/* Commandes */}
