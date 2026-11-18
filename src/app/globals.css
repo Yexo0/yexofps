@@ -1360,14 +1360,25 @@ html {
     padding-top: 18px;
     border-top: 1px solid var(--line);
   }
+  /* Une paire dt/dd par stat ; l'icône (dans le dt) est sortie du flux et centrée à gauche,
+     à la place qu'elle occupait dans l'ancienne rangée flex (36 px + 14 px d'écart) */
   .key-stat {
-    padding: 2px 16px 2px 0;
+    --stat-pad: 0px;
+    position: relative;
+    padding: 2px 16px 2px calc(var(--stat-pad) + 50px);
   }
   @media (min-width: 1024px) {
     .key-stat + .key-stat {
-      padding-left: 24px;
+      --stat-pad: 24px;
       border-left: 1px solid var(--line);
     }
+  }
+  .key-stat-icon {
+    position: absolute;
+    top: 50%;
+    left: var(--stat-pad);
+    font-size: 1rem;
+    translate: 0 -50%;
   }
   [data-js] .key-stat {
     animation: fade-up 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
