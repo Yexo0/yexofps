@@ -296,11 +296,17 @@ html {
     opacity: 1;
     transform: none;
   }
+  /* Espace actif à la verticale : calé sur la colonne du rail fermé (72 px), pas sur sa largeur
+     courante. À la fermeture, le rail garde 264 px le temps que le panneau se replie : centré sur
+     toute la largeur, le libellé réapparaissait décalé puis sautait à sa place. Il revient en fondu
+     une fois le panneau replié ; il disparaît tout de suite à l'ouverture. */
   .rail-current {
-    transition: opacity 200ms ease;
+    width: 72px;
+    transition: opacity 220ms ease 260ms;
   }
   .rail[data-open] .rail-current {
     opacity: 0;
+    transition-delay: 0s;
   }
   /* La page ne passe pas sous le rail ouvert : elle se réduit vers la droite (ancrée au bord droit,
      centrée sur l'écran visible), puis reprend sa taille. Transform seulement : pas de recalcul de mise en page. */
