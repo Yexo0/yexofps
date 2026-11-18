@@ -1,5 +1,5 @@
 // src/components/home/hero.tsx — Hero plein écran commun aux deux profils de l'accueil :
-// "yexo" (/, univers Valorant : Vandal) et "baptiste" (/baptiste, côté pro : PC + After Effects).
+// "yexo" (/, univers Valorant : Vandal) et "baptiste" (/baptiste, côté pro : PC portable).
 // Haut : avatar + prénom, nom affiché en très grand (lettre par lettre), une phrase, le sélecteur de
 // profil, les actions. Droite : bande colorée en biais, scène 3D, deux repères. Bas : chiffres clés.
 // Seul le prénom apparaît (jamais le nom de famille).

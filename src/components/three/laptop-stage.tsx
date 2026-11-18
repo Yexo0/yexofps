@@ -1,23 +1,20 @@
 // src/components/three/laptop-stage.tsx — Hero de la page Baptiste (côté pro) : un PC portable en 3D,
-// écran allumé, et le logo After Effects qui "sort" de l'écran puis flotte à côté.
-// Même logique que la Vandal : intro, flottement, inclinaison vers la souris, rotation au défilement.
+// écran allumé. Même logique que la Vandal : intro, flottement, inclinaison vers la souris,
+// rotation au défilement.
 "use client";
 
 import { Suspense, useLayoutEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
-import { Box3, Mesh, MeshStandardMaterial, Vector3, type Group } from "three";
+import { Box3, Vector3, type Group } from "three";
 import type { StageInput } from "./vandal-stage";
 
 const LAPTOP = "/models/laptop.glb";
-const AE = "/models/ae.glb";
 
 const easeOut = (x: number) => 1 - Math.pow(1 - x, 4);
-/** Léger dépassement en fin de course (le logo "jaillit") */
-const easeOutBack = (x: number) => 1 + 2.4 * Math.pow(x - 1, 3) + 1.4 * Math.pow(x - 1, 2);
 
 /** Centre un modèle sur l'origine (base posée à y = 0) et ramène sa plus grande dimension à `size` */
-function useFit(ref: React.RefObject<Group | null>, deps: unknown, size: number, base = true) {
+function useFit(ref: React.RefObject<Group | null>, deps: unknown, size: number) {
   useLayoutEffect(() => {
     const g = ref.current;
     if (!g) return;
@@ -28,8 +25,8 @@ function useFit(ref: React.RefObject<Group | null>, deps: unknown, size: number,
     const center = box.getCenter(new Vector3());
     const s = size / Math.max(dim.x, dim.y, dim.z, 0.001);
     g.scale.setScalar(s);
-    g.position.set(-center.x * s, base ? -box.min.y * s : -center.y * s, -center.z * s);
-  }, [ref, deps, size, base]);
+    g.position.set(-center.x * s, -box.min.y * s, -center.z * s);
+  }, [ref, deps, size]);
 }
 
 function Laptop() {
@@ -43,29 +40,8 @@ function Laptop() {
   );
 }
 
-function AeLogo() {
-  const { scene } = useGLTF(AE, false, true);
-  const fit = useRef<Group>(null);
-  useFit(fit, scene, 0.46, false);
-  // Un peu plus de brillant pour accrocher les reflets
-  useLayoutEffect(() => {
-    scene.traverse((o) => {
-      if (o instanceof Mesh && o.material instanceof MeshStandardMaterial) {
-        o.material.envMapIntensity = 1.4;
-        o.material.roughness = Math.min(o.material.roughness, 0.35);
-      }
-    });
-  }, [scene]);
-  return (
-    <group ref={fit}>
-      <primitive object={scene} />
-    </group>
-  );
-}
-
 function Rig({ pointer, progress, reduced }: StageInput) {
   const rig = useRef<Group>(null);
-  const logo = useRef<Group>(null);
   const t0 = useRef<number | null>(null);
   const look = useRef({ x: 0, y: 0 });
   const viewport = useThree((s) => s.viewport);
@@ -74,13 +50,10 @@ function Rig({ pointer, progress, reduced }: StageInput) {
 
   useFrame((state, dt) => {
     const g = rig.current;
-    const l = logo.current;
-    if (!g || !l) return;
+    if (!g) return;
     if (t0.current === null) t0.current = state.clock.elapsedTime;
     const since = reduced ? 10 : state.clock.elapsedTime - t0.current;
     const e = easeOut(Math.min(1, since / 1.8));
-    const k = Math.min(1, Math.max(0, (since - 0.9) / 1.1));
-    const out = reduced ? 1 : easeOutBack(k);
     const t = reduced ? 0 : state.clock.elapsedTime;
     const p = progress.current ?? 0;
     const target = reduced ? { x: 0, y: 0 } : (pointer.current ?? { x: 0, y: 0 });
@@ -94,30 +67,16 @@ function Rig({ pointer, progress, reduced }: StageInput) {
     g.rotation.x = 0.12 + y * 0.08;
     g.position.x = viewport.width * 0.02 + (1 - e) * viewport.width * 0.35 - p * viewport.width * 0.1;
     g.position.y = -viewport.height * 0.3 + Math.sin(t * 0.7) * 0.02 + p * viewport.height * 0.15;
-
-    // Logo After Effects : part du centre de l'écran, jaillit vers la caméra puis flotte en haut à droite
-    const from = new Vector3(0, 0.75, 0.1);
-    const to = new Vector3(1.2, 1.12, 0.75);
-    l.position.lerpVectors(from, to, out);
-    l.position.y += Math.sin(t * 1.1) * 0.05 * k;
-    l.scale.setScalar(0.15 + 0.85 * Math.min(1, out));
-    // Rotation bornée : le logo reste toujours lisible (jamais vu par la tranche)
-    l.rotation.y = -0.25 + Math.sin(t * 0.6) * 0.22 + x * 0.12;
-    l.rotation.x = Math.sin(t * 0.8) * 0.08 - y * 0.15;
   });
 
   return (
     <group ref={rig}>
       <Laptop />
-      <group ref={logo}>
-        <AeLogo />
-      </group>
     </group>
   );
 }
 
 useGLTF.preload(LAPTOP, false, true);
-useGLTF.preload(AE, false, true);
 
 export default function LaptopStage({ active, accent, accent2, ...input }: StageInput & { active: boolean; accent: string; accent2: string }) {
   return (
