@@ -1487,16 +1487,15 @@ html {
   }
 }
 
+/* Lettres du nom : opacity + transform seulement (animés par le compositeur, sans repeindre) */
 @keyframes char-in {
   from {
     opacity: 0;
     transform: translateY(38%) rotate(5deg);
-    filter: blur(10px);
   }
   to {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 
@@ -1529,6 +1528,26 @@ html {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Carte principale de la page (data-lcp : hero de l'accueil), qui porte le plus grand texte du premier
+   écran (élément LCP). Visible dès le premier affichage, sans attendre de script : elle garde son
+   glissement d'arrivée mais sans fondu, et ses boutons arrivent en cascade d'eux-mêmes (CSS seul).
+   Rien n'est rejoué après une navigation avec transition de page (data-instant). */
+:root[data-js] .card[data-lcp] {
+  opacity: 1;
+  transform: none;
+}
+:root[data-js] .card[data-lcp]:not([data-instant]) {
+  animation: lcp-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+:root[data-js] .card[data-lcp]:not([data-instant]) .stagger > * {
+  animation: fade-up 650ms cubic-bezier(0.16, 1, 0.3, 1) calc(180ms + var(--si, 0) * 55ms) both;
+}
+@keyframes lcp-in {
+  from {
+    transform: translateY(18px) scale(0.985);
   }
 }
 

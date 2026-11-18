@@ -159,9 +159,10 @@ export const themeScript = `(function(){var d=document.documentElement;d.setAttr
  * sans attendre le chargement de React (sur un appareil lent, plusieurs secondes de gagnées).
  * Il ne touche pas aux cartes (React les reprend telles quelles) : il ajoute dans <head> une feuille
  * de style qui les cible par leur position, puis ScrollReveal prend le relais et la retire.
- * Les cartes plus bas restent gérées par ScrollReveal au défilement.
+ * Les cartes plus bas restent gérées par ScrollReveal au défilement. La carte principale (data-lcp)
+ * n'en a pas besoin : elle est visible dès le premier affichage (globals.css).
  */
-export const earlyRevealScript = `(function(){var m=document.getElementById("main");if(!m)return;var h=window.innerHeight,css=[],cards=[];function path(e){var p=[];while(e&&e!==m){var i=1,s=e;while((s=s.previousElementSibling))i++;p.unshift(e.tagName.toLowerCase()+":nth-child("+i+")");e=e.parentElement}return"#main>"+p.join(">")}m.querySelectorAll(".card").forEach(function(c){if(c.getBoundingClientRect().top>=h)return;var s=path(c);cards.push(c);css.push(s+"{animation:early-in 700ms cubic-bezier(.16,1,.3,1) calc(var(--i,0)*70ms) both}"+s+" .stagger>*{animation:fade-up 650ms cubic-bezier(.16,1,.3,1) calc(180ms + var(--si,0)*55ms) both}")});if(!css.length)return;var st=document.createElement("style");st.id="early-reveal";st.textContent=css.join("");document.head.appendChild(st);window.__earlyCards=cards})();`;
+export const earlyRevealScript = `(function(){var m=document.getElementById("main");if(!m)return;var h=window.innerHeight,css=[],cards=[];function path(e){var p=[];while(e&&e!==m){var i=1,s=e;while((s=s.previousElementSibling))i++;p.unshift(e.tagName.toLowerCase()+":nth-child("+i+")");e=e.parentElement}return"#main>"+p.join(">")}m.querySelectorAll(".card:not([data-lcp])").forEach(function(c){if(c.getBoundingClientRect().top>=h)return;var s=path(c);cards.push(c);css.push(s+"{animation:early-in 700ms cubic-bezier(.16,1,.3,1) calc(var(--i,0)*70ms) both}"+s+" .stagger>*{animation:fade-up 650ms cubic-bezier(.16,1,.3,1) calc(180ms + var(--si,0)*55ms) both}")});if(!css.length)return;var st=document.createElement("style");st.id="early-reveal";st.textContent=css.join("");document.head.appendChild(st);window.__earlyCards=cards})();`;
 
 const homeAccent = accentPalette(SPACE_SEEDS.home);
 
