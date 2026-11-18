@@ -849,15 +849,22 @@
       "contact": "Me contacter",
       "whoami": {
         "label": "Choisir le profil affiché",
+        "hint": "deux profils, deux univers",
         "yexo": {
           "title": "Yexo, côté jeu et montage.",
           "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services.",
-          "path": "Voir mes montages"
+          "path": "Voir mes montages",
+          "name": "Yexo",
+          "tag": "Jeu · montage",
+          "go": "Voir le côté jeu"
         },
         "baptiste": {
           "title": "Baptiste, côté infra.",
           "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer.",
-          "path": "Voir mon parcours"
+          "path": "Voir mon parcours",
+          "name": "Baptiste",
+          "tag": "Infra · côté pro",
+          "go": "Voir le côté pro"
         }
       },
       "punch": "Je monte des clips Valorant et je fais tourner des serveurs.",

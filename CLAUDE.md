@@ -68,7 +68,7 @@ All visible text lives in `messages/fr.json` and `messages/en.json` (same keys a
 - `valorant/` — settings menu (tabs/sub-tabs synced with the URL hash, read-only controls), crosshair SVG drawn from the config, summary tiles (sens, eDPI, cm/360, crosshair code)
 - `hosting/` — /lab/site live tiles (response time measured in the browser, uptimes, last deploy from `BUILD_TIME`/`BUILD_COMMIT` set in `next.config.ts`), request path diagram, server specs
 - `now/` — current activity card (schedule or live Discord), Spotify now playing, typical week (timeline + list), Contact banner and statusline segment
-- `gaming/` (RankGrid: current rank huge, peak tile with PeakBuddy, other games), `home/` (Hero shared by both profiles, HeroStage, YexoStats / ProStats, SpaceTiles with optional order, LiveCard, FeaturedEdit, Fastfetch with a `pro` variant, Whoami = links between the two profiles), `career/`, `creator/` (LogoTitle), `tools/` — space-specific pieces
+- `gaming/` (RankGrid: current rank huge, peak tile with PeakBuddy, other games), `home/` (Hero shared by both profiles, HeroStage, YexoStats / ProStats, SpaceTiles with optional order, LiveCard, FeaturedEdit, Fastfetch with a `pro` variant, Whoami = switch between the two profiles: two large options, the other profile drawn in its own universe colors via `data-accent` (`pro` on `/`, `home` on `/baptiste`) with a call to action, a one-time shine and an arrow nudge after the hero intro, CSS only), `career/`, `creator/` (LogoTitle), `tools/` — space-specific pieces
 
 ### Tracker data flow
 

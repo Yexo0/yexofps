@@ -1361,6 +1361,91 @@ html {
     background: linear-gradient(270deg, var(--accent-2), transparent);
   }
 
+  /* Sélecteur de profil (Whoami) : deux grandes options. Chacune porte les couleurs de son univers
+     (data-accent) : l'autre profil se détache, avec un reflet qui le traverse une fois après l'intro
+     du hero et une flèche qui fait signe. Transform / opacity seulement. */
+  .whoami-option {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    min-height: 58px;
+    padding: 9px 12px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition:
+      box-shadow 300ms ease,
+      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .whoami-option::before {
+    content: "";
+    position: absolute;
+    inset: 0 -30%;
+    z-index: -1;
+    background: var(--accent-soft);
+    transform: translateX(-102%) skewX(-24deg);
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .whoami-option:active {
+    transform: scale(0.98);
+  }
+  /* Icône à partir de 640 px : sur téléphone, toute la largeur va au nom et à l'appel */
+  .whoami-icon {
+    display: none;
+    flex-shrink: 0;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    background: var(--accent-tint);
+    color: var(--accent);
+  }
+  @media (min-width: 640px) {
+    .whoami-option {
+      padding-left: 9px;
+    }
+    .whoami-icon {
+      display: grid;
+    }
+  }
+  .whoami-current {
+    background: color-mix(in oklab, var(--accent) 10%, var(--surface-2));
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 55%, transparent);
+  }
+  .whoami-other {
+    box-shadow:
+      inset 0 0 0 1px var(--glow-ring),
+      0 10px 28px -16px var(--glow-strong);
+  }
+  .whoami-arrow {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (hover: hover) {
+    .whoami-other:hover {
+      box-shadow:
+        inset 0 0 0 1px var(--accent),
+        0 14px 32px -14px var(--glow-strong);
+    }
+    .whoami-option:hover::before {
+      transform: translateX(0) skewX(-24deg);
+    }
+    .whoami-other:hover .whoami-arrow {
+      transform: translateX(4px);
+    }
+  }
+  /* Appel discret, une seule fois, une fois le nom et la bande arrivés */
+  [data-js] .whoami-other::before {
+    animation: whoami-shine 1100ms cubic-bezier(0.45, 0, 0.2, 1) 1900ms both;
+  }
+  [data-js] .whoami-other .whoami-arrow {
+    animation: nudge 900ms cubic-bezier(0.16, 1, 0.3, 1) 2300ms 2;
+  }
+
   .key-stats {
     gap: 18px 0;
     padding-top: 18px;
@@ -1494,6 +1579,22 @@ html {
     .space-tile:hover .space-tile-arrow {
       transform: translate(3px, -3px);
     }
+  }
+}
+
+/* Reflet qui traverse l'option de l'autre profil (Whoami), puis s'efface */
+@keyframes whoami-shine {
+  0% {
+    transform: translateX(-102%) skewX(-24deg);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(102%) skewX(-24deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(102%) skewX(-24deg);
+    opacity: 0;
   }
 }
 
