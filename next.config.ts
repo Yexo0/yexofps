@@ -45,14 +45,18 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.discordapp.com", pathname: "/avatar-decoration-presets/**" },
     ],
   },
-  // Fichiers de public/ : mis en cache 7 jours par le navigateur (Next met max-age=0 par défaut).
-  // Pour remplacer la vidéo à la une, changer son nom de fichier (sinon l'ancienne reste en cache).
+  // Fichiers de public/ (Next met max-age=0 par défaut) :
+  // - vidéos et modèles 3D : versionnés par leur nom, mis en cache un an sans revalidation (immutable).
+  //   Pour en remplacer un, TOUJOURS changer son nom de fichier (featured-edit-v3.mp4…), sinon les
+  //   visiteurs gardent l'ancien ;
+  // - images et textures : 7 jours.
   async headers() {
+    const year = "public, max-age=31536000, immutable";
     const week = "public, max-age=604800, stale-while-revalidate=86400";
-    return ["/videos/:path*", "/images/:path*", "/textures/:path*"].map((source) => ({
-      source,
-      headers: [{ key: "Cache-Control", value: week }],
-    }));
+    return [
+      ...["/videos/:path*", "/models/:path*"].map((source) => ({ source, headers: [{ key: "Cache-Control", value: year }] })),
+      ...["/images/:path*", "/textures/:path*"].map((source) => ({ source, headers: [{ key: "Cache-Control", value: week }] })),
+    ];
   },
   async redirects() {
     return LEGACY.flatMap(([from, to]) => [

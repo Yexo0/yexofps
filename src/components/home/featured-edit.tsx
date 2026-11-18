@@ -244,7 +244,8 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
           src={FEATURED_EDIT.poster}
           alt=""
           fill
-          sizes={landscape ? "(min-width: 1024px) 60vw, 100vw" : "340px"}
+          // Largeur réelle du lecteur (rail, marges et colonnes déduits)
+          sizes={landscape ? "(min-width: 1024px) 59vw, (min-width: 640px) 88vw, 82vw" : "340px"}
           className="pointer-events-none object-cover"
         />
       )}

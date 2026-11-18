@@ -64,8 +64,8 @@ export const TIKTOK_VIDEOS = {
  * Montage mis en avant sur l'accueil (lecteur maison avec réglage du son).
  * - `video` : fichier hébergé sur le site, dans public/ (ex : "/videos/featured-edit-v2.mp4"). Lu sans
  *   passer par TikTok ; s'il est absent ou illisible, repli sur le lecteur TikTok (chargé au clic).
- *   Fichiers de public/videos/ mis en cache (next.config.ts) : pour remplacer la vidéo, changer
- *   son nom (v3…). Encodage actuel : 720p60 H.264 CRF 32, AAC 128 kb/s, +faststart (≈ 9 Mo).
+ *   Fichiers de public/videos/ mis en cache un an, immutable (next.config.ts) : pour remplacer la
+ *   vidéo ou l'affiche, changer son nom (v3…). Encodage actuel : 720p60 H.264 CRF 32, AAC 128 kb/s, +faststart (≈ 9 Mo).
  * - `poster` : image affichée avant lecture, servie à la taille de l'écran par next/image
  *   (optionnelle : sans elle, la première image de la vidéo).
  * - `aspect` : format de la vidéo ; "landscape" (16:9) agrandit la carte sur l'accueil, "portrait"

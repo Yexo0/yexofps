@@ -51,7 +51,7 @@ Image d'aperçu facultative (puis `poster: "/videos/featured-edit.jpg"` dans `FE
 ffmpeg -ss 0.5 -i featured-edit-v3.mp4 -frames:v 1 -q:v 3 featured-edit-v3.jpg
 ```
 
-Le navigateur garde la vidéo en cache : pour la remplacer, change toujours son nom de fichier (v3, v4…) et `video` dans `FEATURED_EDIT`.
+Les fichiers de `public/videos/` et `public/models/` sont mis en cache un an (`immutable`, voir `next.config.ts`) : pour remplacer une vidéo, une affiche ou un modèle 3D, change toujours son nom de fichier (v3, v4…) et son chemin dans la config.
 
 ## Vérifications avant de déployer
 

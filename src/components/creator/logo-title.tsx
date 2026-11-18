@@ -16,7 +16,7 @@ export function LogoTitle({ image, alt, className }: { image: string; alt: strin
 
   return (
     <div ref={ref} className={cn("logo-title relative overflow-hidden rounded-[6px]", className)}>
-      <Image src={image} alt={alt} fill sizes="(min-width: 640px) 260px, 100vw" className="object-cover opacity-40" />
+      <Image src={image} alt={alt} fill sizes="(min-width: 640px) 240px, 82vw" className="object-cover opacity-40" />
       <span aria-hidden="true" className="logo-title-veil absolute inset-0" />
       <div aria-hidden="true" className="absolute inset-0">
         {ready && (

@@ -8,7 +8,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { SPACES, type SpaceId } from "@/config/spaces";
 
-/** Visuel de fond des tuiles qui en ont un (les autres gardent leur grande icône) */
+/** Visuel de fond des tuiles qui en ont un (les autres gardent leur grande icône).
+ *  `sizes` des images : largeur réelle des tuiles (mesurée de 360 à 1920 px), marges et rail déduits. */
 const IMAGES: Partial<Record<(typeof SPACES)[number]["id"], string>> = {
   gaming: "/videos/featured-edit.jpg",
   creator: "/images/creator/editing-setup.webp",
@@ -41,7 +42,7 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
                 aria-label={`${n}. ${t(`${space.id}.title`)} : ${t(`${space.id}.desc`)}`}
               >
                 {image && (
-                  <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="space-tile-image" />
+                  <Image src={image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw" className="space-tile-image" />
                 )}
                 <span aria-hidden="true" className="space-tile-sweep" />
                 <Icon aria-hidden="true" className="space-tile-icon" strokeWidth={1.2} />
