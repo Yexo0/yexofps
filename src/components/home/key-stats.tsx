@@ -30,18 +30,23 @@ function RankIcon({ src }: { src: string }) {
   return <Image src={src} alt="" width={40} height={40} className="h-9 w-9 object-contain" />;
 }
 
+/**
+ * Liste de définitions valide (axe : definition-list, dlitem) : un seul div par paire directement
+ * sous le <dl>, qui ne contient que <dt> puis <dd>. Le chiffre (dd) s'affiche au-dessus du libellé
+ * (flex-col-reverse) ; l'icône, décorative, vit dans le <dt> mais est placée à gauche (globals.css).
+ */
 function KeyStatsList({ items, label, className }: { items: Stat[]; label: string; className?: string }) {
   return (
     <dl aria-label={label} className={cn("key-stats grid grid-cols-2 lg:grid-cols-4", className)}>
       {items.map((s, i) => (
-        <div key={s.id} className="key-stat flex items-center gap-3.5" style={{ "--si": i } as CSSProperties}>
-          <span aria-hidden="true" className="shrink-0">
-            {s.visual}
-          </span>
-          <div className="flex min-w-0 flex-col-reverse">
-            <dt className="truncate text-[12px] text-muted">{s.label}</dt>
-            <dd className="display truncate text-[30px] text-fg sm:text-[38px]">{s.value}</dd>
-          </div>
+        <div key={s.id} className="key-stat flex min-w-0 flex-col-reverse" style={{ "--si": i } as CSSProperties}>
+          <dt className="truncate text-[12px] text-muted">
+            <span aria-hidden="true" className="key-stat-icon">
+              {s.visual}
+            </span>
+            {s.label}
+          </dt>
+          <dd className="display truncate text-[30px] text-fg sm:text-[38px]">{s.value}</dd>
         </div>
       ))}
     </dl>

@@ -62,9 +62,12 @@ export const TIKTOK_VIDEOS = {
 
 /**
  * Montage mis en avant sur l'accueil (lecteur maison avec réglage du son).
- * - `video` : fichier hébergé sur le site, dans public/ (ex : "/videos/featured-edit.mp4"). Lu sans
+ * - `video` : fichier hébergé sur le site, dans public/ (ex : "/videos/featured-edit-v2.mp4"). Lu sans
  *   passer par TikTok ; s'il est absent ou illisible, repli sur le lecteur TikTok (chargé au clic).
- * - `poster` : image affichée avant lecture (optionnelle : sans elle, la première image de la vidéo).
+ *   Fichiers de public/videos/ mis en cache un an, immutable (next.config.ts) : pour remplacer la
+ *   vidéo ou l'affiche, changer son nom (v3…). Encodage actuel : 720p60 H.264 CRF 32, AAC 128 kb/s, +faststart (≈ 9 Mo).
+ * - `poster` : image affichée avant lecture, servie à la taille de l'écran par next/image
+ *   (optionnelle : sans elle, la première image de la vidéo).
  * - `aspect` : format de la vidéo ; "landscape" (16:9) agrandit la carte sur l'accueil, "portrait"
  *   (9:16, format TikTok) garde la colonne étroite.
  * - `url` / `tiktokId` : le même montage sur TikTok (lien "Voir sur TikTok" et repli).
@@ -79,7 +82,7 @@ export const FEATURED_EDIT: {
   tiktokId: "7625315787451976982",
   url: "https://www.tiktok.com/@yexofps/video/7625315787451976982",
   poster: "/videos/featured-edit.jpg",
-  video: "/videos/featured-edit.mp4",
+  video: "/videos/featured-edit-v2.mp4",
   aspect: "landscape",
 };
 

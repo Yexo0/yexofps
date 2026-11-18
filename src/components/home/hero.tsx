@@ -32,6 +32,8 @@ export function Hero({ profile, name, punch, scene, callouts, actions, stats, na
   return (
     <section
       aria-labelledby="hero-title"
+      // data-lcp : visible dès le premier affichage (sans fondu ni script), voir globals.css
+      data-lcp=""
       className="card hero-card md:col-span-6 lg:col-span-12"
       style={{ "--i": 0, viewTransitionName: "lead-card" } as CSSProperties}
     >

@@ -1,4 +1,4 @@
-// src/components/ui/split-text.tsx — Texte qui arrive lettre par lettre (montée + sortie du flou).
+// src/components/ui/split-text.tsx — Texte qui arrive lettre par lettre (montée + fondu, en CSS pur).
 // Lecteurs d'écran : le texte entier est lu une fois (copie masquée), les lettres sont ignorées.
 // `reveal="load"` : au chargement ; `reveal="card"` : quand la carte parente apparaît (ScrollReveal).
 import type { CSSProperties } from "react";
