@@ -849,15 +849,22 @@
       "contact": "Contact me",
       "whoami": {
         "label": "Choose which profile to show",
+        "hint": "two profiles, two worlds",
         "yexo": {
           "title": "Yexo, the gaming and editing side.",
           "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services.",
-          "path": "See my edits"
+          "path": "See my edits",
+          "name": "Yexo",
+          "tag": "Gaming · editing",
+          "go": "See the gaming side"
         },
         "baptiste": {
           "title": "Baptiste, the infrastructure side.",
           "text": "Work-study IT infrastructure administrator in an IT department, bachelor's student at EPSI Grenoble. Between two tickets, I break my homelab to learn how to fix it.",
-          "path": "See my career"
+          "path": "See my career",
+          "name": "Baptiste",
+          "tag": "Infra · pro side",
+          "go": "See the pro side"
         }
       },
       "punch": "I edit Valorant clips and keep servers running.",
@@ -1242,6 +1249,16 @@
   "contact": {
     "title": "Contact",
     "meta": "{count} channels",
+    "statusMeta": "live status",
+    "channels": {
+      "title": "Reach me",
+      "join": "Join",
+      "linkLabel": "the Discord link"
+    },
+    "links": {
+      "title": "Socials",
+      "meta": "{count} links"
+    },
     "intro": "Every way to reach me, in one place. For a Y-Services order, a Discord ticket is still the fastest.",
     "keys": {
       "proEmail": "email.work",
@@ -1473,6 +1490,11 @@
       "cover": "{album} cover",
       "progress": "Track progress",
       "open": "Listen to {song} on Spotify"
+    },
+    "today": {
+      "title": "Today",
+      "week": "See my week",
+      "nextOpen": "Available to reply from {time} · {activity}"
     }
   },
   "hosting": {

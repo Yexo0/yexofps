@@ -33,7 +33,7 @@ export function RankGrid({ className }: { className?: string }) {
         <p className="label">{tHero("current")}</p>
         <div className="flex items-center gap-4">
           <Image
-            src="/images/ranks/valorant-immortal.png"
+            src="/images/ranks/valorant-immortal-3.webp"
             alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
             width={140}
             height={140}
@@ -46,7 +46,9 @@ export function RankGrid({ className }: { className?: string }) {
       {/* Peak : Radiant, avec le buddy suspendu qui réagit à la souris */}
       <div data-buddy-zone className="tile relative flex min-h-[220px] flex-col justify-between overflow-hidden px-5 py-5 lg:col-span-4">
         <GameStripe color={featured.color} />
-        <PeakBuddy className="pointer-events-none absolute -top-2 right-2 h-[210px] w-[130px]" />
+        {/* Canvas assez large pour le balancement maximal (inclinaison bornée dans BuddyStage) ;
+            un peu plus petit sur téléphone pour ne pas passer sur le titre */}
+        <PeakBuddy className="pointer-events-none absolute -top-2 right-0 h-[170px] w-[160px] sm:h-[210px] sm:w-[200px]" />
         <div className="relative flex items-center gap-3">
           <Image
             src={featured.image}

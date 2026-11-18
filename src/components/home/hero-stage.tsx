@@ -1,5 +1,5 @@
 // src/components/home/hero-stage.tsx — Emplacement de la scène 3D des heros d'accueil :
-// "vandal" (Yexo, univers Valorant) ou "laptop" (Baptiste, PC + logo After Effects).
+// "vandal" (Yexo, univers Valorant) ou "laptop" (Baptiste, PC portable).
 // Charge three.js après le premier affichage (import dynamique, client seulement), suit la souris
 // et le défilement, et ne fait tourner le rendu que lorsque le hero est à l'écran et l'onglet visible.
 // Sans WebGL : le hero reste complet (bande colorée et repères), simplement sans la 3D.

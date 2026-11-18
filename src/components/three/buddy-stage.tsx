@@ -1,5 +1,6 @@
 // src/components/three/buddy-stage.tsx — Gun buddy Radiant en 3D, accroché par le haut, qui se
 // balance comme un pendule : la souris qui passe lui donne de l'élan, il ralentit puis se repose.
+// Face avant (emblème doré) vers la caméra ; inclinaison bornée pour rester dans son cadre.
 // Petit canvas, rendu seulement quand il est à l'écran (voir PeakBuddy).
 "use client";
 
@@ -9,6 +10,13 @@ import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Vector3, type Group } from "three";
 
 const MODEL = "/models/buddy.glb";
+/** Le modèle regarde vers -Z : demi-tour pour montrer l'emblème Radiant (et pas le dos noir) */
+const FRONT = Math.PI;
+/**
+ * Inclinaison affichée maximale (≈ 24°) : même lancé fort, le buddy reste dans son canvas.
+ * L'angle du pendule est compressé en douceur (tanh) : les petits balancements sont inchangés.
+ */
+const MAX_TILT = 0.42;
 
 export interface BuddyInput {
   /** Élan à ajouter (vitesse horizontale de la souris), remis à zéro à chaque image */
@@ -20,7 +28,7 @@ function Buddy({ impulseRef, reduced }: BuddyInput) {
   const { scene } = useGLTF(MODEL, false, true);
   const pivot = useRef<Group>(null);
   const model = useRef<Group>(null);
-  const swing = useRef({ angle: reduced ? 0 : 0.5, speed: 0 });
+  const swing = useRef({ angle: reduced ? 0 : 0.35, speed: 0 });
 
   // Pivot en haut du buddy (l'anneau d'accroche), centré horizontalement, hauteur ramenée à 2 unités
   useLayoutEffect(() => {
@@ -43,13 +51,14 @@ function Buddy({ impulseRef, reduced }: BuddyInput) {
     const sw = swing.current;
     if (!reduced) {
       // Pendule amorti : rappel vers la verticale, frottement, élan de la souris
-      sw.speed += (-14 * Math.sin(sw.angle) - 1.6 * sw.speed) * step + (impulseRef.current ?? 0) * 0.012;
+      sw.speed += (-14 * Math.sin(sw.angle) - 1.6 * sw.speed) * step + (impulseRef.current ?? 0) * 0.006;
       sw.angle = Math.max(-1.1, Math.min(1.1, sw.angle + sw.speed * step));
       if (impulseRef.current) impulseRef.current = 0;
     }
-    p.rotation.z = sw.angle;
-    // Rotation lente sur lui-même, comme suspendu à une chaînette
-    p.rotation.y = reduced ? 0.3 : Math.sin(state.clock.elapsedTime * 0.7) * 0.6 + sw.angle * 0.8;
+    const tilt = MAX_TILT * Math.tanh(sw.angle / MAX_TILT);
+    p.rotation.z = tilt;
+    // Rotation lente sur lui-même, comme suspendu à une chaînette, sans jamais montrer le dos
+    p.rotation.y = FRONT + (reduced ? -0.3 : Math.sin(state.clock.elapsedTime * 0.7) * 0.45 + tilt * 0.8);
   });
 
   return (

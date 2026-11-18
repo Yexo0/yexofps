@@ -1,49 +1,36 @@
 // src/components/gaming/peak-buddy.tsx — Emplacement du gun buddy Radiant (tuile du peak).
-// three.js chargé après l'affichage, rendu actif seulement à l'écran ; la souris qui passe au-dessus
-// de la tuile lance le balancement. Sans WebGL ou en mouvement réduit : buddy immobile ou rien.
+// Même cycle de vie que les autres scènes 3D (useStage) : three.js chargé à l'approche, après le
+// chargement de la page ; rendu actif seulement à l'écran ; buddy immobile en mouvement réduit,
+// sans GPU ou si la cadence s'effondre ; rien sans WebGL. La souris qui passe au-dessus de la tuile
+// lance le balancement.
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useEffect, useRef } from "react";
+import { useStage } from "@/components/three/use-stage";
 
 const BuddyStage = dynamic(() => import("@/components/three/buddy-stage"), { ssr: false });
 
 export function PeakBuddy({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const impulse = useRef(0);
-  const reduced = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  const [active, setActive] = useState(false);
+  const { ready, active } = useStage(ref);
 
+  // Élan : vitesse horizontale de la souris au-dessus de la tuile parente
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    let inView = false;
-    const update = () => setActive(inView && !document.hidden);
-    const io = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      if (inView) setMounted(true);
-      update();
-    });
-    io.observe(el);
-    document.addEventListener("visibilitychange", update);
-    // Élan : vitesse horizontale de la souris au-dessus de la tuile parente
+    if (!el || !ready || ready.reduced) return;
     const zone = el.closest<HTMLElement>("[data-buddy-zone]") ?? el;
     const onMove = (e: PointerEvent) => {
       impulse.current += e.movementX;
     };
     zone.addEventListener("pointermove", onMove, { passive: true });
-    return () => {
-      io.disconnect();
-      document.removeEventListener("visibilitychange", update);
-      zone.removeEventListener("pointermove", onMove);
-    };
-  }, []);
+    return () => zone.removeEventListener("pointermove", onMove);
+  }, [ready]);
 
   return (
     <div ref={ref} aria-hidden="true" className={className}>
-      {mounted && <BuddyStage active={active && !reduced} impulseRef={impulse} reduced={reduced} />}
+      {ready && <BuddyStage active={active} impulseRef={impulse} reduced={ready.reduced} />}
     </div>
   );
 }
