@@ -2,15 +2,20 @@
 // Arrivée en "inspection" (rotation qui se pose), flottement lent, inclinaison vers la souris,
 // rotation pilotée par le défilement. Lumières : environnement procédural (aucun fichier HDR,
 // aucune requête réseau) teinté aux couleurs de l'espace.
-// Chargé uniquement côté client (voir HeroVandal) ; rendu en continu seulement quand il est visible.
+// Chargé uniquement côté client, après le chargement de la page (voir HeroStage / useStage) ; rendu en
+// continu seulement quand il est visible. Téléphone : modèle allégé (texture 1024 au lieu de 2048)
+// et densité de pixels limitée à 1,5.
 "use client";
 
 import { Suspense, useLayoutEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Mesh, MeshStandardMaterial, type Group } from "three";
+import { isPhone } from "@/lib/defer";
 
-const MODEL = "/models/vandal.glb";
+// Module chargé côté client seulement (next/dynamic, ssr: false) : window est disponible
+const PHONE = typeof window !== "undefined" && isPhone();
+const MODEL = PHONE ? "/models/vandal-lite.glb" : "/models/vandal.glb";
 
 export interface StageInput {
   /** Pointeur normalisé (-1 à 1) */
@@ -76,7 +81,7 @@ useGLTF.preload(MODEL, false, true);
 export default function VandalStage({ active, accent, accent2, ...input }: StageInput & { active: boolean; accent: string; accent2: string }) {
   return (
     <Canvas
-      dpr={[1, 1.6]}
+      dpr={[1, PHONE ? 1.5 : 1.6]}
       frameloop={active ? "always" : "demand"}
       camera={{ position: [0, 0, 3.4], fov: 30 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}

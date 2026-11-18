@@ -16,7 +16,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "@/i18n/navigation";
 import { SPACES, spaceFromPath } from "@/config/spaces";
-import { afterLoadIdle, isPhone, isSoftwareRenderer } from "@/lib/defer";
+import { afterLoadIdle, cadenceWatch, isPhone, isSoftwareRenderer } from "@/lib/defer";
 
 /* ─── Fumée (WebGL 1, un seul triangle plein écran) ─── */
 
@@ -129,14 +129,15 @@ function startSmoke(canvas: HTMLCanvasElement): (() => void) | undefined {
   const nav = navigator as Navigator & { deviceMemory?: number };
   // Image fixe d'office : machine modeste, ou WebGL sans GPU (chaque image bloquerait la page)
   const modest = (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2 || isSoftwareRenderer(gl);
-  /** Cadence effondrée constatée en cours de route (voir watchdog) */
+  /** Cadence effondrée constatée en cours de route (voir watch) */
   let slow = false;
   const read = makeColorReader();
   const root = document.documentElement;
 
   let bg: RGBA = [0, 0, 0, 1], c1: RGBA = [0, 0, 0, 0], c2: RGBA = [0, 0, 0, 0];
-  // Couleurs relues pendant la transition d'espace / de thème (propriétés CSS animées), puis figées
-  let colorsUntil = performance.now() + 1200;
+  // Couleurs relues pendant la transition d'espace / de thème (propriétés CSS animées), puis figées.
+  // Au démarrage, seulement si une transition est en cours (sinon une image fixe de trop à dessiner)
+  let colorsUntil = root.getAnimations?.().length ? performance.now() + 1200 : 0;
   const readColors = () => {
     const cs = getComputedStyle(root);
     bg = read(cs.getPropertyValue("--bg"));
@@ -176,27 +177,8 @@ function startSmoke(canvas: HTMLCanvasElement): (() => void) | undefined {
     if (!("ready" in canvas.dataset)) canvas.dataset.ready = "";
   };
 
-  // Garde-fou : cadence mesurée par fenêtres de 2 s ; deux fenêtres lentes d'affilée → image fixe
-  let windowStart = 0, windowFrames = 0, slowWindows = 0, prevFrame = 0;
-  const watchdog = (now: number) => {
-    // Longue interruption (fenêtre masquée, onglet en arrière-plan) : une pause, pas une lenteur
-    if (!windowStart || now - prevFrame > 1000) {
-      windowStart = now;
-      windowFrames = 0;
-    } else {
-      windowFrames++;
-    }
-    prevFrame = now;
-    if (now - windowStart < 2000) return;
-    const fps = (windowFrames * 1000) / (now - windowStart);
-    slowWindows = fps < profile.minFps ? slowWindows + 1 : 0;
-    windowStart = now;
-    windowFrames = 0;
-    if (slowWindows >= 2) {
-      slow = true;
-      stillAt = now;
-    }
-  };
+  // Garde-fou : cadence trop basse sur la durée (appareil trop lent) → image fixe
+  const watch = cadenceWatch(profile.minFps);
 
   const still = () => reduced.matches || modest || slow;
   const loop = (now: number) => {
@@ -204,8 +186,11 @@ function startSmoke(canvas: HTMLCanvasElement): (() => void) | undefined {
     if (now - last < profile.interval) return;
     last = now;
     draw(now);
-    watchdog(now);
-    if (slow) cancelAnimationFrame(frame);
+    if (watch.tick(now)) {
+      slow = true;
+      stillAt = now;
+      cancelAnimationFrame(frame);
+    }
   };
   /** Image fixe : redessinée à la prochaine image, puis une fois la transition de couleur finie */
   const paintStill = () => {
@@ -223,7 +208,7 @@ function startSmoke(canvas: HTMLCanvasElement): (() => void) | undefined {
     cancelAnimationFrame(frame);
     window.clearTimeout(timer);
     if (still()) return paintStill();
-    windowStart = 0;
+    watch.reset();
     if (!document.hidden) frame = requestAnimationFrame(loop);
   };
   play();

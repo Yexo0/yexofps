@@ -41,3 +41,33 @@ export function isSoftwareRenderer(gl: WebGLRenderingContext | WebGL2RenderingCo
 export function isPhone(): boolean {
   return window.matchMedia("(pointer: coarse) and (max-width: 767px)").matches;
 }
+
+/**
+ * Garde-fou de cadence, appelé à chaque image dessinée : mesure la cadence par fenêtres de 2 s et
+ * répond vrai quand deux fenêtres d'affilée passent sous `minFps` (l'effet doit alors se figer).
+ * Une interruption de plus de 5 s (onglet en arrière-plan, page gelée) remet la mesure à zéro :
+ * c'est une pause, pas une lenteur ; une image de 1 ou 2 s, elle, compte comme de la lenteur.
+ */
+export function cadenceWatch(minFps: number) {
+  let start = 0, frames = 0, slowWindows = 0, prev = 0;
+  return {
+    reset() {
+      start = 0;
+    },
+    tick(now: number): boolean {
+      if (!start || now - prev > 5000) {
+        start = now;
+        frames = 0;
+      } else {
+        frames++;
+      }
+      prev = now;
+      if (now - start < 2000) return false;
+      const fps = (frames * 1000) / (now - start);
+      slowWindows = fps < minFps ? slowWindows + 1 : 0;
+      start = now;
+      frames = 0;
+      return slowWindows >= 2;
+    },
+  };
+}
