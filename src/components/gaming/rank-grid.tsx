@@ -33,7 +33,7 @@ export function RankGrid({ className }: { className?: string }) {
         <p className="label">{tHero("current")}</p>
         <div className="flex items-center gap-4">
           <Image
-            src="/images/ranks/valorant-immortal.png"
+            src="/images/ranks/valorant-immortal-3.webp"
             alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
             width={140}
             height={140}

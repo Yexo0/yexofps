@@ -58,7 +58,7 @@ export function YexoStats({ className }: { className?: string }) {
   const t = useTranslations("home.stats");
   const lab = labStats();
   const items: Stat[] = [
-    { id: "current", visual: <RankIcon src="/images/ranks/valorant-immortal.png" />, value: t("currentValue"), label: t("current") },
+    { id: "current", visual: <RankIcon src="/images/ranks/valorant-immortal-3.webp" />, value: t("currentValue"), label: t("current") },
     {
       id: "peak",
       visual: <RankIcon src={VALORANT_PEAK.image} />,

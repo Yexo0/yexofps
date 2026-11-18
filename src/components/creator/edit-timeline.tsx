@@ -20,7 +20,7 @@ const MILESTONES: { year: number | null; from: number; id: ClipId; icon?: Lucide
   { year: 2022, from: 2022, id: "tiktok", icon: Video },
   { year: 2023, from: 2023, id: "immortal", image: "/images/ranks/valorant-immortal.png" },
   { year: 2024, from: 2024, id: "radiant", image: "/images/ranks/valorant-radiant.png" },
-  { year: null, from: 2024.6, id: "immortal3", image: "/images/ranks/valorant-immortal.png" },
+  { year: null, from: 2024.6, id: "immortal3", image: "/images/ranks/valorant-immortal-3.webp" },
   { year: 2025, from: 2025, id: "services", icon: Store },
 ];
 
