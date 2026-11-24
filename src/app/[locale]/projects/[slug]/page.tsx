@@ -1,27 +1,27 @@
-// src/app/[locale]/projects/[slug]/page.tsx — One project: name, one line, facts (year, status, type,
-// tools, links), the plate (morphs from the grid), what it does, key points, captures, then the next
-// project. Some projects carry their real tool: the sensitivity converter runs here, the IT guides
-// download here.
+// src/app/[locale]/projects/[slug]/page.tsx — Page d'un projet, en bento : nom, une phrase et fiche
+// (année, statut, outils, liens) à côté de la vignette (qui arrive de la grille), puis le résumé et les
+// points clés, les captures, et le projet suivant. Certains projets portent leur vrai outil : le
+// convertisseur de sensibilité tourne ici, les tutos PDF se téléchargent ici.
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft, ArrowUpRight, Download, FileText } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Download, FileText, Images, ListChecks, SlidersHorizontal } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { PROJECTS, nextProject, projectBySlug, type Project } from "@/config/projects";
 import { DOCS } from "@/config/career";
 import { GAMES, GAME_KEYS } from "@/lib/converter-math";
 import { pageMetadata } from "@/lib/metadata";
-import { Words } from "@/components/ui/words";
-import { Reveal, Section } from "@/components/ui/section";
+import { Card } from "@/components/ui/card";
 import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { GitHubIcon } from "@/components/icons/brands";
 import { ProjectCover } from "@/components/projects/project-cover";
 import { ProjectStatus } from "@/components/projects/project-card";
 import { LoopVideo } from "@/components/projects/loop-video";
-import { Converter } from "@/components/projects/converter";
+import { Converter } from "@/components/tools/converter";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -34,12 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projectBySlug(slug);
   if (!project) return {};
   const t = await getTranslations({ locale, namespace: "projects.items" });
-  return pageMetadata({
-    locale,
-    path: `/projects/${slug}`,
-    title: t(`${project.id}.name`),
-    description: t(`${project.id}.tagline`),
-  });
+  return pageMetadata({ locale, path: `/projects/${slug}`, title: t(`${project.id}.name`), description: t(`${project.id}.tagline`) });
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -53,53 +48,87 @@ export default async function ProjectPage({ params }: Props) {
 function ProjectView({ project }: { project: Project }) {
   const t = useTranslations("projects");
   const tItem = useTranslations(`projects.items.${project.id}`);
+  const tNav = useTranslations("nav.spaces");
   const n = String(PROJECTS.indexOf(project) + 1).padStart(2, "0");
   const highlights = tItem.raw("highlights") as string[];
+  const related = project.related;
 
   return (
-    <div className="page">
-      <header className="page-head">
-        <Link href="/projects" className="group label inline-flex items-center gap-3 hover:text-fg">
-          <ArrowLeft size={14} aria-hidden="true" className="transition-transform duration-500 [transition-timing-function:var(--ease-out)] group-hover:-translate-x-1" />
-          <span className="link-line">{t("back")}</span>
+    <div className="bento">
+      <Card
+        id="project"
+        title={tItem("name")}
+        subtitle={`~/projects/${project.slug}`}
+        meta={n}
+        headingLevel={1}
+        index={0}
+        className="md:col-span-6 lg:col-span-5"
+        bodyClassName="gap-6"
+      >
+        <Link href="/projects" className="group -mt-2 inline-flex items-center gap-2 self-start text-[13px] font-semibold text-accent">
+          <ArrowLeft size={14} aria-hidden="true" className="transition-transform duration-300 group-hover:-translate-x-0.5" />
+          {t("back")}
         </Link>
-        <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="min-w-0 lg:col-span-8">
-            <p className="label">
-              <span className="text-accent">{n}</span> / {tItem("kind")}
-            </p>
-            <h1 className="display t-h1 mt-5 text-fg">
-              <Words text={tItem("name")} mode="load" />
-            </h1>
-            <p className="lead stagger mt-7 max-w-[40ch]">
-              <span>{tItem("tagline")}</span>
-            </p>
+        <p className="text-[22px] font-bold leading-tight tracking-tight text-fg sm:text-[24px]">{tItem("tagline")}</p>
+        <dl className="stagger grid grid-cols-2 gap-2">
+          <div className="tile px-4 py-3">
+            <dt className="label">{t("labels.year")}</dt>
+            <dd className="mt-1.5 text-[15px] font-semibold text-fg">{project.year}</dd>
           </div>
-          <Facts project={project} />
-        </div>
-      </header>
+          <div className="tile px-4 py-3">
+            <dt className="label">{t("labels.status")}</dt>
+            <dd className="mt-1.5">
+              <ProjectStatus status={project.status} />
+            </dd>
+          </div>
+          <div className="tile col-span-2 px-4 py-3">
+            <dt className="label">{tItem("kind")}</dt>
+            {project.stack.length > 0 && (
+              <dd className="mt-2 flex flex-wrap gap-1.5">
+                {project.stack.map((s) => (
+                  <span key={s} className="tag">
+                    {s}
+                  </span>
+                ))}
+              </dd>
+            )}
+          </div>
+        </dl>
+        {(project.repo || related) && (
+          <div className="mt-auto flex flex-wrap gap-2.5">
+            {related && (
+              <ButtonLink href={`${related}${project.relatedHash ?? ""}`} variant="primary">
+                {t("labels.related", { space: related === "/lab/site" ? t("labels.site") : tNav(related === "/lab" ? "lab" : "career") })}
+                <ArrowRight size={15} aria-hidden="true" />
+              </ButtonLink>
+            )}
+            {project.repo && (
+              <ExternalButton href={project.repo} variant={related ? "tonal" : "primary"} showIcon>
+                <GitHubIcon size={15} />
+                {t("labels.source")}
+              </ExternalButton>
+            )}
+          </div>
+        )}
+      </Card>
 
-      <div data-reveal="" className="-mt-[calc(var(--section-gap)/2)]">
-        <ProjectCover project={project} priority sizes="(min-width: 1520px) 1408px, 100vw" className="!aspect-[16/9]" />
-      </div>
+      <section aria-label={tItem("name")} data-lcp="" className="card md:col-span-6 lg:col-span-7" style={{ padding: 10 }}>
+        <ProjectCover project={project} priority sizes="(min-width: 1024px) 56vw, 92vw" className="h-full !aspect-auto min-h-[280px]" />
+      </section>
 
-      <Section id="about" index="01" title={t("about")}>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-6">
-            <p className="text-[19px] leading-relaxed text-fg sm:text-[21px]">{tItem("summary")}</p>
-          </Reveal>
-          <Reveal i={1} className="lg:col-span-5 lg:col-start-8">
-            <ol className="stagger flex flex-col">
-              {highlights.map((h, i) => (
-                <li key={h} className="flex gap-5 border-t border-line py-4">
-                  <span className="font-mono text-[11px] text-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-[15px] leading-relaxed text-muted">{h}</span>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+      <Card id="about" icon={ListChecks} title={t("about")} subtitle="cat README.md" index={2} className="md:col-span-6 lg:col-span-12" bodyClassName="gap-6">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <p className="text-[16px] leading-relaxed text-fg lg:col-span-6">{tItem("summary")}</p>
+          <ol className="stagger flex flex-col gap-2 lg:col-span-6">
+            {highlights.map((h, i) => (
+              <li key={h} className="tile flex gap-3 px-4 py-3 text-[14px] leading-relaxed text-muted">
+                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-tint font-mono text-[10.5px] text-accent">{i + 1}</span>
+                {h}
+              </li>
+            ))}
+          </ol>
         </div>
-      </Section>
+      </Card>
 
       {project.id === "sens" && <SensTool />}
       {project.id === "guides" && <GuidesList />}
@@ -110,165 +139,127 @@ function ProjectView({ project }: { project: Project }) {
   );
 }
 
-/* ─── Facts: year, status, type, tools, links ─── */
-
-function Facts({ project }: { project: Project }) {
-  const t = useTranslations("projects.labels");
-  const tNav = useTranslations("nav.spaces");
-  const related = project.related;
-  return (
-    <dl className="stagger grid grid-cols-2 gap-x-6 gap-y-5 text-[14px] lg:col-span-4">
-      <div className="border-t border-line pt-3">
-        <dt className="label">{t("year")}</dt>
-        <dd className="mt-1.5 text-fg">{project.year}</dd>
-      </div>
-      <div className="border-t border-line pt-3">
-        <dt className="label">{t("status")}</dt>
-        <dd className="mt-1.5">
-          <ProjectStatus status={project.status} className="!text-[12px] !tracking-[0.06em] text-fg" />
-        </dd>
-      </div>
-      {project.stack.length > 0 && (
-        <div className="col-span-2 border-t border-line pt-3">
-          <dt className="label">{t("stack")}</dt>
-          <dd className="mt-2 flex flex-wrap gap-1.5">
-            {project.stack.map((s) => (
-              <span key={s} className="tag">
-                {s}
-              </span>
-            ))}
-          </dd>
-        </div>
-      )}
-      {(project.repo || related) && (
-        <div className="col-span-2 flex flex-wrap gap-3 border-t border-line pt-4">
-          {project.repo && (
-            <ExternalButton href={project.repo} size="sm" variant="tonal" showIcon>
-              <GitHubIcon size={14} />
-              {t("source")}
-            </ExternalButton>
-          )}
-          {related && (
-            <ButtonLink href={`${related}${project.relatedHash ?? ""}`} size="sm" variant="primary">
-              {t("related", { space: related === "/lab/site" ? t("site") : tNav(related === "/lab" ? "lab" : "career") })}
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </ButtonLink>
-          )}
-        </div>
-      )}
-    </dl>
-  );
-}
-
 /* ─── Captures ─── */
 
 function Gallery({ project }: { project: Project }) {
   const t = useTranslations("projects");
   const media = project.gallery ?? [];
   const portrait = media.every((m) => m.height > m.width);
+  const label = t("captureLabel", { name: t(`items.${project.id}.name`) });
   return (
-    <Section id="captures" index="02" title={t("gallery")}>
-      <div className={portrait ? "grid gap-5 sm:grid-cols-3" : "grid gap-5 lg:grid-cols-12"}>
-        {media.map((m, i) => {
+    <Card id="captures" icon={Images} title={t("gallery")} subtitle="ls ./captures" meta={media.length} index={3} className="md:col-span-6 lg:col-span-12">
+      <div className={portrait ? "stagger grid gap-2.5 sm:grid-cols-3" : "stagger grid gap-2.5 lg:grid-cols-12"}>
+        {media.map((m) => {
           const wide = m.width / m.height > 2;
           return (
-            <Reveal key={m.src} i={i} className={portrait ? undefined : wide ? "lg:col-span-12" : "lg:col-span-7"}>
-              <div className="media-frame border border-line" style={{ aspectRatio: `${m.width} / ${m.height}` }}>
-                {m.type === "video" ? (
-                  <LoopVideo src={m.src} poster={m.poster} label={t("captureLabel", { name: t(`items.${project.id}.name`) })} />
-                ) : (
-                  <Image src={m.src} alt={t("captureLabel", { name: t(`items.${project.id}.name`) })} width={m.width} height={m.height} sizes="(min-width: 1024px) 80vw, 100vw" className="h-full w-full object-cover" />
-                )}
-              </div>
-            </Reveal>
+            <div
+              key={m.src}
+              className={portrait ? "media-frame" : wide ? "media-frame lg:col-span-12" : "media-frame lg:col-span-7"}
+              style={{ aspectRatio: `${m.width} / ${m.height}` }}
+            >
+              {m.type === "video" ? (
+                <LoopVideo src={m.src} poster={m.poster} label={label} />
+              ) : (
+                <Image src={m.src} alt={label} width={m.width} height={m.height} sizes="(min-width: 1024px) 80vw, 92vw" className="h-full w-full object-cover" />
+              )}
+            </div>
           );
         })}
       </div>
-    </Section>
+    </Card>
   );
 }
 
-/* ─── Sensitivity converter: the tool itself ─── */
+/* ─── Convertisseur de sensibilité : l'outil lui-même ─── */
 
 function SensTool() {
-  const t = useTranslations("converter");
+  const t = useTranslations("tools");
   return (
-    <Section id="converter" index="02" title={t("title")} intro={t("intro")}>
-      <Reveal>
+    <>
+      <Card
+        id="converter"
+        icon={SlidersHorizontal}
+        title={t("converter.title")}
+        subtitle="sens --convert --keep cm/360"
+        meta={t("converter.meta", { count: GAME_KEYS.length })}
+        index={3}
+        className="md:col-span-6 lg:col-span-8"
+        bodyClassName="gap-4"
+      >
+        <p className="max-w-[70ch] text-sm leading-relaxed text-muted">{t("converter.intro")}</p>
         <Converter />
-      </Reveal>
-      <Reveal i={1} className="mt-12 grid gap-8 lg:grid-cols-12">
-        <div className="lg:col-span-6">
-          <p className="label mb-3">{t("how.formula")}</p>
-          <div className="terminal px-5 py-4">
-            <p className="text-fg">cm/360 = (360 × 2.54) / (DPI × sens × yaw)</p>
-            <p className="text-fg">sens₂ = (360 × 2.54) / (DPI₂ × cm/360 × yaw₂)</p>
-            <p className="mt-1.5 text-dim">eDPI = DPI × sens</p>
-          </div>
-          <p className="mt-4 max-w-[60ch] text-[14px] leading-relaxed text-muted">{t("how.text")}</p>
+      </Card>
+      <Card id="how" icon={BookOpen} title={t("how.title")} subtitle="man sens" index={4} className="md:col-span-6 lg:col-span-4" bodyClassName="gap-4">
+        <p className="text-sm leading-relaxed text-muted">{t("how.text")}</p>
+        <div className="terminal px-4 py-3.5 text-[12.5px]">
+          <p className="label mb-1.5">{t("how.formula")}</p>
+          <p className="text-fg">cm/360 = (360 × 2.54) / (DPI × sens × yaw)</p>
+          <p className="text-fg">sens₂ = (360 × 2.54) / (DPI₂ × cm/360 × yaw₂)</p>
+          <p className="mt-1.5 text-dim">eDPI = DPI × sens</p>
         </div>
-        <dl className="grid grid-cols-2 content-start gap-x-6 lg:col-span-5 lg:col-start-8">
-          <p className="label col-span-2 mb-1">{t("how.yaw")}</p>
-          {GAME_KEYS.map((k) => (
-            <div key={k} className="flex items-baseline justify-between border-t border-line py-2.5 text-[14px]">
-              <dt>{GAMES[k].name}</dt>
-              <dd className="font-mono text-[13px] text-muted">{GAMES[k].yaw}</dd>
-            </div>
-          ))}
-        </dl>
-      </Reveal>
-    </Section>
+        <div>
+          <p className="label mb-2">{t("how.yaw")}</p>
+          <dl className="stagger flex flex-col gap-1">
+            {GAME_KEYS.map((k) => (
+              <div key={k} className="tile flex items-center justify-between px-3.5 py-2 text-sm">
+                <dt>{GAMES[k].name}</dt>
+                <dd className="font-mono text-[13px] text-muted">{GAMES[k].yaw}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <p className="text-xs text-dim">{t("how.note")}</p>
+      </Card>
+    </>
   );
 }
 
-/* ─── IT guides: the PDFs ─── */
+/* ─── Tutos IT : les PDF ─── */
 
 function GuidesList() {
   const t = useTranslations("career.docs");
-  const tProjects = useTranslations("projects");
   return (
-    <Section id="guides" index="02" title={tProjects("guides")}>
-      <Reveal>
-        <ul className="stagger grid gap-x-8 lg:grid-cols-2">
-          {DOCS.map((d) => (
-            <li key={d.id}>
-              <a href={d.file} download className="group flex items-center gap-4 border-t border-line py-4 transition-colors hover:text-fg">
-                <FileText size={16} aria-hidden="true" className="shrink-0 text-dim transition-colors group-hover:text-accent" />
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[15px] font-medium text-fg">{t(`items.${d.id}.title`)}</span>
-                  <span className="block truncate text-[13px] text-dim">{t(`items.${d.id}.desc`)}</span>
-                </span>
-                <span className="hidden font-mono text-[11px] text-dim sm:inline">
-                  {t(`categories.${d.category}`)} · {t("pages", { count: d.pages })}
-                </span>
-                <Download size={15} aria-hidden="true" className="shrink-0 text-dim transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-accent" />
-                <span className="sr-only">{t("downloadLabel", { count: d.pages })}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </Reveal>
-    </Section>
+    <Card id="guides" icon={FileText} title={t("title")} subtitle="ls ~/docs/*.pdf" meta={t("meta", { count: DOCS.length })} index={3} className="md:col-span-6 lg:col-span-12">
+      <p className="mb-3 text-sm text-muted">{t("intro")}</p>
+      <ul className="stagger grid gap-1.5 lg:grid-cols-2">
+        {DOCS.map((d) => (
+          <li key={d.id}>
+            <a href={d.file} download className="group flex items-center gap-3 rounded-[4px] bg-surface-2 px-3.5 py-2.5 transition-colors hover:bg-surface-3">
+              <FileText size={16} aria-hidden="true" className="shrink-0 text-muted group-hover:text-accent" />
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-semibold">{t(`items.${d.id}.title`)}</span>
+                <span className="block truncate text-xs text-dim">{t(`items.${d.id}.desc`)}</span>
+              </span>
+              <span className="hidden font-mono text-[11px] text-dim sm:inline">
+                {t(`categories.${d.category}`)} · {t("pages", { count: d.pages })}
+              </span>
+              <Download size={15} aria-hidden="true" className="shrink-0 text-dim group-hover:text-accent" />
+              <span className="sr-only">{t("downloadLabel", { count: d.pages })}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Card>
   );
 }
 
-/* ─── Next project ─── */
+/* ─── Projet suivant ─── */
 
 function NextProject({ project }: { project: Project }) {
   const t = useTranslations("projects");
   const next = nextProject(project.id);
   return (
-    <Reveal>
-      <Link href={`/projects/${next.slug}`} className="group block border-t border-line-strong pt-8">
-        <p className="label">{t("next")}</p>
-        <div className="mt-5 flex items-end justify-between gap-6">
-          <span className="display t-h1 index-title text-fg transition-colors duration-500 group-hover:text-accent">{t(`items.${next.id}.name`)}</span>
-          <span className="mb-3 hidden max-w-[36ch] items-center gap-3 text-right text-[14px] text-muted sm:flex">
-            {t(`items.${next.id}.tagline`)}
-            <ArrowUpRight size={18} aria-hidden="true" className="shrink-0 text-fg transition-transform duration-500 [transition-timing-function:var(--ease-out)] group-hover:rotate-45" />
+    <Link href={`/projects/${next.slug}`} className="card group md:col-span-6 lg:col-span-12" style={{ "--i": 5 } as CSSProperties}>
+      <span className="label">{t("next")}</span>
+      <span className="mt-3 flex items-end justify-between gap-6">
+        <span className="display text-[44px] text-fg sm:text-[64px]">{t(`items.${next.id}.name`)}</span>
+        <span className="mb-2 hidden items-center gap-3 text-right text-[14px] text-muted sm:flex">
+          {t(`items.${next.id}.tagline`)}
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[4px] bg-accent-tint text-accent transition-transform duration-500 group-hover:rotate-45">
+            <ArrowUpRight size={18} aria-hidden="true" />
           </span>
-        </div>
-      </Link>
-    </Reveal>
+        </span>
+      </span>
+    </Link>
   );
 }

@@ -1,6 +1,6 @@
-// src/components/hosting/live.tsx — /lab/site: live figures (response time, uptimes, last deploy), the
-// path of a request down to the app, and the server sheet. Everything comes from /api/host (useHost):
-// what isn't detected isn't shown.
+// src/components/hosting/live.tsx — Page /lab/site : chiffres en direct (temps de réponse, durées de
+// fonctionnement, dernier déploiement), chemin d'une requête jusqu'à l'appli et fiche du serveur.
+// Tout vient de /api/host (useHost) : ce qui n'est pas détecté n'est pas affiché.
 "use client";
 
 import { Fragment, type CSSProperties, type ReactNode } from "react";
@@ -48,7 +48,7 @@ export function LiveTiles() {
   const deployed = BUILD_TIME ? new Date(BUILD_TIME) : null;
 
   return (
-    <div className="stagger grid grid-cols-2 gap-x-6 lg:grid-cols-4">
+    <div className="stagger grid grid-cols-2 gap-2.5 lg:grid-cols-4">
       <Tile label={t("tiles.rtt")} sub={t("tiles.rttSub")} live={Boolean(last) && !failed}>
         {last ? (
           <span className="flex items-end justify-between gap-3">
@@ -75,11 +75,11 @@ export function LiveTiles() {
 
 function Tile({ label, sub, live, children }: { label: string; sub?: string; live?: boolean; children: ReactNode }) {
   return (
-    <div className="flex min-w-0 flex-col justify-between gap-3 border-t border-line py-4">
-      <div className="display text-[34px] leading-none tabular-nums text-fg sm:text-[44px]">{children}</div>
+    <div className="tile flex min-w-0 flex-col justify-between gap-2 px-4 py-3.5">
+      <div className="text-[22px] font-bold leading-none tracking-tight tabular-nums text-fg">{children}</div>
       <div>
         <p className="label flex items-center gap-1.5">
-          {live && <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent-vivid text-accent-vivid" />}
+          {live && <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />}
           {label}
         </p>
         {sub && <p className="mt-0.5 truncate font-mono text-[11px] text-dim">{sub}</p>}
@@ -173,7 +173,7 @@ export function RequestPath({ nextVersion }: { nextVersion: string }) {
         ))}
         <PathLink index={outside.length} />
         <li className="min-w-0 flex-1">
-          <div className="relative border border-dashed border-line-strong p-3 pt-7">
+          <div className="relative rounded-[18px] border border-dashed border-line-strong p-3 pt-7">
             <span className="label absolute left-3.5 top-2.5">{vpsLabel}</span>
             <ol className="flex flex-col md:flex-row md:items-center">
               {inside.map((node, i) => (
@@ -194,7 +194,7 @@ export function RequestPath({ nextVersion }: { nextVersion: string }) {
         <p className="label mb-2">{t("branches")}</p>
         <ul className="stagger grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
           {branches.map(({ id, icon: Icon }) => (
-            <li key={id} className="flex items-start gap-3 border-t border-line py-3.5">
+            <li key={id} className="tile flex items-start gap-3 px-3.5 py-3">
               <Icon size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
               <span className="min-w-0">
                 <span className="block text-[13.5px] font-semibold text-fg">{t(`items.${id}.title`)}</span>
@@ -213,8 +213,8 @@ function NodeBox({ node, highlight }: { node: PathNode; highlight?: boolean }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-3 border px-3.5 py-3",
-        highlight ? "border-accent-vivid bg-accent-soft text-fg" : "border-line bg-surface",
+        "flex items-center gap-3 rounded-[14px] px-3.5 py-3",
+        highlight ? "glow bg-accent-tint text-on-accent-container" : "bg-surface-2",
       )}
     >
       <Icon size={18} aria-hidden="true" className={highlight ? "" : "text-muted"} />
@@ -265,14 +265,14 @@ export function ServerSpecs() {
       value: (
         <span className="flex items-center gap-3">
           <span
-            className="h-1 w-24 overflow-hidden bg-surface-3"
+            className="h-1.5 w-24 overflow-hidden rounded-full bg-surface-3"
             role="meter"
             aria-label={t("memory")}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(memoryShare * 100)}
           >
-            <span className="block h-full bg-accent-vivid" style={{ width: `${memoryShare * 100}%` }} />
+            <span className="block h-full rounded-full bg-accent" style={{ width: `${memoryShare * 100}%` }} />
           </span>
           {t("memoryValue", { used: gb(info.memory.used), total: gb(info.memory.total) })}
         </span>
@@ -287,10 +287,10 @@ export function ServerSpecs() {
   ];
 
   return (
-    <dl className="stagger flex flex-col">
+    <dl className="stagger flex flex-col gap-1">
       {rows.map((row) => (
-        <div key={row.label} className="flex items-baseline justify-between gap-4 border-t border-line py-3">
-          <dt className="text-[14px] text-muted">{row.label}</dt>
+        <div key={row.label} className="flex items-center justify-between gap-4 rounded-xl px-3 py-2.5 hover:bg-surface-2">
+          <dt className="text-[13px] text-muted">{row.label}</dt>
           <dd className="text-right font-mono text-[12.5px] text-fg">{row.value}</dd>
         </div>
       ))}

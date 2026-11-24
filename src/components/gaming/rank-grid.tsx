@@ -1,6 +1,7 @@
-// src/components/gaming/rank-grid.tsx — Gaming ranks, most important first: the current rank huge,
-// the peak (with the Radiant gun buddy swinging on its panel), then the other games in a row.
-// The Radiant peak always stays next to the other ranks (site tone rule).
+// src/components/gaming/rank-grid.tsx — Rangs de l'espace Gaming, du plus important au moins important :
+// le rang actuel en très grand, le peak (avec le gun buddy Radiant qui se balance), puis les autres jeux.
+// Le peak Radiant reste aux côtés des autres rangs (règle de ton du site). Chaque tuile de jeu porte
+// un liseré fin de la couleur du jeu.
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
@@ -11,64 +12,80 @@ import { PeakBuddy } from "./peak-buddy";
 
 type Rank = (typeof RANKS)[number];
 
+function GameStripe({ color }: { color: string }) {
+  return <span aria-hidden="true" className="absolute left-0 top-3 h-8 w-[3px]" style={{ backgroundColor: color }} />;
+}
+
 export function RankGrid({ className }: { className?: string }) {
   const t = useTranslations("gaming.ranks");
   const tTracker = useTranslations("gaming.tracker");
   const tHero = useTranslations("gaming.hero");
   const featured = RANKS.find((r) => r.featured) ?? RANKS[0];
   const others = RANKS.filter((r) => r.id !== featured.id);
-  const gameLabel = (r: Rank) => (t.has(`items.${r.id}.platform`) ? `${r.game} · ${t(`items.${r.id}.platform`)}` : r.game);
+
+  const gameLabel = (r: Rank) =>
+    t.has(`items.${r.id}.platform`) ? `${r.game} · ${t(`items.${r.id}.platform`)}` : r.game;
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
-      <div className="grid gap-5 lg:grid-cols-12">
-        {/* Current rank: the most important information, huge */}
-        <div data-reveal="" className="flex flex-col justify-end gap-4 border-t border-line-strong pt-6 lg:col-span-7">
-          <p className="label">{tHero("current")}</p>
-          <div className="flex items-center gap-5">
-            <Image
-              src="/images/ranks/valorant-immortal-3.webp"
-              alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
-              width={160}
-              height={160}
-              className="h-20 w-20 shrink-0 object-contain sm:h-32 sm:w-32"
-            />
-            <p className="display whitespace-nowrap text-[clamp(56px,8vw,128px)] leading-[0.85] text-fg">{tHero("currentValue")}</p>
-          </div>
-        </div>
-
-        {/* Peak: Radiant, with the buddy hanging on the panel, pushed by the pointer */}
-        <div data-reveal="" data-buddy-zone style={{ "--i": 1 } as CSSProperties} className="card relative min-h-[260px] justify-between overflow-hidden lg:col-span-5">
-          <PeakBuddy className="pointer-events-none absolute -top-2 right-0 h-[190px] w-[170px] sm:h-[230px] sm:w-[210px]" />
-          <div className="relative flex items-center gap-3">
-            <Image
-              src={featured.image}
-              alt={t("alt", { rank: t(`items.${featured.id}.rank`), game: featured.game })}
-              width={64}
-              height={64}
-              className="h-12 w-12 shrink-0 object-contain"
-            />
-            <div>
-              <p className="label">{t("peak")}</p>
-              <p className="display text-[40px] text-fg">{t(`items.${featured.id}.rank`)}</p>
-            </div>
-          </div>
-          <div className="relative">
-            <p className="display text-[64px] leading-none text-accent-vivid">
-              <CountUp value={VALORANT_PEAK.rr} /> <span className="text-[28px]">RR</span>
-            </p>
-            <p className="mt-2 font-mono text-[11.5px] text-muted">{tTracker("peakSeason", { episode: VALORANT_PEAK.episode, act: VALORANT_PEAK.act })}</p>
-          </div>
+    <div className={cn("grid gap-3 lg:grid-cols-12 lg:gap-4", className)}>
+      {/* Rang actuel : l'info la plus importante, en très grand */}
+      <div className="rank-current relative flex flex-col justify-end gap-2 overflow-hidden px-1 py-2 lg:col-span-5">
+        <p className="label">{tHero("current")}</p>
+        <div className="flex items-center gap-4">
+          <Image
+            src="/images/ranks/valorant-immortal-3.webp"
+            alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
+            width={140}
+            height={140}
+            className="rank-current-icon h-24 w-24 shrink-0 object-contain sm:h-32 sm:w-32"
+          />
+          <p className="display whitespace-nowrap text-[clamp(52px,5.4vw,86px)] text-fg">{tHero("currentValue")}</p>
         </div>
       </div>
 
-      {/* Other games */}
-      <ul data-reveal="" style={{ "--i": 2 } as CSSProperties} className="stagger grid gap-x-6 sm:grid-cols-3">
-        {others.map((r) => (
-          <li key={r.id} className="flex items-center gap-4 border-t border-line py-5">
-            <Image src={r.image} alt={t("alt", { rank: t(`items.${r.id}.rank`), game: r.game })} width={48} height={48} className="h-11 w-11 shrink-0 object-contain" />
+      {/* Peak : Radiant, avec le buddy suspendu qui réagit à la souris */}
+      <div data-buddy-zone className="tile relative flex min-h-[220px] flex-col justify-between overflow-hidden px-5 py-5 lg:col-span-4">
+        <GameStripe color={featured.color} />
+        {/* Canvas assez large pour le balancement maximal (inclinaison bornée dans BuddyStage) ;
+            un peu plus petit sur téléphone pour ne pas passer sur le titre */}
+        <PeakBuddy className="pointer-events-none absolute -top-2 right-0 h-[170px] w-[160px] sm:h-[210px] sm:w-[200px]" />
+        <div className="relative flex items-center gap-3">
+          <Image
+            src={featured.image}
+            alt={t("alt", { rank: t(`items.${featured.id}.rank`), game: featured.game })}
+            width={64}
+            height={64}
+            className="h-14 w-14 shrink-0 object-contain"
+          />
+          <div>
+            <p className="label">{t("peak")}</p>
+            <p className="display text-[40px] text-fg">{t(`items.${featured.id}.rank`)}</p>
+          </div>
+        </div>
+        <div className="relative">
+          <p className="display text-[52px] text-accent-2">
+            <CountUp value={VALORANT_PEAK.rr} /> <span className="text-[26px]">RR</span>
+          </p>
+          <p className="font-mono text-[11.5px] text-muted">
+            {tTracker("peakSeason", { episode: VALORANT_PEAK.episode, act: VALORANT_PEAK.act })}
+          </p>
+        </div>
+      </div>
+
+      {/* Autres jeux */}
+      <ul className="stagger flex flex-col gap-2 lg:col-span-3">
+        {others.map((r, i) => (
+          <li key={r.id} className="tile relative flex flex-1 items-center gap-3.5 px-4 py-3.5" style={{ "--si": i } as CSSProperties}>
+            <GameStripe color={r.color} />
+            <Image
+              src={r.image}
+              alt={t("alt", { rank: t(`items.${r.id}.rank`), game: r.game })}
+              width={44}
+              height={44}
+              className="h-11 w-11 shrink-0 object-contain"
+            />
             <div className="min-w-0">
-              <p className="display truncate text-[28px] text-fg">{t(`items.${r.id}.rank`)}</p>
+              <p className="display truncate text-[24px] text-fg">{t(`items.${r.id}.rank`)}</p>
               <p className="mt-1 truncate font-mono text-[11px] text-muted">{gameLabel(r)}</p>
             </div>
           </li>

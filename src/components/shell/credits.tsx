@@ -1,12 +1,12 @@
-// src/components/shell/credits.tsx — Credits line at the bottom of every page: authors and licenses of
-// the 3D models (required by the CC BY licenses) and the "not endorsed by Riot Games" notice.
+// src/components/shell/credits.tsx — Ligne de crédits en bas de chaque page : auteurs et licences des
+// modèles 3D (obligatoire pour les licences CC BY), et mention "non approuvé par Riot Games".
 import { useTranslations } from "next-intl";
 import { MODEL_CREDITS } from "@/config/site";
 
 export function Credits() {
   const t = useTranslations("common.credits");
   return (
-    <div className="flex flex-col gap-1.5 text-[11px] leading-relaxed text-dim">
+    <div className="mt-2 flex flex-col gap-1 px-1 text-[10.5px] leading-relaxed text-dim">
       <p>
         {t("models")}{" "}
         {MODEL_CREDITS.map((m, i) => (

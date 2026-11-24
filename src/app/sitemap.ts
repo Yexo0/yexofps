@@ -1,4 +1,4 @@
-// src/app/sitemap.ts — Sitemap: the 7 spaces, their sub-pages and every project, in both languages, with hreflang alternates.
+// src/app/sitemap.ts — Sitemap : les 7 espaces et leurs sous-pages dans les deux langues, avec alternates hreflang.
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { SPACES } from "@/config/spaces";
@@ -6,7 +6,7 @@ import { SITE } from "@/config/site";
 import { PROJECTS } from "@/config/projects";
 import { localizedPath } from "@/lib/metadata";
 
-/** Pages attached to a space, on top of the 7 spaces */
+/** Pages rattachées à un espace, en plus des 7 espaces */
 const SUB_PAGES = [
   { href: "/baptiste", changeFrequency: "monthly" as const, priority: 0.9 },
   { href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 },

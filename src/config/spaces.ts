@@ -1,25 +1,36 @@
-// src/config/spaces.ts — The 7 spaces of the site: order, URL, icon.
-// The number shown (01…07) and the keyboard shortcut (1…7) follow the array order.
-import { Briefcase, Clapperboard, Gamepad2, House, LayoutGrid, Mail, Network, type LucideIcon } from "lucide-react";
+// src/config/spaces.ts — Les 7 espaces du site : ordre, URL, icône.
+// Le numéro affiché (01…07) et le raccourci clavier (1…7) suivent l'ordre du tableau.
+import {
+  Briefcase,
+  Clapperboard,
+  Gamepad2,
+  House,
+  LayoutGrid,
+  Mail,
+  Network,
+  type LucideIcon,
+} from "lucide-react";
 
-export type SpaceId = "home" | "projects" | "career" | "lab" | "creator" | "gaming" | "contact";
+export type SpaceId = "home" | "projects" | "career" | "lab" | "gaming" | "creator" | "contact";
 
 export interface Space {
   id: SpaceId;
-  href: "/" | "/projects" | "/career" | "/lab" | "/creator" | "/gaming" | "/contact";
+  href: "/" | "/projects" | "/career" | "/lab" | "/gaming" | "/creator" | "/contact";
   icon: LucideIcon;
-  /** Other pages that belong to this space (navigation marks the space as current on them) */
+  /** Affiché dans la barre mobile principale (les autres passent dans "Plus"). */
+  mobile: boolean;
+  /** Autres pages rattachées à cet espace (rail et barre d'état les montrent dans l'espace) */
   aliases?: readonly string[];
 }
 
 export const SPACES: readonly Space[] = [
-  { id: "home", href: "/", icon: House, aliases: ["/baptiste"] },
-  { id: "projects", href: "/projects", icon: LayoutGrid },
-  { id: "career", href: "/career", icon: Briefcase },
-  { id: "lab", href: "/lab", icon: Network },
-  { id: "creator", href: "/creator", icon: Clapperboard },
-  { id: "gaming", href: "/gaming", icon: Gamepad2 },
-  { id: "contact", href: "/contact", icon: Mail, aliases: ["/now"] },
+  { id: "home", href: "/", icon: House, mobile: true },
+  { id: "projects", href: "/projects", icon: LayoutGrid, mobile: true },
+  { id: "career", href: "/career", icon: Briefcase, mobile: true },
+  { id: "lab", href: "/lab", icon: Network, mobile: true },
+  { id: "gaming", href: "/gaming", icon: Gamepad2, mobile: false },
+  { id: "creator", href: "/creator", icon: Clapperboard, mobile: true },
+  { id: "contact", href: "/contact", icon: Mail, mobile: false, aliases: ["/now"] },
 ];
 
 export function spaceIndex(id: SpaceId): number {
@@ -30,17 +41,16 @@ export function getSpace(id: SpaceId): Space {
   return SPACES.find((s) => s.id === id)!;
 }
 
-/** Next space (the last one leads back home). */
+/** Espace suivant (le dernier renvoie vers l'accueil). */
 export function nextSpace(id: SpaceId): Space {
   const i = SPACES.findIndex((s) => s.id === id);
   return SPACES[(i + 1) % SPACES.length];
 }
 
-/** Current space from a path without its language prefix. */
+/** Retrouve l'espace actif à partir du chemin (sans préfixe de langue). */
 export function spaceFromPath(pathname: string): Space {
-  const path = pathname.replace(/\/$/, "") || "/";
-  const match = SPACES.find((s) =>
-    [s.href, ...(s.aliases ?? [])].some((href) => href !== "/" && (path === href || path.startsWith(`${href}/`))),
+  const match = SPACES.filter((s) => s.href !== "/").find((s) =>
+    [s.href, ...(s.aliases ?? [])].some((href) => pathname === href || pathname.startsWith(`${href}/`)),
   );
   return match ?? SPACES[0];
 }

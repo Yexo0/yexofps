@@ -1,52 +1,52 @@
-// src/components/shell/scroll-reveal.tsx — Reveals [data-reveal] elements when they enter the screen
-// (fade + rise, defined in globals.css). Once per element, including after client-side navigation.
-// No effect under prefers-reduced-motion (CSS). After a navigation with a page transition, what is on
-// the first screen arrives with the transition (data-instant) instead of fading in a second time.
+// src/components/shell/scroll-reveal.tsx — Fait apparaître les cartes quand elles entrent dans l'écran
+// (fondu + léger glissement, défini dans globals.css). Une seule fois par carte, y compris après
+// une navigation entre espaces. Sans effet si l'utilisateur préfère réduire les animations (CSS).
+// Après une navigation avec transition de page, les cartes du premier écran arrivent avec la
+// transition (data-instant) au lieu d'un second fondu.
 "use client";
 
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "@/i18n/navigation";
 
-const SELECTOR = "[data-reveal]:not([data-in])";
-
 export function ScrollReveal() {
   const pathname = usePathname();
   const firstPath = useRef(pathname);
 
-  // Navigation with a page transition: first-screen elements are shown at once (before the
-  // transition snapshot), so the new page slides in complete.
+  // Navigation avec transition de page : les cartes du premier écran sont affichées tout de suite
+  // (avant la capture de la transition), sinon la carte principale ne pourrait pas se transformer.
   useLayoutEffect(() => {
     if (pathname === firstPath.current && !document.documentElement.dataset.navDir) return;
+    // Feuille de l'apparition immédiate : ciblait les cartes de la page d'arrivée, plus celles-ci
     document.getElementById("early-reveal")?.remove();
     const supported = "startViewTransition" in document && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!supported) return;
-    document.querySelectorAll<HTMLElement>(SELECTOR).forEach((el) => {
-      const top = el.getBoundingClientRect().top + window.scrollY;
+    document.querySelectorAll<HTMLElement>(".card:not([data-in])").forEach((card) => {
+      // La page s'ouvre en haut : visible si son haut est dans la hauteur de l'écran
+      const top = card.getBoundingClientRect().top + window.scrollY;
       if (top < window.innerHeight) {
-        el.setAttribute("data-in", "");
-        el.setAttribute("data-instant", "");
+        card.setAttribute("data-in", "");
+        card.setAttribute("data-instant", "");
       }
     });
   }, [pathname]);
 
-  // Hand-off from earlyRevealScript: those elements are marked as revealed, then the temporary
-  // stylesheet is removed once their animations are over
+  // Relais de l'apparition immédiate (earlyRevealScript) : ces cartes sont marquées comme apparues,
+  // puis la feuille temporaire est retirée une fois leurs animations terminées
   useEffect(() => {
-    const w = window as Window & { __earlyReveal?: Element[] };
-    const early = w.__earlyReveal;
+    const early = (window as Window & { __earlyCards?: Element[] }).__earlyCards;
     if (!early) return;
-    delete w.__earlyReveal;
-    early.forEach((el) => {
-      el.setAttribute("data-in", "");
-      el.setAttribute("data-instant", "");
+    delete (window as Window & { __earlyCards?: Element[] }).__earlyCards;
+    early.forEach((card) => {
+      card.setAttribute("data-in", "");
+      card.setAttribute("data-instant", "");
     });
-    const id = setTimeout(() => document.getElementById("early-reveal")?.remove(), 2_400);
+    const id = setTimeout(() => document.getElementById("early-reveal")?.remove(), 2_000);
     return () => clearTimeout(id);
   }, []);
 
   useEffect(() => {
-    // The script runs: the CSS safety net (show everything after 2.5 s) is turned off
-    document.documentElement.setAttribute("data-reveal-ready", "");
+    // Le script tourne : on désactive le filet de sécurité CSS (affichage forcé après 2,5 s)
+    document.documentElement.setAttribute("data-reveal", "");
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -55,18 +55,18 @@ export function ScrollReveal() {
           io.unobserve(entry.target);
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.04 },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.06 },
     );
-    const observe = () => document.querySelectorAll(SELECTOR).forEach((el) => io.observe(el));
+    const observe = () => document.querySelectorAll(".card:not([data-in])").forEach((el) => io.observe(el));
     observe();
 
-    // New elements (client navigation, content loaded later)
+    // Nouvelles cartes (navigation côté client, contenu chargé après coup)
     const main = document.getElementById("main");
     const mo = new MutationObserver((mutations) => {
-      const added = mutations.some((m) =>
-        [...m.addedNodes].some((n) => n instanceof Element && (n.matches("[data-reveal]") || n.querySelector("[data-reveal]"))),
+      const hasNewCard = mutations.some((m) =>
+        [...m.addedNodes].some((n) => n instanceof Element && (n.matches(".card") || n.querySelector(".card"))),
       );
-      if (added) observe();
+      if (hasNewCard) observe();
     });
     if (main) mo.observe(main, { childList: true, subtree: true });
 

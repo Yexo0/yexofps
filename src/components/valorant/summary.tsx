@@ -1,5 +1,5 @@
-// src/components/valorant/summary.tsx — Config summary (sens, eDPI, cm/360, crosshair),
-// shared by the settings page and the Gaming space.
+// src/components/valorant/summary.tsx — Résumé de la config (sensi, eDPI, cm/360, réticule),
+// partagé par la page settings et la carte de l'espace Gaming.
 import { useFormatter, useTranslations } from "next-intl";
 import { MY_SENS } from "@/config/site";
 import { CROSSHAIR } from "@/config/valorant-settings";
@@ -26,7 +26,7 @@ export function SensTiles({ className }: { className?: string }) {
     },
   ];
   return (
-    <div className={cn("stagger grid grid-cols-2 gap-x-6 sm:grid-cols-4", className)}>
+    <div className={cn("stagger grid grid-cols-2 gap-2.5 sm:grid-cols-4", className)}>
       {tiles.map((tile) => (
         <StatTile key={tile.label} label={tile.label} value={tile.value} unit={tile.unit} />
       ))}
@@ -38,9 +38,9 @@ export function SensTiles({ className }: { className?: string }) {
 export function CrosshairTile({ className, compact = false }: { className?: string; compact?: boolean }) {
   const t = useTranslations("valoSettings");
   return (
-    <div className={cn("flex min-w-0 items-center gap-4 border-t border-line py-4", className)}>
+    <div className={cn("tile flex min-w-0 items-center gap-3.5 p-2.5 pr-4", className)}>
       <div
-        className="grid h-[72px] w-[72px] shrink-0 place-items-center"
+        className="grid h-[72px] w-[72px] shrink-0 place-items-center rounded-[10px]"
         style={{ background: "linear-gradient(180deg, #24272d 0%, #131518 100%)" }}
       >
         <CrosshairSvg zoom={3} size={24} />

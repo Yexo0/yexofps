@@ -46,7 +46,7 @@ export function matchHs(m: MatchData) {
 export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
   const t = useTranslations("gaming.tracker");
   return (
-    <div className={cn("relative flex items-center gap-4 border-t border-line", size === "lg" ? "py-5" : "py-3.5")}>
+    <div className={cn("tile relative flex items-center gap-4", size === "lg" ? "px-5 py-5" : "px-4 py-3.5")}>
       <Image
         src={VALORANT_PEAK.image}
         alt=""
@@ -62,7 +62,7 @@ export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
       </div>
       <div className="text-right">
         <p className="flex items-end justify-end gap-1.5 leading-none">
-          <DotDigits value={String(VALORANT_PEAK.rr)} dot={size === "lg" ? 4.5 : 3.5} gap={1.5} className="text-accent-vivid" />
+          <DotDigits value={String(VALORANT_PEAK.rr)} dot={size === "lg" ? 4.5 : 3.5} gap={1.5} className="text-accent" />
           <span className="font-mono text-[11px] text-muted">RR</span>
         </p>
         <p className="mt-1 font-mono text-[11px] text-dim">
@@ -97,7 +97,7 @@ export function TrackerNotice({
   return (
     <div
       role={kind === "error" ? "alert" : "status"}
-      className={cn("flex items-start gap-3 border-l-2 border-accent-vivid bg-surface-2", compact ? "px-4 py-3.5" : "px-5 py-4")}
+      className={cn("tile flex items-start gap-3", compact ? "px-4 py-3.5" : "px-5 py-4")}
     >
       <Icon size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
       <div className="min-w-0 flex-1">
@@ -134,8 +134,8 @@ export function ResultDots({ matches }: { matches: MatchData[] }) {
             key={`${m.ts}-${i}`}
             title={t(`result.${m.result}`)}
             className={cn(
-              "h-2.5 w-4",
-              m.result === "win" && "bg-accent-vivid",
+              "h-2.5 w-2.5 rounded-full",
+              m.result === "win" && "bg-accent",
               m.result === "loss" && "ring-1 ring-inset ring-line-strong",
               m.result === "unknown" && "bg-surface-3",
             )}
@@ -153,8 +153,8 @@ export function ResultTag({ result }: { result: MatchData["result"] }) {
   return (
     <span
       className={cn(
-        "inline-flex justify-center px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider",
-        result === "win" && "bg-accent-soft text-fg shadow-[inset_2px_0_0_var(--accent-vivid)]",
+        "inline-flex justify-center rounded-full px-2.5 py-1 text-xs font-semibold",
+        result === "win" && "bg-accent-tint text-on-accent-container",
         result === "loss" && "bg-surface-3 text-muted",
         result === "unknown" && "bg-surface-3 text-dim",
       )}
@@ -168,7 +168,7 @@ export function ResultTag({ result }: { result: MatchData["result"] }) {
 
 export function AgentAvatar({ src, agent, size = 40 }: { src: string; agent: string; size?: 40 | 56 }) {
   const [failed, setFailed] = useState(false);
-  const box = size === 56 ? "h-14 w-14 text-lg" : "h-10 w-10 text-sm";
+  const box = size === 56 ? "h-14 w-14 rounded-2xl text-lg" : "h-10 w-10 rounded-xl text-sm";
   if (!src || failed) {
     return (
       <span aria-hidden="true" className={cn("grid shrink-0 place-items-center bg-surface-3 font-semibold text-muted", box)}>

@@ -1,168 +1,181 @@
-// src/lib/theme.ts — Builds the CSS color tokens (dark and light) from the three brand colors in
-// src/config/theme.ts. One accent for the whole site: no per-page colors.
-// Server-side only: the CSS is injected into <head> by the layout, before the first paint.
-import { PALETTE } from "@/config/theme";
+// src/lib/theme.ts — Génère les variables CSS (mode sombre et clair) à partir de src/config/theme.ts.
+// Neutres (fond, cartes, textes) communs à tout le site ; accent propre à chaque espace, appliqué
+// par html[data-space] (posé avant le premier rendu par themeScript, puis par SpaceSync).
+// Exécuté côté serveur uniquement : le CSS produit est injecté dans <head> par le layout.
+import {
+  Hct,
+  TonalPalette,
+  argbFromHex,
+  hexFromArgb,
+} from "@material/material-color-utilities";
+import { NEUTRAL_CHROMA, NEUTRAL_SEED, SPACE_SEEDS, SPACE_SEEDS_2, THEME_OVERRIDES, type ThemeKey } from "@/config/theme";
+import { SPACES } from "@/config/spaces";
 
-type RGB = [number, number, number];
+const neutralHue = Hct.fromInt(argbFromHex(NEUTRAL_SEED)).hue;
+const neutral = TonalPalette.fromHueAndChroma(neutralHue, NEUTRAL_CHROMA);
+const variant = TonalPalette.fromHueAndChroma(neutralHue, NEUTRAL_CHROMA * 2);
 
-function rgb(hex: string): RGB {
-  const n = parseInt(hex.slice(1), 16);
-  return [(n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
+/** Palette d'accent : la couleur de base garde toute sa saturation (minimum 48, comme Material You). */
+function accentPalette(seedHex: string): TonalPalette {
+  const seed = Hct.fromInt(argbFromHex(seedHex));
+  return TonalPalette.fromHueAndChroma(seed.hue, Math.max(seed.chroma, 48));
 }
 
-function toHex([r, g, b]: RGB): string {
-  return `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
-}
+const hex = (p: TonalPalette, tone: number) => hexFromArgb(p.tone(tone));
 
-/** a mixed into b: t = 0 gives b, t = 1 gives a */
-function mix(a: string, b: string, t: number): string {
-  const A = rgb(a);
-  const B = rgb(b);
-  return toHex([0, 1, 2].map((i) => A[i] * t + B[i] * (1 - t)) as RGB);
-}
-
-function alpha(hex: string, a: number): string {
-  const [r, g, b] = rgb(hex);
+/** Ton d'une palette + opacité → rgba() */
+function alpha(p: TonalPalette, tone: number, a: number): string {
+  const argb = p.tone(tone);
+  const r = (argb >> 16) & 0xff;
+  const g = (argb >> 8) & 0xff;
+  const b = argb & 0xff;
   return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-const { ink, bone, signal } = PALETTE;
-const black = "#000000";
-const white = "#ffffff";
-
-/* ─── Dark: near-black navy page, bone text ─── */
-
-const darkBg = mix(ink, black, 0.42); // ~#060a0f
-const dark = {
-  bg: darkBg,
-  surface: mix(ink, black, 0.62),
-  surface2: mix(ink, black, 0.82),
-  surface3: mix(bone, ink, 0.07),
-  hover: mix(bone, ink, 0.12),
-  inset: mix(ink, black, 0.5),
-  text: bone,
-  muted: mix(bone, darkBg, 0.72),
-  dim: mix(bone, darkBg, 0.6),
-  accent: signal,
-  accentText: mix(signal, bone, 0.86),
-};
-
-/* ─── Light: bone page, ink text ─── */
-
-const lightBg = bone;
-const light = {
-  bg: lightBg,
-  surface: mix(white, bone, 0.55),
-  surface2: mix(ink, bone, 0.045),
-  surface3: mix(ink, bone, 0.08),
-  hover: mix(ink, bone, 0.12),
-  inset: mix(ink, bone, 0.03),
-  text: ink,
-  muted: mix(ink, lightBg, 0.76),
-  dim: mix(ink, lightBg, 0.69),
-  accent: mix(signal, black, 0.8),
-  accentText: mix(signal, black, 0.68),
-};
-
 type Tokens = Record<string, string>;
 
-const darkTokens: Tokens = {
-  "--bg": dark.bg,
-  "--surface": dark.surface,
-  "--surface-solid": dark.surface,
-  "--surface-2": dark.surface2,
-  "--surface-3": dark.surface3,
-  "--surface-hover": dark.hover,
-  "--inset": dark.inset,
-  "--line": alpha(bone, 0.09),
-  "--line-strong": alpha(bone, 0.2),
-  "--text": dark.text,
-  "--text-muted": dark.muted,
-  "--text-dim": dark.dim,
-  "--accent": dark.accentText,
-  "--accent-vivid": signal,
-  "--accent-2": mix(signal, bone, 0.45),
-  "--on-accent": ink,
-  "--accent-container": mix(signal, darkBg, 0.22),
-  "--on-accent-container": mix(signal, bone, 0.25),
-  "--accent-soft": alpha(signal, 0.12),
-  "--accent-tint": mix(signal, dark.surface3, 0.14),
-  "--accent-mid": mix(signal, darkBg, 0.7),
-  "--accent-low": mix(signal, darkBg, 0.4),
-  "--glow": alpha(signal, 0.18),
-  "--glow-strong": alpha(signal, 0.3),
-  "--glow-ring": alpha(signal, 0.36),
-  "--shadow": "0 1px 0 rgba(255,255,255,0.03) inset, 0 24px 48px -24px rgba(0,0,0,0.6)",
-  "--scrim": "rgba(3, 5, 8, 0.72)",
+/* ─── Neutres ─────────────────────────────────────────── */
+
+const darkNeutrals: Tokens = {
+  "--bg": hex(neutral, 4),
+  "--surface": alpha(neutral, 9, 0.9),
+  "--surface-solid": hex(neutral, 9),
+  "--surface-2": hex(neutral, 14),
+  "--surface-3": hex(neutral, 21),
+  "--surface-hover": hex(neutral, 25),
+  "--inset": hex(neutral, 6),
+  "--line": alpha(variant, 55, 0.2),
+  "--line-strong": alpha(variant, 65, 0.36),
+  "--text": hex(neutral, 94),
+  "--text-muted": hex(variant, 78),
+  "--text-dim": hex(variant, 64),
+  "--shadow": "0 1px 0 rgba(255,255,255,0.03) inset, 0 12px 32px rgba(0,0,0,0.28)",
+  "--backdrop-lines": "0.55",
 };
 
-const lightTokens: Tokens = {
-  "--bg": light.bg,
-  "--surface": light.surface,
-  "--surface-solid": light.surface,
-  "--surface-2": light.surface2,
-  "--surface-3": light.surface3,
-  "--surface-hover": light.hover,
-  "--inset": light.inset,
-  "--line": alpha(ink, 0.1),
-  "--line-strong": alpha(ink, 0.22),
-  "--text": light.text,
-  "--text-muted": light.muted,
-  "--text-dim": light.dim,
-  "--accent": light.accentText,
-  "--accent-vivid": signal,
-  "--accent-2": mix(signal, black, 0.55),
-  "--on-accent": ink,
-  "--accent-container": mix(signal, lightBg, 0.16),
-  "--on-accent-container": mix(signal, black, 0.5),
-  "--accent-soft": alpha(signal, 0.1),
-  "--accent-tint": mix(signal, light.surface3, 0.12),
-  "--accent-mid": mix(signal, lightBg, 0.7),
-  "--accent-low": mix(signal, lightBg, 0.3),
-  "--glow": alpha(signal, 0.14),
-  "--glow-strong": alpha(signal, 0.24),
-  "--glow-ring": alpha(signal, 0.32),
-  "--shadow": "0 1px 2px rgba(15,25,35,0.05), 0 24px 48px -28px rgba(15,25,35,0.28)",
-  "--scrim": "rgba(15, 25, 35, 0.4)",
+const lightNeutrals: Tokens = {
+  "--bg": hex(neutral, 93),
+  "--surface": alpha(neutral, 99, 0.92),
+  "--surface-solid": hex(neutral, 99),
+  "--surface-2": hex(neutral, 95),
+  "--surface-3": hex(neutral, 90),
+  "--surface-hover": hex(neutral, 87),
+  "--inset": hex(neutral, 92),
+  "--line": alpha(variant, 50, 0.22),
+  "--line-strong": alpha(variant, 40, 0.36),
+  "--text": hex(neutral, 10),
+  "--text-muted": hex(variant, 30),
+  "--text-dim": hex(variant, 40),
+  "--shadow": "0 1px 2px rgba(0,0,0,0.04), 0 10px 28px rgba(0,0,0,0.06)",
+  "--backdrop-lines": "0.7",
 };
+
+/* ─── Accents (un jeu par espace) ─────────────────────── */
+
+function darkAccent(id: ThemeKey): Tokens {
+  const p = accentPalette(SPACE_SEEDS[id]);
+  const p2 = accentPalette(SPACE_SEEDS_2[id]);
+  return {
+    "--accent": hex(p, 64),
+    "--accent-2": hex(p2, 72),
+    "--accent-vivid": hex(p, 56),
+    "--on-accent": hex(p, 8),
+    "--accent-container": hex(p, 28),
+    "--on-accent-container": hex(p, 92),
+    "--accent-soft": alpha(p, 64, 0.14),
+    "--accent-tint": `color-mix(in oklab, ${hex(p, 64)} 18%, ${hex(neutral, 21)})`,
+    // Lueurs de guidage : action principale, position actuelle, direct, survol
+    "--glow": alpha(p, 60, 0.38),
+    "--glow-strong": alpha(p, 60, 0.58),
+    "--glow-ring": alpha(p, 70, 0.4),
+    "--spot": alpha(p, 70, 0.95),
+    "--spot-fill": alpha(p, 70, 0.08),
+    "--accent-mid": hex(p, 50),
+    "--accent-low": hex(p, 34),
+    // Fond de page teinté (fumée, dégradés)
+    "--haze": alpha(p, 50, 0.16),
+    "--haze-2": alpha(p2, 55, 0.07),
+  };
+}
+
+function lightAccent(id: ThemeKey): Tokens {
+  const p = accentPalette(SPACE_SEEDS[id]);
+  const p2 = accentPalette(SPACE_SEEDS_2[id]);
+  return {
+    "--accent": hex(p, 44),
+    "--accent-2": hex(p2, 50),
+    "--accent-vivid": hex(p, 52),
+    "--on-accent": hex(p, 100),
+    "--accent-container": hex(p, 90),
+    "--on-accent-container": hex(p, 10),
+    "--accent-soft": alpha(p, 44, 0.1),
+    "--accent-tint": `color-mix(in oklab, ${hex(p, 44)} 12%, ${hex(neutral, 92)})`,
+    "--glow": alpha(p, 50, 0.26),
+    "--glow-strong": alpha(p, 50, 0.4),
+    "--glow-ring": alpha(p, 44, 0.3),
+    "--spot": alpha(p, 44, 0.7),
+    "--spot-fill": alpha(p, 44, 0.06),
+    "--accent-mid": hex(p, 62),
+    "--accent-low": hex(p, 82),
+    "--haze": alpha(p, 70, 0.22),
+    "--haze-2": alpha(p2, 75, 0.1),
+  };
+}
 
 const block = (tokens: Tokens) =>
   Object.entries(tokens)
     .map(([k, v]) => `${k}:${v};`)
     .join("");
 
-/** CSS injected into <head>. Dark by default. */
+/** CSS injecté dans <head>. Mode sombre par défaut, accent de l'accueil par défaut. */
 export const themeCss =
-  `:root,[data-theme="dark"]{color-scheme:dark;${block(darkTokens)}}` +
-  `[data-theme="light"]{color-scheme:light;${block(lightTokens)}}`;
+  `:root,[data-theme="dark"]{color-scheme:dark;${block(darkNeutrals)}${block(darkAccent("home"))}}` +
+  `[data-theme="light"]{color-scheme:light;${block(lightNeutrals)}${block(lightAccent("home"))}}` +
+  // Espace de la page (html[data-space]) ou élément coloré à part (data-accent, ex : tuiles d'espaces)
+  // Univers à part (THEME_OVERRIDES), sur le même modèle
+  (Object.keys(SPACE_SEEDS) as ThemeKey[])
+    .map(
+      (id) =>
+        `${id === "home" ? "" : `:root[data-space="${id}"],`}[data-accent="${id}"]{${block(darkAccent(id))}}` +
+        `${id === "home" ? "" : `:root[data-theme="light"][data-space="${id}"],`}[data-theme="light"] [data-accent="${id}"]{${block(lightAccent(id))}}`,
+    )
+    .join("");
 
-/** Browser UI color (mobile address bar) */
-export const themeColor = { dark: dark.bg, light: light.bg };
+/** Couleur du navigateur (barre d'adresse mobile) */
+export const themeColor = { dark: hex(neutral, 4), light: hex(neutral, 93) };
+
+/** Préfixes d'URL → espace, pour poser data-space avant le premier rendu (voir spaceFromPath) */
+const spaceRoutes = SPACES.filter((s) => s.href !== "/").map((s) => [s.id, [s.href, ...(s.aliases ?? [])]]);
 
 /**
- * Runs before the first paint: applies the theme saved by the visitor (localStorage) to avoid a flash,
- * and sets data-js so reveal animations only hide content when JavaScript actually runs.
+ * Script exécuté avant le premier rendu : applique le thème choisi par le visiteur
+ * (localStorage) et la couleur de l'espace de la page, pour éviter un flash.
+ * Pose aussi data-js : les animations d'apparition ne s'activent que si JavaScript tourne.
  */
-export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}})();`;
+export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}var p=location.pathname.replace(/^\\/(fr|en)(?=\\/|$)/,"").replace(/\\/$/,"")||"/",r=${JSON.stringify(spaceRoutes)},o=${JSON.stringify(THEME_OVERRIDES)},s="home";for(var i=0;i<r.length;i++){for(var j=0;j<r[i][1].length;j++){var h=r[i][1][j];if(p===h||p.indexOf(h+"/")===0){s=r[i][0];}}}if(o[p])s=o[p];d.setAttribute("data-space",s);})();`;
 
 /**
- * Placed right after the page content: starts the reveal of everything already on the first screen
- * without waiting for React (seconds saved on a slow phone). It never touches the elements themselves
- * (React hydrates them as rendered): it adds a stylesheet that targets them by position, then
- * ScrollReveal takes over and removes it. Lower elements are revealed on scroll by ScrollReveal.
+ * Script placé juste après le contenu : lance tout de suite l'apparition des cartes du premier écran,
+ * sans attendre le chargement de React (sur un appareil lent, plusieurs secondes de gagnées).
+ * Il ne touche pas aux cartes (React les reprend telles quelles) : il ajoute dans <head> une feuille
+ * de style qui les cible par leur position, puis ScrollReveal prend le relais et la retire.
+ * Les cartes plus bas restent gérées par ScrollReveal au défilement. La carte principale (data-lcp)
+ * n'en a pas besoin : elle est visible dès le premier affichage (globals.css).
  */
-export const earlyRevealScript = `(function(){var m=document.getElementById("main");if(!m)return;var h=window.innerHeight,css=[],els=[];function path(e){var p=[];while(e&&e!==m){var i=1,s=e;while((s=s.previousElementSibling))i++;p.unshift(e.tagName.toLowerCase()+":nth-child("+i+")");e=e.parentElement}return"#main>"+p.join(">")}m.querySelectorAll("[data-reveal]").forEach(function(c){if(c.getBoundingClientRect().top>=h)return;var s=path(c);els.push(c);css.push(s+"{animation:reveal-in 1000ms cubic-bezier(.16,1,.3,1) calc(120ms + var(--i,0)*80ms) both}"+s+" .stagger>*{animation:reveal-in 900ms cubic-bezier(.16,1,.3,1) calc(260ms + var(--i,0)*80ms + var(--si,0)*60ms) both}"+s+" .words .w>span{animation:word-in 1100ms cubic-bezier(.16,1,.3,1) calc(140ms + var(--wi,0)*55ms) both}")});if(!css.length)return;var st=document.createElement("style");st.id="early-reveal";st.textContent=css.join("");document.head.appendChild(st);window.__earlyReveal=els})();`;
+export const earlyRevealScript = `(function(){var m=document.getElementById("main");if(!m)return;var h=window.innerHeight,css=[],cards=[];function path(e){var p=[];while(e&&e!==m){var i=1,s=e;while((s=s.previousElementSibling))i++;p.unshift(e.tagName.toLowerCase()+":nth-child("+i+")");e=e.parentElement}return"#main>"+p.join(">")}m.querySelectorAll(".card:not([data-lcp])").forEach(function(c){if(c.getBoundingClientRect().top>=h)return;var s=path(c);cards.push(c);css.push(s+"{animation:early-in 700ms cubic-bezier(.16,1,.3,1) calc(var(--i,0)*70ms) both}"+s+" .stagger>*{animation:fade-up 650ms cubic-bezier(.16,1,.3,1) calc(180ms + var(--si,0)*55ms) both}")});if(!css.length)return;var st=document.createElement("style");st.id="early-reveal";st.textContent=css.join("");document.head.appendChild(st);window.__earlyCards=cards})();`;
 
-/** Hex colors for generated images (favicon, Open Graph): dark theme */
+const homeAccent = accentPalette(SPACE_SEEDS.home);
+
+/** Couleurs en hexadécimal pour les images générées (favicon, Open Graph) — mode sombre, accueil */
 export const brand = {
-  bg: dark.bg,
-  surface: dark.surface,
-  surface2: dark.surface2,
-  line: mix(bone, dark.bg, 0.16),
-  text: bone,
-  muted: dark.muted,
-  dim: dark.dim,
-  accent: signal,
-  onAccent: ink,
-  accentTint: mix(signal, dark.bg, 0.25),
+  bg: hex(neutral, 4),
+  surface: hex(neutral, 9),
+  surface2: hex(neutral, 14),
+  line: hex(variant, 25),
+  text: hex(neutral, 94),
+  muted: hex(variant, 78),
+  dim: hex(variant, 64),
+  accent: hex(homeAccent, 60),
+  onAccent: hex(homeAccent, 8),
+  accentTint: hex(homeAccent, 25),
 };

@@ -1,19 +1,16 @@
-// src/components/shell/logo.tsx — "Y" monogram on a red square with the signature cut corner (header, favicon).
-export function Logo({ size = 28 }: { size?: number }) {
+// src/components/shell/logo.tsx — Monogramme "Y" (rail, favicon). Couleurs = tokens d'accent.
+export function Logo({ size = 36 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <path d="M0 0H32V24L24 32H0Z" fill="var(--accent-vivid)" />
-      <path d="M9.5 8.5 16 16.8l6.5-8.3M16 16.8V24" fill="none" stroke="var(--on-accent)" strokeWidth="2.6" strokeLinecap="square" />
+    <svg width={size} height={size} viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+      <rect width="36" height="36" rx="11" fill="var(--accent)" />
+      <path
+        d="M11.5 10.5 18 18.6l6.5-8.1M18 18.6v7.4"
+        fill="none"
+        stroke="var(--on-accent)"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
-  );
-}
-
-/** Logo + "YEXO" wordmark */
-export function Wordmark() {
-  return (
-    <span className="inline-flex items-center gap-2.5">
-      <Logo size={26} />
-      <span className="display text-[22px] leading-none tracking-[0.02em] text-fg">Yexo</span>
-    </span>
   );
 }

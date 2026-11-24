@@ -1,5 +1,6 @@
-// src/components/home/fastfetch.tsx — fastfetch-style terminal panel, fed by src/config/lab.ts.
+// src/components/home/fastfetch.tsx — Carte terminal façon fastfetch, alimentée par src/config/lab.ts.
 import { useTranslations } from "next-intl";
+import { SquareTerminal } from "lucide-react";
 import { HOSTS, VMS, labStats } from "@/config/lab";
 import { RANKS, SOCIALS } from "@/config/site";
 import { Card } from "@/components/ui/card";
@@ -7,8 +8,17 @@ import { Card } from "@/components/ui/card";
 /** Petit logo ASCII façon distribution Linux, dessiné avec la lettre du pseudo */
 const LOGO = ["yy    yy", " yy  yy ", "  yyyy  ", "   yy   ", "   yy   "].join("\n");
 
-/** Palette strip at the bottom of the terminal: the site's own colors */
-const SWATCHES = ["var(--accent-vivid)", "var(--surface-3)", "var(--text-dim)", "var(--text-muted)", "var(--text)"];
+/** Nuancier en bas du terminal : tons de l'accent puis neutres */
+const SWATCHES = [
+  "var(--accent-low)",
+  "var(--accent-mid)",
+  "var(--accent)",
+  "var(--on-accent-container)",
+  "var(--surface-3)",
+  "var(--text-dim)",
+  "var(--text-muted)",
+  "var(--text)",
+];
 
 /** `pro` : version de la page Baptiste, sans les rangs (on reste hors univers Valorant) */
 export function Fastfetch({ className, index, pro = false }: { className?: string; index?: number; pro?: boolean }) {
@@ -33,14 +43,23 @@ export function Fastfetch({ className, index, pro = false }: { className?: strin
   ];
 
   return (
-    <Card id="fastfetch" title="fastfetch" meta="ssh yexo@homelab" index={index} className={className}>
+    <Card
+      id="fastfetch"
+      icon={SquareTerminal}
+      title="fastfetch"
+      subtitle="ssh yexo@homelab"
+      meta="zsh"
+      next="lab"
+      index={index}
+      className={className}
+    >
       <div className="terminal flex-1 overflow-x-auto p-4 text-[12.5px] sm:p-5">
         <p>
           <span className="prompt">yexo@homelab</span> <span className="text-dim">~ $</span>{" "}
           <span className="text-fg">fastfetch</span>
         </p>
         <div className="mt-3 flex items-center gap-4">
-          <pre aria-hidden="true" className="select-none text-[10px] font-semibold leading-[1.3] text-accent-vivid">
+          <pre aria-hidden="true" className="select-none text-[10px] font-semibold leading-[1.3] text-accent">
             {LOGO}
           </pre>
           <div>
@@ -62,7 +81,7 @@ export function Fastfetch({ className, index, pro = false }: { className?: strin
         </dl>
         <div className="mt-3 flex" aria-hidden="true">
           {SWATCHES.map((c) => (
-            <span key={c} className="h-3 w-6" style={{ backgroundColor: c }} />
+            <span key={c} className="h-3 w-5 first:rounded-l last:rounded-r" style={{ backgroundColor: c }} />
           ))}
         </div>
         <p className="mt-4">

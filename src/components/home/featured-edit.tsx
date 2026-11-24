@@ -38,10 +38,10 @@ function TikTokLink() {
       href={FEATURED_EDIT.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group inline-flex items-center gap-2 self-start text-[14px] font-medium text-fg"
+      className="inline-flex items-center gap-1.5 self-start text-sm font-semibold text-accent"
     >
-      <span className="link-line">{t("open")}</span>
-      <ExternalLink size={13} aria-hidden="true" className="text-muted" />
+      {t("open")}
+      <ExternalLink size={13} aria-hidden="true" />
     </a>
   );
 }
@@ -69,7 +69,7 @@ function TikTokPlayer() {
 
   return (
     <div className="flex flex-1 flex-col justify-center gap-3">
-      <div className="media-frame relative mx-auto aspect-[9/16] w-full max-w-[340px] bg-black">
+      <div className="relative mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl bg-black">
         {loaded ? (
           <iframe
             src={`https://www.tiktok.com/player/v1/${FEATURED_EDIT.tiktokId}?${params}`}
@@ -100,8 +100,8 @@ function TikTokPlayer() {
               <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-surface-3 to-black" />
             )}
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                  <span className="relative flex items-center gap-3">
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-accent-vivid text-on-accent transition-transform duration-500 group-hover:scale-110">
+            <span className="relative flex items-center gap-3">
+              <span className="glow live-dot grid h-12 w-12 place-items-center rounded-full bg-accent text-on-accent transition-transform duration-300 group-hover:scale-105">
                 <Play size={20} fill="currentColor" aria-hidden="true" />
               </span>
               <span className="text-sm font-semibold text-white">{t("play")}</span>
@@ -209,7 +209,7 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
   return (
     <div
       className={cn(
-        "media-frame relative w-full bg-black",
+        "relative w-full overflow-hidden rounded-2xl bg-black",
         landscape ? "aspect-video" : "mx-auto aspect-[9/16] max-w-[340px]",
       )}
     >
@@ -252,19 +252,19 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
       {/* Fond opaque plutôt que flou : un flou par-dessus une vidéo est recalculé à chaque image */}
       <div
         className={cn(
-          "absolute bottom-4 left-4 flex flex-col gap-2.5 bg-black/75 p-3 text-white",
+          "absolute bottom-3 left-3 flex flex-col gap-2 rounded-2xl bg-black/70 p-2.5 text-white",
           landscape ? "right-3 sm:right-auto sm:w-[320px]" : "right-3",
         )}
       >
-        <div className="h-[2px] overflow-hidden bg-white/20" aria-hidden="true">
-          <div className="h-full bg-accent-vivid transition-[width] duration-200" style={{ width: `${progress * 100}%` }} />
+        <div className="h-1 overflow-hidden rounded-full bg-white/20" aria-hidden="true">
+          <div className="h-full rounded-full bg-accent transition-[width] duration-200" style={{ width: `${progress * 100}%` }} />
         </div>
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={togglePlay}
             aria-label={playing ? t("controls.pause") : t("controls.play")}
-            className="grid h-9 w-9 place-items-center bg-white text-black transition-transform active:scale-95"
+            className="grid h-9 w-9 place-items-center rounded-full bg-white/15 transition-colors hover:bg-white/25 active:scale-95"
           >
             {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}
           </button>
@@ -273,7 +273,7 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
             onClick={toggleMute}
             aria-label={muted ? t("controls.unmute") : t("controls.mute")}
             aria-pressed={!muted}
-            className="grid h-9 w-9 place-items-center transition-colors hover:bg-white/15 active:scale-95"
+            className="grid h-9 w-9 place-items-center rounded-full transition-colors hover:bg-white/15 active:scale-95"
           >
             <VolumeIcon size={17} />
           </button>
@@ -285,7 +285,7 @@ function NativePlayer({ src, landscape, onFail }: { src: string; landscape: bool
             value={muted ? 0 : volume}
             onChange={(e) => changeVolume(Number(e.target.value))}
             aria-label={t("controls.volume")}
-            className="h-1 min-w-0 flex-1 cursor-pointer accent-[var(--accent-vivid)]"
+            className="h-1 min-w-0 flex-1 cursor-pointer accent-[var(--accent)]"
           />
         </div>
       </div>

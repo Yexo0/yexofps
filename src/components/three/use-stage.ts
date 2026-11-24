@@ -8,7 +8,6 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { afterLoadIdle, cadenceWatch, isSoftwareRenderer } from "@/lib/defer";
-import { PALETTE } from "@/config/theme";
 
 export interface StageReady {
   accent: string;
@@ -49,10 +48,9 @@ export function useStage(ref: RefObject<HTMLElement | null>) {
           const gl = probeWebGL();
           if (!gl) return;
           const cs = getComputedStyle(el);
-          // Rim light in the brand red, fill light in bone: the same two lights for every model
           setReady({
-            accent: cs.getPropertyValue("--accent-vivid").trim() || PALETTE.signal,
-            accent2: PALETTE.bone,
+            accent: cs.getPropertyValue("--accent").trim() || "#ff4655",
+            accent2: cs.getPropertyValue("--accent-2").trim() || "#f2c14e",
             reduced: gl.software || window.matchMedia("(prefers-reduced-motion: reduce)").matches,
           });
         });

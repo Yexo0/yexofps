@@ -1,10 +1,10 @@
-// src/components/gaming/tracker-section.tsx — Full Valorant tracker (stats panel + matches panel).
-// One instance of the hook: both panels share the same API call.
+// src/components/gaming/tracker-section.tsx — Tracker Valorant complet (carte stats + carte parties).
+// Une seule instance du hook : les deux cartes partagent le même appel API.
 "use client";
 
 import { useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
-import { RefreshCw } from "lucide-react";
+import { Crosshair, ListOrdered, RefreshCw } from "lucide-react";
 import { TRACKER } from "@/config/site";
 import { useValorantTracker } from "@/hooks/use-valorant-tracker";
 import type { MatchData } from "@/lib/tracker-types";
@@ -59,7 +59,16 @@ export function TrackerSection() {
 
   return (
     <>
-      <Card id="tracker-stats" title={t("trackerTitle")} meta={account} index={0} className="lg:col-span-5" bodyClassName="gap-5">
+      <Card
+        id="tracker"
+        icon={Crosshair}
+        title={t("trackerTitle")}
+        subtitle={`valorant --live --mode ${TRACKER.mode}`}
+        meta={account}
+        index={1}
+        className="md:col-span-6 lg:col-span-5"
+        bodyClassName="gap-3"
+      >
         {/* Barre d'état et commandes */}
         <div className="flex flex-wrap items-center gap-2">
           <p className="mr-auto flex items-center gap-2 font-mono text-[11.5px] text-muted" role="status">
@@ -67,7 +76,7 @@ export function TrackerSection() {
               aria-hidden="true"
               className={cn(
                 "h-2 w-2 rounded-full",
-                status === "ready" && "live-dot bg-accent-vivid text-accent-vivid",
+                status === "ready" && "live-dot bg-accent",
                 status === "loading" && "bg-surface-hover",
                 (status === "error" || status === "empty") && "ring-1 ring-inset ring-line-strong",
               )}
@@ -95,13 +104,13 @@ export function TrackerSection() {
             <span
               aria-hidden="true"
               className={cn(
-                "relative h-4 w-7 transition-colors",
-                autoOn ? "bg-accent-vivid" : "bg-surface-hover",
+                "relative h-4 w-7 rounded-full transition-colors",
+                autoOn ? "bg-accent" : "bg-surface-hover",
               )}
             >
               <span
                 className={cn(
-                  "absolute top-0.5 h-3 w-3 bg-bg transition-[left] duration-300",
+                  "absolute top-0.5 h-3 w-3 rounded-full bg-surface-solid transition-[left] duration-150",
                   autoOn ? "left-3.5" : "left-0.5",
                 )}
               />
@@ -111,9 +120,9 @@ export function TrackerSection() {
         </div>
 
         {status === "loading" && (
-          <div className="grid grid-cols-2 gap-x-6" aria-hidden="true">
+          <div className="grid grid-cols-2 gap-2" aria-hidden="true">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="border-t border-line py-4">
+              <div key={i} className="tile px-4 py-3.5">
                 <Skeleton className="h-7 w-16" />
                 <Skeleton className="mt-2.5 h-2.5 w-12" />
                 <Skeleton className="mt-2 h-2.5 w-20" />
@@ -123,9 +132,9 @@ export function TrackerSection() {
         )}
 
         {status === "ready" && (
-          <dl className="stagger grid grid-cols-2 gap-x-6">
+          <dl className="stagger grid grid-cols-2 gap-2">
             {tiles.map((tile) => (
-              <div key={tile.label} className="flex flex-col border-t border-line py-4">
+              <div key={tile.label} className="tile flex flex-col px-4 py-4">
                 <dd className="display order-1 text-[44px] tabular-nums text-fg">{tile.value}</dd>
                 <dt className="label order-2 mt-2">{tile.label}</dt>
                 <dd className="order-3 mt-1 text-[11.5px] text-dim">{tile.sub}</dd>
@@ -143,7 +152,16 @@ export function TrackerSection() {
         )}
       </Card>
 
-      <Card id="matches" title={tm("title")} meta={tm("meta")} index={1} className="lg:col-span-7" bodyClassName="gap-4">
+      <Card
+        id="matches"
+        icon={ListOrdered}
+        title={tm("title")}
+        subtitle={`valorant matches --last ${data?.matches.length ?? TRACKER.size}`}
+        meta={tm("meta")}
+        index={2}
+        className="md:col-span-6 lg:col-span-7"
+        bodyClassName="gap-3"
+      >
         {status === "ready" && data && (
           <div className="flex items-center justify-between gap-3">
             <ResultDots matches={data.matches} />
@@ -151,22 +169,22 @@ export function TrackerSection() {
         )}
 
         {status === "loading" && (
-          <ul className="flex flex-col" aria-hidden="true">
+          <ul className="flex flex-col gap-1.5" aria-hidden="true">
             {[0, 1, 2, 3, 4].map((i) => (
-              <li key={i} className="flex items-center gap-4 border-t border-line py-2.5">
-                <Skeleton className="h-10 w-10" />
+              <li key={i} className="tile flex items-center gap-4 px-3 py-2.5">
+                <Skeleton className="h-10 w-10 rounded-xl" />
                 <div className="flex-1">
                   <Skeleton className="h-3.5 w-28" />
                   <Skeleton className="mt-2 h-2.5 w-20" />
                 </div>
-                <Skeleton className="h-6 w-20" />
+                <Skeleton className="h-6 w-20 rounded-full" />
               </li>
             ))}
           </ul>
         )}
 
         {status === "ready" && data && (
-          <ul className="stagger flex flex-col">
+          <ul className="stagger flex flex-col gap-1.5">
             {data.matches.map((m, i) => {
               const hs = matchHs(m);
               return (
@@ -175,7 +193,7 @@ export function TrackerSection() {
                     type="button"
                     aria-haspopup="dialog"
                     onClick={() => setSelected(m)}
-                    className="grid w-full grid-cols-[40px_1fr_auto] items-center gap-x-4 border-t border-line px-1 py-2.5 text-left transition-colors hover:bg-surface-2 sm:grid-cols-[40px_1fr_96px_72px_88px_64px]"
+                    className="grid w-full grid-cols-[40px_1fr_auto] items-center gap-x-4 rounded-[14px] bg-surface-2 px-3 py-2.5 text-left transition-colors hover:bg-surface-3 sm:grid-cols-[40px_1fr_96px_72px_88px_64px]"
                   >
                     <AgentAvatar src={m.agentImg} agent={m.agent} />
                     <span className="min-w-0">
@@ -198,7 +216,9 @@ export function TrackerSection() {
         {status === "error" && <p className="text-sm text-dim">{tm("unavailable")}</p>}
         {status === "empty" && <TrackerNotice kind="empty" />}
 
-        <p className="mt-auto pt-2 text-[12px] text-dim">{tm("note")}</p>
+        <div className="mt-3">
+          <p className="text-xs text-dim">{tm("note")}</p>
+        </div>
       </Card>
 
       <MatchDialog match={selected} onClose={() => setSelected(null)} />

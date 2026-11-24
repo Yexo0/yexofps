@@ -1,9 +1,11 @@
-// src/components/home/key-stats.tsx — Key figures under the home heroes, four columns.
-// Yexo: current rank, peak, Faceit, homelab (the Radiant peak only appears next to the other ranks).
-// Baptiste: work-study, VMs, VLANs, After Effects.
+// src/components/home/key-stats.tsx — Bande de chiffres clés en bas des heros d'accueil.
+// Yexo : rang actuel, peak, Faceit, homelab (le peak Radiant n'apparaît qu'aux côtés des autres rangs).
+// Baptiste : alternance, VM, VLAN, After Effects.
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { Briefcase, Clapperboard, Network, Server } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { VALORANT_PEAK } from "@/config/site";
 import { labStats } from "@/config/lab";
 import { CountUp } from "@/components/ui/count-up";
@@ -11,40 +13,55 @@ import { cn } from "@/lib/utils";
 
 interface Stat {
   id: string;
-  icon?: string;
+  visual: ReactNode;
   value: ReactNode;
   label: string;
 }
 
+function StatIcon({ icon: Icon }: { icon: LucideIcon }) {
+  return (
+    <span className="grid h-9 w-9 place-items-center text-accent">
+      <Icon size={26} strokeWidth={1.6} aria-hidden="true" />
+    </span>
+  );
+}
+
+function RankIcon({ src }: { src: string }) {
+  return <Image src={src} alt="" width={40} height={40} className="h-9 w-9 object-contain" />;
+}
+
 /**
- * Valid definition list: one div per pair directly under <dl>, holding <dt> then <dd>.
- * The figure (dd) shows above its label (flex-col-reverse); the small rank icon sits in the label.
+ * Liste de définitions valide (axe : definition-list, dlitem) : un seul div par paire directement
+ * sous le <dl>, qui ne contient que <dt> puis <dd>. Le chiffre (dd) s'affiche au-dessus du libellé
+ * (flex-col-reverse) ; l'icône, décorative, vit dans le <dt> mais est placée à gauche (globals.css).
  */
 function KeyStatsList({ items, label, className }: { items: Stat[]; label: string; className?: string }) {
   return (
-    <dl aria-label={label} className={cn("key-stats stagger grid grid-cols-2 gap-x-6 lg:grid-cols-4", className)} style={{ "--sd": "950ms" } as CSSProperties}>
-      {items.map((s) => (
-        <div key={s.id} className="key-stat flex min-w-0 flex-col-reverse">
-          <dt className="mt-2 flex items-center gap-2 truncate text-[12.5px] text-muted">
-            {s.icon && <Image src={s.icon} alt="" width={36} height={36} className="h-[18px] w-[18px] object-contain" />}
+    <dl aria-label={label} className={cn("key-stats grid grid-cols-2 lg:grid-cols-4", className)}>
+      {items.map((s, i) => (
+        <div key={s.id} className="key-stat flex min-w-0 flex-col-reverse" style={{ "--si": i } as CSSProperties}>
+          <dt className="truncate text-[12px] text-muted">
+            <span aria-hidden="true" className="key-stat-icon">
+              {s.visual}
+            </span>
             {s.label}
           </dt>
-          <dd className="display truncate text-[34px] text-fg sm:text-[46px]">{s.value}</dd>
+          <dd className="display truncate text-[30px] text-fg sm:text-[38px]">{s.value}</dd>
         </div>
       ))}
     </dl>
   );
 }
 
-/** Yexo profile (Valorant world) */
+/** Profil Yexo (univers Valorant) */
 export function YexoStats({ className }: { className?: string }) {
   const t = useTranslations("home.stats");
   const lab = labStats();
   const items: Stat[] = [
-    { id: "current", icon: "/images/ranks/valorant-immortal-3.webp", value: t("currentValue"), label: t("current") },
+    { id: "current", visual: <RankIcon src="/images/ranks/valorant-immortal-3.webp" />, value: t("currentValue"), label: t("current") },
     {
       id: "peak",
-      icon: VALORANT_PEAK.image,
+      visual: <RankIcon src={VALORANT_PEAK.image} />,
       value: (
         <>
           <CountUp value={VALORANT_PEAK.rr} /> RR
@@ -52,9 +69,10 @@ export function YexoStats({ className }: { className?: string }) {
       ),
       label: t("peak", { episode: VALORANT_PEAK.episode }),
     },
-    { id: "faceit", icon: "/images/ranks/faceit-level-10.png", value: t("faceitValue"), label: t("faceit") },
+    { id: "faceit", visual: <RankIcon src="/images/ranks/faceit-level-10.png" />, value: t("faceitValue"), label: t("faceit") },
     {
       id: "lab",
+      visual: <StatIcon icon={Server} />,
       value: (
         <>
           <CountUp value={lab.vms} /> VM
@@ -66,14 +84,15 @@ export function YexoStats({ className }: { className?: string }) {
   return <KeyStatsList items={items} label={t("label")} className={className} />;
 }
 
-/** Baptiste profile (pro side) */
+/** Profil Baptiste (côté pro et After Effects) */
 export function ProStats({ className }: { className?: string }) {
   const t = useTranslations("home.pro.stats");
   const lab = labStats();
   const items: Stat[] = [
-    { id: "role", value: t("roleValue"), label: t("role") },
+    { id: "role", visual: <StatIcon icon={Briefcase} />, value: t("roleValue"), label: t("role") },
     {
       id: "vms",
+      visual: <StatIcon icon={Server} />,
       value: (
         <>
           <CountUp value={lab.vms} /> VM
@@ -83,6 +102,7 @@ export function ProStats({ className }: { className?: string }) {
     },
     {
       id: "vlans",
+      visual: <StatIcon icon={Network} />,
       value: (
         <>
           <CountUp value={lab.vlans} /> VLAN
@@ -90,7 +110,7 @@ export function ProStats({ className }: { className?: string }) {
       ),
       label: t("vlans"),
     },
-    { id: "ae", value: "After Effects", label: t("ae") },
+    { id: "ae", visual: <StatIcon icon={Clapperboard} />, value: "After Effects", label: t("ae") },
   ];
   return <KeyStatsList items={items} label={t("label")} className={className} />;
 }

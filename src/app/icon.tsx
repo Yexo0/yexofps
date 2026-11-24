@@ -1,4 +1,4 @@
-// src/app/icon.tsx — Generated favicon: the "Y" monogram on the red square with the cut corner.
+// src/app/icon.tsx — Favicon généré : monogramme "Y" aux couleurs de l'accent (suit ACCENT_SEED).
 import { ImageResponse } from "next/og";
 import { brand } from "@/lib/theme";
 
@@ -16,7 +16,7 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: brand.accent,
-          clipPath: "polygon(0 0, 100% 0, 100% 76%, 76% 100%, 0 100%)",
+          borderRadius: 18,
         }}
       >
         <svg width="44" height="44" viewBox="6 6 24 24">
@@ -25,8 +25,8 @@ export default function Icon() {
             fill="none"
             stroke={brand.onAccent}
             strokeWidth="3.4"
-            strokeLinecap="square"
-            strokeLinejoin="miter"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>

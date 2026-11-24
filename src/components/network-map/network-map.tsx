@@ -241,7 +241,7 @@ export function NetworkMap({
                 y={g.y}
                 width={g.w}
                 height={g.h}
-                rx={0}
+                rx={6}
                 fill="none"
                 stroke="var(--line-strong)"
                 strokeDasharray="4 5"
@@ -284,7 +284,7 @@ export function NetworkMap({
                     className={cn(l.kind !== "dashed" && "map-draw", traced && "map-trace")}
                     style={{ ["--li" as string]: li }}
                     fill="none"
-                    stroke={isActive ? "var(--accent-vivid)" : "var(--text-dim)"}
+                    stroke={isActive ? "var(--accent)" : "var(--text-dim)"}
                     strokeOpacity={isActive ? 1 : 0.55}
                     strokeWidth={traced ? 2.2 : isActive ? 1.5 : 1.1}
                     strokeDasharray={l.kind === "dashed" ? "5 5" : undefined}
@@ -296,7 +296,7 @@ export function NetworkMap({
                       d={p.d}
                       pathLength={1}
                       fill="none"
-                      stroke="var(--accent-vivid)"
+                      stroke="var(--accent)"
                       strokeWidth={2.2}
                       className="map-flow-draw map-trace"
                       style={{ ["--from" as string]: forward ? 1 : -1 }}
@@ -313,8 +313,8 @@ export function NetworkMap({
                       style={{ ["--dir" as string]: forward ? -1 : 1 }}
                     />
                   )}
-                  <circle cx={p.x1} cy={p.y1} r={2.4} fill={isActive ? "var(--accent-vivid)" : "var(--text-dim)"} />
-                  <circle cx={p.x2} cy={p.y2} r={2.4} fill={isActive ? "var(--accent-vivid)" : "var(--text-dim)"} />
+                  <circle cx={p.x1} cy={p.y1} r={2.4} fill={isActive ? "var(--accent)" : "var(--text-dim)"} />
+                  <circle cx={p.x2} cy={p.y2} r={2.4} fill={isActive ? "var(--accent)" : "var(--text-dim)"} />
                   {l.label && (
                     <text
                       x={(p.x1 + p.x2) / 2}
@@ -365,10 +365,10 @@ export function NetworkMap({
                 <rect
                   width={W}
                   height={H}
-                  rx={0}
+                  rx={5}
                   className={isActive || isPinned ? "map-trace" : undefined}
                   fill={isActive || isPinned || isDone ? "var(--accent-tint)" : "var(--surface-2)"}
-                  stroke={isActive || isPinned ? "var(--accent-vivid)" : isDone ? "var(--glow-ring)" : "var(--line-strong)"}
+                  stroke={isActive || isPinned ? "var(--accent)" : isDone ? "var(--glow-ring)" : "var(--line-strong)"}
                   strokeWidth={isActive || isPinned ? 1.5 : 1}
                   style={{ transition: "fill 300ms ease, stroke 300ms ease" }}
                 />
@@ -377,7 +377,7 @@ export function NetworkMap({
                   y={13}
                   size={20}
                   strokeWidth={1.8}
-                  color={isActive || isPinned ? "var(--accent-vivid)" : "var(--text-muted)"}
+                  color={isActive || isPinned ? "var(--accent)" : "var(--text-muted)"}
                   aria-hidden="true"
                 />
                 <text x={42} y={20} fill="var(--text)" fontFamily="var(--font-mono)" fontSize={12} fontWeight={600}>
@@ -404,7 +404,7 @@ export function NetworkMap({
                 const Icon = MAP_ICONS[n.icon];
                 const open = pinned === n.id;
                 return (
-                  <li key={n.id} className="overflow-hidden border-t border-line">
+                  <li key={n.id} className="tile overflow-hidden">
                     <button
                       type="button"
                       aria-expanded={open}
@@ -441,7 +441,7 @@ export function NetworkMap({
       </div>
 
       {/* ─── Panneau de détail (desktop) ─── */}
-      <div className="hidden min-h-[132px] flex-col justify-center border-t border-line-strong px-1 py-4 md:flex" aria-live="polite">
+      <div className="tile hidden min-h-[132px] flex-col justify-center px-5 py-4 md:flex" aria-live="polite">
         {activeNode && ActiveIcon ? (
           <div className="flex gap-4">
             <span className="icon-pill" aria-hidden="true">

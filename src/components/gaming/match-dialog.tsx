@@ -66,14 +66,14 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
                     ["score", playerScore(match)],
                   ] as const
                 ).map(([k, v]) => (
-                  <div key={k} className="flex flex-col border-t border-line py-3">
+                  <div key={k} className="tile flex flex-col px-3 py-3">
                     <dd className="order-1 text-xl font-bold tabular-nums">{v}</dd>
                     <dt className="label order-2 mt-1">{t(k)}</dt>
                   </div>
                 ))}
               </dl>
 
-              <div className="mt-2 flex flex-col items-center gap-5 border border-line bg-surface-2 px-4 py-4 sm:flex-row">
+              <div className="tile mt-2 flex flex-col items-center gap-5 px-4 py-4 sm:flex-row">
                 <svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label={t("accuracy")}>
                   <circle cx="60" cy="60" r={R} fill="none" stroke="var(--surface-3)" strokeWidth="12" />
                   {segments.map((s) => (

@@ -1,11 +1,9 @@
-// src/components/shell/section-nav.tsx — "On this page" bar, sticky under the header on long pages.
-// Marks the section being read (scrollspy, red bar gliding between links) and shows reading progress.
-// Slides up with the header when it hides (html[data-header-hidden], set by SiteHeader).
+// src/components/shell/section-nav.tsx — Navigation "sur cette page", collée en haut des espaces longs.
+// Surligne la section en cours de lecture (scrollspy) et affiche la progression dans la page,
+// pour que le visiteur sache toujours où il est et ce qui reste.
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
-import { EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 export interface SectionItem {
@@ -18,7 +16,7 @@ export function SectionNav({ items, label }: { items: SectionItem[]; label: stri
   const barRef = useRef<HTMLSpanElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  // Active section: the first one (in page order) crossing the upper part of the screen
+  // Section active : la première (dans l'ordre de la page) qui traverse le haut de l'écran
   useEffect(() => {
     const visible = new Set<string>();
     const io = new IntersectionObserver(
@@ -39,7 +37,7 @@ export function SectionNav({ items, label }: { items: SectionItem[]; label: stri
     return () => io.disconnect();
   }, [items]);
 
-  // Reading progress (no re-render: the style is written directly)
+  // Barre de progression de lecture (sans re-rendu : on écrit directement le style)
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -61,46 +59,46 @@ export function SectionNav({ items, label }: { items: SectionItem[]; label: stri
     };
   }, []);
 
-  // On phones, keep the active link visible in the scrolling row
+  // Sur mobile, garde la puce active visible dans la rangée défilante
   useEffect(() => {
     const list = listRef.current;
-    const link = list?.querySelector<HTMLElement>(`[data-id="${active}"]`);
-    if (!list || !link) return;
-    list.scrollTo({ left: link.offsetLeft - list.clientWidth / 2 + link.clientWidth / 2, behavior: "smooth" });
+    const chip = list?.querySelector<HTMLElement>(`[data-id="${active}"]`);
+    if (!list || !chip) return;
+    const left = chip.offsetLeft - list.clientWidth / 2 + chip.clientWidth / 2;
+    list.scrollTo({ left, behavior: "smooth" });
   }, [active]);
 
   return (
-    <nav aria-label={label} className="section-nav">
-      <div className="relative flex items-center gap-6">
-        <span className="label hidden shrink-0 lg:inline">{label}</span>
-        <ul ref={listRef} className="no-scrollbar flex min-w-0 gap-6 overflow-x-auto">
-          {items.map((item, i) => {
+    <nav aria-label={label} className="sticky top-2 z-30 mb-2.5 md:top-3 md:mb-3">
+      <div className="relative flex items-center overflow-hidden rounded-full border border-line bg-surface-solid/95 p-1 shadow-[var(--shadow)]">
+        <span className="label hidden shrink-0 pl-3.5 pr-2 lg:inline">{label}</span>
+        <ul ref={listRef} className="no-scrollbar flex min-w-0 gap-1 overflow-x-auto">
+          {items.map((item) => {
             const isActive = item.id === active;
             return (
-              <li key={item.id} data-id={item.id} className="relative shrink-0">
+              <li key={item.id} data-id={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
                   onClick={() => setActive(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={cn("flex h-12 items-center gap-2 text-[13px] transition-colors", isActive ? "text-fg" : "text-muted hover:text-fg")}
+                  className={cn(
+                    "flex h-8 items-center rounded-full px-3.5 text-[13px] font-medium transition-[background-color,color,box-shadow] duration-300",
+                    isActive ? "glow bg-accent-tint text-on-accent-container" : "text-muted hover:bg-surface-3 hover:text-fg",
+                  )}
                 >
-                  <span className={cn("font-mono text-[10px]", isActive ? "text-accent" : "text-dim")}>{String(i + 1).padStart(2, "0")}</span>
                   {item.label}
                 </a>
-                {isActive && (
-                  <motion.span
-                    layoutId="section-current"
-                    aria-hidden="true"
-                    className="absolute inset-x-0 bottom-0 h-[2px] bg-accent-vivid"
-                    transition={{ duration: 0.6, ease: EASE.out }}
-                  />
-                )}
               </li>
             );
           })}
         </ul>
+        <span
+          ref={barRef}
+          aria-hidden="true"
+          className="absolute inset-x-5 bottom-0 h-px origin-left bg-accent"
+          style={{ transform: "scaleX(0)" }}
+        />
       </div>
-      <span ref={barRef} aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px origin-left bg-line-strong" style={{ transform: "scaleX(0)" }} />
     </nav>
   );
 }

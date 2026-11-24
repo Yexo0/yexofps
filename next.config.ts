@@ -7,7 +7,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-/** Old URLs (previous versions of the site) → current pages */
+/** Anciennes URLs (avant la refonte) → nouveaux espaces */
 const LEGACY: [from: string, to: string][] = [
   ["profil", "creator"],
   ["shop", "creator#services"],

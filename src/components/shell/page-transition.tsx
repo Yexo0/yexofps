@@ -1,14 +1,14 @@
-// src/components/shell/page-transition.tsx — Transition between pages (View Transitions through React):
-// the old page lifts away, the new one rises through a mask, leaning slightly in the direction of travel.
-// Project images morph from the grid to their page (named transitions). Animations in globals.css,
-// off under reduced motion. Browsers without View Transitions: plain page change.
+// src/components/shell/page-transition.tsx — Transition entre pages (View Transitions via React) :
+// le contenu glisse dans le sens de la navigation et la carte principale se transforme d'une page
+// à l'autre (nom "lead-card", voir Card). Animations dans globals.css, coupées en mouvement réduit.
+// Navigateurs sans View Transitions : changement de page normal.
 "use client";
 
 import { ViewTransition, useEffect, type ReactNode } from "react";
 import { markNavigation } from "@/lib/nav-direction";
 
 export function PageTransition({ children }: { children: ReactNode }) {
-  // Direction of travel for internal links (header, menu, links inside pages…)
+  // Sens de la navigation pour les liens internes (rail, barre mobile, liens dans les cartes…)
   useEffect(() => {
     function onClick(e: MouseEvent) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
