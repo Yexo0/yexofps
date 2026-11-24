@@ -3,7 +3,7 @@
 // rotation au défilement.
 "use client";
 
-import { Suspense, useLayoutEffect, useRef } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Vector3, type Group } from "three";
@@ -40,19 +40,21 @@ function Laptop() {
   );
 }
 
-function Rig({ pointer, progress, reduced }: StageInput) {
+function Rig({ pointer, progress, reduced, intro = true, onReady }: StageInput) {
   const rig = useRef<Group>(null);
   const t0 = useRef<number | null>(null);
   const look = useRef({ x: 0, y: 0 });
   const viewport = useThree((s) => s.viewport);
   // Le PC (2 unités dans sa plus grande dimension) occupe ~55 % de la largeur du canvas
   const scale = Math.min(viewport.width * 0.28, viewport.height * 0.5);
+  // Rig s'affiche avec le modèle (même frontière Suspense) : la scène est prête
+  useEffect(() => onReady?.(), [onReady]);
 
   useFrame((state, dt) => {
     const g = rig.current;
     if (!g) return;
     if (t0.current === null) t0.current = state.clock.elapsedTime;
-    const since = reduced ? 10 : state.clock.elapsedTime - t0.current;
+    const since = reduced || !intro ? 10 : state.clock.elapsedTime - t0.current;
     const e = easeOut(Math.min(1, since / 1.8));
     const t = reduced ? 0 : state.clock.elapsedTime;
     const p = progress.current ?? 0;

@@ -7,7 +7,7 @@
 // et densité de pixels limitée à 1,5.
 "use client";
 
-import { Suspense, useLayoutEffect, useRef, type RefObject } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Mesh, MeshStandardMaterial, type Group } from "three";
@@ -23,14 +23,19 @@ export interface StageInput {
   /** Défilement à travers le hero (0 en haut, 1 quand il est sorti de l'écran) */
   progress: RefObject<number>;
   reduced: boolean;
+  /** Tour d'inspection à l'arrivée ; faux quand la scène prend le relais d'un poster (même pose de départ) */
+  intro?: boolean;
+  /** Appelé quand le modèle est chargé et la scène affichée */
+  onReady?: () => void;
 }
 
 const easeOut = (x: number) => 1 - Math.pow(1 - x, 4);
 
-function Vandal({ pointer, progress, reduced }: StageInput) {
+function Vandal({ pointer, progress, reduced, intro: withIntro = true, onReady }: StageInput) {
   const { scene } = useGLTF(MODEL, false, true);
   const group = useRef<Group>(null);
-  const intro = useRef(reduced ? 1 : 0);
+  const intro = useRef(reduced || !withIntro ? 1 : 0);
+  useEffect(() => onReady?.(), [onReady]);
   const look = useRef({ x: 0, y: 0 });
   const viewport = useThree((s) => s.viewport);
 

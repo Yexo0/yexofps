@@ -14,6 +14,8 @@ export interface StageReady {
   accent2: string;
   /** Scène figée : mouvement réduit demandé, WebGL sans GPU ou appareil trop lent */
   reduced: boolean;
+  /** WebGL rendu par le processeur (pas de GPU) */
+  software: boolean;
 }
 
 /** WebGL disponible ? `software` : rendu sans GPU. Le contexte de test est libéré aussitôt. */
@@ -52,6 +54,7 @@ export function useStage(ref: RefObject<HTMLElement | null>) {
             accent: cs.getPropertyValue("--accent").trim() || "#ff4655",
             accent2: cs.getPropertyValue("--accent-2").trim() || "#f2c14e",
             reduced: gl.software || window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+            software: gl.software,
           });
         });
       },

@@ -72,8 +72,22 @@ const nextConfig: NextConfig = {
   experimental: {
     // Transitions entre pages (<ViewTransition> de React, voir components/shell/page-transition)
     viewTransition: true,
+    // CSS intégré dans le HTML (balise <style>) au lieu d'un fichier à télécharger avant d'afficher
+    // quoi que ce soit : une requête bloquante de moins sur le chemin critique
+    inlineCss: true,
+  },
+  turbopack: {
+    resolveAlias: {
+      // Polyfills de Next (trimStart, flat, at, Object.hasOwn…) : tous natifs dans les navigateurs
+      // visés (Chrome/Edge/Firefox 111+, Safari 16.4+) → remplacés par le strict nécessaire
+      "../build/polyfills/polyfill-module": "./src/lib/polyfills.ts",
+    },
   },
   images: {
+    // Tailles intermédiaires : une tuile de ~410 px reçoit une image de 448 px (et plus 640)
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 448],
+    // Qualités autorisées : 75 par défaut, 45 pour les visuels d'ambiance (tuiles en fond, atténuées)
+    qualities: [45, 75],
     // Statut Discord en direct (/now) : pochettes Spotify, avatar et décoration Discord.
     // Les images passent par le serveur du site : les visiteurs ne contactent ni Spotify ni Discord.
     remotePatterns: [

@@ -42,7 +42,7 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
                 aria-label={`${n}. ${t(`${space.id}.title`)} : ${t(`${space.id}.desc`)}`}
               >
                 {image && (
-                  <Image src={image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw" className="space-tile-image" />
+                  <Image src={image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw" quality={45} className="space-tile-image" />
                 )}
                 <Icon aria-hidden="true" className="space-tile-icon" strokeWidth={1.2} />
                 <span aria-hidden="true" className="relative flex items-start justify-between">
