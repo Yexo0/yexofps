@@ -20,10 +20,6 @@
       "title": "Créateur",
       "description": "Mes montages vidéo Valorant sur TikTok, mes partenaires et Y-Services : presets d'étalonnage, montages et patch anti-compression."
     },
-    "tools": {
-      "title": "Outils",
-      "description": "Convertisseur de sensibilité entre Valorant, CS2, Apex Legends et Overwatch 2, avec cm/360 et eDPI."
-    },
     "contact": {
       "title": "Contact",
       "description": "Emails pro et business, Discord, TikTok, Instagram : tous les moyens de me joindre."
@@ -46,6 +42,10 @@
     "baptiste": {
       "title": "Baptiste · admin systèmes et réseaux, motion design",
       "description": "Le côté pro de Yexo : alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, homelab, et montage sur After Effects."
+    },
+    "projects": {
+      "title": "Projets",
+      "description": "Les projets de Yexo : YexoFX pour After Effects, Claimd, YexoClip, ce site, le homelab, un convertisseur de sensibilité et plus."
     }
   },
   "common": {
@@ -59,18 +59,21 @@
     "close": "Fermer",
     "write": "Écrire",
     "download": "Télécharger",
-    "placeholderNote": "valeur d'exemple",
     "footer": {
-      "copyright": "© {year} {name} · {author}"
+      "copyright": "© {year} {name} · {author}",
+      "cta": {
+        "label": "Contact",
+        "title": "Parlons-en",
+        "text": "Boulot, collab ou montage :",
+        "copy": "Copier l'adresse"
+      },
+      "spaces": "Espaces",
+      "elsewhere": "Ailleurs",
+      "now": "En ce moment",
+      "top": "Haut de page"
     },
     "status": {
-      "session": "yexo",
-      "nav": "Espaces (barre d'état)",
-      "deployed": "auto-hébergé · déployé le {date}",
-      "theme": {
-        "dark": "sombre",
-        "light": "clair"
-      }
+      "deployed": "Auto-hébergé · déployé le {date}"
     },
     "credits": {
       "models": "Modèles 3D :",
@@ -83,18 +86,15 @@
   "nav": {
     "main": "Navigation principale",
     "homeLogo": "Yexo, retour à l'accueil",
-    "avatar": "Me contacter",
-    "goToSpace": "Espace {n} : {name}",
-    "more": "Plus",
-    "moreDescription": "Autres espaces et outils",
+    "more": "Menu",
     "close": "Fermer",
     "spaces": {
       "home": "Accueil",
+      "projects": "Projets",
       "career": "Parcours",
       "lab": "Lab",
-      "gaming": "Gaming",
       "creator": "Créateur",
-      "tools": "Outils",
+      "gaming": "Gaming",
       "contact": "Contact"
     },
     "tools": {
@@ -103,42 +103,11 @@
       "themeDark": "Mode sombre",
       "shortcuts": "Raccourcis clavier",
       "language": "English version"
-    },
-    "rail": {
-      "home": {
-        "title": "Accueil",
-        "desc": "Qui je suis, en bref"
-      },
-      "career": {
-        "title": "Parcours",
-        "desc": "Études, alternance, compétences"
-      },
-      "lab": {
-        "title": "Homelab",
-        "desc": "Mon infra à la maison"
-      },
-      "gaming": {
-        "title": "Gaming",
-        "desc": "Rangs et stats en direct"
-      },
-      "creator": {
-        "title": "Création",
-        "desc": "Montages et Y-Services"
-      },
-      "tools": {
-        "title": "Outils",
-        "desc": "Convertisseur de sensibilité"
-      },
-      "contact": {
-        "title": "Contact",
-        "desc": "M'écrire, savoir où j'en suis"
-      },
-      "settings": "Réglages"
     }
   },
   "palette": {
     "title": "Palette de commandes",
-    "placeholder": "Aller à un espace, copier un email, ouvrir un tuto…",
+    "placeholder": "Aller à une page, un projet, copier un email…",
     "results": "Résultats",
     "empty": "Rien ne correspond à « {query} ».",
     "groups": {
@@ -147,7 +116,8 @@
       "actions": "Actions",
       "links": "Liens",
       "products": "Y-Services",
-      "docs": "Tutos PDF"
+      "docs": "Tutos PDF",
+      "projects": "Projets"
     },
     "sections": {
       "timeline": "Frise du parcours",
@@ -155,7 +125,6 @@
       "missions": "Missions de stage",
       "infraBts": "Schéma réseau du BTS",
       "watch": "Veille technologique",
-      "docs": "Tutos PDF",
       "labMap": "Schéma du homelab",
       "labMachines": "Machines du lab",
       "ranks": "Rangs",
@@ -188,7 +157,7 @@
   },
   "shortcuts": {
     "title": "Raccourcis clavier",
-    "subtitle": "man yexo",
+    "subtitle": "Pour aller plus vite sur le site",
     "spaces": "Espaces",
     "general": "Général",
     "palette": "Palette de commandes",
@@ -231,8 +200,7 @@
         }
       },
       "title": "Y-Services",
-      "meta": "{count} produits",
-      "intro": "Les presets, montages et outils que j'utilise pour mes propres vidéos. Pour commander, ouvre un ticket sur Discord (le plus rapide), écris-moi par email, ou achète directement sur Payhip.",
+      "intro": "Les presets, montages et outils que j'utilise pour mes propres vidéos.",
       "order": "Commander",
       "orderLabel": "Commander « {product} » sur Discord",
       "example": "Voir un exemple",
@@ -241,18 +209,11 @@
     "bio": {
       "title": "Créateur",
       "tagline": "Je monte des vidéos Valorant : rythme calé sur la musique, transitions propres, couleurs travaillées.",
-      "text": "Je publie sous le nom de Yexo sur TikTok depuis 2022. Je monte surtout mes propres parties, avec un soin particulier pour le rythme, les transitions et le sound design. Ce que j'utilise pour mes vidéos, je le propose aussi : presets d'étalonnage, montages sur commande et patch anti-compression, réunis dans Y-Services.",
-      "chips": {
-        "valorant": "Joueur Valorant",
-        "editor": "Monteur vidéo",
-        "age": "{age} ans",
-        "location": "France"
-      },
+      "text": "Sur TikTok en tant que Yexo depuis 2022, surtout sur mes propres parties. Ce que j'utilise pour mes vidéos, je le propose aussi aux autres avec Y-Services.",
       "photoAlt": "Mon poste de montage, avec la timeline d'une vidéo Valorant à l'écran"
     },
     "history": {
-      "title": "Historique",
-      "meta": "{count} étapes",
+      "title": "Depuis 2021",
       "items": {
         "competitive": "Début du jeu compétitif",
         "tiktok": "Premiers montages sur TikTok",
@@ -279,17 +240,16 @@
     },
     "edits": {
       "title": "Montages",
-      "intro": "Deux exemples : un montage simple et un plus poussé. Le reste est sur TikTok.",
+      "intro": "Un montage simple et un plus avancé. Le reste est sur TikTok.",
       "items": {
         "basicEdit": "Exemple de montage basique",
         "advancedEdit": "Exemple de montage avancé"
       },
-      "all": "Tous mes montages sur TikTok",
+      "all": "Tous les montages sur TikTok",
       "newTab": "s'ouvre dans un nouvel onglet"
     },
     "partners": {
       "title": "Partenaires",
-      "meta": "codes promo",
       "discount": "−{discount} % avec le code {code}",
       "visit": "Le site",
       "visitLabel": "Ouvrir le site de {name} (lien partenaire)",
@@ -314,13 +274,11 @@
         "text": "Achat instantané, sans passer par une discussion.",
         "cta": "Ouvrir Payhip"
       },
-      "delivery": "Livraison : les fichiers ou ressources, avec des instructions si besoin. Prix affichés en euros.",
-      "tip": "Quand tu me contactes, précise le produit, ton logiciel et ce que tu veux obtenir."
+      "delivery": "Livraison : les fichiers ou ressources, avec des instructions si besoin. Prix affichés en euros."
     },
     "reviews": {
       "title": "Avis clients",
-      "meta": "{count} avis",
-      "intro": "Des messages reçus après livraison, recopiés tels quels.",
+      "intro": "Messages reçus après livraison, tels quels.",
       "via": "via {platform}",
       "quote": "« {text} »",
       "all": "Tous les avis sont sur Discord",
@@ -376,9 +334,6 @@
           "desc": "Étendues, réservations, zones et enregistrements DNS"
         }
       },
-      "title": "Tutos PDF",
-      "meta": "{count} PDF",
-      "intro": "Guides techniques rédigés pendant ma formation, à télécharger.",
       "pages": "{count} p.",
       "downloadLabel": "Télécharger le PDF ({count} pages)",
       "categories": {
@@ -391,48 +346,26 @@
       }
     },
     "intro": {
-      "meta": "admin sys · réseau",
-      "role": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI",
-      "school": "Bachelor Administrateur systèmes, réseaux et bases de données · EPSI Grenoble",
-      "p1": "Depuis novembre 2026, je suis alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en parallèle du bachelor Administrateur systèmes, réseaux et bases de données de l'EPSI Grenoble. Avant ça, j'ai fait un BTS SIO option SISR au Campus CCI de Nîmes, avec un stage en infogérance chez Cekoya.",
-      "p2": "Ce qui me plaît dans l'infra : comprendre pourquoi ça marche avant d'y toucher, et laisser derrière moi une config propre et documentée. Mon homelab sert à tester tout ce que je n'ai pas le droit de casser ailleurs.",
-      "stats": {
-        "missions": "Missions détaillées",
-        "docs": "Tutos rédigés",
-        "homelab": "Homelab depuis"
-      },
+      "eyebrow": "Systèmes et réseaux",
+      "title": "Parcours",
+      "role": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI,",
+      "lead": "et étudiant en bachelor à l'EPSI Grenoble. J'aime comprendre pourquoi ça marche avant d'y toucher, et laisser derrière moi une config propre et documentée.",
       "email": "M'écrire",
-      "emailLabel": "l'email pro"
-    },
-    "elsewhere": {
-      "title": "En dehors du poste",
-      "content": {
-        "title": "Création de contenu",
-        "text": "Je monte des vidéos Valorant sous le nom de Yexo : rythme, transitions et sound design."
-      },
-      "watch": {
-        "title": "Veille",
-        "text": "Je suis l'actualité de la cybersécurité, de l'infra cloud et des outils open source."
-      },
-      "homelab": {
-        "title": "Homelab et scripts",
-        "text": "Self-hosting, scripts d'automatisation et maquettes réseau à la maison, détaillés dans l'espace Lab."
+      "emailLabel": "l'email pro",
+      "facts": {
+        "missions": "Missions de stage",
+        "docs": "Tutos PDF rédigés",
+        "homelab": "Homelab depuis"
       }
     },
     "timeline": {
-      "title": "Parcours",
-      "meta": "{count} étapes",
-      "current": "en cours",
-      "seeMissions": "Voir les missions du stage",
+      "title": "Étapes",
+      "seeMissions": "Voir les missions",
       "items": {
         "workStudy": {
           "date": "Depuis novembre 2026",
           "title": "Alternant gestionnaire d'infrastructures informatiques",
-          "place": "Au sein d'une DSI",
-          "items": [
-            "Support de proximité auprès des utilisateurs",
-            "Traitement des tickets dans GLPI"
-          ]
+          "place": "Au sein d'une DSI"
         },
         "bachelor": {
           "date": "2026 – 2027",
@@ -443,23 +376,13 @@
           "date": "2024 – 2026",
           "title": "BTS SIO option SISR",
           "place": "Campus CCI de Nîmes",
-          "text": "Le BTS SIO forme à l'informatique en entreprise ; l'option SISR se concentre sur les réseaux, les systèmes et la sécurité. J'ai choisi SISR pour le côté infrastructure : comprendre un réseau, le configurer, le sécuriser et le maintenir.",
-          "items": [
-            "Administration Windows et Linux, virtualisation, comptes et services",
-            "Adressage IP, VLAN, routage, maquettes sous Cisco Packet Tracer",
-            "Diagnostic d'incidents, installation et configuration de postes",
-            "Sécurité : mises à jour, mots de passe, segmentation, règles réseau"
-          ]
+          "text": "Deux ans d'informatique en entreprise, option réseaux et systèmes : comprendre un réseau, le configurer, le sécuriser et le maintenir."
         },
         "internship": {
           "date": "Stage",
           "title": "Stage chez Cekoya",
           "place": "Nîmes · infogérance pour des clients professionnels",
-          "items": [
-            "Support informatique des clients, à distance et sur site",
-            "Configuration réseau et déploiement d'équipements",
-            "Inventaire du parc et maintenance préventive"
-          ]
+          "text": "Support, configuration réseau et inventaire du parc pour des clients professionnels."
         },
         "but": {
           "date": "2023 – 2024",
@@ -475,45 +398,43 @@
     },
     "skills": {
       "title": "Compétences",
-      "meta": "{count} domaines",
       "items": {
         "support": {
           "title": "Support N1 / N2",
-          "text": "Diagnostiquer, isoler, corriger, puis valider avec l'utilisateur. Je traite les tickets dans GLPI, j'installe et je configure les postes, et j'explique ce que j'ai fait avec des mots simples."
+          "text": "Diagnostiquer, isoler, corriger, puis valider avec l'utilisateur, tickets dans GLPI."
         },
         "windows": {
           "title": "Windows Server et Active Directory",
-          "text": "Création de domaine, OU, comptes et groupes, stratégies de groupe (GPO), DHCP et DNS sous Windows Server. Les tutos AD, GPO et DHCP/DNS sont plus bas."
+          "text": "Domaines, UO, comptes et groupes, GPO, DHCP et DNS sous Windows Server."
         },
         "virtualization": {
           "title": "Virtualisation",
-          "text": "VMware ESXi (VM, vSwitch, utilisateurs et droits), Proxmox pour les VM et les conteneurs, Hyper-V pour les labs d'école."
+          "text": "VMware ESXi, Proxmox pour les VM et conteneurs, Hyper-V pour les labs d'école."
         },
         "network": {
           "title": "Réseau",
-          "text": "Adressage IP, VLAN et routage inter-VLAN, configuration de routeurs MikroTik et Zyxel avec bascule 4G, bornes Wi-Fi Cisco, pare-feu IPFire et pfSense."
+          "text": "Adressage, VLAN et routage inter-VLAN, routeurs avec secours 4G, pare-feu."
         },
         "linux": {
           "title": "Linux",
-          "text": "Debian et Ubuntu côté serveur : DHCP, FTP, MariaDB, routage inter-VLAN, serveur Zabbix et ses agents."
+          "text": "Serveurs Debian et Ubuntu : DHCP, FTP, MariaDB, routage, Zabbix et ses agents."
         },
         "inventory": {
           "title": "Parc et inventaire",
-          "text": "Inventaire matériel et logiciel avec GLPI et FusionInventory, déploiement d'images avec FOG, règles de nommage pour retrouver une machine en dix secondes."
+          "text": "Inventaire matériel et logiciel, déploiement d'images, règles de nommage qui tiennent."
         },
         "code": {
           "title": "Code",
-          "text": "Python pour les scripts d'automatisation, C# pour des applications console, HTML, CSS et JavaScript pour le web, Git pour versionner le tout."
+          "text": "Python pour automatiser, C# pour des applis console, HTML, CSS et JS, le tout sous Git."
         },
         "soft": {
           "title": "Savoir-être",
-          "text": "Je garde mon calme quand ça casse, je traite d'abord ce qui bloque le plus de monde, et je documente ce que je fais : les dix tutos PDF plus bas en sont la preuve. Je travaille aussi bien seul qu'en binôme."
+          "text": "Calme quand ça casse, le plus bloquant d'abord, et tout est documenté."
         }
       }
     },
     "missions": {
       "title": "Missions de stage",
-      "meta": "{count} missions",
       "labels": {
         "context": "Contexte",
         "objective": "Objectif",
@@ -524,9 +445,7 @@
         "support": {
           "tab": "Support et incidents réseau",
           "title": "Diagnostiquer vite, corriger proprement",
-          "intro": "Pendant mon stage chez Cekoya, j'ai participé au support des clients : incidents réseau, services indisponibles, postes instables, impressions, accès aux ressources. Le support, c'est surtout une méthode : identifier, isoler, corriger, puis valider.",
-          "missionLabel": "Mission mise en avant",
-          "mission": "Incident réseau : partages et imprimantes inaccessibles sur plusieurs postes après un changement d'équipement (routeur ou switch). Objectif : rétablir l'accès vite, sans perturber davantage la production.",
+          "intro": "Support des clients : incidents réseau, services indisponibles, postes instables, impressions, accès aux ressources. Surtout une méthode : identifier, isoler, corriger, puis valider.",
           "context": "Plusieurs utilisateurs signalent des dossiers partagés inaccessibles, des imprimantes introuvables et des connexions instables. Le problème semble limité à une zone précise du réseau.",
           "objective": "Rétablir l'accès aux partages, aux imprimantes et aux applications, vérifier la stabilité, puis valider avec les utilisateurs concernés.",
           "role": "Piste DHCP/DNS, erreur de VLAN, câble ou port défaillant, conflit d'adressage : il fallait d'abord savoir si le problème venait des postes ou du réseau.",
@@ -536,18 +455,6 @@
             "Tester l'accès aux ressources : ping passerelle, serveur, partages, imprimantes",
             "Isoler la zone : port du switch, VLAN, équipement relié aux postes concernés",
             "Corriger, puis valider sur un cas réel (partage et impression)"
-          ],
-          "proofTitle": "Pourquoi ça compte",
-          "proofText": "Le support demande de la technique, mais surtout une méthode claire pour réduire le temps d'indisponibilité tout en laissant un résultat propre.",
-          "impacts": [
-            {
-              "title": "Prioriser",
-              "text": "Je traite d'abord ce qui bloque le plus (l'accès aux ressources essentielles), puis je vérifie la stabilité avant de clôturer."
-            },
-            {
-              "title": "Valider",
-              "text": "Une correction n'est jamais supposée : je la teste sur un poste réel, puis je confirme avec les utilisateurs que tout est revenu à la normale."
-            }
           ],
           "tags": [
             "Diagnostic",
@@ -559,9 +466,7 @@
         "project": {
           "tab": "Bascule 4G de secours",
           "title": "Déploiement d'une solution 4G de secours",
-          "intro": "Mission réalisée pendant mon stage chez Cekoya, dans un contexte d'infogérance auprès de clients professionnels (PME, commerces, structures administratives).",
-          "missionLabel": "Ma mission : configurer le routeur 4G",
-          "mission": "J'étais responsable de la partie technique du routeur 4G : préparation, configuration, bascule et tests. Le but : livrer une configuration fiable, prête à être installée chez le client.",
+          "intro": "Pour des clients professionnels en infogérance : PME, commerces, structures administratives.",
           "context": "Un client subissait des coupures régulières de sa connexion principale, ce qui bloquait ses outils métier, sa téléphonie IP et le travail des équipes.",
           "objective": "Basculer automatiquement sur une connexion de secours, sans intervention manuelle, pour limiter l'impact des coupures.",
           "role": "Préparation, configuration, bascule et tests en autonomie, intégration sur site avec un technicien référent.",
@@ -571,18 +476,6 @@
             "Détecter la panne et revenir automatiquement quand la ligne principale est stable",
             "Simuler des coupures pour vérifier le passage en 4G et la stabilité",
             "Confirmer le retour automatique sur la ligne principale"
-          ],
-          "proofTitle": "Critères de réussite",
-          "proofText": "La solution est validée quand le client garde une connexion fonctionnelle pendant une coupure, et que la bascule comme le retour se font seuls et de façon stable.",
-          "impacts": [
-            {
-              "title": "Fiabilité",
-              "text": "Solution simple à maintenir, bascule testée en conditions réalistes avant la mise en production."
-            },
-            {
-              "title": "Travail en binôme",
-              "text": "Préparation technique en autonomie, intégration sur site et validation finale avec le technicien référent."
-            }
           ],
           "tags": [
             "MikroTik",
@@ -594,9 +487,7 @@
         "assistance": {
           "tab": "Assistance utilisateur",
           "title": "Dépanner et rendre l'utilisateur autonome",
-          "intro": "Pendant mon stage chez Cekoya, j'étais souvent en contact direct avec les utilisateurs, à distance ou sur site. Le but : résoudre l'incident vite, en expliquant ce qui se passe et ce que je fais.",
-          "missionLabel": "Mission mise en avant",
-          "mission": "Déploiement d'un nouveau poste après incident, avec récupération de l'environnement de l'utilisateur et vérifications réseau.",
+          "intro": "Contact direct avec les utilisateurs, à distance ou sur site : résoudre l'incident vite, et expliquer ce qui se passe.",
           "context": "Un utilisateur ne pouvait plus travailler : lenteurs, plantages, accès aléatoire aux lecteurs réseau, à l'impression et aux applications. La priorité : le remettre au travail rapidement.",
           "objective": "Fournir un poste stable, retrouver ses comptes, accès et outils, et lui montrer les vérifications simples à faire seul.",
           "role": "Installation et configuration du poste, réintégration au domaine si besoin, vérifications DHCP/DNS, partages et imprimantes, puis accompagnement.",
@@ -605,18 +496,6 @@
             "Vérifier les accès : partages, impression, applications, navigation",
             "Expliquer ce qui a été fait et comment éviter que ça se reproduise",
             "Faire tester les tâches réelles de l'utilisateur avant de clôturer"
-          ],
-          "proofTitle": "Pourquoi ça compte",
-          "proofText": "L'assistance ne consiste pas seulement à réparer : il faut traduire un problème technique en actions simples pour l'utilisateur.",
-          "impacts": [
-            {
-              "title": "Expliquer simplement",
-              "text": "Je décris ce que je fais sans jargon et je laisse deux ou trois vérifications rapides à refaire seul (Wi-Fi, câble, redémarrage)."
-            },
-            {
-              "title": "Clôturer sur du réel",
-              "text": "L'utilisateur teste ses tâches habituelles. Le ticket n'est fermé que quand le poste fonctionne vraiment."
-            }
           ],
           "tags": [
             "Poste",
@@ -628,9 +507,7 @@
         "inventory": {
           "tab": "Gestion du parc",
           "title": "Suivre le parc, éviter les surprises",
-          "intro": "La gestion du parc, c'est la base d'un SI propre : savoir quel matériel existe, où il se trouve, dans quel état et qui l'utilise. C'est aussi ce qui permet d'anticiper les pannes et les renouvellements.",
-          "missionLabel": "Mission mise en avant",
-          "mission": "Remise à jour de l'inventaire du parc d'un client : vérification du matériel sur site, consolidation des informations et mise à jour du suivi pour faciliter la maintenance et le support.",
+          "intro": "Savoir quel matériel existe, où il est, dans quel état et qui l'utilise : la base d'un SI propre, et de renouvellements anticipés.",
           "context": "L'inventaire du client était incomplet : des postes non référencés, du matériel passé d'un utilisateur à l'autre, et des informations (modèle, numéro de série, emplacement) périmées.",
           "objective": "Un inventaire fiable des postes, périphériques et équipements réseau, avec assez de traçabilité pour accélérer le support et planifier les renouvellements.",
           "role": "Relevés sur le terrain, consolidation et mise à jour de l'inventaire. J'ai aussi standardisé certains champs (noms, lieux, responsables) pour qu'il reste lisible dans le temps.",
@@ -640,18 +517,6 @@
             "Appliquer une règle de nommage (PC-XXX, SALLE-XXX) pour tout retrouver vite",
             "Repérer le matériel fantôme : présent dans l'outil mais absent sur site, et inversement",
             "Centraliser les infos utiles au support : OS, IP fixe, garantie, rôle de la machine"
-          ],
-          "proofTitle": "Pourquoi ça compte",
-          "proofText": "La différence ne tient pas à « faire un inventaire », mais à structurer des données assez fiables pour servir tous les jours au support, à la maintenance et à la sécurité.",
-          "impacts": [
-            {
-              "title": "Terrain, outil, vérification",
-              "text": "Je collecte, je structure, puis je contrôle que les informations sont cohérentes et réutilisables."
-            },
-            {
-              "title": "Moins d'incidents",
-              "text": "Un inventaire propre accélère les dépannages (quel matériel, où, pour qui) et aide à suivre les mises à jour."
-            }
           ],
           "tags": [
             "Inventaire",
@@ -663,9 +528,7 @@
         "communication": {
           "tab": "Communication externe",
           "title": "Communiquer pour convaincre",
-          "intro": "Comment Cekoya communique vers l'extérieur (image, acquisition, crédibilité), et comment j'applique la même logique à mes projets perso : contenu et services.",
-          "missionLabel": "Communication externe chez Cekoya",
-          "mission": "Cekoya s'appuie sur plusieurs leviers complémentaires : site vitrine, LinkedIn, présence et avis Google, partenariats et salons. Le but : être visible, inspirer confiance et créer des opportunités.",
+          "intro": "Comment l'entreprise se présente (image, acquisition, crédibilité), et comment j'applique la même logique à mes contenus et services.",
           "context": "Site vitrine (première impression), LinkedIn (image pro et réseau), Google (être trouvé et recommandé), partenariats (crédibilité terrain), salons (visibilité et confiance).",
           "objective": "Une communication qui tient la route : le même message partout, confirmé par la réputation.",
           "role": "Analyse des leviers de communication, puis application de la même logique à mes projets : montrer, rassurer, convertir. Mon contenu sert de preuve.",
@@ -676,18 +539,6 @@
             "Site vitrine : rassurer dès la première impression",
             "LinkedIn : crédibiliser et créer des contacts"
           ],
-          "proofTitle": "Ce que ça montre",
-          "proofText": "Je sais vendre par la preuve : un contenu qui rassure, un discours clair et une offre simple. C'est la même base qu'une communication externe efficace en entreprise.",
-          "impacts": [
-            {
-              "title": "Un message cohérent",
-              "text": "Le même discours sur le site, LinkedIn et Google ; les partenaires et les retours clients le confirment."
-            },
-            {
-              "title": "Appliqué à mes projets",
-              "text": "Montrer, rassurer, convertir : mes montages servent de preuve directe de qualité pour Y-Services."
-            }
-          ],
           "tags": [
             "Site web",
             "LinkedIn",
@@ -695,12 +546,12 @@
             "Partenariats"
           ]
         }
-      }
+      },
+      "intro": "Cinq missions de mon stage de BTS chez Cekoya, en infogérance."
     },
     "infra": {
       "title": "Réseau de formation (BTS)",
-      "meta": "{count} nœuds",
-      "intro": "L'infrastructure montée pendant le BTS : un serveur VMware qui héberge le pare-feu IPFire, les serveurs du LAN et un WordPress en DMZ, derrière le réseau du lycée. Survole ou sélectionne un nœud pour voir son rôle.",
+      "intro": "Monté pendant le BTS : un serveur VMware avec le pare-feu IPFire, les serveurs du LAN et un site WordPress en DMZ. Sélectionne un nœud pour voir son rôle.",
       "hint": "Survole ou sélectionne un nœud : son rôle, ses voisins et le chemin depuis le réseau du lycée s'affichent ici.",
       "related": "Relié à",
       "ungrouped": "Réseau du lycée",
@@ -795,7 +646,7 @@
     },
     "watch": {
       "title": "Veille technologique",
-      "topic": "L'évolution de la virtualisation serveur, de VMware à aujourd'hui",
+      "topic": "L'évolution de la virtualisation des serveurs, de VMware à aujourd'hui.",
       "sections": {
         "before": {
           "title": "Avant la virtualisation",
@@ -838,39 +689,27 @@
         }
       },
       "sources": "Sources : Google Alerts, LeMondeInformatique, ZDNet, Tom's Hardware, VMware Community, Reddit r/sysadmin",
-      "more": "Lire la veille"
+      "more": "Lire toute la veille"
     }
   },
   "home": {
     "hero": {
       "avatarAlt": "Photo de profil de Yexo",
       "realName": "Baptiste · {age} ans · France",
-      "tagline": "Admin systèmes et réseaux en alternance, joueur de FPS et monteur vidéo sur Valorant.",
-      "contact": "Me contacter",
-      "whoami": {
+      "punch": "Je monte des clips Valorant et je fais tourner des serveurs.",
+      "caption": "Vandal · Champions",
+      "work": "Voir mes projets",
+      "profiles": {
         "label": "Choisir le profil affiché",
-        "hint": "deux profils, deux univers",
+        "hint": "Profil",
         "yexo": {
-          "title": "Yexo, côté jeu et montage.",
-          "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services.",
-          "path": "Voir mes montages",
           "name": "Yexo",
-          "tag": "Jeu · montage",
-          "go": "Voir le côté jeu"
+          "tag": "Gaming et montage"
         },
         "baptiste": {
-          "title": "Baptiste, côté infra.",
-          "text": "Alternant gestionnaire d'infrastructures informatiques au sein d'une DSI, en bachelor à l'EPSI Grenoble. Entre deux tickets, je casse mon homelab pour apprendre à le réparer.",
-          "path": "Voir mon parcours",
           "name": "Baptiste",
-          "tag": "Infra · côté pro",
-          "go": "Voir le côté pro"
+          "tag": "Infrastructure, côté pro"
         }
-      },
-      "punch": "Je monte des clips Valorant et je fais tourner des serveurs.",
-      "callouts": {
-        "weapon": "Vandal · skin Champions",
-        "main": "Arme principale"
       }
     },
     "fastfetch": {
@@ -896,8 +735,7 @@
       }
     },
     "edit": {
-      "title": "Montage à la une",
-      "meta": "TikTok",
+      "title": "Dernier montage",
       "posterAlt": "Image extraite du montage",
       "play": "Lire le montage",
       "tiktokNote": "Lecture via le lecteur TikTok, avec réglage du son. Rien n'est chargé depuis TikTok avant ton clic.",
@@ -910,12 +748,13 @@
         "unmute": "Activer le son",
         "volume": "Volume"
       },
-      "videoLabel": "Montage vidéo Valorant de Yexo"
+      "videoLabel": "Montage vidéo Valorant de Yexo",
+      "intro": "Du Valorant calé sur la musique. À côté, les stats de mes dernières parties, en direct."
     },
     "gaming": {
       "title": "Stats en direct",
-      "ranks": "Meilleurs rangs",
-      "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}"
+      "recent": "{count, plural, one {Dernière partie} other {# dernières parties}}",
+      "more": "Rangs et tracker"
     },
     "stats": {
       "label": "En chiffres",
@@ -927,18 +766,22 @@
       "lab": "Homelab · {machines} machines"
     },
     "explore": {
-      "title": "Explorer le site",
-      "open": "Ouvrir"
+      "title": "Explorer",
+      "items": {
+        "projects": "Outils, applis et infra que j'ai construits",
+        "career": "Études, alternance, compétences",
+        "lab": "Mon réseau à la maison",
+        "creator": "Montages, partenaires, Y-Services",
+        "gaming": "Rangs, stats en direct, réglages",
+        "contact": "M'écrire, voir ce que je fais"
+      }
     },
     "pro": {
       "punch": "J'administre des systèmes et des réseaux, et j'anime des images sur After Effects.",
-      "callouts": {
-        "machine": "Poste de travail · admin et montage",
-        "ae": "After Effects · motion design"
-      },
       "actions": {
         "career": "Mon parcours",
-        "lab": "Mon homelab"
+        "lab": "Mon homelab",
+        "contact": "Me contacter"
       },
       "stats": {
         "label": "En chiffres",
@@ -949,9 +792,14 @@
         "ae": "Montage et motion design"
       },
       "timeline": {
-        "title": "Parcours en bref",
+        "title": "Parcours",
         "all": "Tout le parcours"
-      }
+      },
+      "caption": "Poste · admin et montage"
+    },
+    "work": {
+      "title": "Projets choisis",
+      "all": "Tous les projets"
     }
   },
   "lab": {
@@ -961,10 +809,10 @@
     },
     "overview": {
       "title": "Lab",
-      "meta": "depuis {year}",
-      "text": "Mon terrain d'entraînement depuis 2022 : un pare-feu pfSense, des switchs Cisco et MikroTik, un hôte ESXi et Zabbix pour surveiller le tout, plus un lab Hyper-V pour l'école. Ce que j'apprends en cours ou en alternance, je le remonte ici avant de le considérer comme acquis.",
+      "text": "Mon terrain d'entraînement : un pare-feu pfSense, des switchs Cisco et MikroTik, un hôte ESXi et Zabbix qui surveille le tout. Ce que j'apprends en cours ou au travail, je le reconstruis ici d'abord.",
       "technologies": "Technologies utilisées",
-      "siteLink": "Comment ce site est hébergé"
+      "siteLink": "Comment ce site est hébergé",
+      "eyebrow": "Homelab depuis {year}"
     },
     "stats": {
       "machines": "Machines",
@@ -974,7 +822,6 @@
     },
     "map": {
       "title": "Schéma du réseau",
-      "meta": "{count} nœuds",
       "hint": "Survole ou sélectionne un nœud : son rôle, ses voisins et le chemin depuis Internet s'affichent ici.",
       "related": "Relié à",
       "ungrouped": "Cœur du réseau",
@@ -991,7 +838,8 @@
           "alert": "Alerte → Discord",
           "wifi": "Wi-Fi → Internet"
         }
-      }
+      },
+      "intro": "Sélectionne un nœud pour voir son rôle et son chemin depuis Internet, ou lance les scénarios."
     },
     "nodes": {
       "internet": {
@@ -1055,7 +903,6 @@
     },
     "vlans": {
       "title": "VLAN",
-      "meta": "{count} VLAN",
       "items": {
         "admin": "Interfaces d'administration : pfSense, ESXi, switchs, borne et NAS. Accessible uniquement depuis le VPN WireGuard.",
         "srv": "Serveurs internes : AD de test, Zabbix, GLPI, Veeam et Docker. Le réseau perso n'y accède que sur les ports nécessaires (DNS, web).",
@@ -1086,7 +933,7 @@
     },
     "resources": {
       "title": "Ressources",
-      "text": "Chaque usage a son VLAN, et pfSense filtre tout ce qui passe de l'un à l'autre. Côté box, seul le port WireGuard est ouvert : ce qui doit être public passe par le VPS, puis par le tunnel jusqu'au reverse proxy en DMZ. Les VM sont sauvegardées chaque nuit sur le NAS, avec une copie hors site chaque semaine. Zabbix surveille les équipements, les VM et le VPS, et me prévient avant que quelqu'un d'autre ne remarque la panne.",
+      "text": "Un VLAN par usage, et pfSense filtre tout ce qui passe de l'un à l'autre.",
       "access": {
         "title": "Accès admin",
         "text": "VPN WireGuard vers le VLAN 10, une clé par appareil, rien d'autre d'ouvert côté box."
@@ -1104,7 +951,6 @@
   "gaming": {
     "ranks": {
       "title": "Rangs",
-      "meta": "{count} jeux",
       "peak": "Rang peak",
       "alt": "Icône du rang {rank} sur {game}",
       "items": {
@@ -1167,11 +1013,14 @@
         "ready": "À jour à {time}",
         "empty": "Aucune partie",
         "error": "Indisponible"
-      }
+      },
+      "sectionTitle": "Tracker en direct",
+      "intro": "Mes dernières parties, rafraîchies toutes les 90 secondes. Sélectionne une partie pour le détail des tirs."
     },
     "intro": {
       "title": "Gaming",
-      "tagline": "Surtout Valorant, avec des passages par CS, Apex et Clash Royale. Je joue moins qu'avant, mais la visée est restée."
+      "tagline": "Surtout Valorant, avec des passages par CS, Apex et Clash Royale. Je joue moins qu'avant, mais la visée est restée.",
+      "eyebrow": "Valorant d'abord"
     },
     "matches": {
       "title": "Dernières parties",
@@ -1198,68 +1047,32 @@
     },
     "setup": {
       "title": "Setup",
-      "meta": "{count} pièces",
       "items": {
         "mouse": "Souris",
         "keyboard": "Clavier",
         "mousepad": "Tapis"
       },
       "partner": "−{discount} % avec le code {code}",
-      "codeLabel": "le code promo"
+      "codeLabel": "le code promo",
+      "convert": "Convertir ma sensi"
     },
     "hero": {
       "current": "Rang actuel · Valorant",
       "currentValue": "Immortal 3"
     }
   },
-  "tools": {
-    "converter": {
-      "title": "Convertisseur de sensibilité",
-      "meta": "{count} jeux",
-      "intro": "Change de jeu sans réapprendre ta visée : le convertisseur garde la même distance de souris pour un tour complet (cm/360).",
-      "from": "Source",
-      "to": "Cible",
-      "game": "Jeu",
-      "sens": "Sensibilité",
-      "dpi": "DPI",
-      "targetDpi": "DPI cible",
-      "sameDpi": "Même DPI",
-      "swap": "Inverser la source et la cible",
-      "mine": "Ma config : {sens} à {dpi} DPI",
-      "result": "Sensibilité cible",
-      "in": "à entrer dans {game}",
-      "cm360Sub": "Même distance physique entre les jeux",
-      "in360": "{value} pouces par tour",
-      "edpiSub": "Sensibilité × DPI",
-      "edpiTo": "{value} en cible",
-      "errors": {
-        "invalidSens": "Entre une sensibilité valide.",
-        "invalidDpi": "Entre un DPI valide.",
-        "invalidTargetDpi": "Entre un DPI cible valide."
-      }
-    },
-    "how": {
-      "title": "Comment ça marche",
-      "text": "Chaque jeu multiplie ta sensibilité par un coefficient, le yaw. Le convertisseur calcule la distance que parcourt ta souris pour un tour complet, puis la sensibilité qui donne la même distance dans le jeu cible.",
-      "formula": "Formules",
-      "yaw": "Valeurs de yaw",
-      "note": "Résultat arrondi à 4 décimales. Le point sert de séparateur décimal, comme dans les jeux."
-    }
-  },
   "contact": {
     "title": "Contact",
-    "meta": "{count} canaux",
-    "statusMeta": "statut en direct",
+    "statusMeta": "Statut en direct",
     "channels": {
-      "title": "Me joindre",
+      "title": "M'écrire",
       "join": "Rejoindre",
       "linkLabel": "le lien Discord"
     },
     "links": {
-      "title": "Réseaux",
-      "meta": "{count} liens"
+      "title": "Ailleurs"
     },
-    "intro": "Tous les moyens de me joindre au même endroit. Pour une commande Y-Services, le ticket Discord reste le plus rapide.",
+    "intro": "Tous les moyens de me joindre. Pour une commande Y-Services, un ticket Discord reste le plus rapide.",
     "keys": {
       "proEmail": "email.pro",
       "businessEmail": "email.business",
@@ -1271,14 +1084,14 @@
       "linktree": "linktree"
     },
     "comments": {
-      "proEmail": "alternance, stage, sujets pro",
-      "businessEmail": "commandes, partenariats, collaborations",
-      "discord": "le serveur, avec les tickets pour commander",
-      "discordEdits": "le serveur consacré au montage",
-      "tiktok": "mes montages vidéo",
-      "instagram": "compte perso",
-      "instagramFps": "compte FPS",
-      "linktree": "tous mes liens au même endroit"
+      "proEmail": "Alternance, stages, sujets pro",
+      "businessEmail": "Commandes, partenariats, collaborations",
+      "discord": "Le serveur, avec des tickets pour commander",
+      "discordEdits": "Le serveur dédié au montage",
+      "tiktok": "Mes montages vidéo",
+      "instagram": "Compte perso",
+      "instagramFps": "Compte FPS",
+      "linktree": "Tous mes liens au même endroit"
     },
     "write": "Écrire",
     "open": "Ouvrir",
@@ -1287,71 +1100,43 @@
     "subjects": {
       "pro": "Contact depuis yexofps.org",
       "business": "Demande business depuis yexofps.org"
-    },
-    "routing": {
-      "title": "Qui contacter",
-      "pro": {
-        "title": "Alternance, stage, sujet pro",
-        "text": "Écris à l'adresse pro, avec l'objet de ta demande dans le titre."
-      },
-      "order": {
-        "title": "Commande Y-Services",
-        "text": "Ouvre un ticket sur Discord, c'est le plus rapide. L'email business marche aussi."
-      },
-      "collab": {
-        "title": "Partenariat ou collaboration",
-        "text": "Passe par l'email business et présente ton projet en quelques lignes."
-      },
-      "tip": "Pour une commande, précise le produit, ton logiciel et ce que tu veux obtenir."
     }
   },
   "og": {
-    "tagline": "Admin systèmes et réseaux en alternance, joueur de FPS et monteur vidéo sur Valorant.",
-    "chips": {
-      "sysadmin": "Systèmes et réseaux",
-      "fps": "FPS · Valorant",
-      "video": "Montage vidéo"
-    }
+    "tagline": "Admin systèmes et réseaux, joueur FPS et monteur vidéo Valorant.",
+    "label": "Portfolio"
   },
   "notFound": {
     "title": "Page introuvable",
-    "text": "Cette page n'existe pas ou a changé d'adresse avec la refonte du site. Les raccourcis 1 à 7 et la recherche (Ctrl+K) restent disponibles.",
+    "text": "Cette page n'existe pas, ou elle a bougé lors de la refonte du site.",
     "home": "Retour à l'accueil",
-    "contact": "Me signaler un lien cassé"
+    "projects": "Voir les projets"
   },
   "sectionNav": {
     "label": "Sur cette page",
     "career": {
-      "intro": "Profil",
-      "timeline": "Frise",
+      "timeline": "Parcours",
       "skills": "Compétences",
       "missions": "Missions",
       "infra": "Réseau BTS",
-      "watch": "Veille",
-      "docs": "Tutos"
+      "watch": "Veille"
     },
     "lab": {
-      "overview": "Aperçu",
       "map": "Schéma",
       "vlans": "VLAN",
-      "resources": "Ressources",
       "machines": "Machines"
     },
     "gaming": {
       "ranks": "Rangs",
       "tracker": "Tracker",
-      "matches": "Parties",
-      "settings": "Settings",
+      "settings": "Réglages",
       "setup": "Setup"
     },
     "creator": {
-      "bio": "Bio",
-      "partners": "Partenaires",
-      "history": "Historique",
       "edits": "Montages",
-      "reviews": "Avis",
+      "partners": "Partenaires",
       "services": "Y-Services",
-      "order": "Commander"
+      "reviews": "Avis"
     }
   },
   "valoSettings": {
@@ -1359,14 +1144,14 @@
       "title": "Settings Valorant",
       "meta": "{count} réglages",
       "back": "Gaming",
-      "captured": "Mis à jour le {date}",
       "sens": "Sensibilité",
       "dpi": "DPI",
       "edpi": "eDPI",
       "cm360": "cm / 360°",
       "display": "Affichage",
       "crosshair": "Réticule",
-      "convert": "Convertir ma sensi vers un autre jeu"
+      "convert": "Convertir ma sensi vers un autre jeu",
+      "lead": "Chaque réglage, rangé comme le menu du jeu. Mis à jour le {date}."
     },
     "menu": {
       "title": "Menu des paramètres",
@@ -1390,13 +1175,13 @@
     },
     "teaser": {
       "title": "Settings Valorant",
-      "text": "Sensi, réticule, touches, vidéo, audio : toute ma config.",
+      "text": "Sensi, réticule, touches, vidéo, audio : toute la config.",
       "open": "Ouvrir mes settings"
     }
   },
   "now": {
     "title": "En ce moment",
-    "meta": "heure de Paris",
+    "meta": "Heure de Paris",
     "loading": "Calcul du statut…",
     "parisTime": "Il est {time} à Paris",
     "progressLabel": "Avancement du créneau",
@@ -1433,13 +1218,13 @@
       }
     },
     "short": {
-      "music": "musique",
-      "work": "alternance",
-      "valorant": "valorant",
-      "editing": "montage",
-      "grass": "dehors",
-      "offline": "hors ligne",
-      "game": "{name}"
+      "music": "Musique",
+      "work": "Au travail",
+      "valorant": "Sur Valorant",
+      "editing": "En montage",
+      "grass": "Dehors",
+      "offline": "Hors ligne",
+      "game": "Sur {name}"
     },
     "availability": {
       "open": "Dispo pour répondre",
@@ -1495,13 +1280,12 @@
       "title": "Aujourd'hui",
       "week": "Voir ma semaine",
       "nextOpen": "Dispo pour répondre dès {time} · {activity}"
-    }
+    },
+    "lead": "Calculé depuis mon emploi du temps à l'heure de Paris, ou depuis Discord quand je joue ou écoute de la musique."
   },
   "hosting": {
     "title": "Ce site",
-    "meta": "en direct",
-    "back": "Lab",
-    "intro": "yexofps.org tourne sur mon propre VPS Linux, que j'administre moi-même. Les chiffres ci-dessous sont lus en direct sur le serveur.",
+    "intro": "yexofps.org tourne sur un VPS Linux que j'administre moi-même. Les chiffres ci-dessous sont lus en direct sur le serveur.",
     "unavailable": "indisponible",
     "tiles": {
       "rtt": "Temps de réponse",
@@ -1582,11 +1366,176 @@
       "styles": "Styles",
       "i18n": "Traductions",
       "fonts": "Polices",
-      "fontsValue": "Geist, servie par le site",
+      "fontsValue": "Geist et Anton, servies par le site",
       "data": "Contenu",
       "dataValue": "fichiers de config, pas de base de données",
       "tracking": "Suivi",
-      "trackingValue": "aucun outil de statistiques tiers"
+      "trackingValue": "aucun outil de statistiques tiers",
+      "motion": "Animations"
+    },
+    "eyebrow": "Auto-hébergé",
+    "project": "Le projet derrière"
+  },
+  "converter": {
+    "from": "Source",
+    "to": "Cible",
+    "game": "Jeu",
+    "sens": "Sensibilité",
+    "dpi": "DPI",
+    "targetDpi": "DPI cible",
+    "sameDpi": "Même DPI",
+    "swap": "Inverser la source et la cible",
+    "mine": "Ma config : {sens} à {dpi} DPI",
+    "result": "Sensibilité cible",
+    "in": "à entrer dans {game}",
+    "cm360Sub": "Même distance physique entre les jeux",
+    "in360": "{value} pouces par tour",
+    "edpiSub": "Sensibilité × DPI",
+    "edpiTo": "{value} en cible",
+    "errors": {
+      "invalidSens": "Entre une sensibilité valide.",
+      "invalidDpi": "Entre un DPI valide.",
+      "invalidTargetDpi": "Entre un DPI cible valide."
+    },
+    "title": "Le convertisseur",
+    "intro": "Choisis un jeu, entre ta sensi et ton DPI : le résultat garde la même distance pour un tour complet.",
+    "how": {
+      "text": "Chaque jeu multiplie ta sensibilité par un coefficient, le yaw. Le convertisseur calcule la distance que parcourt ta souris pour un tour complet, puis la sensibilité qui donne la même distance dans le jeu cible.",
+      "formula": "Formules",
+      "yaw": "Valeurs de yaw"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "count": "{count} projets",
+    "lead": "Outils, applis et infrastructures que j'ai conçus et construits, pour mes edits, mon réseau et tous ceux qui en ont besoin.",
+    "view": "Voir",
+    "back": "Tous les projets",
+    "about": "En bref",
+    "gallery": "Captures",
+    "guides": "Les tutos",
+    "next": "Projet suivant",
+    "captureLabel": "{name}, capture",
+    "status": {
+      "released": "Disponible",
+      "inProgress": "En développement",
+      "live": "En ligne",
+      "school": "Projet d'école"
+    },
+    "labels": {
+      "year": "Année",
+      "status": "Statut",
+      "stack": "Outils",
+      "source": "Code source",
+      "related": "Voir {space}",
+      "site": "l'hébergement"
+    },
+    "items": {
+      "yexofx": {
+        "name": "YexoFX",
+        "kind": "Extension After Effects",
+        "tagline": "Un panneau After Effects pensé pour les edits FPS : 592 presets, un clic chacun.",
+        "summary": "YexoFX se docke dans After Effects 2025 et transforme les effets que j'utilise dans chaque edit Valorant et CS2 en presets à un clic. Chacun est une petite recette jouée en une seule annulation, et sa durée, son intensité et sa courbe restent réglables après coup.",
+        "highlights": [
+          "592 presets en 10 catégories, des impacts et shakes aux mouvements de caméra 3D.",
+          "22 styles d'edit (Phonk, Flow, Cinéma…) qui filtrent tout le catalogue, et des packs de style en un clic.",
+          "Des presets écrits en recettes JSON, joués par un moteur ExtendScript bâti sur 57 primitives.",
+          "Un panneau rapide : grille virtualisée, aperçus au survol, recherche floue en français et en anglais."
+        ]
+      },
+      "claimd": {
+        "name": "Claimd",
+        "kind": "Application web",
+        "tagline": "Ton pseudo est-il libre ? Sept plateformes vérifiées d'un coup, rien de deviné.",
+        "summary": "Tu tapes un pseudo une fois et Claimd interroge Twitch, YouTube, Instagram, TikTok, Kick, Bluesky et Steam en parallèle. Chaque carte affiche libre, pris ou incertain, avec la fiabilité de la vérification. Ça tourne sur ta machine, en une commande Docker.",
+        "highlights": [
+          "Résultats en direct : chaque carte s'affiche dès que sa plateforme a répondu.",
+          "Honnête : une réponse bloquée ou ambiguë s'affiche « incertain », avec une vérification manuelle en un clic.",
+          "Des requêtes propres : aucun contournement des protections, aucun cookie conservé.",
+          "Une plateforme = un module Python : simple à étendre, testé en CI."
+        ]
+      },
+      "yexoclip": {
+        "name": "YexoClip",
+        "kind": "Application desktop",
+        "tagline": "Retrouve mes kills dans les replays ShadowPlay et les découpe en clips propres à 120 FPS.",
+        "summary": "Trier ses replays à la main prend des heures. YexoClip analyse un dossier d'enregistrements NVIDIA ShadowPlay, repère mes bannières de kill, les regroupe en clips de 1K à ACE avec de la marge avant et après, puis exporte chacun à 120 FPS constants, renommé et rangé où je veux.",
+        "highlights": [
+          "Détection des kills sur la bannière du jeu : échantillonnage rapide, puis précision à l'image près.",
+          "Exports à 120 FPS constants avec NVENC, vérifiés avec ffprobe après chaque clip.",
+          "Aperçu, sélection et ajustement des clips avant export ; modèles de nom et dossiers favoris.",
+          "Clés de licence vérifiées par un serveur sur mon VPS, avec des réponses signées."
+        ]
+      },
+      "site": {
+        "name": "yexofps.org",
+        "kind": "Site web",
+        "tagline": "Ce site : conçu, développé et auto-hébergé de A à Z.",
+        "summary": "Un portfolio bilingue en Next.js et React, avec des données en direct (stats Valorant, présence Discord, chiffres du serveur), de la 3D chargée après l'affichage et un seul système d'animation pour toutes les pages. Il tourne sur mon propre VPS Ubuntu.",
+        "highlights": [
+          "Anglais et français sur chaque page, avec le choix du visiteur mémorisé.",
+          "Modèles 3D compressés, chargés après la page et rendus seulement à l'écran.",
+          "Des données en direct : tracker Valorant, présence Discord, santé du serveur.",
+          "Un seul design system : un accent, une échelle typographique, un jeu de courbes d'animation."
+        ]
+      },
+      "homelab": {
+        "name": "Homelab",
+        "kind": "Infrastructure",
+        "tagline": "Mon réseau à la maison depuis 2022 : là où je teste ce que je ne peux pas casser au travail.",
+        "summary": "Un pare-feu pfSense en entrée, des switchs Cisco et MikroTik, un hyperviseur VMware ESXi pour les machines virtuelles et Zabbix pour les surveiller. Chaque nouveau service passe par ici avant que je lui fasse confiance ailleurs.",
+        "highlights": [
+          "pfSense filtre et route tout le trafic.",
+          "Des switchs Cisco et MikroTik, pour pratiquer sur les deux.",
+          "VMware ESXi héberge les machines virtuelles, Zabbix les surveille.",
+          "Le schéma complet est sur la page Lab."
+        ]
+      },
+      "yexound": {
+        "name": "YexoUnd",
+        "kind": "Bientôt",
+        "tagline": "Un nouveau projet en préparation. La suite bientôt.",
+        "summary": "YexoUnd est au tout début de son développement. Cette page grandira avec le projet.",
+        "highlights": [
+          "Commencé en novembre 2026.",
+          "Dépôt privé pour l'instant."
+        ]
+      },
+      "sens": {
+        "name": "Convertisseur de sensi",
+        "kind": "Outil web",
+        "tagline": "Change de jeu sans réapprendre ta visée : même distance pour un tour complet.",
+        "summary": "Chaque jeu multiplie ta sensibilité par son propre coefficient. Le convertisseur calcule la distance parcourue par ta souris pour un tour complet (cm/360), puis la sensibilité qui donne la même distance dans l'autre jeu. Valorant, CS2, Apex Legends et Overwatch 2.",
+        "highlights": [
+          "cm/360 et eDPI à chaque conversion.",
+          "Un DPI différent de chaque côté, si tu changes de souris.",
+          "Mon setup chargé en un clic.",
+          "Tout se calcule dans ton navigateur : rien n'est envoyé."
+        ]
+      },
+      "weather": {
+        "name": "Dashboard météo",
+        "kind": "Projet d'école · Python",
+        "tagline": "Météo et qualité de l'air pour cinq villes, avec des alertes au-delà des seuils de l'OMS.",
+        "summary": "Un projet Python de 3e année : un dashboard Streamlit qui récupère la météo et la qualité de l'air de Paris, Lyon, Marseille, Londres et Madrid via l'API Open-Meteo, garde les réponses en cache dans SQLite et signale les alertes pollution ou chaleur. Je suis parti d'un fichier de départ unique, j'ai corrigé ses bugs et je l'ai découpé en modules propres.",
+        "highlights": [
+          "Données, calculs et affichage dans des modules séparés, couverts par pytest.",
+          "Un cache SQLite de 30 minutes et un mode hors ligne avec des données simulées.",
+          "Corrigé : le plantage au changement de ville, la carte cassée et les graphiques mal légendés.",
+          "Aucune clé d'API : Open-Meteo est gratuit."
+        ]
+      },
+      "guides": {
+        "name": "Tutos IT",
+        "kind": "Documentation",
+        "tagline": "Dix tutos PDF pas à pas, de Proxmox à GLPI.",
+        "summary": "Écrits pendant mon BTS SIO en montant le réseau de formation. Chaque tuto mène un service de l'installation à une configuration qui marche, captures à l'appui : virtualisation, réseau, annuaire, supervision et gestion de parc.",
+        "highlights": [
+          "87 pages au total, la plus longue sur Proxmox (25 pages).",
+          "Proxmox, ESXi, VLAN, Active Directory, GPO, DHCP et DNS, Wi-Fi, IPFire, Zabbix, GLPI.",
+          "Téléchargement libre, sans inscription."
+        ]
+      }
     }
   }
 }

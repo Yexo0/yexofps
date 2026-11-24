@@ -1,5 +1,5 @@
-// src/components/icons/brands.tsx — Logos de marque (TikTok, Discord, Linktree) en SVG.
-// Décoratifs : le nom du réseau est toujours écrit à côté ou donné en aria-label.
+// src/components/icons/brands.tsx — Brand logos (TikTok, Discord, Linktree, Instagram, GitHub) as SVG.
+// Decorative: the network name is always written next to them or given as aria-label.
 import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement> & { size?: number };
@@ -50,6 +50,14 @@ export function InstagramIcon(props: IconProps) {
       <rect x="2" y="2" width="20" height="20" rx="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </Svg>
+  );
+}
+
+export function GitHubIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
     </Svg>
   );
 }

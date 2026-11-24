@@ -1,16 +1,19 @@
-// src/app/[locale]/gaming/page.tsx — 04 Gaming : rangs, tracker Valorant, dernières parties, setup.
+// src/app/[locale]/gaming/page.tsx — 06 Gaming: ranks (current huge, peak with the Radiant buddy),
+// live Valorant tracker and recent matches, my settings in short, setup.
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, Gamepad2, Keyboard, Settings2 } from "lucide-react";
-import { PARTNERS, RANKS, SETUP } from "@/config/site";
+import { ArrowRight } from "lucide-react";
+import { PARTNERS, SETUP } from "@/config/site";
 import { settingsCount } from "@/config/valorant-settings";
 import { pageMetadata } from "@/lib/metadata";
-import { Card } from "@/components/ui/card";
+import { PageHeader } from "@/components/ui/page-header";
+import { Reveal, Section } from "@/components/ui/section";
 import { PageSections } from "@/components/shell/page-sections";
 import { CopyButton } from "@/components/ui/copy-button";
-import { ButtonLink, ExternalButton } from "@/components/ui/primitives";
+import { ArrowLink, ButtonLink, ExternalButton } from "@/components/ui/primitives";
 import { RankGrid } from "@/components/gaming/rank-grid";
 import { TrackerSection } from "@/components/gaming/tracker-section";
 import { CrosshairTile, SensTiles } from "@/components/valorant/summary";
@@ -26,112 +29,80 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GamingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return (
-    <>
-      <PageSections page="gaming" />
-      <div className="bento">
-        <Ranks />
-        <TrackerSection />
-        <ValorantSettings />
-        <Setup />
-      </div>
-    </>
-  );
+  return <Gaming />;
 }
 
-function Ranks() {
+function Gaming() {
   const t = useTranslations("gaming");
   return (
-    <Card
-      id="ranks"
-      icon={Gamepad2}
-      title={t("intro.title")}
-      subtitle="ls ~/ranks --peak"
-      meta={t("ranks.meta", { count: RANKS.length })}
-      headingLevel={1}
-      index={0}
-      className="md:col-span-6 lg:col-span-12"
-      bodyClassName="gap-5"
-    >
-      <RankGrid />
-      <p className="max-w-[60ch] text-[17px] leading-snug text-muted">{t("intro.tagline")}</p>
-    </Card>
+    <div className="page">
+      <PageHeader space="gaming" eyebrow={t("intro.eyebrow")} title={t("intro.title")} lead={<p>{t("intro.tagline")}</p>} />
+      <PageSections page="gaming" />
+      <Section id="ranks" index="01" title={t("ranks.title")}>
+        <RankGrid />
+      </Section>
+      <Section id="tracker" index="02" title={t("tracker.sectionTitle")} intro={t("tracker.intro")}>
+        <div className="grid gap-5 lg:grid-cols-12">
+          <TrackerSection />
+        </div>
+      </Section>
+      <ValorantSettings />
+      <Setup />
+    </div>
   );
 }
 
 function ValorantSettings() {
   const t = useTranslations("valoSettings");
   return (
-    <Card
+    <Section
       id="settings"
-      icon={Settings2}
+      index="03"
       title={t("teaser.title")}
-      subtitle="cat ~/valorant/settings.ini"
-      meta={t("summary.meta", { count: settingsCount() })}
-      index={3}
-      className="md:col-span-6 lg:col-span-12"
+      intro={t("teaser.text")}
+      aside={<span className="label">{t("summary.meta", { count: settingsCount() })}</span>}
     >
-      <div className="grid items-center gap-4 lg:grid-cols-12 lg:gap-6">
-        <div className="flex flex-col items-start gap-3 lg:col-span-4">
-          <p className="max-w-[46ch] text-sm leading-relaxed text-muted">{t("teaser.text")}</p>
-          <ButtonLink href="/gaming/settings" variant="primary" size="sm">
-            {t("teaser.open")}
-            <ArrowRight size={14} aria-hidden="true" />
-          </ButtonLink>
-        </div>
-        <SensTiles className="lg:col-span-5" />
-        <CrosshairTile compact className="lg:col-span-3" />
-      </div>
-    </Card>
+      <Reveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <SensTiles className="lg:col-span-8" />
+        <CrosshairTile compact className="lg:col-span-4" />
+      </Reveal>
+      <Reveal i={1} className="mt-8">
+        <ButtonLink href="/gaming/settings" variant="primary">
+          {t("teaser.open")}
+          <ArrowRight size={15} aria-hidden="true" />
+        </ButtonLink>
+      </Reveal>
+    </Section>
   );
 }
 
 function Setup() {
   const t = useTranslations("gaming.setup");
   return (
-    <Card
-      id="setup"
-      icon={Keyboard}
-      title={t("title")}
-      subtitle="ls ~/setup"
-      meta={t("meta", { count: SETUP.length })}
-      next="creator"
-      index={4}
-      className="md:col-span-6 lg:col-span-12"
-    >
-      <ul className="stagger grid gap-2.5 sm:grid-cols-3">
-        {SETUP.map((item) => {
+    <Section id="setup" index="04" title={t("title")} aside={<ArrowLink href="/projects/sensitivity-converter">{t("convert")}</ArrowLink>}>
+      <ul className="grid gap-5 sm:grid-cols-3">
+        {SETUP.map((item, i) => {
           const partner = "partner" in item ? PARTNERS.find((p) => p.id === item.partner) : undefined;
           return (
-            <li key={item.id} className="tile flex flex-col overflow-hidden">
-              <div className="relative m-2 mb-0 h-40 overflow-hidden rounded-[10px] bg-white">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                  className="object-contain p-4"
-                />
+            <li key={item.id} data-reveal="" style={{ "--i": i } as CSSProperties} className="group flex flex-col">
+              <div className="media-frame relative aspect-[4/3] bg-white">
+                <Image src={item.image} alt={item.name} fill sizes="(min-width: 640px) 31vw, 100vw" className="zoom-media object-contain p-8" />
               </div>
-              <div className="flex flex-1 flex-col gap-1 px-4 py-3.5">
-                <p className="label">{t(`items.${item.id}`)}</p>
-                <p className="text-[15px] font-bold">{item.name}</p>
-                {partner && (
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span className="text-[13px] text-muted">
-                      {t("partner", { discount: partner.discount, code: partner.code })}
-                    </span>
-                    <CopyButton value={partner.code} label={t("codeLabel")} compact />
-                    <ExternalButton href={partner.url} size="sm" variant="tonal" showIcon>
-                      {partner.name}
-                    </ExternalButton>
-                  </div>
-                )}
-              </div>
+              <p className="label mt-5">{t(`items.${item.id}`)}</p>
+              <p className="display mt-2 text-[28px] text-fg">{item.name}</p>
+              {partner && (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="text-[13px] text-muted">{t("partner", { discount: partner.discount, code: partner.code })}</span>
+                  <CopyButton value={partner.code} label={t("codeLabel")} compact />
+                  <ExternalButton href={partner.url} size="sm" variant="tonal" showIcon>
+                    {partner.name}
+                  </ExternalButton>
+                </div>
+              )}
             </li>
           );
         })}
       </ul>
-    </Card>
+    </Section>
   );
 }

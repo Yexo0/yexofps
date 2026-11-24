@@ -40,11 +40,11 @@ export function WeekSchedule() {
           <Tabs.Trigger
             key={type}
             value={type}
-            className="btn btn-sm bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-accent-tint data-[state=active]:text-on-accent-container"
+            className="btn btn-sm text-muted shadow-[inset_0_0_0_1px_var(--line)] hover:text-fg data-[state=active]:bg-fg data-[state=active]:text-bg"
           >
             {t(`week.${type}`)}
             {now?.dayType === type && (
-              <span aria-hidden="true" className="live-dot ml-0.5 h-1.5 w-1.5 rounded-full bg-accent" />
+              <span aria-hidden="true" className="live-dot ml-0.5 h-1.5 w-1.5 rounded-full bg-accent-vivid text-accent-vivid" />
             )}
           </Tabs.Trigger>
         ))}
@@ -139,7 +139,7 @@ function DayStrip({ slots, nowMinutes }: { slots: Slot[]; nowMinutes: number | n
         })}
         {nowMinutes !== null && (
           <span
-            className="absolute -inset-y-1.5 w-0.5 rounded-full bg-accent shadow-[0_0_10px_var(--glow-strong)]"
+            className="absolute -inset-y-1.5 w-0.5 bg-accent-vivid"
             style={{ left: `${dayPosition(nowMinutes) * 100}%` }}
           />
         )}
@@ -179,7 +179,7 @@ export function TodayStrip() {
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="label">{t("today.title")}</p>
-        <Link href="/now" className="group inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-accent">
+        <Link href="/now" className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-fg">
           {t("today.week")}
           <ArrowRight size={13} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
         </Link>

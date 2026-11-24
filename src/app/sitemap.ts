@@ -1,11 +1,12 @@
-// src/app/sitemap.ts — Sitemap : les 7 espaces et leurs sous-pages dans les deux langues, avec alternates hreflang.
+// src/app/sitemap.ts — Sitemap: the 7 spaces, their sub-pages and every project, in both languages, with hreflang alternates.
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { SPACES } from "@/config/spaces";
 import { SITE } from "@/config/site";
+import { PROJECTS } from "@/config/projects";
 import { localizedPath } from "@/lib/metadata";
 
-/** Pages rattachées à un espace, en plus des 7 espaces */
+/** Pages attached to a space, on top of the 7 spaces */
 const SUB_PAGES = [
   { href: "/baptiste", changeFrequency: "monthly" as const, priority: 0.9 },
   { href: "/gaming/settings", changeFrequency: "monthly" as const, priority: 0.6 },
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: space.id === "home" ? 1 : 0.7,
     })),
     ...SUB_PAGES,
+    ...PROJECTS.map((p) => ({ href: `/projects/${p.slug}`, changeFrequency: "monthly" as const, priority: 0.6 })),
   ];
   return pages.flatMap((page) =>
     routing.locales.map((locale) => ({

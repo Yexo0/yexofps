@@ -1,5 +1,5 @@
-// src/components/shell/command-palette.tsx — Palette de commandes (Ctrl+K) : espaces, sections,
-// actions, liens, produits et tutos, avec recherche et navigation au clavier.
+// src/components/shell/command-palette.tsx — Command palette (Ctrl+K): spaces, projects, sections,
+// actions, links, products and guides, with search and keyboard navigation.
 "use client";
 
 import { Fragment, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
@@ -15,6 +15,7 @@ import {
   Hash,
   Keyboard,
   Languages,
+  LayoutGrid,
   Moon,
   Search,
   ShoppingBag,
@@ -24,13 +25,14 @@ import { useRouter } from "@/i18n/navigation";
 import { SPACES, spaceFromPath } from "@/config/spaces";
 import { EMAILS, PRODUCTS, SOCIALS } from "@/config/site";
 import { DOCS } from "@/config/career";
+import { PROJECTS } from "@/config/projects";
 import { useTheme } from "@/hooks/use-theme";
 import { useCopy } from "@/hooks/use-copy";
 import { cn } from "@/lib/utils";
 import { markNavigation } from "@/lib/nav-direction";
 import { useUI } from "./ui-provider";
 
-type Group = "spaces" | "sections" | "actions" | "links" | "products" | "docs";
+type Group = "spaces" | "projects" | "sections" | "actions" | "links" | "products" | "docs";
 
 interface Item {
   id: string;
@@ -50,7 +52,6 @@ const SECTIONS = [
   { id: "missions", href: "/career#missions" },
   { id: "infraBts", href: "/career#infra" },
   { id: "watch", href: "/career#watch" },
-  { id: "docs", href: "/career#docs" },
   { id: "labMap", href: "/lab#map" },
   { id: "labMachines", href: "/lab#machines" },
   { id: "site", href: "/lab/site", keywords: "hebergement hosting vps serveur server uptime infra site" },
@@ -63,7 +64,7 @@ const SECTIONS = [
   { id: "partners", href: "/creator#partners" },
   { id: "services", href: "/creator#services" },
   { id: "reviews", href: "/creator#reviews" },
-  { id: "converter", href: "/tools#converter" },
+  { id: "converter", href: "/projects/sensitivity-converter", keywords: "sensi sensitivity cm360 edpi convert" },
   { id: "now", href: "/now", keywords: "now maintenant dispo disponible available statut status planning" },
 ] as const;
 
@@ -102,6 +103,7 @@ function PaletteContent({ close }: { close: () => void }) {
   const tNav = useTranslations("nav");
   const tProducts = useTranslations("creator.services.products");
   const tDocs = useTranslations("career.docs.items");
+  const tProjects = useTranslations("projects.items");
   const router = useRouter();
   const locale = useLocale();
   const { theme, toggleTheme } = useTheme();
@@ -131,6 +133,15 @@ function PaletteContent({ close }: { close: () => void }) {
         hint: String(i + 1),
         icon: <s.icon size={16} />,
         run: go(s.href),
+      })),
+      ...PROJECTS.map((p) => ({
+        id: `project-${p.id}`,
+        group: "projects" as const,
+        label: tProjects(`${p.id}.name`),
+        hint: tProjects(`${p.id}.kind`),
+        icon: <LayoutGrid size={16} />,
+        keywords: p.stack.join(" "),
+        run: go(`/projects/${p.slug}`),
       })),
       ...SECTIONS.map((s) => ({
         id: `section-${s.id}`,
@@ -209,7 +220,7 @@ function PaletteContent({ close }: { close: () => void }) {
         run: act(() => openExternal(d.file)),
       })),
     ];
-  }, [t, tNav, tProducts, tDocs, router, locale, theme, toggleTheme, switchLocale, setHelpOpen, copy, close]);
+  }, [t, tNav, tProducts, tDocs, tProjects, router, locale, theme, toggleTheme, switchLocale, setHelpOpen, copy, close]);
 
   const results = useMemo(() => {
     const terms = normalize(query).split(/\s+/).filter(Boolean);
@@ -288,8 +299,8 @@ function PaletteContent({ close }: { close: () => void }) {
                 onMouseMove={() => setActive(i)}
                 onClick={() => item.run()}
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm",
-                  selected ? "bg-surface-3 text-fg" : "text-muted",
+                  "flex cursor-pointer items-center gap-3 px-3 py-2.5 text-sm",
+                  selected ? "bg-surface-3 text-fg shadow-[inset_2px_0_0_var(--accent-vivid)]" : "text-muted",
                 )}
               >
                 <span aria-hidden="true" className={selected ? "text-accent" : "text-dim"}>

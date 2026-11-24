@@ -65,7 +65,7 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[11.5px] text-muted">
         <span className="flex items-center gap-2">
-          <span aria-hidden="true" className="live-dot h-2 w-2 rounded-full bg-accent" />
+          <span aria-hidden="true" className="live-dot h-2 w-2 rounded-full bg-accent-vivid text-accent-vivid" />
           {t("parisTime", { time: formatMinutes(now.minutes) })}
         </span>
         {presence && <span className="text-dim">{t("discord.label", { status: t(`discord.${presence.discord}`) })}</span>}
@@ -103,7 +103,7 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
         </div>
       </div>
 
-      <p className={cn("flex items-center gap-2.5", lg ? "now-availability" : "tile px-4 py-3 text-[14px] font-medium")}>
+      <p className={cn("flex items-center gap-2.5", lg ? "now-availability" : "border-l-2 border-accent-vivid bg-surface-2 px-4 py-3 text-[14px] font-medium")}>
         <AvailabilityIcon size={lg ? 18 : 16} aria-hidden="true" className="shrink-0 text-accent" />
         {t(`availability.${activity.availability}`)}
       </p>
@@ -119,14 +119,14 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
           {/* Avancement du créneau */}
           <div className="flex flex-col gap-2">
             <div
-              className="h-1.5 overflow-hidden rounded-full bg-surface-3"
+              className="h-1 overflow-hidden bg-surface-3"
               role="progressbar"
               aria-label={t("progressLabel")}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={Math.round(now.progress * 100)}
             >
-              <div className="h-full rounded-full bg-accent" style={{ width: `${now.progress * 100}%` }} />
+              <div className="h-full bg-accent-vivid" style={{ width: `${now.progress * 100}%` }} />
             </div>
             <div className="flex justify-between font-mono text-[11.5px] text-dim">
               <span>{formatMinutes(current.start)}</span>

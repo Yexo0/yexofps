@@ -90,7 +90,7 @@ export function Packet({ d, reverse }: { d: string; reverse: boolean }) {
       <path ref={path} d={d} fill="none" stroke="none" />
       <g ref={dot} style={{ opacity: 0 }}>
         <circle r={9} fill="var(--glow)" />
-        <circle r={4} fill="var(--accent)" />
+        <circle r={4} fill="var(--accent-vivid)" />
         <circle r={1.8} fill="var(--on-accent-container)" />
       </g>
     </g>
@@ -103,14 +103,14 @@ export function StepBadge({ state, x, y }: { state: StepState; x: number; y: num
     <g transform={`translate(${x} ${y})`} aria-hidden="true">
       {state === "done" && (
         <>
-          <circle r={7} fill="var(--accent)" />
+          <circle r={7} fill="var(--accent-vivid)" />
           <path d="M-3 0.2 L-0.8 2.4 L3.2 -2.2" fill="none" stroke="var(--on-accent)" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
         </>
       )}
       {state === "running" && (
         <>
           <circle r={7} fill="var(--surface-solid)" stroke="var(--line-strong)" strokeWidth={1.4} />
-          <circle r={7} fill="none" stroke="var(--accent)" strokeWidth={1.8} strokeDasharray="11 33" strokeLinecap="round" className="map-spin" />
+          <circle r={7} fill="none" stroke="var(--accent-vivid)" strokeWidth={1.8} strokeDasharray="11 33" strokeLinecap="round" className="map-spin" />
         </>
       )}
       {state === "pending" && <circle r={4.5} fill="var(--surface-solid)" stroke="var(--line-strong)" strokeWidth={1.4} />}
@@ -137,14 +137,14 @@ export function ScenarioBar({
   if (!scene) return null;
 
   return (
-    <div className={cn("tile flex flex-col gap-3 px-3.5 py-3 transition-opacity duration-300", muted && "opacity-50")}>
+    <div className={cn("flex flex-col gap-3 border-y border-line py-3 transition-opacity duration-300", muted && "opacity-50")}>
       <div className="flex flex-wrap items-center gap-2">
         {!reduced && (
           <button
             type="button"
             onClick={player.toggle}
             aria-label={playing ? labels.pause : labels.play}
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-[4px] bg-accent text-on-accent"
+            className="grid h-8 w-8 shrink-0 place-items-center bg-accent-vivid text-on-accent"
           >
             {playing ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
           </button>
@@ -159,8 +159,8 @@ export function ScenarioBar({
               aria-selected={i === sceneIndex}
               onClick={() => player.select(i)}
               className={cn(
-                "min-h-8 rounded-[4px] px-2.5 text-[12.5px] font-semibold transition-colors",
-                i === sceneIndex ? "bg-accent-tint text-on-accent-container shadow-[inset_0_0_0_1px_var(--glow-ring)]" : "text-muted hover:bg-surface-3 hover:text-fg",
+                "min-h-8 px-2.5 text-[12.5px] font-medium transition-colors",
+                i === sceneIndex ? "bg-fg text-bg" : "text-muted hover:bg-surface-3 hover:text-fg",
               )}
             >
               {s.label}
@@ -176,12 +176,12 @@ export function ScenarioBar({
             <li key={id} className="flex items-center" style={{ "--si": i } as CSSProperties}>
               {i > 0 && (
                 <span aria-hidden="true" className="relative mx-1.5 h-px w-5 bg-line-strong sm:w-7">
-                  <span className={cn("pipe-fill absolute inset-0 bg-accent", state !== "pending" && "pipe-fill-on")} />
+                  <span className={cn("pipe-fill absolute inset-0 bg-accent-vivid", state !== "pending" && "pipe-fill-on")} />
                 </span>
               )}
               <span
                 className={cn(
-                  "flex items-center gap-1.5 rounded-[4px] px-2 py-1 font-mono text-[11.5px] transition-colors duration-300",
+                  "flex items-center gap-1.5 px-2 py-1 font-mono text-[11.5px] transition-colors duration-300",
                   state === "running" && "bg-accent-tint text-fg",
                   state === "done" && "text-fg",
                   state === "pending" && "text-dim",
@@ -189,11 +189,11 @@ export function ScenarioBar({
               >
                 <span aria-hidden="true" className="grid h-4 w-4 place-items-center">
                   {state === "done" && (
-                    <span className="grid h-4 w-4 place-items-center rounded-full bg-accent text-on-accent">
+                    <span className="grid h-4 w-4 place-items-center rounded-full bg-accent-vivid text-on-accent">
                       <Check size={10} strokeWidth={3} />
                     </span>
                   )}
-                  {state === "running" && <span className="pipe-spin h-3.5 w-3.5 rounded-full border-[1.5px] border-line-strong border-t-accent" />}
+                  {state === "running" && <span className="pipe-spin h-3.5 w-3.5 rounded-full border-[1.5px] border-line-strong border-t-accent-vivid" />}
                   {state === "pending" && <span className="h-2 w-2 rounded-full border border-line-strong" />}
                 </span>
                 {nodeLabel(id)}

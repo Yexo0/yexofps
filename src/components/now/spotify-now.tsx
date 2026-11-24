@@ -31,17 +31,17 @@ export function SpotifyNow({ track }: { track: Track }) {
   const progress = duration > 0 ? elapsed / duration : 0;
 
   return (
-    <div className="tile flex items-center gap-3.5 p-2.5 pr-4">
+    <div className="flex items-center gap-3.5 border-t border-line py-3">
       {track.art ? (
         <Image
           src={track.art}
           alt={t("cover", { album: track.album || track.song })}
           width={64}
           height={64}
-          className="h-16 w-16 shrink-0 rounded-[10px] object-cover"
+          className="h-16 w-16 shrink-0 object-cover"
         />
       ) : (
-        <span aria-hidden="true" className="h-16 w-16 shrink-0 rounded-[10px] bg-surface-3" />
+        <span aria-hidden="true" className="h-16 w-16 shrink-0 bg-surface-3" />
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <p className="label">{t("label")}</p>
@@ -50,14 +50,14 @@ export function SpotifyNow({ track }: { track: Track }) {
         <div className="mt-1 flex items-center gap-2 font-mono text-[10.5px] text-dim">
           <span>{clock(elapsed)}</span>
           <span
-            className="h-1 flex-1 overflow-hidden rounded-full bg-surface-3"
+            className="h-1 flex-1 overflow-hidden bg-surface-3"
             role="progressbar"
             aria-label={t("progress")}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(progress * 100)}
           >
-            <span className="block h-full rounded-full bg-accent" style={{ width: `${progress * 100}%` }} />
+            <span className="block h-full bg-accent-vivid" style={{ width: `${progress * 100}%` }} />
           </span>
           <span>{clock(duration)}</span>
         </div>

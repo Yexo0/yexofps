@@ -1,13 +1,12 @@
-// src/components/home/live-card.tsx — Carte "Stats en direct" de l'accueil : résumé des dernières
-// parties Valorant (tracker) en gros chiffres. Les rangs sont dans le hero (KeyStats).
+// src/components/home/live-card.tsx — Home "Live stats" panel: the last Valorant matches (tracker)
+// as big figures, with a win/loss strip. Ranks are in the hero (KeyStats).
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Gamepad2 } from "lucide-react";
 import { TRACKER } from "@/config/site";
 import { useValorantTracker } from "@/hooks/use-valorant-tracker";
 import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/primitives";
+import { ArrowLink, Skeleton } from "@/components/ui/primitives";
 import { ResultDots, TrackerNotice, useStatFormat } from "@/components/gaming/tracker-parts";
 
 export function LiveCard({ className, index }: { className?: string; index?: number }) {
@@ -25,30 +24,20 @@ export function LiveCard({ className, index }: { className?: string; index?: num
   ];
 
   return (
-    <Card
-      id="gaming"
-      icon={Gamepad2}
-      title={t("title")}
-      subtitle="valorant --live"
-      meta={account}
-      next="gaming"
-      index={index}
-      className={className}
-      bodyClassName="gap-4"
-    >
+    <Card id="gaming" title={t("title")} meta={account} index={index} className={className} bodyClassName="gap-6">
       <div className="flex items-center justify-between gap-3">
         <p className="label">{t("recent", { count: data?.matches.length ?? TRACKER.size })}</p>
         {status === "ready" && data && <ResultDots matches={data.matches} />}
       </div>
 
       {status === "loading" && (
-        <div className="grid grid-cols-3 gap-2" aria-busy="true">
+        <div className="grid grid-cols-3 gap-4" aria-busy="true">
           <span className="sr-only" role="status">
             {tTracker("loading")}
           </span>
           {tiles.map((tile) => (
-            <div key={tile.label} className="tile px-3 py-3">
-              <Skeleton className="h-6 w-14" />
+            <div key={tile.label} className="border-t border-line pt-4">
+              <Skeleton className="h-9 w-16" />
               <Skeleton className="mt-2 h-2.5 w-10" />
             </div>
           ))}
@@ -56,11 +45,11 @@ export function LiveCard({ className, index }: { className?: string; index?: num
       )}
 
       {status === "ready" && (
-        <dl className="stagger grid grid-cols-3 gap-2">
+        <dl className="stagger grid grid-cols-3 gap-4">
           {tiles.map((tile) => (
-            <div key={tile.label} className="tile flex flex-col-reverse px-3.5 py-4">
+            <div key={tile.label} className="flex flex-col-reverse border-t border-line pt-4">
               <dt className="label mt-2">{tile.label}</dt>
-              <dd className="display text-[40px] tabular-nums text-fg">{tile.value}</dd>
+              <dd className="display text-[44px] tabular-nums text-fg sm:text-[56px]">{tile.value}</dd>
             </div>
           ))}
         </dl>
@@ -78,6 +67,9 @@ export function LiveCard({ className, index }: { className?: string; index?: num
           cooldownLeft={cooldownLeft}
         />
       )}
+      <div className="mt-auto pt-2">
+        <ArrowLink href="/gaming">{t("more")}</ArrowLink>
+      </div>
     </Card>
   );
 }

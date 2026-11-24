@@ -1,83 +1,49 @@
-// src/components/ui/card.tsx — Composant carte : base de tout le site.
-// Header = pastille d'icône + titre + sous-titre façon commande (mono) + méta à droite.
-// En bas, lien optionnel vers l'espace suivant.
+// src/components/ui/card.tsx — Panel: flat surface with a hairline border, revealed on scroll.
+// Optional head: title (display face) and a short meta on the right. Used for interactive blocks
+// (tracker, maps, players…); text content lives in Sections, not in boxes.
 import type { CSSProperties, ReactNode } from "react";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { SpaceId } from "@/config/spaces";
-import { NextSpace } from "./next-space";
 
 interface CardProps {
   id?: string;
-  icon?: LucideIcon;
-  title: string;
-  /** Commande ou chemin affiché sous le titre, ex : "~/parcours" */
-  subtitle?: string;
-  /** Méta courte à droite, ex : "4 jeux" */
+  title?: string;
+  /** Short meta on the right, e.g. "4 games" */
   meta?: ReactNode;
-  /** h1 pour la carte principale d'un espace, h2 sinon */
-  headingLevel?: 1 | 2;
-  /** Masque visuellement le header (le titre reste lu par les lecteurs d'écran) */
+  /** Keep the title for screen readers only */
   hideHeader?: boolean;
-  next?: SpaceId;
-  /** Ordre d'apparition (léger décalage du fondu) */
+  /** Reveal order (small delay after siblings) */
   index?: number;
+  /** No surface, no border: only the reveal and the head */
+  plain?: boolean;
   className?: string;
   bodyClassName?: string;
   children?: ReactNode;
 }
 
-export function Card({
-  id,
-  icon: Icon,
-  title,
-  subtitle,
-  meta,
-  headingLevel = 2,
-  hideHeader = false,
-  next,
-  index = 0,
-  className,
-  bodyClassName,
-  children,
-}: CardProps) {
-  const Heading = headingLevel === 1 ? "h1" : "h2";
-  const headingId = id ? `${id}-title` : undefined;
-
+export function Card({ id, title, meta, hideHeader = false, index = 0, plain, className, bodyClassName, children }: CardProps) {
+  const headingId = id && title ? `${id}-title` : undefined;
   return (
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("card", className)}
-      // Carte principale (h1) : se transforme en celle de la page suivante lors d'une navigation
-      style={{ "--i": index, viewTransitionName: headingLevel === 1 ? "lead-card" : undefined } as CSSProperties}
+      data-reveal=""
+      className={cn("card", plain && "card-plain", className)}
+      style={{ "--i": index } as CSSProperties}
     >
-      {hideHeader ? (
-        <Heading id={headingId} className="sr-only">
-          {title}
-        </Heading>
-      ) : (
-        <header className="mb-5 flex items-center gap-3">
-          {Icon && (
-            <span className="icon-pill" aria-hidden="true">
-              <Icon size={16} strokeWidth={2.2} />
-            </span>
-          )}
-          <div className="min-w-0 flex-1">
-            <Heading id={headingId} className="display text-[22px] text-fg sm:text-[24px]">
+      {title &&
+        (hideHeader ? (
+          <h3 id={headingId} className="sr-only">
+            {title}
+          </h3>
+        ) : (
+          <header className="mb-6 flex items-baseline justify-between gap-4">
+            <h3 id={headingId} className="display text-[26px] text-fg sm:text-[30px]">
               {title}
-            </Heading>
-            {subtitle && <p className="mt-1 truncate font-mono text-[10px] text-dim opacity-80">{subtitle}</p>}
-          </div>
-          {meta && <div className="shrink-0 font-mono text-[10.5px] text-dim">{meta}</div>}
-        </header>
-      )}
+            </h3>
+            {meta && <div className="label shrink-0">{meta}</div>}
+          </header>
+        ))}
       <div className={cn("flex min-w-0 flex-1 flex-col", bodyClassName)}>{children}</div>
-      {next && (
-        <div className="mt-6">
-          <NextSpace to={next} />
-        </div>
-      )}
     </section>
   );
 }

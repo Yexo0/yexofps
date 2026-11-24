@@ -1,21 +1,22 @@
-// src/app/[locale]/baptiste/page.tsx — Accueil, profil Baptiste : le côté pro, hors univers Valorant.
-// Couleurs de l'univers "pro" (THEME_OVERRIDES), fond façon logiciel de montage, PC portable
-// en 3D. De haut en bas : hero (prénom, une phrase, actions, chiffres clés), puis
-// le parcours en bref et le résumé de l'infra, puis les espaces dans l'ordre utile à ce profil.
+// src/app/[locale]/baptiste/page.tsx — Home, Baptiste profile: the professional side, outside the
+// Valorant world. Laptop in 3D. Top to bottom: hero (first name, one sentence, actions, key figures),
+// background in short next to the fastfetch summary, infra projects, then the spaces in the order
+// that matters for this profile (gaming last).
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, GitCommitHorizontal, Mail, Network } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { TIMELINE } from "@/config/career";
 import { SITE } from "@/config/site";
 import { pageMetadata } from "@/lib/metadata";
-import { Card } from "@/components/ui/card";
-import { ButtonLink } from "@/components/ui/primitives";
+import { Reveal, Section } from "@/components/ui/section";
+import { ArrowLink, ButtonLink } from "@/components/ui/primitives";
 import { Hero } from "@/components/home/hero";
 import { ProStats } from "@/components/home/key-stats";
 import { Fastfetch } from "@/components/home/fastfetch";
-import { SpaceTiles } from "@/components/home/space-tiles";
+import { SpaceIndex } from "@/components/home/space-index";
+import { SelectedWork } from "@/components/home/selected-work";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -31,83 +32,70 @@ export default async function BaptistePage({ params }: Props) {
   return <Baptiste />;
 }
 
-/** Les espaces dans l'ordre utile au côté pro (le gaming passe en dernier) */
-const PRO_ORDER = ["career", "lab", "creator", "tools", "contact", "gaming"] as const;
+/** Spaces in the order that matters for the pro side (gaming last) */
+const PRO_ORDER = ["career", "lab", "projects", "creator", "contact", "gaming"] as const;
 
 function Baptiste() {
   const t = useTranslations("home.pro");
-  const tHero = useTranslations("home.hero");
   return (
-    <div className="bento lg:gap-4">
+    <div className="page">
       <Hero
         profile="baptiste"
         name={SITE.displayName}
-        nameClassName="hero-name-long"
+        long
         punch={t("punch")}
         scene="laptop"
-        callouts={[t("callouts.ae"), t("callouts.machine")]}
+        caption={t("caption")}
         stats={<ProStats />}
         actions={
           <>
             <ButtonLink href="/career" variant="primary">
               {t("actions.career")}
-              <ArrowRight size={16} aria-hidden="true" />
+              <ArrowRight size={15} aria-hidden="true" />
             </ButtonLink>
             <ButtonLink href="/lab" variant="tonal">
-              <Network size={16} aria-hidden="true" />
               {t("actions.lab")}
             </ButtonLink>
             <ButtonLink href="/contact" variant="tonal">
-              <Mail size={16} aria-hidden="true" />
-              {tHero("contact")}
+              {t("actions.contact")}
             </ButtonLink>
           </>
         }
       />
-      <TimelineBrief />
-      <Fastfetch pro index={2} className="md:col-span-6 lg:col-span-5" />
-      <SpaceTiles className="md:col-span-6 lg:col-span-12" order={PRO_ORDER} />
+      <Background />
+      <SelectedWork ids={["homelab", "site", "claimd"]} index="02" />
+      <SpaceIndex index="03" order={PRO_ORDER} />
     </div>
   );
 }
 
-/* ─── Parcours en bref : les trois dernières étapes, en grand ─── */
+/* ─── Background in short: the three latest steps, next to the infra summary ─── */
 
-function TimelineBrief() {
+function Background() {
   const t = useTranslations("home.pro.timeline");
   const tItems = useTranslations("career.timeline");
   const items = TIMELINE.slice(0, 3);
   return (
-    <Card
-      id="timeline"
-      icon={GitCommitHorizontal}
-      title={t("title")}
-      subtitle="git log --oneline -3 ~/parcours"
-      index={1}
-      className="md:col-span-6 lg:col-span-7"
-      bodyClassName="gap-5"
-    >
-      <ol className="stagger relative flex flex-col gap-5 border-l border-line-strong pl-6">
-        {items.map((item, i) => (
-          <li key={item.id} className="relative" style={{ "--si": i } as CSSProperties}>
-            <span
-              aria-hidden="true"
-              className={
-                item.current
-                  ? "absolute -left-[29.5px] top-1.5 h-[11px] w-[11px] rotate-45 bg-accent shadow-[0_0_14px_var(--glow-strong)]"
-                  : "absolute -left-[29.5px] top-1.5 h-[11px] w-[11px] rotate-45 border border-line-strong bg-surface-solid"
-              }
-            />
-            <p className="font-mono text-[11.5px] text-dim">{tItems(`items.${item.id}.date`)}</p>
-            <p className="display mt-1 text-[26px] leading-[0.98] text-fg sm:text-[30px]">{tItems(`items.${item.id}.title`)}</p>
-            <p className="mt-1 text-[14px] text-muted">{tItems(`items.${item.id}.place`)}</p>
-          </li>
-        ))}
-      </ol>
-      <ButtonLink href="/career#timeline" variant="tonal" size="sm" className="mt-auto self-start">
-        {t("all")}
-        <ArrowRight size={14} aria-hidden="true" />
-      </ButtonLink>
-    </Card>
+    <Section id="background" index="01" title={t("title")} aside={<ArrowLink href="/career">{t("all")}</ArrowLink>}>
+      <div className="grid gap-10 lg:grid-cols-12">
+        <Reveal className="lg:col-span-6">
+          <ol className="stagger">
+            {items.map((item, i) => (
+              <li key={item.id} className="grid grid-cols-[88px_1fr] gap-4 border-t border-line py-6" style={{ "--si": i } as CSSProperties}>
+                <p className="font-mono text-[11.5px] text-dim">
+                  {item.current && <span aria-hidden="true" className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent-vivid align-middle" />}
+                  {tItems(`items.${item.id}.date`)}
+                </p>
+                <div>
+                  <p className="display text-[28px] leading-[0.95] text-fg sm:text-[34px]">{tItems(`items.${item.id}.title`)}</p>
+                  <p className="mt-2 text-[14px] text-muted">{tItems(`items.${item.id}.place`)}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <Fastfetch pro index={1} className="lg:col-span-6" />
+      </div>
+    </Section>
   );
 }

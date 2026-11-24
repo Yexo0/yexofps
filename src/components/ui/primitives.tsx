@@ -1,12 +1,12 @@
-// src/components/ui/primitives.tsx — Petits blocs visuels réutilisés : stat, chip, tag, bouton, skeleton.
+// src/components/ui/primitives.tsx — Small building blocks: stat, chip, tag, buttons, arrow link, skeleton.
 import type { AnchorHTMLAttributes, ComponentProps, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
-import { ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { CountUp } from "./count-up";
 
-/* ─── Tuile de stat : gros chiffre, petite unité, label mono ─── */
+/* ─── Stat: big figure, small unit, mono label ─── */
 
 export function StatTile({
   value,
@@ -22,10 +22,10 @@ export function StatTile({
   size?: "md" | "lg";
 }) {
   return (
-    <div className={cn("tile flex min-w-0 flex-col justify-between gap-2 px-4 py-4", className)}>
+    <div className={cn("flex min-w-0 flex-col justify-between gap-3 border-t border-line pt-4", className)}>
       <p className="flex items-baseline gap-1.5 leading-none">
-        <span className={cn("display text-fg tabular-nums", size === "lg" ? "text-[56px]" : "text-[42px]")}>
-          {/* Nombre : défile jusqu'à sa valeur quand la tuile arrive à l'écran */}
+        <span className={cn("display text-fg tabular-nums", size === "lg" ? "text-[64px]" : "text-[46px]")}>
+          {/* Numbers count up to their value when they reach the screen */}
           {typeof value === "number" ? <CountUp value={value} /> : value}
         </span>
         {unit && <span className="font-mono text-[11px] text-muted">{unit}</span>}
@@ -35,17 +35,9 @@ export function StatTile({
   );
 }
 
-/* ─── Chip en pilule avec icône (technos) ─── */
+/* ─── Chip with an icon (technologies) ─── */
 
-export function Chip({
-  icon: Icon,
-  children,
-  className,
-}: {
-  icon?: LucideIcon;
-  children: ReactNode;
-  className?: string;
-}) {
+export function Chip({ icon: Icon, children, className }: { icon?: LucideIcon; children: ReactNode; className?: string }) {
   return (
     <span className={cn("chip", className)}>
       {Icon && <Icon size={14} aria-hidden="true" className="text-muted" />}
@@ -54,13 +46,13 @@ export function Chip({
   );
 }
 
-/* ─── Petit tag mono avec contour (mots-clés) ─── */
+/* ─── Small mono tag (keywords) ─── */
 
 export function Tag({ children, className }: { children: ReactNode; className?: string }) {
   return <span className={cn("tag", className)}>{children}</span>;
 }
 
-/* ─── Boutons pilule ─── */
+/* ─── Buttons ─── */
 
 type Variant = "primary" | "tonal" | "ghost";
 type Size = "md" | "sm";
@@ -69,7 +61,7 @@ export function buttonClass(variant: Variant = "tonal", size: Size = "md", class
   return cn("btn", `btn-${variant}`, size === "sm" && "btn-sm", className);
 }
 
-/** Lien interne (localisé) en forme de bouton */
+/** Internal (localized) link shaped as a button */
 export function ButtonLink({
   variant,
   size,
@@ -79,7 +71,7 @@ export function ButtonLink({
   return <Link className={buttonClass(variant, size, className)} {...props} />;
 }
 
-/** Lien externe en forme de bouton (nouvel onglet) */
+/** External link shaped as a button (new tab) */
 export function ExternalButton({
   variant,
   size,
@@ -93,19 +85,59 @@ export function ExternalButton({
   showIcon?: boolean;
 }) {
   return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      className={buttonClass(variant, size, className)}
-      {...props}
-    >
+    <a target="_blank" rel="noopener noreferrer" className={buttonClass(variant, size, className)} {...props}>
       {children}
-      {showIcon && <ExternalLink size={13} aria-hidden="true" className="opacity-70" />}
+      {showIcon && <ArrowUpRight size={14} aria-hidden="true" className="opacity-70" />}
     </a>
   );
 }
 
-/* ─── Skeleton (chargement) ─── */
+/* ─── Text link with an arrow that slides through on hover ─── */
+
+export function ArrowLink({
+  href,
+  children,
+  external,
+  className,
+}: {
+  href: ComponentProps<typeof Link>["href"] | string;
+  children: ReactNode;
+  external?: boolean;
+  className?: string;
+}) {
+  const Arrow = external ? ArrowUpRight : ArrowRight;
+  const inner = (
+    <>
+      <span className="link-line">{children}</span>
+      <span aria-hidden="true" className={cn("arrow-swap", !external && "arrow-swap-x")}>
+        <Arrow size={15} />
+        <Arrow size={15} className="text-accent" />
+      </span>
+    </>
+  );
+  const cls = cn("group inline-flex items-center gap-2 text-[14px] font-medium text-fg", className);
+  if (external || (href as string).startsWith("#")) {
+    if (!external) {
+      return (
+        <a href={href as string} className={cls}>
+          {inner}
+        </a>
+      );
+    }
+    return (
+      <a href={href as string} target="_blank" rel="noopener noreferrer" className={cls}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href as ComponentProps<typeof Link>["href"]} className={cls}>
+      {inner}
+    </Link>
+  );
+}
+
+/* ─── Skeleton (loading) ─── */
 
 export function Skeleton({ className }: { className?: string }) {
   return <span aria-hidden="true" className={cn("skeleton block", className)} />;

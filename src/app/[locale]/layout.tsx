@@ -1,4 +1,4 @@
-// src/app/[locale]/layout.tsx — Layout racine par langue : <html>, thème, polices, fond, rail, cadre.
+// src/app/[locale]/layout.tsx — Root layout per language: <html>, theme, fonts, header, page, footer.
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
@@ -11,21 +11,18 @@ import { routing } from "@/i18n/routing";
 import { SITE } from "@/config/site";
 import { DEFAULT_THEME } from "@/config/theme";
 import { earlyRevealScript, themeColor, themeCss, themeScript } from "@/lib/theme";
-import { Rail } from "@/components/shell/rail";
 import { UIProvider } from "@/components/shell/ui-provider";
+import { SiteHeader } from "@/components/shell/site-header";
+import { SiteFooter } from "@/components/shell/site-footer";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
-import { Statusline } from "@/components/shell/statusline";
 import { ScrollReveal } from "@/components/shell/scroll-reveal";
-import { CardSpotlight } from "@/components/shell/card-spotlight";
 import { PageTransition } from "@/components/shell/page-transition";
-import { Backdrop } from "@/components/shell/backdrop";
-import { SpaceSync } from "@/components/shell/space-sync";
 import { AimCursor } from "@/components/shell/aim-cursor";
 import { Credits } from "@/components/shell/credits";
 import "../globals.css";
 
-// Police des titres et gros chiffres (fichier local, aucune requête réseau au build)
+// Display face for titles and big figures (local file, no network request at build)
 const anton = localFont({
   src: "../fonts/anton-latin.woff2",
   variable: "--font-anton",
@@ -70,7 +67,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
   const t = await getTranslations("common");
-  // Pages générées au build : la date de build = date du dernier déploiement
+  // Pages are generated at build time: the build date is the last deploy date
   const buildDate = new Date();
   const deployedAt = new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(buildDate);
 
@@ -92,23 +89,17 @@ export default async function LocaleLayout({ children, params }: Props) {
             <a href="#main" className="skip-link">
               {t("skipToContent")}
             </a>
-            <SpaceSync />
-            <Backdrop />
-            <Rail />
-            <div className="shell">
-              <main id="main" tabIndex={-1} className="frame flex flex-col outline-none">
+            <SiteHeader />
+            <div className="site-main">
+              <main id="main" tabIndex={-1} className="container-x flex-1 outline-none">
                 <PageTransition>{children}</PageTransition>
                 <script dangerouslySetInnerHTML={{ __html: earlyRevealScript }} />
-                <div className="mt-auto pt-3">
-                  <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
-                  <Credits />
-                </div>
               </main>
+              <SiteFooter year={buildDate.getFullYear()} deployedAt={deployedAt} credits={<Credits />} />
             </div>
             <CommandPalette />
             <ShortcutsDialog />
             <ScrollReveal />
-            <CardSpotlight />
             <AimCursor />
           </UIProvider>
         </NextIntlClientProvider>

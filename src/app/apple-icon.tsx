@@ -35,8 +35,8 @@ export default function AppleIcon() {
               fill="none"
               stroke={brand.onAccent}
               strokeWidth="3.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
             />
           </svg>
         </div>

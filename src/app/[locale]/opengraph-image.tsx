@@ -1,5 +1,5 @@
-// src/app/[locale]/opengraph-image.tsx — Image Open Graph (1200 × 630) par langue, générée au build.
-// Reprend la DA du site : fond sombre, coins de viseur, accent, Geist / Geist Mono.
+// src/app/[locale]/opengraph-image.tsx — Open Graph image (1200 × 630) per language, generated at build.
+// Same art direction as the site: near-black page, the red band of the hero, the name huge.
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
@@ -26,11 +26,6 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
     readFile(join(FONTS, "geist-mono/GeistMono-Regular.ttf")),
   ]);
 
-  const corner = (pos: Record<string, number>, borders: Record<string, string>) => (
-    <div style={{ position: "absolute", width: 34, height: 34, display: "flex", ...pos, ...borders }} />
-  );
-  const line = `3px solid ${brand.accent}`;
-
   return new ImageResponse(
     (
       <div
@@ -47,68 +42,30 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           color: brand.text,
         }}
       >
-        {corner({ left: 36, top: 36 }, { borderLeft: line, borderTop: line })}
-        {corner({ right: 36, top: 36 }, { borderRight: line, borderTop: line })}
-        {corner({ left: 36, bottom: 36 }, { borderLeft: line, borderBottom: line })}
-        {corner({ right: 36, bottom: 36 }, { borderRight: line, borderBottom: line })}
-
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              background: brand.accent,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="44" height="44" viewBox="6 6 24 24">
-              <path
-                d="M11.5 10.5 18 18.6l6.5-8.1M18 18.6v7.4"
-                fill="none"
-                stroke={brand.onAccent}
-                strokeWidth="3.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div style={{ fontFamily: "Geist Mono", fontSize: 26, color: brand.dim, display: "flex" }}>
-            <span style={{ color: brand.accent }}>$</span>&nbsp;whoami
-          </div>
+        {/* The red band of the home hero */}
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: 470,
+            height: 630,
+            display: "flex",
+            background: brand.accent,
+            clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0 100%)",
+          }}
+        />
+        <div style={{ display: "flex", alignItems: "center", gap: 18, fontFamily: "Geist Mono", fontSize: 24, color: brand.dim }}>
+          <div style={{ width: 44, height: 2, background: brand.accent, display: "flex" }} />
+          {t("label")}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <div style={{ fontSize: 156, lineHeight: 0.9, letterSpacing: -6, display: "flex" }}>Yexo</div>
-          <div style={{ fontSize: 40, lineHeight: 1.2, maxWidth: 960, color: brand.text, display: "flex" }}>
-            {t("tagline")}
-          </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+          <div style={{ fontSize: 210, lineHeight: 0.82, letterSpacing: -10, display: "flex" }}>YEXO</div>
+          <div style={{ fontSize: 38, lineHeight: 1.2, maxWidth: 680, color: brand.muted, display: "flex" }}>{t("tagline")}</div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 12 }}>
-            {(["sysadmin", "fps", "video"] as const).map((k) => (
-              <div
-                key={k}
-                style={{
-                  display: "flex",
-                  padding: "10px 20px",
-                  borderRadius: 999,
-                  background: brand.surface2,
-                  color: brand.muted,
-                  fontSize: 24,
-                }}
-              >
-                {t(`chips.${k}`)}
-              </div>
-            ))}
-          </div>
-          <div style={{ fontFamily: "Geist Mono", fontSize: 24, color: brand.accent, display: "flex" }}>
-            {SITE.url.replace("https://", "")}
-          </div>
-        </div>
+        <div style={{ display: "flex", fontFamily: "Geist Mono", fontSize: 24, color: brand.text }}>{SITE.url.replace("https://", "")}</div>
       </div>
     ),
     {

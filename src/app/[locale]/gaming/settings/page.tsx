@@ -1,14 +1,14 @@
-// src/app/[locale]/gaming/settings/page.tsx — Settings Valorant : résumé (sensi, réticule) puis
-// le menu complet, organisé comme celui du jeu. Rattachée à l'espace 04 Gaming.
+// src/app/[locale]/gaming/settings/page.tsx — Valorant settings: summary (sens, crosshair, display), then
+// the full menu, organised like the in-game one. Belongs to the Gaming space.
 import type { Metadata } from "next";
 import { useFormatter, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft, Settings2, SlidersHorizontal } from "lucide-react";
 import { MY_SENS } from "@/config/site";
 import { SETTINGS_CAPTURED_AT, VALO_DISPLAY, settingsCount } from "@/config/valorant-settings";
 import { pageMetadata } from "@/lib/metadata";
-import { Card } from "@/components/ui/card";
-import { ButtonLink, StatTile } from "@/components/ui/primitives";
+import { PageHeader } from "@/components/ui/page-header";
+import { Reveal } from "@/components/ui/section";
+import { ArrowLink, StatTile } from "@/components/ui/primitives";
 import { CrosshairTile, SensTiles } from "@/components/valorant/summary";
 import { SettingsMenu } from "@/components/valorant/settings-menu";
 
@@ -28,71 +28,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ValorantSettingsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return (
-    <div className="bento">
-      <Summary />
-      <Menu />
-    </div>
-  );
+  return <Settings />;
 }
 
-function Summary() {
-  const t = useTranslations("valoSettings.summary");
+function Settings() {
+  const t = useTranslations("valoSettings");
   const format = useFormatter();
   const captured = format.dateTime(new Date(`${SETTINGS_CAPTURED_AT}T12:00:00Z`), { dateStyle: "long" });
 
   return (
-    <Card
-      id="summary"
-      icon={Settings2}
-      title={t("title")}
-      subtitle="cat ~/valorant/settings.ini"
-      meta={t("meta", { count: settingsCount() })}
-      headingLevel={1}
-      index={0}
-      className="md:col-span-6 lg:col-span-12"
-    >
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <ButtonLink href="/gaming" variant="ghost" size="sm" className="-ml-2">
-            <ArrowLeft size={14} aria-hidden="true" />
-            {t("back")}
-          </ButtonLink>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p className="font-mono text-[11.5px] text-dim">{t("captured", { date: captured })}</p>
-            <ButtonLink href="/tools#converter" variant="tonal" size="sm">
-              <SlidersHorizontal size={14} aria-hidden="true" />
-              {t("convert")}
-            </ButtonLink>
-          </div>
-        </div>
+    <div className="page">
+      <PageHeader
+        space="gaming"
+        eyebrow={t("summary.meta", { count: settingsCount() })}
+        title={t("summary.title")}
+        lead={<p>{t("summary.lead", { date: captured })}</p>}
+        actions={
+          <>
+            <ArrowLink href="/gaming">{t("summary.back")}</ArrowLink>
+            <ArrowLink href="/projects/sensitivity-converter">{t("summary.convert")}</ArrowLink>
+          </>
+        }
+      />
+      <Reveal className="flex flex-col gap-6">
         <SensTiles />
-        <div className="grid gap-2.5 sm:grid-cols-2">
+        <div className="grid gap-x-6 sm:grid-cols-2">
           <CrosshairTile />
-          <StatTile
-            label={t("display")}
-            value={VALO_DISPLAY.resolution}
-            unit={`${VALO_DISPLAY.ratio} · ${VALO_DISPLAY.hz} Hz`}
-            className="[&_span:first-child]:text-[24px]"
-          />
+          <StatTile label={t("summary.display")} value={VALO_DISPLAY.resolution} unit={`${VALO_DISPLAY.ratio} · ${VALO_DISPLAY.hz} Hz`} className="[&_span:first-child]:text-[30px]" />
         </div>
-      </div>
-    </Card>
-  );
-}
-
-function Menu() {
-  const t = useTranslations("valoSettings.menu");
-  return (
-    <Card
-      id="menu"
-      title={t("title")}
-      hideHeader
-      index={1}
-      next="creator"
-      className="md:col-span-6 lg:col-span-12"
-    >
-      <SettingsMenu />
-    </Card>
+      </Reveal>
+      <section id="menu" aria-label={t("menu.title")} data-reveal="">
+        <SettingsMenu />
+      </section>
+    </div>
   );
 }

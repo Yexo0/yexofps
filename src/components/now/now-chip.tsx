@@ -1,21 +1,21 @@
-// src/components/now/now-chip.tsx — Statut "en ce moment" en version courte, avec lien vers /now :
-// segment dans la barre d'état. (La page Contact affiche le statut complet, NowCard size="lg".)
+// src/components/now/now-chip.tsx — Short "right now" status linking to /now (footer, mobile menu).
+// The Contact page shows the full status (NowCard size="lg").
 "use client";
 
 import { useTranslations } from "next-intl";
 import { useLive } from "@/hooks/use-now";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
-/** Segment de la barre d'état façon tmux : "● now: valorant" */
-export function NowStatusSegment() {
+export function NowStatusSegment({ className }: { className?: string }) {
   const t = useTranslations("now");
   const state = useLive();
-  // Avant le calcul du statut : même emplacement réservé (sinon la barre change de largeur au chargement)
+  // Before the status is computed: same footprint (no width jump on load)
   if (!state) {
     return (
-      <span aria-hidden="true" className="hidden items-center gap-1.5 px-3 sm:flex">
+      <span aria-hidden="true" className={cn("inline-flex items-center gap-2", className)}>
         <span className="h-1.5 w-1.5 rounded-full bg-surface-hover" />
-        now: <span className="h-2.5 w-16 rounded bg-surface-3" />
+        <span className="h-2.5 w-24 bg-surface-3" />
       </span>
     );
   }
@@ -24,10 +24,10 @@ export function NowStatusSegment() {
     <Link
       href="/now"
       aria-label={t("chip.aria", { activity: t(`activities.${live.id}.title`, { name: live.name ?? "" }) })}
-      className="hidden items-center gap-1.5 px-3 transition-colors hover:text-fg sm:flex"
+      className={cn("group inline-flex items-center gap-2 transition-colors hover:text-fg", className)}
     >
-      <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
-      now: <span className="text-fg">{t(`short.${live.id}`, { name: live.name?.toLowerCase() ?? "" })}</span>
+      <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent-vivid text-accent-vivid" />
+      <span className="link-line">{t(`short.${live.id}`, { name: live.name ?? "" })}</span>
     </Link>
   );
 }

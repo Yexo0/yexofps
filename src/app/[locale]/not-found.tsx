@@ -1,32 +1,31 @@
-// src/app/[locale]/not-found.tsx — Page 404 dans le design du site.
+// src/app/[locale]/not-found.tsx — 404 in the site's design: a huge outlined 404, one line, two ways out.
 import { useTranslations } from "next-intl";
-import { SearchX } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
+import { Words } from "@/components/ui/words";
 import { ButtonLink } from "@/components/ui/primitives";
 
 export default function NotFound() {
   const t = useTranslations("notFound");
   return (
-    <div className="bento">
-      <Card
-        icon={SearchX}
-        title={t("title")}
-        subtitle="ls: cannot access: No such file or directory"
-        headingLevel={1}
-        className="md:col-span-6 lg:col-span-8"
-        bodyClassName="gap-5"
-      >
-        <p className="font-mono text-[64px] font-semibold leading-none text-accent">404</p>
-        <p className="max-w-[60ch] text-[15px] leading-relaxed text-muted">{t("text")}</p>
-        <div className="flex flex-wrap gap-2.5">
+    <div className="page">
+      <header className="page-head flex min-h-[60svh] flex-col justify-center">
+        <p className="label">
+          <span className="text-accent">404</span> / {t("title")}
+        </p>
+        <h1 className="display mt-6 text-[clamp(120px,26vw,380px)] leading-[0.8] text-transparent [-webkit-text-stroke:1px_var(--text-muted)]">
+          <Words text="404" mode="load" />
+        </h1>
+        <p className="lead mt-8 max-w-[44ch]">{t("text")}</p>
+        <div className="mt-9 flex flex-wrap gap-3">
           <ButtonLink href="/" variant="primary">
             {t("home")}
+            <ArrowRight size={15} aria-hidden="true" />
           </ButtonLink>
-          <ButtonLink href="/contact" variant="tonal">
-            {t("contact")}
+          <ButtonLink href="/projects" variant="tonal">
+            {t("projects")}
           </ButtonLink>
         </div>
-      </Card>
+      </header>
     </div>
   );
 }

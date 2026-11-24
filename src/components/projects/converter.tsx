@@ -1,6 +1,6 @@
-// src/components/tools/converter.tsx — Convertisseur de sensibilité (cm/360).
-// Calculs identiques à l'ancienne version : yaw CS2 0.022, Valorant 0.07, Apex 0.022, OW2 0.0066,
-// cm/360 = (360 × 2.54) / (DPI × sens × yaw), puis sens cible = (360 × 2.54) / (DPI cible × cm/360 × yaw cible).
+// src/components/projects/converter.tsx — Sensitivity converter (cm/360), on its project page.
+// Same math as before: yaw CS2 0.022, Valorant 0.07, Apex 0.022, OW2 0.0066,
+// cm/360 = (360 × 2.54) / (DPI × sens × yaw), then target sens = (360 × 2.54) / (target DPI × cm/360 × target yaw).
 "use client";
 
 import { useId, useMemo, useState } from "react";
@@ -10,7 +10,6 @@ import { GAMES, GAME_KEYS, cm360, round, sensFromCm360, type GameKey } from "@/l
 import { MY_SENS } from "@/config/site";
 import { CopyButton } from "@/components/ui/copy-button";
 import { DotDigits } from "@/components/ui/dot-digits";
-import { Reticle } from "@/components/ui/reticle";
 import { cn } from "@/lib/utils";
 
 type Result =
@@ -63,7 +62,7 @@ function GamePicker({
               onChange={() => onChange(k)}
               className="peer sr-only"
             />
-            <span className="flex min-h-10 cursor-pointer items-center justify-center rounded-full bg-surface-3 px-3 text-center text-[13px] font-semibold text-muted transition-colors hover:text-fg peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+            <span className="flex min-h-10 cursor-pointer items-center justify-center border border-line px-3 text-center text-[13px] font-medium text-muted transition-colors duration-300 hover:border-line-strong hover:text-fg peer-checked:border-transparent peer-checked:bg-fg peer-checked:text-bg peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
               {GAMES[k].name}
             </span>
           </label>
@@ -105,14 +104,14 @@ function Field({
         disabled={disabled}
         aria-invalid={invalid || undefined}
         placeholder={placeholder}
-        className={cn("field disabled:opacity-50", invalid && "border-accent")}
+        className={cn("field disabled:opacity-50", invalid && "border-accent-vivid")}
       />
     </div>
   );
 }
 
 export function Converter() {
-  const t = useTranslations("tools.converter");
+  const t = useTranslations("converter");
   const format = useFormatter();
   const [from, setFrom] = useState<GameKey>("valo");
   const [to, setTo] = useState<GameKey>("apex");
@@ -147,9 +146,9 @@ export function Converter() {
     <div className="grid gap-4 lg:grid-cols-12">
       {/* ─── Saisie ─── */}
       <div className="flex flex-col gap-4 lg:col-span-7">
-        <div className="tile flex flex-col gap-4 px-4 py-4">
+        <div className="flex flex-col gap-5 border border-line bg-surface p-5">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-bold">{t("from")}</p>
+            <p className="label text-fg">{t("from")}</p>
             <button type="button" onClick={loadMine} className="btn btn-ghost btn-sm -mr-2">
               <RotateCcw size={13} aria-hidden="true" />
               {t("mine", { sens: MY_SENS.sens, dpi: MY_SENS.dpi })}
@@ -175,13 +174,13 @@ export function Converter() {
         </div>
 
         <div className="-my-2 flex justify-center">
-          <button type="button" onClick={swap} className="icon-btn bg-surface-3 hover:bg-surface-hover" aria-label={t("swap")}>
+          <button type="button" onClick={swap} className="icon-btn border border-line-strong bg-bg" aria-label={t("swap")}>
             <ArrowDownUp size={17} aria-hidden="true" />
           </button>
         </div>
 
-        <div className="tile flex flex-col gap-4 px-4 py-4">
-          <p className="text-sm font-bold">{t("to")}</p>
+        <div className="flex flex-col gap-5 border border-line bg-surface p-5">
+          <p className="label text-fg">{t("to")}</p>
           <GamePicker legend={t("game")} value={to} onChange={setTo} />
           <div className="grid grid-cols-2 items-end gap-3">
             <Field
@@ -204,11 +203,11 @@ export function Converter() {
             >
               <span
                 aria-hidden="true"
-                className={cn("relative h-4 w-7 shrink-0 rounded-full transition-colors", sameDpi ? "bg-accent" : "bg-surface-hover")}
+                className={cn("relative h-4 w-7 shrink-0 transition-colors", sameDpi ? "bg-accent-vivid" : "bg-surface-hover")}
               >
                 <span
                   className={cn(
-                    "absolute top-0.5 h-3 w-3 rounded-full bg-surface-solid transition-[left] duration-150",
+                    "absolute top-0.5 h-3 w-3 bg-bg transition-[left] duration-300",
                     sameDpi ? "left-3.5" : "left-0.5",
                   )}
                 />
@@ -221,26 +220,25 @@ export function Converter() {
 
       {/* ─── Résultat ─── */}
       <div className="flex flex-col gap-2 lg:col-span-5" aria-live="polite">
-        <div className="tile relative flex flex-1 flex-col justify-between gap-6 px-5 py-5">
-          <Reticle size={12} inset={8} />
+        <div className="relative flex flex-1 flex-col justify-between gap-6 border border-line-strong bg-surface p-6">
           <div>
             <p className="label">{t("result")}</p>
             <p className="mt-1 text-sm text-muted">{t("in", { game: GAMES[to].name })}</p>
           </div>
           {result.ok ? (
-            <p className="text-accent">
+            <p className="text-accent-vivid">
               <DotDigits value={String(result.sens)} dot={6} gap={2} />
             </p>
           ) : (
             <p role="alert" className="flex items-center gap-2 text-sm text-fg">
-              <CircleAlert size={16} aria-hidden="true" className="text-accent" />
+              <CircleAlert size={16} aria-hidden="true" className="text-accent-vivid" />
               {t(`errors.${result.error}`)}
             </p>
           )}
           <div>{result.ok && <CopyButton value={String(result.sens)} label={t("result")} variant="primary" />}</div>
         </div>
-        <dl className="grid grid-cols-2 gap-2">
-          <div className="tile flex flex-col px-4 py-3.5">
+        <dl className="mt-4 grid grid-cols-2 gap-4">
+          <div className="flex flex-col border-t border-line pt-4">
             <dd className="order-1 flex items-baseline gap-1.5 leading-none">
               <span className="display text-[44px] tabular-nums text-fg">{result.ok ? num(result.cm) : "—"}</span>
               <span className="font-mono text-[11px] text-muted">cm</span>
@@ -250,7 +248,7 @@ export function Converter() {
               {result.ok ? t("in360", { value: num(result.inches) }) : t("cm360Sub")}
             </dd>
           </div>
-          <div className="tile flex flex-col px-4 py-3.5">
+          <div className="flex flex-col border-t border-line pt-4">
             <dd className="display order-1 text-[44px] tabular-nums text-fg">
               {result.ok ? num(result.edpiFrom, 0) : "—"}
             </dd>

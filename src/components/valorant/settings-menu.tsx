@@ -85,7 +85,7 @@ export function SettingsMenu() {
       {/* Barre d'onglets collante : on sait toujours où on est en faisant défiler */}
       <div
         ref={headerRef}
-        className="sticky top-2 z-20 -mx-2 rounded-[16px] border border-line bg-surface-solid/95 px-2 pt-2 shadow-[var(--shadow)] md:top-3"
+        className="sticky-under-header z-20 -mx-2 border-b border-line bg-bg/95 px-2 pt-2"
       >
         <Tabs.List
           aria-label={t("tabs")}
@@ -271,7 +271,7 @@ function Control({ row }: { row: SettingRow }) {
             <span className="set-thumb" />
           </span>
           {row.volume ? (
-            <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-inset text-muted">
+            <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center bg-inset text-muted">
               {row.pct === 0 ? <VolumeX size={15} /> : <Volume2 size={15} />}
             </span>
           ) : (
@@ -301,7 +301,7 @@ function Control({ row }: { row: SettingRow }) {
         <div className="flex w-full items-center gap-2 sm:w-auto">
           <span
             aria-hidden="true"
-            className="h-[34px] w-[34px] shrink-0 rounded-[8px] ring-1 ring-line-strong"
+            className="h-[34px] w-[34px] shrink-0 ring-1 ring-line-strong"
             style={{ background: row.hex }}
           />
           <span className="set-box flex-1 justify-between gap-3 sm:w-[200px] sm:flex-none" lang="en">
@@ -354,7 +354,7 @@ function CrosshairPanel() {
   const [zoom, setZoom] = useState<(typeof ZOOMS)[number]>(1);
 
   return (
-    <div className="mb-5 overflow-hidden rounded-[14px] border border-line">
+    <div className="media-frame mb-5 border border-line">
       <div className="relative grid h-[170px] place-items-center" style={{ background: BACKGROUNDS[bg] }}>
         <span
           lang="en"

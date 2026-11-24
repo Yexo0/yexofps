@@ -37,9 +37,9 @@ export function ShortcutsDialog() {
           </div>
 
           <h3 className="label mb-2">{t("spaces")}</h3>
-          <dl className="mb-5 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+          <dl className="mb-5 grid grid-cols-1 gap-x-6 sm:grid-cols-2">
             {SPACES.map((s, i) => (
-              <div key={s.id} className="tile flex items-center justify-between gap-3 px-3 py-2">
+              <div key={s.id} className="flex items-center justify-between gap-3 border-t border-line py-2">
                 <dt className="text-sm">{tNav(`spaces.${s.id}`)}</dt>
                 <dd>
                   <kbd className="kbd">{i + 1}</kbd>
@@ -49,9 +49,9 @@ export function ShortcutsDialog() {
           </dl>
 
           <h3 className="label mb-2">{t("general")}</h3>
-          <dl className="grid gap-1.5">
+          <dl className="grid">
             {general.map((g) => (
-              <div key={g.label} className="tile flex items-center justify-between gap-3 px-3 py-2">
+              <div key={g.label} className="flex items-center justify-between gap-3 border-t border-line py-2">
                 <dt className="text-sm">{g.label}</dt>
                 <dd className="flex items-center gap-1">
                   {g.keys.map((k) => (
