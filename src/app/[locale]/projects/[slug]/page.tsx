@@ -116,13 +116,13 @@ function ProjectView({ project }: { project: Project }) {
         <ProjectCover project={project} priority sizes="(min-width: 1024px) 56vw, 92vw" className="h-full !aspect-auto min-h-[280px]" />
       </section>
 
-      <Card id="about" icon={ListChecks} title={t("about")} subtitle="cat README.md" index={2} className="md:col-span-6 lg:col-span-12" bodyClassName="gap-6">
+      <Card id="about" icon={ListChecks} title={t("about")} subtitle="cat README.md" index={2} className="group-start md:col-span-6 lg:col-span-12" bodyClassName="gap-6">
         <div className="grid gap-6 lg:grid-cols-12">
           <p className="text-[16px] leading-relaxed text-fg lg:col-span-6">{tItem("summary")}</p>
           <ol className="stagger flex flex-col gap-2 lg:col-span-6">
             {highlights.map((h, i) => (
               <li key={h} className="tile flex gap-3 px-4 py-3 text-[14px] leading-relaxed text-muted">
-                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-tint font-mono text-[10.5px] text-accent">{i + 1}</span>
+                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-tint text-[11px] font-semibold tabular-nums text-accent">{i + 1}</span>
                 {h}
               </li>
             ))}
@@ -224,13 +224,13 @@ function GuidesList() {
       <ul className="stagger grid gap-1.5 lg:grid-cols-2">
         {DOCS.map((d) => (
           <li key={d.id}>
-            <a href={d.file} download className="group flex items-center gap-3 rounded-[4px] bg-surface-2 px-3.5 py-2.5 transition-colors hover:bg-surface-3">
+            <a href={d.file} download className="group flex items-center gap-3 rounded-[14px] bg-surface-2 px-3.5 py-2.5 transition-colors hover:bg-surface-3">
               <FileText size={16} aria-hidden="true" className="shrink-0 text-muted group-hover:text-accent" />
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-semibold">{t(`items.${d.id}.title`)}</span>
                 <span className="block truncate text-xs text-dim">{t(`items.${d.id}.desc`)}</span>
               </span>
-              <span className="hidden font-mono text-[11px] text-dim sm:inline">
+              <span className="hidden text-[12px] text-dim sm:inline">
                 {t(`categories.${d.category}`)} · {t("pages", { count: d.pages })}
               </span>
               <Download size={15} aria-hidden="true" className="shrink-0 text-dim group-hover:text-accent" />
@@ -249,13 +249,13 @@ function NextProject({ project }: { project: Project }) {
   const t = useTranslations("projects");
   const next = nextProject(project.id);
   return (
-    <Link href={`/projects/${next.slug}`} className="card group md:col-span-6 lg:col-span-12" style={{ "--i": 5 } as CSSProperties}>
+    <Link href={`/projects/${next.slug}`} className="card group group-start md:col-span-6 lg:col-span-12" style={{ "--i": 5 } as CSSProperties}>
       <span className="label">{t("next")}</span>
       <span className="mt-3 flex items-end justify-between gap-6">
         <span className="display text-[44px] text-fg sm:text-[64px]">{t(`items.${next.id}.name`)}</span>
         <span className="mb-2 hidden items-center gap-3 text-right text-[14px] text-muted sm:flex">
           {t(`items.${next.id}.tagline`)}
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[4px] bg-accent-tint text-accent transition-transform duration-500 group-hover:rotate-45">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface-2 text-fg transition-[transform,background-color,color] duration-500 ease-[var(--ease-spring)] group-hover:rotate-45 group-hover:bg-accent-strong group-hover:text-on-accent">
             <ArrowUpRight size={18} aria-hidden="true" />
           </span>
         </span>

@@ -4,7 +4,7 @@
 // Petit canvas, rendu seulement quand il est à l'écran (voir PeakBuddy).
 "use client";
 
-import { Suspense, useLayoutEffect, useRef, type RefObject } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Vector3, type Group } from "three";
@@ -22,10 +22,13 @@ export interface BuddyInput {
   /** Élan à ajouter (vitesse horizontale de la souris), remis à zéro à chaque image */
   impulseRef: RefObject<number>;
   reduced: boolean;
+  /** Appelé quand le modèle est chargé et la scène affichée */
+  onReady?: () => void;
 }
 
-function Buddy({ impulseRef, reduced }: BuddyInput) {
+function Buddy({ impulseRef, reduced, onReady }: BuddyInput) {
   const { scene } = useGLTF(MODEL, false, true);
+  useEffect(() => onReady?.(), [onReady]);
   const pivot = useRef<Group>(null);
   const model = useRef<Group>(null);
   const swing = useRef({ angle: reduced ? 0 : 0.35, speed: 0 });

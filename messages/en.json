@@ -1581,7 +1581,7 @@
       "styles": "Styles",
       "i18n": "Translations",
       "fonts": "Fonts",
-      "fontsValue": "Geist, served by the site",
+      "fontsValue": "Geist and Inter Tight, served by the site",
       "data": "Content",
       "dataValue": "config files, no database",
       "tracking": "Tracking",

@@ -83,7 +83,7 @@ export function SectionNav({ items, label }: { items: SectionItem[]; label: stri
                   aria-current={isActive ? "location" : undefined}
                   className={cn(
                     "flex h-8 items-center rounded-full px-3.5 text-[13px] font-medium transition-[background-color,color,box-shadow] duration-300",
-                    isActive ? "glow bg-accent-tint text-on-accent-container" : "text-muted hover:bg-surface-3 hover:text-fg",
+                    isActive ? "bg-fg text-bg" : "text-muted hover:bg-surface-3 hover:text-fg",
                   )}
                 >
                   {item.label}

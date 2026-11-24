@@ -144,7 +144,7 @@ export function ScenarioBar({
             type="button"
             onClick={player.toggle}
             aria-label={playing ? labels.pause : labels.play}
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-[4px] bg-accent text-on-accent"
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-strong text-on-accent"
           >
             {playing ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
           </button>
@@ -159,8 +159,8 @@ export function ScenarioBar({
               aria-selected={i === sceneIndex}
               onClick={() => player.select(i)}
               className={cn(
-                "min-h-8 rounded-[4px] px-2.5 text-[12.5px] font-semibold transition-colors",
-                i === sceneIndex ? "bg-accent-tint text-on-accent-container shadow-[inset_0_0_0_1px_var(--glow-ring)]" : "text-muted hover:bg-surface-3 hover:text-fg",
+                "min-h-8 rounded-full px-3 text-[12.5px] font-semibold transition-colors",
+                i === sceneIndex ? "bg-fg text-bg" : "text-muted hover:bg-surface-3 hover:text-fg",
               )}
             >
               {s.label}
@@ -181,7 +181,7 @@ export function ScenarioBar({
               )}
               <span
                 className={cn(
-                  "flex items-center gap-1.5 rounded-[4px] px-2 py-1 font-mono text-[11.5px] transition-colors duration-300",
+                  "flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11.5px] transition-colors duration-300",
                   state === "running" && "bg-accent-tint text-fg",
                   state === "done" && "text-fg",
                   state === "pending" && "text-dim",

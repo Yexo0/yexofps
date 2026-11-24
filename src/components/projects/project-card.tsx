@@ -44,12 +44,12 @@ export function ProjectCard({ project, index, sizes, className }: { project: Pro
       <div className="flex flex-1 flex-col gap-3">
         <div className="flex items-start justify-between gap-4">
           <p className="flex min-w-0 items-baseline gap-3">
-            <span className="font-mono text-[11px] text-accent">{n}</span>
+            <span className="text-[13px] font-medium tabular-nums text-dim">{n}</span>
             <span className="display truncate text-[30px] text-fg sm:text-[34px]">{name}</span>
           </p>
           <span
             aria-hidden="true"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-[4px] bg-accent-tint text-accent transition-transform duration-500 group-hover:rotate-45"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-surface-2 text-fg transition-[transform,background-color,color] duration-500 ease-[var(--ease-spring)] group-hover:rotate-45 group-hover:bg-accent-strong group-hover:text-on-accent"
           >
             <ArrowUpRight size={17} />
           </span>

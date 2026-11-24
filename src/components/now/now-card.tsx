@@ -63,7 +63,7 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[11.5px] text-muted">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] tabular-nums text-muted">
         <span className="flex items-center gap-2">
           <span aria-hidden="true" className="live-dot h-2 w-2 rounded-full bg-accent" />
           {t("parisTime", { time: formatMinutes(now.minutes) })}
@@ -110,7 +110,7 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
 
       {fromDiscord ? (
         since && (
-          <p className="font-mono text-[11.5px] text-muted">
+          <p className="text-[13px] tabular-nums text-muted">
             {t("since", { duration: t(`duration.${since.key}`, since.values) })}
           </p>
         )
@@ -128,7 +128,7 @@ export function NowCard({ size = "md" }: { size?: "md" | "lg" }) {
             >
               <div className="h-full rounded-full bg-accent" style={{ width: `${now.progress * 100}%` }} />
             </div>
-            <div className="flex justify-between font-mono text-[11.5px] text-dim">
+            <div className="flex justify-between text-[12px] tabular-nums text-dim">
               <span>{formatMinutes(current.start)}</span>
               <span className="text-muted">
                 {t("remaining", { duration: t(`duration.${remaining.key}`, remaining.values) })}

@@ -59,7 +59,7 @@ function Summary() {
             {t("back")}
           </ButtonLink>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p className="font-mono text-[11.5px] text-dim">{t("captured", { date: captured })}</p>
+            <p className="text-[13px] text-dim">{t("captured", { date: captured })}</p>
             <ButtonLink href="/tools#converter" variant="tonal" size="sm">
               <SlidersHorizontal size={14} aria-hidden="true" />
               {t("convert")}
@@ -90,7 +90,7 @@ function Menu() {
       hideHeader
       index={1}
       next="creator"
-      className="md:col-span-6 lg:col-span-12"
+      className="group-start md:col-span-6 lg:col-span-12"
     >
       <SettingsMenu />
     </Card>

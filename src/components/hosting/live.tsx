@@ -54,7 +54,7 @@ export function LiveTiles() {
           <span className="flex items-end justify-between gap-3">
             <span>
               {last}
-              <span className="ml-1 font-mono text-[11px] font-normal text-muted">ms</span>
+              <span className="ml-1 text-[13px] font-medium text-dim">ms</span>
             </span>
             <Sparkline values={rtt} />
           </span>
@@ -82,7 +82,7 @@ function Tile({ label, sub, live, children }: { label: string; sub?: string; liv
           {live && <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />}
           {label}
         </p>
-        {sub && <p className="mt-0.5 truncate font-mono text-[11px] text-dim">{sub}</p>}
+        {sub && <p className="mt-0.5 truncate text-[12px] text-dim">{sub}</p>}
       </div>
     </div>
   );

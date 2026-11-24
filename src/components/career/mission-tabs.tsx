@@ -40,9 +40,9 @@ export function MissionTabs({ missions, labels }: { missions: Mission[]; labels:
           <Tabs.Trigger
             key={m.id}
             value={m.id}
-            className="btn btn-sm shrink-0 bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-accent data-[state=active]:text-on-accent"
+            className="btn btn-sm shrink-0 bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-fg data-[state=active]:text-bg"
           >
-            <span className="font-mono text-[11px]">{String(i + 1).padStart(2, "0")}</span>
+            <span className="tabular-nums opacity-70">{String(i + 1).padStart(2, "0")}</span>
             {m.tab}
           </Tabs.Trigger>
         ))}
@@ -94,7 +94,7 @@ export function MissionTabs({ missions, labels }: { missions: Mission[]; labels:
               <ol className="flex flex-col gap-2.5">
                 {m.actions.map((a, i) => (
                   <li key={a} className="flex gap-3 text-[13px] leading-relaxed text-muted">
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-tint font-mono text-[10.5px] text-accent">
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-tint text-[11px] font-semibold tabular-nums text-accent">
                       {i + 1}
                     </span>
                     {a}

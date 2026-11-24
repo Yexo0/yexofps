@@ -43,7 +43,7 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
                 <AgentAvatar src={match.agentImg} agent={match.agent} size={56} />
                 <div className="min-w-0 flex-1">
                   <Dialog.Title className="text-lg font-bold leading-tight">{match.map}</Dialog.Title>
-                  <Dialog.Description className="font-mono text-[11.5px] text-dim">
+                  <Dialog.Description className="text-[13px] text-dim">
                     {match.mode} · {match.agent}
                     {match.ts > 0 &&
                       ` · ${format.dateTime(new Date(match.ts * 1000), { dateStyle: "medium", timeStyle: "short" })}`}
@@ -93,7 +93,7 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
                   <text x="60" y="58" textAnchor="middle" fill="var(--text)" fontSize="20" fontWeight="700">
                     {shots}
                   </text>
-                  <text x="60" y="76" textAnchor="middle" fill="var(--text-dim)" fontSize="10" fontFamily="var(--font-mono)">
+                  <text x="60" y="76" textAnchor="middle" fill="var(--text-dim)" fontSize="10.5" fontFamily="var(--font-sans)">
                     {t("shots")}
                   </text>
                 </svg>
@@ -104,7 +104,7 @@ export function MatchDialog({ match, onClose }: { match: MatchData | null; onClo
                       <div key={s.key} className="flex items-center gap-2.5 text-sm">
                         <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full" style={{ background: s.color }} />
                         <dt className="flex-1 text-muted">{t(s.key)}</dt>
-                        <dd className="font-mono text-xs text-dim">{s.value}</dd>
+                        <dd className="text-[13px] tabular-nums text-dim">{s.value}</dd>
                         <dd className="w-14 text-right font-semibold tabular-nums">
                           {f.pct(shots > 0 ? s.ratio : NaN)}
                         </dd>

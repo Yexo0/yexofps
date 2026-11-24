@@ -1279,7 +1279,30 @@
       margin: 0;
     }
   }
-  /* Poster de l'objet 3D, puis la scène prend le relais (fondu croisé, voir HeroStage) */
+  /* Emplacements 3D avec poster (.stage, voir useStageTakeover) : le poster est là dès le premier
+     affichage ; la scène prend le relais en fondu (data-live). Ordinateur avec GPU (html[data-gpu]) :
+     pas de poster, la scène arrive avec son animation d'entrée ; il revient si elle ne vient pas. */
+  .stage-poster {
+    transition: opacity 700ms var(--ease-out);
+  }
+  .stage canvas {
+    opacity: 0;
+    transition: opacity 700ms var(--ease-out);
+  }
+  .stage[data-live] canvas {
+    opacity: 1;
+  }
+  .stage[data-live] .stage-poster {
+    opacity: 0;
+  }
+  html[data-gpu] .stage:not([data-fallback]) .stage-poster {
+    visibility: hidden;
+  }
+  html[data-gpu] .stage canvas {
+    opacity: 1;
+    transition: none;
+  }
+  /* Poster du hero : pleine largeur, centré à la hauteur où la caméra place l'objet (--py) */
   .hero-poster {
     position: absolute;
     left: 0;
@@ -1288,25 +1311,6 @@
     height: auto;
     max-width: none;
     transform: translateY(calc(-1 * var(--py, 50%)));
-    transition: opacity 700ms var(--ease-out);
-  }
-  .hero-3d canvas {
-    opacity: 0;
-    transition: opacity 700ms var(--ease-out);
-  }
-  .hero-3d[data-live] canvas {
-    opacity: 1;
-  }
-  .hero-3d[data-live] .hero-poster {
-    opacity: 0;
-  }
-  /* Ordinateur avec GPU : pas de poster, la scène arrive avec son animation d'entrée */
-  html[data-gpu] .hero-3d:not([data-fallback]) .hero-poster {
-    visibility: hidden;
-  }
-  html[data-gpu] .hero-3d canvas {
-    opacity: 1;
-    transition: none;
   }
   /* Halo rouge doux sous l'objet : la seule tache de couleur du hero. closest-side : le dégradé
      s'éteint exactement au bord de sa boîte, sans arête visible. */

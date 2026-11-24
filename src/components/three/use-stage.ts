@@ -6,7 +6,7 @@
 // ou si la cadence s'effondre pendant le rendu.
 "use client";
 
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { afterLoadIdle, cadenceWatch, isSoftwareRenderer } from "@/lib/defer";
 
 export interface StageReady {
@@ -103,4 +103,35 @@ export function useStage(ref: RefObject<HTMLElement | null>) {
   }, [active]);
 
   return { ready, active, pointer };
+}
+
+/**
+ * Relais poster → scène 3D, commun aux emplacements qui ont un poster (image fixe de la scène figée,
+ * servie avec la page). `animated` : la scène 3D se charge (vrai GPU, pas de mouvement réduit).
+ * `intro` : ordinateur avec GPU (data-gpu, posé avant le premier rendu par themeScript) : le poster est
+ * masqué par le CSS et la scène joue son animation d'entrée ; sinon elle part de la pose du poster.
+ * `attrs` à poser sur l'élément .stage : data-live (scène affichée, le poster s'efface) et data-fallback
+ * (le poster revient : scène figée, ou qui ne vient pas en 10 s).
+ */
+export function useStageTakeover(ready: StageReady | null) {
+  const [live, setLive] = useState(false);
+  const [stalled, setStalled] = useState(false);
+  const onReady = useCallback(() => setLive(true), []);
+  const animated = Boolean(ready && !ready.reduced);
+  // Lu une fois la scène prête : côté client seulement
+  const intro = Boolean(ready) && document.documentElement.hasAttribute("data-gpu");
+  const fallback = Boolean(ready && !animated) || stalled;
+
+  useEffect(() => {
+    if (!animated || live) return;
+    const id = setTimeout(() => setStalled(true), 10_000);
+    return () => clearTimeout(id);
+  }, [animated, live]);
+
+  return {
+    animated,
+    intro,
+    onReady,
+    attrs: { "data-live": live || undefined, "data-fallback": fallback || undefined },
+  };
 }

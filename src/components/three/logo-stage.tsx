@@ -3,7 +3,7 @@
 // intervalles réguliers. Matériau métal clair, éclairé aux couleurs de l'espace.
 "use client";
 
-import { Suspense, useLayoutEffect, useRef, type RefObject } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { Box3, Mesh, MeshStandardMaterial, Vector3, type DirectionalLight, type Group } from "three";
@@ -13,15 +13,20 @@ const MODEL = "/models/logo.glb";
 export interface LogoInput {
   pointer: RefObject<{ x: number; y: number }>;
   reduced: boolean;
+  /** Entrée animée ; faux quand la scène prend le relais d'un poster (même pose de départ) */
+  intro?: boolean;
+  /** Appelé quand le modèle est chargé et la scène affichée */
+  onReady?: () => void;
 }
 
 const easeOut = (x: number) => 1 - Math.pow(1 - x, 4);
 
-function Logo({ pointer, reduced }: LogoInput) {
+function Logo({ pointer, reduced, intro: withIntro = true, onReady }: LogoInput) {
   const { scene } = useGLTF(MODEL, false, true);
+  useEffect(() => onReady?.(), [onReady]);
   const outer = useRef<Group>(null);
   const inner = useRef<Group>(null);
-  const intro = useRef(reduced ? 1 : 0);
+  const intro = useRef(reduced || !withIntro ? 1 : 0);
   const look = useRef({ x: 0, y: 0 });
 
   // Centré, largeur ramenée à 2 unités, matériau métal clair

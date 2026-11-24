@@ -28,7 +28,7 @@ export function StatTile({
           {/* Nombre : défile jusqu'à sa valeur quand la tuile arrive à l'écran */}
           {typeof value === "number" ? <CountUp value={value} /> : value}
         </span>
-        {unit && <span className="font-mono text-[11px] text-muted">{unit}</span>}
+        {unit && <span className="text-[12px] font-medium text-dim">{unit}</span>}
       </p>
       <p className="label">{label}</p>
     </div>

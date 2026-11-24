@@ -82,7 +82,7 @@ function Site() {
         subtitle="uname -o && free -h"
         meta={t("meta")}
         index={2}
-        className="md:col-span-6 lg:col-span-6"
+        className="group-start md:col-span-6 lg:col-span-6"
       >
         <ServerSpecs />
       </Card>
@@ -94,7 +94,7 @@ function Site() {
         subtitle="cat package.json"
         index={3}
         next="gaming"
-        className="md:col-span-6 lg:col-span-6"
+        className="group-start-lg md:col-span-6 lg:col-span-6"
       >
         <dl className="stagger flex flex-col gap-1">
           {stack.map((row) => (

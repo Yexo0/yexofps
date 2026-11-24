@@ -81,7 +81,7 @@ function Intro() {
     >
       <div>
         <p className="max-w-[30ch] text-[24px] font-bold leading-tight tracking-tight sm:text-[28px]">{t("role")}</p>
-        <p className="mt-2 font-mono text-[12.5px] text-muted">{t("school")}</p>
+        <p className="mt-2 text-[14px] text-muted">{t("school")}</p>
       </div>
       <div className="prose-card max-w-[72ch] text-[15px] leading-relaxed text-muted">
         <p>{t("p1")}</p>
@@ -147,7 +147,7 @@ function Timeline() {
       subtitle="git log --oneline ~/parcours"
       meta={t("meta", { count: TIMELINE.length })}
       index={2}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start md:col-span-6 lg:col-span-7"
     >
       <ol className="stagger relative flex flex-col gap-5 pl-6 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-line-strong">
         {TIMELINE.map((item) => {
@@ -162,7 +162,7 @@ function Timeline() {
                   item.current ? "bg-accent" : "bg-surface-hover",
                 )}
               />
-              <p className="flex flex-wrap items-center gap-2 font-mono text-[11.5px] text-dim">
+              <p className="flex flex-wrap items-center gap-2 text-[13px] text-dim">
                 {t(`items.${item.id}.date`)}
                 {item.current && <span className="tag border-accent/40 text-accent">{t("current")}</span>}
               </p>
@@ -228,7 +228,7 @@ function Skills() {
       subtitle="ls ~/skills"
       meta={t("meta", { count: SKILLS.length })}
       index={3}
-      className="md:col-span-6 lg:col-span-5"
+      className="group-start-lg md:col-span-6 lg:col-span-5"
     >
       <Accordion
         defaultOpen={SKILLS[0].id}
@@ -288,7 +288,7 @@ function Missions() {
       subtitle="cat ~/stage/missions/*.md"
       meta={t("meta", { count: MISSIONS.length })}
       index={4}
-      className="md:col-span-6 lg:col-span-12"
+      className="group-start md:col-span-6 lg:col-span-12"
     >
       <MissionTabs
         missions={missions}
@@ -370,7 +370,7 @@ function Watch() {
       subtitle="rss --topic virtualisation"
       meta="VMware"
       index={6}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start md:col-span-6 lg:col-span-7"
       bodyClassName="gap-3"
     >
       <p className="text-[15px] font-semibold">{t("topic")}</p>
@@ -419,7 +419,7 @@ function Watch() {
             ))}
           </ul>
         </section>
-        <p className="font-mono text-[11px] text-dim">{t("sources")}</p>
+        <p className="text-[12px] text-dim">{t("sources")}</p>
         </div>
       </details>
     </Card>
@@ -438,7 +438,7 @@ function Docs() {
       subtitle="ls ~/docs/*.pdf"
       meta={t("meta", { count: DOCS.length })}
       index={7}
-      className="md:col-span-6 lg:col-span-5"
+      className="group-start-lg md:col-span-6 lg:col-span-5"
     >
       <p className="mb-3 text-sm text-muted">{t("intro")}</p>
       <ul className="stagger flex flex-col gap-1.5">
@@ -454,7 +454,7 @@ function Docs() {
                 <span className="block truncate text-sm font-semibold">{t(`items.${d.id}.title`)}</span>
                 <span className="block truncate text-xs text-dim">{t(`items.${d.id}.desc`)}</span>
               </span>
-              <span className="hidden font-mono text-[11px] text-dim sm:inline">
+              <span className="hidden text-[12px] text-dim sm:inline">
                 {t(`categories.${d.category}`)} · {t("pages", { count: d.pages })}
               </span>
               <Download size={15} aria-hidden="true" className="shrink-0 text-dim group-hover:text-accent" />

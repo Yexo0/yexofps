@@ -140,7 +140,7 @@ function Vlans() {
       subtitle="show vlan brief"
       meta={t("meta", { count: VLANS.length })}
       index={2}
-      className="md:col-span-6 lg:col-span-5"
+      className="group-start md:col-span-6 lg:col-span-5"
     >
       <Accordion
         defaultOpen={String(VLANS[0].id)}
@@ -152,7 +152,7 @@ function Vlans() {
           return {
             id: String(v.id),
             title: `${v.id} · ${v.name}`,
-            icon: <span className="font-mono text-[11px] font-semibold">{v.id}</span>,
+            icon: <span className="text-[12px] font-semibold tabular-nums">{v.id}</span>,
             content: (
               <>
                 <p className="font-mono text-xs text-muted">{v.subnet}</p>
@@ -211,7 +211,7 @@ function HostTile({ host }: { host: Host }) {
       <dl className="flex flex-col gap-1 text-[12.5px]">
         {specs.map(([k, v]) => (
           <div key={k} className="flex gap-2">
-            <dt className="w-[68px] shrink-0 font-mono text-[11px] uppercase tracking-wider text-dim">{k}</dt>
+            <dt className="w-[68px] shrink-0 text-[12px] uppercase text-dim">{k}</dt>
             <dd className="min-w-0 text-fg">{v}</dd>
           </div>
         ))}
@@ -279,7 +279,7 @@ function Resources() {
       title={t("title")}
       subtitle="cat ~/homelab/README.md"
       index={3}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start-lg md:col-span-6 lg:col-span-7"
     >
       <div className="flex flex-col gap-5">
         <p className="max-w-[70ch] text-[15px] leading-relaxed text-muted">{t("text")}</p>

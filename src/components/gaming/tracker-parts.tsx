@@ -63,9 +63,9 @@ export function PeakTile({ size = "md" }: { size?: "md" | "lg" }) {
       <div className="text-right">
         <p className="flex items-end justify-end gap-1.5 leading-none">
           <DotDigits value={String(VALORANT_PEAK.rr)} dot={size === "lg" ? 4.5 : 3.5} gap={1.5} className="text-accent" />
-          <span className="font-mono text-[11px] text-muted">RR</span>
+          <span className="text-[12px] font-medium text-dim">RR</span>
         </p>
-        <p className="mt-1 font-mono text-[11px] text-dim">
+        <p className="mt-1 text-[12px] text-dim">
           {t("peakSeason", { episode: VALORANT_PEAK.episode, act: VALORANT_PEAK.act })}
         </p>
       </div>

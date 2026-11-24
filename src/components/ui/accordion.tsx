@@ -19,13 +19,13 @@ export function Accordion({ items, defaultOpen }: { items: AccordionEntry[]; def
         <Radix.Item
           key={item.id}
           value={item.id}
-          className="overflow-hidden rounded-[14px] bg-surface-2 transition-colors duration-150 data-[state=open]:bg-accent-tint"
+          className="overflow-hidden rounded-[14px] bg-surface-2 transition-colors duration-150 data-[state=open]:bg-surface-3"
         >
           <Radix.Header>
             <Radix.Trigger className="group flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm font-semibold hover:bg-surface-3/50 data-[state=open]:hover:bg-transparent">
               <span
                 aria-hidden="true"
-                className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-surface-3 text-muted group-data-[state=open]:bg-accent group-data-[state=open]:text-on-accent"
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-surface-3 text-muted group-data-[state=open]:bg-accent-strong group-data-[state=open]:text-on-accent"
               >
                 {item.icon}
               </span>

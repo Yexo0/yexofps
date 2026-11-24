@@ -8,6 +8,7 @@ import { PROJECTS } from "@/config/projects";
 import { pageMetadata } from "@/lib/metadata";
 import { Card } from "@/components/ui/card";
 import { ProjectCard } from "@/components/projects/project-card";
+import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -58,7 +59,7 @@ function Projects() {
             project={project}
             index={i + 1}
             sizes={SIZES[n]}
-            className={i === 0 ? `md:col-span-6 ${span}` : `md:col-span-3 ${span}`}
+            className={cn(i === 0 ? `md:col-span-6 ${span}` : `md:col-span-3 ${span}`, i === 0 && "group-start", i === 1 && "group-start-lg")}
           />
         );
       })}

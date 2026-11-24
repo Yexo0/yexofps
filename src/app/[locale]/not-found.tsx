@@ -16,7 +16,7 @@ export default function NotFound() {
         className="md:col-span-6 lg:col-span-8"
         bodyClassName="gap-5"
       >
-        <p className="font-mono text-[64px] font-semibold leading-none text-accent">404</p>
+        <p className="display text-[96px] text-accent">404</p>
         <p className="max-w-[60ch] text-[15px] leading-relaxed text-muted">{t("text")}</p>
         <div className="flex flex-wrap gap-2.5">
           <ButtonLink href="/" variant="primary">

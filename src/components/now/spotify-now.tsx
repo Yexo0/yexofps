@@ -47,7 +47,7 @@ export function SpotifyNow({ track }: { track: Track }) {
         <p className="label">{t("label")}</p>
         <p className="truncate text-[14px] font-semibold text-fg">{track.song}</p>
         <p className="truncate text-[12.5px] text-muted">{track.artist}</p>
-        <div className="mt-1 flex items-center gap-2 font-mono text-[10.5px] text-dim">
+        <div className="mt-1 flex items-center gap-2 text-[11.5px] tabular-nums text-dim">
           <span>{clock(elapsed)}</span>
           <span
             className="h-1 flex-1 overflow-hidden rounded-full bg-surface-3"

@@ -37,9 +37,9 @@ export function RankGrid({ className }: { className?: string }) {
             alt={t("alt", { rank: tHero("currentValue"), game: featured.game })}
             width={140}
             height={140}
-            className="rank-current-icon h-24 w-24 shrink-0 object-contain sm:h-32 sm:w-32"
+            className="rank-current-icon h-16 w-16 shrink-0 object-contain sm:h-28 sm:w-28 lg:h-32 lg:w-32"
           />
-          <p className="display whitespace-nowrap text-[clamp(52px,5.4vw,86px)] text-fg">{tHero("currentValue")}</p>
+          <p className="display whitespace-nowrap text-[44px] text-fg sm:text-[60px] lg:text-[clamp(46px,4.9vw,86px)]">{tHero("currentValue")}</p>
         </div>
       </div>
 
@@ -66,7 +66,7 @@ export function RankGrid({ className }: { className?: string }) {
           <p className="display text-[52px] text-accent-2">
             <CountUp value={VALORANT_PEAK.rr} /> <span className="text-[26px]">RR</span>
           </p>
-          <p className="font-mono text-[11.5px] text-muted">
+          <p className="text-[13px] text-muted">
             {tTracker("peakSeason", { episode: VALORANT_PEAK.episode, act: VALORANT_PEAK.act })}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function RankGrid({ className }: { className?: string }) {
             />
             <div className="min-w-0">
               <p className="display truncate text-[24px] text-fg">{t(`items.${r.id}.rank`)}</p>
-              <p className="mt-1 truncate font-mono text-[11px] text-muted">{gameLabel(r)}</p>
+              <p className="mt-1 truncate text-[12.5px] text-dim">{gameLabel(r)}</p>
             </div>
           </li>
         ))}

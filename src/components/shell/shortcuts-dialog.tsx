@@ -29,7 +29,7 @@ export function ShortcutsDialog() {
             </span>
             <div className="flex-1">
               <Dialog.Title className="text-[15px] font-bold">{t("title")}</Dialog.Title>
-              <Dialog.Description className="font-mono text-[11.5px] text-dim">{t("subtitle")}</Dialog.Description>
+              <Dialog.Description className="text-[13px] text-dim">{t("subtitle")}</Dialog.Description>
             </div>
             <Dialog.Close className="icon-btn -mr-2 -mt-2" aria-label={t("close")}>
               <X size={18} aria-hidden="true" />

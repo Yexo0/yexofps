@@ -97,7 +97,7 @@ function Setup() {
       meta={t("meta", { count: SETUP.length })}
       next="creator"
       index={4}
-      className="md:col-span-6 lg:col-span-12"
+      className="group-start md:col-span-6 lg:col-span-12"
     >
       <ul className="stagger grid gap-2.5 sm:grid-cols-3">
         {SETUP.map((item) => {

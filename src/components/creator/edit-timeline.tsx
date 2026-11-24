@@ -45,7 +45,7 @@ export function EditTimeline({ now }: { now: number }) {
       <ol className="flex flex-col gap-1.5 sm:sr-only">
         {MILESTONES.map(({ year, id, icon: Icon, image }) => (
           <li key={id} className="tile flex items-center gap-3.5 px-4 py-3">
-            <span className="w-14 font-mono text-[13px] font-semibold text-accent">{year ?? t("then")}</span>
+            <span className="w-14 text-[14px] font-semibold tabular-nums text-fg">{year ?? t("then")}</span>
             <span className="grid h-7 w-7 place-items-center" aria-hidden="true">
               {image ? (
                 <Image src={image} alt="" width={28} height={28} className="h-7 w-7 object-contain" />
@@ -61,7 +61,7 @@ export function EditTimeline({ now }: { now: number }) {
       {/* Timeline de montage (desktop) */}
       <div aria-hidden="true" className="hidden select-none gap-2 pb-6 sm:flex">
         {/* Noms des pistes */}
-        <div className="flex w-12 shrink-0 flex-col font-mono text-[10px] leading-tight text-dim">
+        <div className="flex w-12 shrink-0 flex-col text-[11px] leading-tight text-dim">
           <span className="flex h-6 items-start">TC</span>
           {TRACKS.map((track, ti) => (
             <span key={track.id} className="flex h-11 flex-col justify-center">
@@ -76,7 +76,7 @@ export function EditTimeline({ now }: { now: number }) {
           <div className="relative h-6 border-b border-line-strong">
             {years.map((y) => (
               <span key={y} className="absolute bottom-0 flex flex-col items-start" style={{ left: `${pct(y)}%` }}>
-                <span className="-translate-x-1/2 font-mono text-[10px] text-dim">{y}</span>
+                <span className="-translate-x-1/2 text-[11px] tabular-nums text-dim">{y}</span>
                 <span className="mt-0.5 h-1.5 w-px bg-line-strong" />
               </span>
             ))}
@@ -115,7 +115,7 @@ export function EditTimeline({ now }: { now: number }) {
           ))}
           <span className="playhead absolute bottom-0 top-0 w-px bg-accent shadow-[0_0_10px_var(--glow-strong)]" style={{ left: `${pct(now)}%` }}>
             <span className="absolute -left-1 top-4 h-2.5 w-[9px] rounded-sm bg-accent" />
-            <span className="absolute -bottom-5 -translate-x-1/2 font-mono text-[10px] text-accent">{t("now")}</span>
+            <span className="absolute -bottom-5 -translate-x-1/2 text-[11px] font-semibold text-accent">{t("now")}</span>
           </span>
         </div>
       </div>

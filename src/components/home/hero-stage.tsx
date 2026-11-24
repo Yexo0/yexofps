@@ -12,8 +12,9 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
-import { useStage } from "@/components/three/use-stage";
+import { useEffect, useRef, type CSSProperties } from "react";
+import { useStage, useStageTakeover } from "@/components/three/use-stage";
+import { cn } from "@/lib/utils";
 
 const STAGES = {
   vandal: dynamic(() => import("@/components/three/vandal-stage"), { ssr: false }),
@@ -37,21 +38,7 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
   const ref = useRef<HTMLDivElement>(null);
   const progress = useRef(0);
   const { ready, active, pointer } = useStage(ref);
-  const [live, setLive] = useState(false);
-  const [stalled, setStalled] = useState(false);
-  const onReady = useCallback(() => setLive(true), []);
-  const animated = Boolean(ready && !ready.reduced);
-  // Entrée animée : décidée avant le premier rendu (data-gpu), lue une fois la scène prête (client seulement)
-  const intro = Boolean(ready) && document.documentElement.hasAttribute("data-gpu");
-  // Poster masqué d'emblée en mode entrée animée : il revient si la 3D ne vient pas (WebGL refusé,
-  // scène figée, modèle qui ne charge pas en 10 s)
-  const fallback = Boolean(ready && !animated) || stalled;
-
-  useEffect(() => {
-    if (!animated || live) return;
-    const id = setTimeout(() => setStalled(true), 10_000);
-    return () => clearTimeout(id);
-  }, [animated, live]);
+  const { animated, intro, onReady, attrs } = useStageTakeover(ready);
 
   // Défilement à travers le hero : l'objet pivote et remonte en sortant
   useEffect(() => {
@@ -67,13 +54,7 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
   }, [animated]);
 
   return (
-    <div
-      ref={ref}
-      aria-hidden="true"
-      data-live={live || undefined}
-      data-fallback={fallback || undefined}
-      className={className}
-    >
+    <div ref={ref} aria-hidden="true" {...attrs} className={cn("stage", className)}>
       <Image
         src={poster.src}
         alt=""
@@ -81,7 +62,7 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
         height={1206}
         sizes="(min-width: 1024px) 54vw, 100vw"
         preload
-        className="hero-poster"
+        className="stage-poster hero-poster"
         style={{ "--py": poster.y } as CSSProperties}
       />
       {ready && animated && (

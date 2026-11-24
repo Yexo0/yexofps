@@ -358,7 +358,7 @@ function CrosshairPanel() {
       <div className="relative grid h-[170px] place-items-center" style={{ background: BACKGROUNDS[bg] }}>
         <span
           lang="en"
-          className="absolute left-1/2 top-3 -translate-x-1/2 rounded-[6px] bg-black/60 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-white"
+          className="absolute left-1/2 top-3 -translate-x-1/2 rounded-full bg-black/60 px-2.5 py-0.5 text-[11.5px] font-semibold text-white"
         >
           Primary
         </span>

@@ -241,7 +241,7 @@ export function NetworkMap({
                 y={g.y}
                 width={g.w}
                 height={g.h}
-                rx={6}
+                rx={14}
                 fill="none"
                 stroke="var(--line-strong)"
                 strokeDasharray="4 5"
@@ -365,9 +365,9 @@ export function NetworkMap({
                 <rect
                   width={W}
                   height={H}
-                  rx={5}
+                  rx={12}
                   className={isActive || isPinned ? "map-trace" : undefined}
-                  fill={isActive || isPinned || isDone ? "var(--accent-tint)" : "var(--surface-2)"}
+                  fill={isActive || isPinned ? "var(--accent-tint)" : isDone ? "var(--surface-3)" : "var(--surface-2)"}
                   stroke={isActive || isPinned ? "var(--accent)" : isDone ? "var(--glow-ring)" : "var(--line-strong)"}
                   strokeWidth={isActive || isPinned ? 1.5 : 1}
                   style={{ transition: "fill 300ms ease, stroke 300ms ease" }}

@@ -98,7 +98,7 @@ function TimelineBrief() {
                   : "absolute -left-[29.5px] top-1.5 h-[11px] w-[11px] rotate-45 border border-line-strong bg-surface-solid"
               }
             />
-            <p className="font-mono text-[11.5px] text-dim">{tItems(`items.${item.id}.date`)}</p>
+            <p className="text-[13px] text-dim">{tItems(`items.${item.id}.date`)}</p>
             <p className="display mt-1 text-[26px] leading-[0.98] text-fg sm:text-[30px]">{tItems(`items.${item.id}.title`)}</p>
             <p className="mt-1 text-[14px] text-muted">{tItems(`items.${item.id}.place`)}</p>
           </li>

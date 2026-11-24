@@ -145,7 +145,7 @@ function Edits() {
       subtitle="ls ~/edits"
       meta="TikTok"
       index={3}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start md:col-span-6 lg:col-span-7"
       bodyClassName="gap-4"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
@@ -248,7 +248,7 @@ function Services() {
       subtitle="ls ~/y-services"
       meta={t("meta", { count: PRODUCTS.length })}
       index={5}
-      className="md:col-span-6 lg:col-span-12"
+      className="group-start md:col-span-6 lg:col-span-12"
       bodyClassName="gap-4"
     >
       <p className="max-w-[80ch] text-sm leading-relaxed text-muted">{t("intro")}</p>
@@ -267,7 +267,7 @@ function Services() {
             <div className="flex flex-1 flex-col gap-2 px-4 py-4">
               <div className="flex items-start justify-between gap-3">
                 <h3 className="text-[15px] font-bold leading-snug">{t(`products.${p.id}.title`)}</h3>
-                <p className="shrink-0 font-mono text-[17px] font-semibold text-accent">{formatPrice(p.price, locale)}</p>
+                <p className="display shrink-0 text-[22px] text-fg">{formatPrice(p.price, locale)}</p>
               </div>
               <p className="text-[13px] leading-relaxed text-muted">{t(`products.${p.id}.desc`)}</p>
               {p.software && (
@@ -323,7 +323,7 @@ function Order() {
       <ol className="stagger grid gap-2 lg:grid-cols-3">
         <li className="tile flex flex-col gap-3 px-4 py-4">
           <div className="flex items-start gap-3">
-            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent font-mono text-[11px] text-on-accent">1</span>
+            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent-strong text-[12px] font-semibold text-on-accent">1</span>
             <div>
               <p className="text-sm font-semibold">{t("discord.title")}</p>
               <p className="mt-0.5 text-[13px] text-muted">{t("discord.text")}</p>
@@ -336,11 +336,11 @@ function Order() {
         </li>
         <li className="tile flex flex-col gap-3 px-4 py-4">
           <div className="flex items-start gap-3">
-            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-surface-3 font-mono text-[11px] text-muted">2</span>
+            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-surface-3 text-[12px] font-semibold text-muted">2</span>
             <div className="min-w-0">
               <p className="text-sm font-semibold">{t("email.title")}</p>
               <p className="mt-0.5 text-[13px] text-muted">{t("email.text")}</p>
-              <p className="mt-1 truncate font-mono text-[12.5px] text-fg">{EMAILS.business}</p>
+              <p className="mt-1 truncate text-[14px] font-medium text-fg">{EMAILS.business}</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -353,7 +353,7 @@ function Order() {
         </li>
         <li className="tile flex flex-col gap-3 px-4 py-4">
           <div className="flex items-start gap-3">
-            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-surface-3 font-mono text-[11px] text-muted">3</span>
+            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-surface-3 text-[12px] font-semibold text-muted">3</span>
             <div>
               <p className="text-sm font-semibold">{t("payhip.title")}</p>
               <p className="mt-0.5 text-[13px] text-muted">{t("payhip.text")}</p>
@@ -382,7 +382,7 @@ function Reviews() {
       subtitle="tail -n 4 ~/y-services/reviews.log"
       meta={t("meta", { count: REVIEWS.length })}
       index={4}
-      className="md:col-span-6 lg:col-span-5"
+      className="group-start-lg md:col-span-6 lg:col-span-5"
       bodyClassName="gap-3"
     >
       <p className="text-sm text-muted">{t("intro")}</p>
@@ -396,7 +396,7 @@ function Reviews() {
               <figcaption className="flex items-center gap-2.5">
                 <Image src={r.avatar} alt="" width={28} height={28} className="h-7 w-7 rounded-full object-cover" />
                 <span className="text-[13px] font-semibold">{r.name}</span>
-                <span className="font-mono text-[11px] text-dim">{t("via", { platform: r.platform })}</span>
+                <span className="text-[12px] text-dim">{t("via", { platform: r.platform })}</span>
               </figcaption>
             </figure>
           </li>

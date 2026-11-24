@@ -66,12 +66,12 @@ export function TrackerSection() {
         subtitle={`valorant --live --mode ${TRACKER.mode}`}
         meta={account}
         index={1}
-        className="md:col-span-6 lg:col-span-5"
+        className="group-start md:col-span-6 lg:col-span-5"
         bodyClassName="gap-3"
       >
         {/* Barre d'état et commandes */}
         <div className="flex flex-wrap items-center gap-2">
-          <p className="mr-auto flex items-center gap-2 font-mono text-[11.5px] text-muted" role="status">
+          <p className="mr-auto flex items-center gap-2 text-[13px] text-muted" role="status">
             <span
               aria-hidden="true"
               className={cn(
@@ -91,7 +91,7 @@ export function TrackerSection() {
           >
             <RefreshCw size={13} aria-hidden="true" />
             {t("refresh")}
-            {cooldownLeft > 0 && <span className="font-mono text-[11px] text-dim">{cooldownLeft} s</span>}
+            {cooldownLeft > 0 && <span className="text-[12px] tabular-nums text-dim">{cooldownLeft} s</span>}
           </button>
           <button
             type="button"
@@ -159,7 +159,7 @@ export function TrackerSection() {
         subtitle={`valorant matches --last ${data?.matches.length ?? TRACKER.size}`}
         meta={tm("meta")}
         index={2}
-        className="md:col-span-6 lg:col-span-7"
+        className="group-start-lg md:col-span-6 lg:col-span-7"
         bodyClassName="gap-3"
       >
         {status === "ready" && data && (
@@ -198,7 +198,7 @@ export function TrackerSection() {
                     <AgentAvatar src={m.agentImg} agent={m.agent} />
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-semibold">{m.map}</span>
-                      <span className="block truncate font-mono text-[11px] text-dim">
+                      <span className="block truncate text-[12px] text-dim">
                         {m.mode} · {m.agent}
                       </span>
                     </span>
@@ -229,7 +229,7 @@ export function TrackerSection() {
 function Cell({ label, value, className }: { label: string; value: string; className?: string }) {
   return (
     <span className={cn("text-right", className)}>
-      <span className="block font-mono text-[10px] uppercase tracking-wider text-dim">{label}</span>
+      <span className="block text-[12px] text-dim">{label}</span>
       <span className="block text-sm font-semibold tabular-nums">{value}</span>
     </span>
   );

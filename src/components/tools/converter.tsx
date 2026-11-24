@@ -63,7 +63,7 @@ function GamePicker({
               onChange={() => onChange(k)}
               className="peer sr-only"
             />
-            <span className="flex min-h-10 cursor-pointer items-center justify-center rounded-full bg-surface-3 px-3 text-center text-[13px] font-semibold text-muted transition-colors hover:text-fg peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+            <span className="flex min-h-10 cursor-pointer items-center justify-center rounded-full bg-surface-3 px-3 text-center text-[13px] font-semibold text-muted transition-colors hover:text-fg peer-checked:bg-fg peer-checked:text-bg peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
               {GAMES[k].name}
             </span>
           </label>
@@ -243,7 +243,7 @@ export function Converter() {
           <div className="tile flex flex-col px-4 py-3.5">
             <dd className="order-1 flex items-baseline gap-1.5 leading-none">
               <span className="display text-[44px] tabular-nums text-fg">{result.ok ? num(result.cm) : "—"}</span>
-              <span className="font-mono text-[11px] text-muted">cm</span>
+              <span className="text-[12px] font-medium text-dim">cm</span>
             </dd>
             <dt className="label order-2 mt-2">cm/360</dt>
             <dd className="order-3 mt-1 text-[11.5px] text-dim">

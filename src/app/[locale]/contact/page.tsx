@@ -117,7 +117,7 @@ function Channels() {
           const external = c.kind === "link" ? { target: "_blank", rel: "noopener noreferrer" } : {};
           return (
             <li key={c.id} className="tile flex gap-3.5 px-4 py-4">
-              <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-[4px] bg-accent-tint text-accent">
+              <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface-2 text-fg">
                 <Icon size={18} />
               </span>
               <div className="flex min-w-0 flex-1 flex-col gap-2.5">
@@ -168,7 +168,7 @@ function Socials() {
       subtitle="cat ~/contact.txt"
       meta={t("links.meta", { count: SOCIAL_LINES.length })}
       index={2}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start md:col-span-6 lg:col-span-7"
     >
       <div className="terminal px-3 py-3 sm:px-4 sm:py-4">
         <p className="px-2 pb-2">
@@ -228,7 +228,7 @@ function Routing() {
       subtitle="grep -i sujet contact.txt"
       index={3}
       next="home"
-      className="md:col-span-6 lg:col-span-5"
+      className="group-start-lg md:col-span-6 lg:col-span-5"
       bodyClassName="stagger gap-2"
     >
       {items.map(({ id, icon: Icon }) => (

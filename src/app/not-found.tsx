@@ -12,7 +12,7 @@ export default function RootNotFound() {
       </head>
       <body className="grid min-h-dvh place-items-center p-6 font-sans">
         <main className="card max-w-md gap-4 text-center">
-          <p className="font-mono text-[56px] font-semibold leading-none text-accent">404</p>
+          <p className="display text-[96px] text-accent">404</p>
           <h1 className="text-lg font-bold">Page introuvable · Page not found</h1>
           <p className="flex justify-center gap-2">
             <Link href="/fr" className="btn btn-primary">

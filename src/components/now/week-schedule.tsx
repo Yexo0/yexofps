@@ -40,7 +40,7 @@ export function WeekSchedule() {
           <Tabs.Trigger
             key={type}
             value={type}
-            className="btn btn-sm bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-accent-tint data-[state=active]:text-on-accent-container"
+            className="btn btn-sm bg-surface-2 text-muted hover:bg-surface-3 hover:text-fg data-[state=active]:bg-fg data-[state=active]:text-bg"
           >
             {t(`week.${type}`)}
             {now?.dayType === type && (
@@ -84,7 +84,7 @@ function Day({ type, nowMinutes }: { type: DayType; nowMinutes: number | null })
             >
               <span
                 className={cn(
-                  "col-span-2 font-mono text-[12px] sm:col-span-1",
+                  "col-span-2 text-[13px] tabular-nums sm:col-span-1",
                   active ? "text-on-accent-container" : "text-dim",
                 )}
               >
@@ -94,7 +94,7 @@ function Day({ type, nowMinutes }: { type: DayType; nowMinutes: number | null })
               <span className="min-w-0 text-[14px] font-medium">
                 {t(`activities.${slot.id}.title`)}
                 {active && (
-                  <span className="ml-2 inline-block whitespace-nowrap rounded-full px-1.5 align-[1px] font-mono text-[10.5px] font-normal ring-1 ring-inset ring-[var(--glow-ring)]">
+                  <span className="ml-2 inline-block whitespace-nowrap rounded-full px-1.5 align-[1px] text-[11px] font-medium ring-1 ring-inset ring-[var(--glow-ring)]">
                     {t("week.now")}
                   </span>
                 )}
@@ -144,7 +144,7 @@ function DayStrip({ slots, nowMinutes }: { slots: Slot[]; nowMinutes: number | n
           />
         )}
       </div>
-      <div className="relative mt-1.5 h-4 font-mono text-[10.5px] text-dim">
+      <div className="relative mt-1.5 h-4 text-[11px] tabular-nums text-dim">
         {TICKS.map((tick) => (
           <span
             key={tick}
