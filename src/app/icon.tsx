@@ -1,6 +1,7 @@
-// src/app/icon.tsx — Favicon généré : monogramme "Y" aux couleurs de l'accent (suit ACCENT_SEED).
+// src/app/icon.tsx — Favicon généré : le Y en ruban facetté du logo, sur fond transparent
+// (lisible sur les onglets clairs comme sombres). Géométrie : src/lib/logo.ts.
 import { ImageResponse } from "next/og";
-import { brand } from "@/lib/theme";
+import { LOGO_FACETS, LOGO_MARK_VIEWBOX } from "@/lib/logo";
 
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
@@ -8,26 +9,11 @@ export const contentType = "image/png";
 export default function Icon() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: brand.accent,
-          borderRadius: 18,
-        }}
-      >
-        <svg width="44" height="44" viewBox="6 6 24 24">
-          <path
-            d="M11.5 10.5 18 18.6l6.5-8.1M18 18.6v7.4"
-            fill="none"
-            stroke={brand.onAccent}
-            strokeWidth="3.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <svg width="62" height="64" viewBox={LOGO_MARK_VIEWBOX}>
+          {LOGO_FACETS.map((f) => (
+            <polygon key={f.points + f.fill} points={f.points} fill={f.fill} />
+          ))}
         </svg>
       </div>
     ),

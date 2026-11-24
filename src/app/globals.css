@@ -369,6 +369,30 @@
   .rail[data-open] .rail-indicator {
     clip-path: inset(0 0 0 0 round 14px);
   }
+  /* Logo du rail : le Y centré dans la case d'icône ; « exo » apparaît à sa droite rail ouvert */
+  .rail-wordmark {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    height: 25px;
+    width: auto;
+    overflow: visible;
+    transform: translateY(-50%);
+  }
+  .rail-wordmark-exo {
+    opacity: 0;
+    transform: translateX(-480px);
+    transition:
+      opacity 160ms ease,
+      transform 300ms var(--ease-in);
+  }
+  .rail[data-open] .rail-wordmark-exo {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 360ms ease 90ms,
+      transform 560ms var(--ease-out) 60ms;
+  }
   .rail-tool {
     height: 40px;
   }

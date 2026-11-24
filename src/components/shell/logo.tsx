@@ -1,16 +1,38 @@
-// src/components/shell/logo.tsx — Monogramme "Y" (rail, favicon). Couleurs = tokens d'accent.
-export function Logo({ size = 36 }: { size?: number }) {
+// src/components/shell/logo.tsx — Logo : le Y en ruban facetté (LogoMark) et le logotype « Yexo »
+// dont le Y est ce ruban (Wordmark). Géométrie dans src/lib/logo.ts ; « exo » suit la couleur du texte.
+import type { SVGProps } from "react";
+import { LOGO_EXO_PATH, LOGO_FACETS, LOGO_MARK_VIEWBOX, LOGO_WORDMARK_VIEWBOX } from "@/lib/logo";
+
+type Props = Omit<SVGProps<SVGSVGElement>, "viewBox"> & {
+  /** Classe du groupe « exo » (ex : l'apparition dans le rail) */
+  exoClassName?: string;
+};
+
+function Facets() {
   return (
-    <svg width={size} height={size} viewBox="0 0 36 36" aria-hidden="true" focusable="false">
-      <rect width="36" height="36" rx="11" fill="var(--accent)" />
-      <path
-        d="M11.5 10.5 18 18.6l6.5-8.1M18 18.6v7.4"
-        fill="none"
-        stroke="var(--on-accent)"
-        strokeWidth="2.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <>
+      {LOGO_FACETS.map((f) => (
+        <polygon key={f.points + f.fill} points={f.points} fill={f.fill} />
+      ))}
+    </>
+  );
+}
+
+/** Le Y seul */
+export function LogoMark(props: Omit<Props, "exoClassName">) {
+  return (
+    <svg viewBox={LOGO_MARK_VIEWBOX} aria-hidden="true" focusable="false" {...props}>
+      <Facets />
+    </svg>
+  );
+}
+
+/** « Yexo » : le ruban + « exo » vectorisé */
+export function Wordmark({ exoClassName, ...props }: Props) {
+  return (
+    <svg viewBox={LOGO_WORDMARK_VIEWBOX} aria-hidden="true" focusable="false" {...props}>
+      <Facets />
+      <path className={exoClassName} d={LOGO_EXO_PATH} fill="currentColor" />
     </svg>
   );
 }

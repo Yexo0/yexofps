@@ -14,7 +14,7 @@ import { SPACES, spaceFromPath, type Space } from "@/config/spaces";
 import { SOCIALS } from "@/config/site";
 import { DiscordIcon, TikTokIcon } from "@/components/icons/brands";
 import { useTheme } from "@/hooks/use-theme";
-import { Logo } from "./logo";
+import { Wordmark } from "./logo";
 import { useUI } from "./ui-provider";
 
 /* ─── Outils (recherche, thème, raccourcis, langue, réseaux) ─── */
@@ -131,12 +131,10 @@ export function Rail() {
       >
         <span aria-hidden="true" className="rail-panel" />
 
+        {/* Le Y seul rail replié ; « exo » glisse à côté quand il s'ouvre : le logotype se forme */}
         <Link href="/" aria-label={t("homeLogo")} className="rail-link rail-brand">
           <span className="rail-icon">
-            <Logo size={36} />
-          </span>
-          <span className="rail-label display text-[20px] text-fg" style={{ "--ri": 0 } as CSSProperties}>
-            Yexo
+            <Wordmark className="rail-wordmark text-fg" exoClassName="rail-wordmark-exo" />
           </span>
         </Link>
 

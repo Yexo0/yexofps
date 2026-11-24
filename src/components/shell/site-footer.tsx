@@ -11,7 +11,7 @@ import { SPACES } from "@/config/spaces";
 import { SITE, SOCIALS } from "@/config/site";
 import { useTheme } from "@/hooks/use-theme";
 import { NowChip } from "@/components/now/now-chip";
-import { Logo } from "./logo";
+import { Wordmark } from "./logo";
 import { useUI } from "./ui-provider";
 
 const ELSEWHERE = [
@@ -42,9 +42,8 @@ export function SiteFooter({ year, deployedAt, children }: { year: number; deplo
     <footer className="site-footer glass rounded-[var(--r-card)] px-6 pb-6 pt-9 md:px-10 md:pt-12">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))]">
         <div className="flex flex-col items-start gap-5 sm:col-span-2 lg:col-span-1">
-          <Link href="/" className="flex items-center gap-3">
-            <Logo size={34} />
-            <span className="display text-[24px] text-fg">{SITE.name}</span>
+          <Link href="/" aria-label={SITE.name} className="text-fg">
+            <Wordmark className="h-[30px] w-auto" />
           </Link>
           <p className="max-w-[38ch] text-[14.5px] leading-relaxed text-muted">{t("tagline")}</p>
           <NowChip />
