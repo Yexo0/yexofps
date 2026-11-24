@@ -181,8 +181,8 @@
     }
   }
 
-  /* Fond animé (Backdrop) : dégradé CSS de départ, canvas de l'aurore par-dessus quand il est prêt,
-     grain fixe pour adoucir les dégradés. */
+  /* Fond (Backdrop) : noir et lueur rouge fixe en CSS, courbes de niveau animées par-dessus (canvas WebGL,
+     transparent, qui apparaît en fondu quand il est prêt) */
   .backdrop {
     position: fixed;
     inset: 0;
@@ -192,8 +192,7 @@
     background: var(--bg);
   }
   .backdrop-base,
-  .backdrop-canvas,
-  .backdrop-grain {
+  .backdrop-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -201,22 +200,16 @@
   }
   .backdrop-base {
     background:
-      radial-gradient(55% 50% at 82% 10%, var(--aurora-1), transparent 70%),
-      radial-gradient(60% 55% at 10% 85%, var(--aurora-2), transparent 70%),
-      radial-gradient(45% 40% at 48% 55%, var(--aurora-3), transparent 70%),
+      radial-gradient(50% 60% at 92% 0%, var(--bg-glow), transparent 72%),
+      radial-gradient(40% 50% at 0% 100%, color-mix(in oklab, var(--bg-glow) 55%, transparent), transparent 72%),
       var(--bg);
   }
   .backdrop-canvas {
     opacity: 0;
-    transition: opacity 1400ms var(--ease-out);
+    transition: opacity 1600ms var(--ease-out);
   }
   .backdrop-canvas[data-on] {
     opacity: 1;
-  }
-  /* Grain : bruit fixe très léger (évite les marches dans les dégradés sombres) */
-  .backdrop-grain {
-    opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* ─── Verre ──────────────────────────────────────────────
@@ -462,6 +455,27 @@
     .bento {
       grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 18px;
+    }
+  }
+
+  /* Début d'un nouveau groupe de cartes (sections de page) : plus d'air au-dessus, en plus de l'écart
+     de la grille. À poser sur chaque carte de la première rangée du groupe (elles restent alignées). */
+  .group-start {
+    margin-top: 24px;
+  }
+  /* Variantes -md / -lg : pour une carte qui n'est en première rangée du groupe qu'à partir de ce
+     seuil (sur une colonne, elle suit la précédente dans le même groupe) */
+  @media (min-width: 768px) {
+    .group-start,
+    .group-start-md {
+      margin-top: 40px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .group-start,
+    .group-start-md,
+    .group-start-lg {
+      margin-top: 54px;
     }
   }
 
@@ -1262,6 +1276,14 @@
   .hero-3d[data-live] .hero-poster {
     opacity: 0;
   }
+  /* Ordinateur avec GPU : pas de poster, la scène arrive avec son animation d'entrée */
+  html[data-gpu] .hero-3d:not([data-fallback]) .hero-poster {
+    visibility: hidden;
+  }
+  html[data-gpu] .hero-3d canvas {
+    opacity: 1;
+    transition: none;
+  }
   /* Halo rouge doux sous l'objet : la seule tache de couleur du hero. closest-side : le dégradé
      s'éteint exactement au bord de sa boîte, sans arête visible. */
   .hero-band {
@@ -1521,7 +1543,20 @@
     }
   }
 
-  /* Pied de page */
+  /* Pied de page : détaché du contenu comme un groupe à part */
+  .site-footer {
+    margin-top: 36px;
+  }
+  @media (min-width: 768px) {
+    .site-footer {
+      margin-top: 56px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .site-footer {
+      margin-top: 72px;
+    }
+  }
   .site-footer a {
     transition: color var(--dur-micro) ease;
   }

@@ -39,7 +39,7 @@ export function SiteFooter({ year, deployedAt, children }: { year: number; deplo
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <footer className="site-footer glass mt-3 rounded-[var(--r-card)] px-6 pb-6 pt-9 md:px-10 md:pt-12">
+    <footer className="site-footer glass rounded-[var(--r-card)] px-6 pb-6 pt-9 md:px-10 md:pt-12">
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))]">
         <div className="flex flex-col items-start gap-5 sm:col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center gap-3">

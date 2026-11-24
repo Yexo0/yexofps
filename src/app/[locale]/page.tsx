@@ -57,12 +57,15 @@ function Home() {
         subtitle="mpv ~/edits/une.mp4"
         meta={t("edit.meta")}
         index={1}
-        className={landscape ? "md:col-span-6 lg:col-span-8" : "md:col-span-3 lg:col-span-5"}
+        className={landscape ? "group-start md:col-span-6 lg:col-span-8" : "group-start md:col-span-3 lg:col-span-5"}
       >
         <FeaturedEdit video={video} landscape={landscape} />
       </Card>
-      <LiveCard index={2} className={landscape ? "md:col-span-6 lg:col-span-4" : "md:col-span-3 lg:col-span-7"} />
-      <SpaceTiles className="md:col-span-6 lg:col-span-12" />
+      <LiveCard
+        index={2}
+        className={landscape ? "group-start-lg md:col-span-6 lg:col-span-4" : "group-start-md md:col-span-3 lg:col-span-7"}
+      />
+      <SpaceTiles className="group-start md:col-span-6 lg:col-span-12" />
     </div>
   );
 }

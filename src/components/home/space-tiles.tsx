@@ -25,7 +25,7 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
 
   return (
     <section aria-labelledby="explore-title" className={className}>
-      <h2 id="explore-title" className="display mb-4 mt-10 px-2 text-[30px] text-fg sm:text-[40px]">
+      <h2 id="explore-title" className="display mb-5 px-2 text-[30px] text-fg sm:text-[40px]">
         {tHome("title")}
       </h2>
       <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-3">

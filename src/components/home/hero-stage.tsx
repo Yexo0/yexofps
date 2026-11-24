@@ -1,10 +1,13 @@
 // src/components/home/hero-stage.tsx — Objet 3D des heros d'accueil : "vandal" (Yexo) ou "laptop" (Baptiste).
-// 1. Poster : image fixe de l'objet dans sa pose de repos, servie avec la page (rien à attendre, aucun JS).
-// 2. Sur un appareil avec un vrai GPU, three.js est chargé après le premier affichage (import dynamique,
-//    client seulement) ; la scène part de la même pose, puis le poster s'efface : l'objet s'anime
-//    (flottement, souris, défilement) sans saut. Le rendu ne tourne que hero à l'écran et onglet visible.
-// Sans GPU (rendu logiciel), sans WebGL ou en mouvement réduit, la 3D n'apporterait qu'une image figée :
-// three.js n'est pas chargé du tout et le poster reste.
+// Poster : image fixe de l'objet dans sa pose de repos, servie avec la page (rien à attendre, aucun JS).
+// - Ordinateur avec un vrai GPU (data-gpu, posé avant le premier rendu par themeScript) : le poster est
+//   masqué et la scène 3D arrive avec son animation d'entrée (tour d'inspection, PC qui pivote).
+// - Téléphone avec GPU : le poster s'affiche tout de suite, la scène part de la même pose puis prend
+//   le relais en fondu (flottement, souris, défilement), sans saut.
+// - Sans GPU (rendu logiciel), sans WebGL ou en mouvement réduit : la 3D n'apporterait qu'une image
+//   figée, three.js n'est pas chargé du tout et le poster reste.
+// three.js est chargé après le premier affichage (import dynamique, client seulement) ; le rendu ne
+// tourne que hero à l'écran et onglet visible.
 "use client";
 
 import Image from "next/image";
@@ -35,8 +38,20 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
   const progress = useRef(0);
   const { ready, active, pointer } = useStage(ref);
   const [live, setLive] = useState(false);
+  const [stalled, setStalled] = useState(false);
   const onReady = useCallback(() => setLive(true), []);
   const animated = Boolean(ready && !ready.reduced);
+  // Entrée animée : décidée avant le premier rendu (data-gpu), lue une fois la scène prête (client seulement)
+  const intro = Boolean(ready) && document.documentElement.hasAttribute("data-gpu");
+  // Poster masqué d'emblée en mode entrée animée : il revient si la 3D ne vient pas (WebGL refusé,
+  // scène figée, modèle qui ne charge pas en 10 s)
+  const fallback = Boolean(ready && !animated) || stalled;
+
+  useEffect(() => {
+    if (!animated || live) return;
+    const id = setTimeout(() => setStalled(true), 10_000);
+    return () => clearTimeout(id);
+  }, [animated, live]);
 
   // Défilement à travers le hero : l'objet pivote et remonte en sortant
   useEffect(() => {
@@ -52,7 +67,13 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
   }, [animated]);
 
   return (
-    <div ref={ref} aria-hidden="true" data-live={live || undefined} className={className}>
+    <div
+      ref={ref}
+      aria-hidden="true"
+      data-live={live || undefined}
+      data-fallback={fallback || undefined}
+      className={className}
+    >
       <Image
         src={poster.src}
         alt=""
@@ -69,7 +90,7 @@ export function HeroStage({ scene, className }: { scene: keyof typeof STAGES; cl
           accent={ready.accent}
           accent2={ready.accent2}
           reduced={false}
-          intro={false}
+          intro={intro}
           onReady={onReady}
           pointer={pointer}
           progress={progress}

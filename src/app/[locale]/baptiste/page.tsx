@@ -65,8 +65,8 @@ function Baptiste() {
         }
       />
       <TimelineBrief />
-      <Fastfetch pro index={2} className="md:col-span-6 lg:col-span-5" />
-      <SpaceTiles className="md:col-span-6 lg:col-span-12" order={PRO_ORDER} />
+      <Fastfetch pro index={2} className="md:col-span-6 lg:col-span-5 group-start-lg" />
+      <SpaceTiles className="group-start md:col-span-6 lg:col-span-12" order={PRO_ORDER} />
     </div>
   );
 }
@@ -84,7 +84,7 @@ function TimelineBrief() {
       title={t("title")}
       subtitle="git log --oneline -3 ~/parcours"
       index={1}
-      className="md:col-span-6 lg:col-span-7"
+      className="group-start md:col-span-6 lg:col-span-7"
       bodyClassName="gap-5"
     >
       <ol className="stagger relative flex flex-col gap-5 border-l border-line-strong pl-6">

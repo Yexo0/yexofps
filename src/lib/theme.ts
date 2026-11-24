@@ -45,10 +45,8 @@ const dark: Tokens = {
   "--glass-edge": "rgba(255, 255, 255, 0.07)",
   "--glass-top": "rgba(255, 255, 255, 0.08)",
   "--glass-float": "rgba(24, 24, 28, 0.72)",
-  /* Fond animé : dégradé de départ (avant le canvas, voir Backdrop) */
-  "--aurora-1": "rgba(255, 70, 85, 0.2)",
-  "--aurora-2": "rgba(122, 16, 32, 0.38)",
-  "--aurora-3": "rgba(179, 18, 42, 0.14)",
+  /* Fond : lueur rouge fixe en haut à droite, sous les courbes de niveau (Backdrop) */
+  "--bg-glow": "rgba(255, 70, 85, 0.13)",
 };
 
 const light: Tokens = {
@@ -88,9 +86,7 @@ const light: Tokens = {
   "--glass-edge": "rgba(0, 0, 0, 0.05)",
   "--glass-top": "rgba(255, 255, 255, 0.9)",
   "--glass-float": "rgba(255, 255, 255, 0.72)",
-  "--aurora-1": "rgba(255, 120, 130, 0.2)",
-  "--aurora-2": "rgba(255, 196, 200, 0.5)",
-  "--aurora-3": "rgba(255, 220, 223, 0.45)",
+  "--bg-glow": "rgba(255, 70, 85, 0.09)",
 };
 
 const block = (tokens: Tokens) =>
@@ -107,8 +103,11 @@ export const themeColor = { dark: dark["--bg"], light: light["--bg"] };
 /**
  * Script exécuté avant le premier rendu : applique le thème choisi par le visiteur (localStorage) pour
  * éviter un flash, et pose data-js : les animations d'apparition ne s'activent que si JavaScript tourne.
+ * Sur ordinateur (grand écran, souris), sans mouvement réduit, il vérifie aussi que WebGL tourne sur un
+ * vrai GPU (contexte de test libéré aussitôt) et pose data-gpu : les heros masquent alors leur poster et
+ * la scène 3D arrive avec son animation d'entrée (voir HeroStage). Sinon le poster reste affiché.
  */
-export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}})();`;
+export const themeScript = `(function(){var d=document.documentElement;d.setAttribute("data-js","");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}try{if(matchMedia("(min-width:1024px) and (pointer:fine)").matches&&!matchMedia("(prefers-reduced-motion: reduce)").matches){var g=document.createElement("canvas").getContext("webgl",{failIfMajorPerformanceCaveat:true});if(g){var i=g.getExtension("WEBGL_debug_renderer_info"),n=String(g.getParameter(i?i.UNMASKED_RENDERER_WEBGL:g.RENDERER));if(!/swiftshader|llvmpipe|softpipe|software|basic render/i.test(n))d.setAttribute("data-gpu","");var l=g.getExtension("WEBGL_lose_context");if(l)l.loseContext();}}}catch(e){}})();`;
 
 /**
  * Script placé juste après le contenu : lance tout de suite l'apparition des cartes du premier écran,
