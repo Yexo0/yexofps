@@ -61,16 +61,14 @@
     "download": "Télécharger",
     "placeholderNote": "valeur d'exemple",
     "footer": {
-      "copyright": "© {year} {name} · {author}"
-    },
-    "status": {
-      "session": "yexo",
-      "nav": "Espaces (barre d'état)",
-      "deployed": "auto-hébergé · déployé le {date}",
-      "theme": {
-        "dark": "sombre",
-        "light": "clair"
-      }
+      "copyright": "© {year} {name} · {author}",
+      "tagline": "Infrastructures informatiques et montage vidéo Valorant. Un site fait main, auto-hébergé sur mon propre serveur.",
+      "spaces": "Espaces",
+      "elsewhere": "Ailleurs",
+      "site": "Ce site",
+      "hosting": "Comment il est hébergé",
+      "deployed": "Déployé le {date}",
+      "top": "Revenir en haut"
     },
     "credits": {
       "models": "Modèles 3D :",
@@ -850,7 +848,7 @@
       "contact": "Me contacter",
       "whoami": {
         "label": "Choisir le profil affiché",
-        "hint": "deux profils, deux univers",
+        "hint": "Deux profils, deux univers",
         "yexo": {
           "title": "Yexo, côté jeu et montage.",
           "text": "Je joue surtout à Valorant et je monte mes parties en vidéos pour TikTok depuis 2022. Mes presets et mes montages sont dispo dans Y-Services.",

@@ -1,4 +1,4 @@
-// src/app/[locale]/layout.tsx — Layout racine par langue : <html>, thème, polices, fond, rail, cadre.
+// src/app/[locale]/layout.tsx — Layout racine par langue : <html>, thème, polices, fond, rail, cadre, pied de page.
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
@@ -15,21 +15,20 @@ import { Rail } from "@/components/shell/rail";
 import { UIProvider } from "@/components/shell/ui-provider";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { ShortcutsDialog } from "@/components/shell/shortcuts-dialog";
-import { Statusline } from "@/components/shell/statusline";
+import { SiteFooter } from "@/components/shell/site-footer";
 import { ScrollReveal } from "@/components/shell/scroll-reveal";
 import { PageTransition } from "@/components/shell/page-transition";
 import { Backdrop } from "@/components/shell/backdrop";
-import { SpaceSync } from "@/components/shell/space-sync";
-import { AimCursor } from "@/components/shell/aim-cursor";
 import { Credits } from "@/components/shell/credits";
 import "../globals.css";
 
-// Police des titres et gros chiffres (fichier local, aucune requête réseau au build)
-const anton = localFont({
-  src: "../fonts/anton-latin.woff2",
-  variable: "--font-anton",
+// Police des titres et gros chiffres : Inter Tight (fichier local, aucune requête réseau au build)
+const interTight = localFont({
+  src: "../fonts/inter-tight-latin.woff2",
+  variable: "--font-title",
+  weight: "100 900",
   display: "swap",
-  fallback: ["Impact", "Arial Narrow", "sans-serif"],
+  fallback: ["Inter", "system-ui", "sans-serif"],
 });
 
 type Props = {
@@ -78,7 +77,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       lang={locale}
       data-theme={DEFAULT_THEME}
       data-scroll-behavior="smooth"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${anton.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${interTight.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -91,23 +90,22 @@ export default async function LocaleLayout({ children, params }: Props) {
             <a href="#main" className="skip-link">
               {t("skipToContent")}
             </a>
-            <SpaceSync />
             <Backdrop />
             <Rail />
             <div className="shell">
               <main id="main" tabIndex={-1} className="frame flex flex-col outline-none">
                 <PageTransition>{children}</PageTransition>
                 <script dangerouslySetInnerHTML={{ __html: earlyRevealScript }} />
-                <div className="mt-auto pt-3">
-                  <Statusline year={buildDate.getFullYear()} deployedAt={deployedAt} />
-                  <Credits />
+                <div className="mt-auto">
+                  <SiteFooter year={buildDate.getFullYear()} deployedAt={deployedAt}>
+                    <Credits />
+                  </SiteFooter>
                 </div>
               </main>
             </div>
             <CommandPalette />
             <ShortcutsDialog />
             <ScrollReveal />
-            <AimCursor />
           </UIProvider>
         </NextIntlClientProvider>
       </body>

@@ -1,6 +1,6 @@
-// src/components/home/space-tiles.tsx — Bas de l'accueil : les six autres espaces en grandes tuiles,
-// chacune dans sa propre couleur (data-accent). Survol : un voile de couleur balaie la tuile,
-// le numéro s'allume et la flèche part en diagonale.
+// src/components/home/space-tiles.tsx — Bas de l'accueil : les six autres espaces en grandes tuiles.
+// Survol : la tuile se soulève, son image (s'il y en a une) reprend un peu de couleur, la flèche
+// tourne dans un rond qui devient rouge.
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useTranslations } from "next-intl";
@@ -25,7 +25,7 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
 
   return (
     <section aria-labelledby="explore-title" className={className}>
-      <h2 id="explore-title" className="display mb-3 mt-4 px-1 text-[28px] text-fg sm:text-[34px]">
+      <h2 id="explore-title" className="display mb-4 mt-10 px-2 text-[30px] text-fg sm:text-[40px]">
         {tHome("title")}
       </h2>
       <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-3">
@@ -34,7 +34,7 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
           const n = SPACES.indexOf(space) + 1;
           const image = IMAGES[space.id];
           return (
-            <li key={space.id} data-accent={space.id} className="flex">
+            <li key={space.id} className="flex">
               <Link
                 href={space.href}
                 className="card space-tile group"
@@ -44,17 +44,16 @@ export function SpaceTiles({ className, order }: { className?: string; order?: r
                 {image && (
                   <Image src={image} alt="" fill sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 90vw" className="space-tile-image" />
                 )}
-                <span aria-hidden="true" className="space-tile-sweep" />
                 <Icon aria-hidden="true" className="space-tile-icon" strokeWidth={1.2} />
                 <span aria-hidden="true" className="relative flex items-start justify-between">
-                  <span className="space-tile-num font-mono text-[12px] font-medium tracking-[0.08em]">{String(n).padStart(2, "0")}</span>
-                  <span className="space-tile-arrow grid h-9 w-9 place-items-center rounded-[4px] bg-accent-tint text-accent">
+                  <span className="space-tile-num text-[13px] font-medium tabular-nums">{String(n).padStart(2, "0")}</span>
+                  <span className="space-tile-arrow grid h-10 w-10 place-items-center rounded-full bg-surface-2 text-fg">
                     <ArrowUpRight size={18} />
                   </span>
                 </span>
                 <span aria-hidden="true" className="relative mt-auto block pt-6">
-                  <span className="display block text-[38px] leading-none text-fg">{t(`${space.id}.title`)}</span>
-                  <span className="mt-2.5 block text-[14px] text-muted">{t(`${space.id}.desc`)}</span>
+                  <span className="display block text-[34px] text-fg">{t(`${space.id}.title`)}</span>
+                  <span className="mt-2 block text-[14.5px] text-muted">{t(`${space.id}.desc`)}</span>
                 </span>
               </Link>
             </li>

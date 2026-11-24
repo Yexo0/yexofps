@@ -1,5 +1,5 @@
 // src/app/[locale]/baptiste/page.tsx — Accueil, profil Baptiste : le côté pro, hors univers Valorant.
-// Couleurs de l'univers "pro" (THEME_OVERRIDES), fond façon logiciel de montage, PC portable
+// Même design que l'accueil Yexo, sans Valorant : PC portable
 // en 3D. De haut en bas : hero (prénom, une phrase, actions, chiffres clés), puis
 // le parcours en bref et le résumé de l'infra, puis les espaces dans l'ordre utile à ce profil.
 import type { Metadata } from "next";

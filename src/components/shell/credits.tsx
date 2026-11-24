@@ -6,7 +6,7 @@ import { MODEL_CREDITS } from "@/config/site";
 export function Credits() {
   const t = useTranslations("common.credits");
   return (
-    <div className="mt-2 flex flex-col gap-1 px-1 text-[10.5px] leading-relaxed text-dim">
+    <div className="mt-5 flex max-w-[110ch] flex-col gap-1.5 text-[11.5px] leading-relaxed text-dim">
       <p>
         {t("models")}{" "}
         {MODEL_CREDITS.map((m, i) => (

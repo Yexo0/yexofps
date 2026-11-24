@@ -20,7 +20,7 @@ interface Stat {
 
 function StatIcon({ icon: Icon }: { icon: LucideIcon }) {
   return (
-    <span className="grid h-9 w-9 place-items-center text-accent">
+    <span className="grid h-9 w-9 place-items-center text-dim">
       <Icon size={26} strokeWidth={1.6} aria-hidden="true" />
     </span>
   );
@@ -40,13 +40,13 @@ function KeyStatsList({ items, label, className }: { items: Stat[]; label: strin
     <dl aria-label={label} className={cn("key-stats grid grid-cols-2 lg:grid-cols-4", className)}>
       {items.map((s, i) => (
         <div key={s.id} className="key-stat flex min-w-0 flex-col-reverse" style={{ "--si": i } as CSSProperties}>
-          <dt className="truncate text-[12px] text-muted">
+          <dt className="text-[13px] leading-snug text-dim sm:truncate">
             <span aria-hidden="true" className="key-stat-icon">
               {s.visual}
             </span>
             {s.label}
           </dt>
-          <dd className="display truncate text-[30px] text-fg sm:text-[38px]">{s.value}</dd>
+          <dd className="display truncate text-[26px] text-fg sm:text-[36px]">{s.value}</dd>
         </div>
       ))}
     </dl>

@@ -61,16 +61,14 @@
     "download": "Download",
     "placeholderNote": "sample value",
     "footer": {
-      "copyright": "© {year} {name} · {author}"
-    },
-    "status": {
-      "session": "yexo",
-      "nav": "Spaces (status bar)",
-      "deployed": "self-hosted · deployed {date}",
-      "theme": {
-        "dark": "dark",
-        "light": "light"
-      }
+      "copyright": "© {year} {name} · {author}",
+      "tagline": "IT infrastructure and Valorant video editing. A hand-built site, self-hosted on my own server.",
+      "spaces": "Spaces",
+      "elsewhere": "Elsewhere",
+      "site": "This site",
+      "hosting": "How it's hosted",
+      "deployed": "Deployed {date}",
+      "top": "Back to top"
     },
     "credits": {
       "models": "3D models:",
@@ -850,7 +848,7 @@
       "contact": "Contact me",
       "whoami": {
         "label": "Choose which profile to show",
-        "hint": "two profiles, two worlds",
+        "hint": "Two profiles, two worlds",
         "yexo": {
           "title": "Yexo, the gaming and editing side.",
           "text": "I mostly play Valorant and have been turning my matches into TikTok videos since 2022. My presets and edits are available in Y-Services.",

@@ -1,5 +1,6 @@
 // src/components/ui/card.tsx — Composant carte : base de tout le site.
-// Header = pastille d'icône + titre + méta à droite (le sous-titre façon commande n'est plus affiché).
+// Header = pastille d'icône ronde + titre (Inter Tight) + méta grise à droite (le sous-titre façon
+// commande n'est plus affiché).
 // En bas, lien optionnel vers l'espace suivant.
 import type { CSSProperties, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
@@ -60,16 +61,15 @@ export function Card({
         <header className="mb-6 flex items-center gap-3">
           {Icon && (
             <span className="icon-pill" aria-hidden="true">
-              <Icon size={15} strokeWidth={2} />
+              <Icon size={16} strokeWidth={1.9} />
             </span>
           )}
           <div className="min-w-0 flex-1">
-            <Heading id={headingId} className="display text-[22px] leading-none text-fg sm:text-[24px]">
+            <Heading id={headingId} className="display text-[21px] text-fg sm:text-[23px]">
               {title}
             </Heading>
-
           </div>
-          {meta && <div className="shrink-0 font-mono text-[11px] uppercase tracking-[0.08em] text-dim">{meta}</div>}
+          {meta && <div className="shrink-0 text-[13px] text-dim">{meta}</div>}
         </header>
       )}
       <div className={cn("flex min-w-0 flex-1 flex-col", bodyClassName)}>{children}</div>

@@ -1,5 +1,7 @@
-/* src/app/globals.css — Tokens, base et composants partagés.
-   Les couleurs (--bg, --accent…) sont générées par src/lib/theme.ts depuis src/config/theme.ts. */
+/* src/app/globals.css — Design system « premium doux » : tokens, base, coque, composants, animations.
+   Les couleurs (--bg, --accent…) viennent de src/lib/theme.ts. Courbes et durées : miroir de src/lib/motion.ts.
+   Principes : fond noir, surfaces grises sans bordure, grands arrondis, boutons en pilule, un seul accent
+   rouge, titres en Inter Tight, texte en Geist. Les animations ne touchent qu'à transform et opacity. */
 @import "tailwindcss";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -27,72 +29,51 @@
   --color-accent-low: var(--accent-low);
   --color-accent-2: var(--accent-2);
   --color-accent-vivid: var(--accent-vivid);
+  --color-accent-strong: var(--accent-strong);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
-  /* Titres et gros chiffres : condensée, grasse, en capitales */
-  --font-display: var(--font-anton), "Impact", "Arial Narrow", sans-serif;
+  /* Titres et gros chiffres : Inter Tight, grasse et serrée, en casse normale */
+  --font-display: var(--font-title), "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Angles francs, façon interface du jeu : les grands arrondis disparaissent partout */
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 5px;
-  --radius-2xl: 6px;
-  --radius-3xl: 8px;
-  --radius-card: 0px;
-  --radius-tile: 5px;
-  --ease-out-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Grands arrondis : les classes rounded-* de Tailwind suivent cette échelle */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 28px;
+  --radius-card: 28px;
+  --radius-tile: 18px;
+  --ease-out-apple: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Couleurs d'espace animées : en changeant d'espace (html[data-space]) ou de thème, l'accent,
-   les lueurs et le fond glissent d'une teinte à l'autre au lieu de sauter */
-@property --bg { syntax: "<color>"; inherits: true; initial-value: #05080b; }
-@property --accent { syntax: "<color>"; inherits: true; initial-value: #ff5f66; }
-@property --accent-2 { syntax: "<color>"; inherits: true; initial-value: #f2c14e; }
-@property --accent-vivid { syntax: "<color>"; inherits: true; initial-value: #f33d4d; }
-@property --on-accent { syntax: "<color>"; inherits: true; initial-value: #000; }
-@property --accent-container { syntax: "<color>"; inherits: true; initial-value: #000; }
-@property --on-accent-container { syntax: "<color>"; inherits: true; initial-value: #fff; }
-@property --accent-soft { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --accent-tint { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --glow { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --glow-strong { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --glow-ring { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --spot { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --spot-fill { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --haze { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --haze-2 { syntax: "<color>"; inherits: true; initial-value: transparent; }
-@property --card-edge { syntax: "<color>"; inherits: false; initial-value: transparent; }
+/* ─── Tokens hors couleurs ─────────────────────────────── */
 
-/* Animation : courbes et durées partagées (miroir de src/lib/motion.ts) */
 :root {
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Courbes : arrivée douce, passage d'un état à l'autre, ressort léger, sortie */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --dur-short: 350ms;
-  --dur-base: 600ms;
-  --dur-long: 900ms;
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --dur-micro: 180ms;
+  --dur-short: 320ms;
+  --dur-base: 560ms;
+  --dur-long: 800ms;
+  /* Rayons */
+  --r-card: 22px;
+  --r-tile: 16px;
+  --r-control: 999px;
+  --r-field: 14px;
+  /* Rail (desktop) : place réservée à gauche de la page, largeur du panneau ouvert */
+  --rail-w: 92px;
+  --rail-open: 236px;
 }
-
-html {
-  transition:
-    --bg 600ms ease,
-    --accent 700ms ease,
-    --accent-2 700ms ease,
-    --accent-vivid 700ms ease,
-    --on-accent 700ms ease,
-    --accent-container 700ms ease,
-    --on-accent-container 700ms ease,
-    --accent-soft 700ms ease,
-    --accent-tint 700ms ease,
-    --glow 700ms ease,
-    --glow-strong 700ms ease,
-    --glow-ring 700ms ease,
-    --spot 700ms ease,
-    --spot-fill 700ms ease,
-    --haze 900ms ease,
-    --haze-2 900ms ease;
+@media (min-width: 768px) {
+  :root {
+    --r-card: 28px;
+    --r-tile: 18px;
+  }
 }
 
 /* ─── Base ─────────────────────────────────────────────── */
@@ -101,7 +82,7 @@ html {
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-    scroll-padding-top: 84px;
+    scroll-padding-top: 24px;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -121,14 +102,14 @@ html {
   }
 
   ::selection {
-    background: var(--accent-container);
-    color: var(--on-accent-container);
+    background: var(--accent-strong);
+    color: var(--on-accent);
   }
 
   :focus-visible {
     outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 8px;
+    outline-offset: 3px;
+    border-radius: 12px;
   }
 
   a {
@@ -155,21 +136,21 @@ html {
   }
 }
 
-/* ─── Shell : rail, cadre, barre mobile ────────────────── */
-
 @layer components {
+  /* ─── Coque : lien d'évitement, page, cadre ─────────────── */
+
   .skip-link {
     position: fixed;
     top: 12px;
     left: 12px;
     z-index: 100;
     transform: translateY(-160%);
-    padding: 10px 16px;
+    padding: 10px 18px;
     border-radius: 999px;
-    background: var(--accent);
+    background: var(--accent-strong);
     color: var(--on-accent);
     font-weight: 600;
-    transition: transform 150ms ease;
+    transition: transform var(--dur-micro) ease;
   }
   .skip-link:focus-visible {
     transform: translateY(0);
@@ -177,239 +158,40 @@ html {
 
   .shell {
     min-height: 100dvh;
-    padding: 8px 8px calc(84px + env(safe-area-inset-bottom));
+    padding: 10px 10px calc(104px + env(safe-area-inset-bottom));
   }
   @media (min-width: 768px) {
     .shell {
-      padding: 12px 12px 12px 84px;
+      padding: 14px 14px 14px var(--rail-w);
     }
   }
 
-  /* ─── Rail extensible (desktop) ─────────────────────── */
-  /* Fermé : 72 px. Ouvert : 264 px, la largeur ne revient qu'après la fermeture des libellés.
-     Le panneau de fond s'étire depuis la gauche (transform), les libellés arrivent en cascade. */
-  .rail {
-    width: 72px;
-    overflow: hidden;
-    transition: width 0s linear 360ms;
-  }
-  .rail[data-open] {
-    width: 264px;
-    transition-delay: 0s;
-  }
-  .rail-panel {
-    position: absolute;
-    inset: 6px auto 6px 6px;
-    width: 252px;
-    background: var(--surface-solid);
-    border: 1px solid var(--line);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
-    transform-origin: left center;
-    transform: scaleX(0.24);
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 260ms ease;
-  }
-  .rail[data-open] .rail-panel {
-    transform: none;
-    opacity: 1;
-  }
-  .rail-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-height: 40px;
-  }
-  .rail-link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    text-align: left;
-    transition: color 200ms ease;
-  }
-  .rail-link::before {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 40px;
-    border-radius: 5px;
-    background: var(--surface-3);
-    opacity: 0;
-    transition: opacity 150ms ease;
-  }
-  .rail[data-open] .rail-link::before {
-    width: 100%;
-  }
-  .rail-link:hover::before {
-    opacity: 1;
-  }
-  .rail-link[aria-current="page"]::before {
-    display: none;
-  }
-  .rail-tool {
-    color: var(--text-muted);
-  }
-  .rail-tool:hover {
-    color: var(--text);
-  }
-  .rail-label,
-  .rail-num {
-    position: relative;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateX(-10px);
-    pointer-events: none;
-    transition:
-      opacity 180ms ease,
-      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .rail[data-open] .rail-label,
-  .rail[data-open] .rail-num {
-    opacity: 1;
-    transform: none;
-    transition-delay: calc(70ms + var(--ri, 0) * 22ms);
-  }
-  .rail-num {
-    width: 16px;
-    flex-shrink: 0;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--text-dim);
-  }
-  .rail-link[aria-current="page"] .rail-num {
-    color: var(--accent);
-  }
-  .rail-indicator {
-    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .rail-indicator-row {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 232px;
-    border-radius: 5px;
-    background: var(--accent-soft);
-    box-shadow: inset 0 0 0 1px var(--glow-ring);
-    opacity: 0;
-    transform-origin: left center;
-    transform: scaleX(0.17);
-    transition:
-      opacity 260ms ease,
-      transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .rail[data-open] .rail-indicator-row {
-    opacity: 1;
-    transform: none;
-  }
-  /* Espace actif à la verticale : calé sur la colonne du rail fermé (72 px), pas sur sa largeur
-     courante. À la fermeture, le rail garde 264 px le temps que le panneau se replie : centré sur
-     toute la largeur, le libellé réapparaissait décalé puis sautait à sa place. Il revient en fondu
-     une fois le panneau replié ; il disparaît tout de suite à l'ouverture. */
-  .rail-current {
-    width: 72px;
-    transition: opacity 220ms ease 260ms;
-  }
-  .rail[data-open] .rail-current {
-    opacity: 0;
-    transition-delay: 0s;
-  }
-  /* La page ne passe pas sous le rail ouvert : elle se réduit vers la droite (ancrée au bord droit,
-     centrée sur l'écran visible), puis reprend sa taille. Transform seulement : pas de recalcul de mise en page. */
-  .shell {
-    transform-origin: calc(100% - 12px) var(--rail-oy, 50vh);
-    transition: transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  html[data-rail="open"] .shell {
-    transform: scale(var(--rail-s, 1));
-  }
-
-  /* Cadre de la page : quatre coins de viseur au lieu d'une bordure complète */
-  /* Cadre de la page : de l'air autour de la grille, sans décor */
   .frame {
-    min-height: calc(100dvh - 16px - 84px);
-    padding: 6px;
+    min-height: calc(100dvh - 20px - 104px);
   }
   @media (min-width: 768px) {
     .frame {
-      min-height: calc(100dvh - 24px);
-      padding: 16px 20px;
+      min-height: calc(100dvh - 28px);
     }
   }
   @media (min-width: 1280px) {
     .frame {
-      max-width: 1560px;
+      max-width: 1520px;
       margin-inline: auto;
-      padding: 20px 28px;
     }
   }
 
-  /* ─── Fond (Backdrop) ───────────────────────────────── */
+  /* Fond : noir, plus rien derrière le contenu */
   .backdrop {
     position: fixed;
     inset: 0;
     z-index: -1;
-    overflow: hidden;
     pointer-events: none;
   }
   .backdrop-base {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(60% 55% at 94% 2%, var(--haze), transparent 70%),
-      radial-gradient(55% 50% at 2% 100%, var(--haze-2), transparent 72%),
-      var(--bg);
-  }
-  .backdrop-smoke {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1400ms ease;
-  }
-  .backdrop-smoke[data-ready] {
-    opacity: 1;
-  }
-  .backdrop-lines {
-    position: absolute;
-    inset: -120px 0;
-    opacity: var(--backdrop-lines);
-    will-change: transform;
-  }
-  .backdrop-set {
-    position: absolute;
-    inset: 0;
-    transition: opacity 900ms ease;
-  }
-  .backdrop-set-studio,
-  :root[data-space="pro"] .backdrop-set-valo {
-    opacity: 0;
-  }
-  :root[data-space="pro"] .backdrop-set-studio {
-    opacity: 1;
-  }
-  .backdrop-number {
-    position: absolute;
-    right: -0.03em;
-    bottom: -0.2em;
-    font-family: var(--font-display);
-    font-size: clamp(200px, 40vw, 620px);
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--line-strong);
-    opacity: 0.55;
-    animation: number-in 1400ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  @media (max-width: 767px) {
-    .backdrop-number {
-      bottom: 40px;
-      opacity: 0.35;
-    }
+    background: var(--bg);
   }
 
   .no-scrollbar {
@@ -419,22 +201,208 @@ html {
     display: none;
   }
 
-  .vertical-label {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+  /* ─── Rail (desktop) ─────────────────────────────────────
+     Replié : un panneau arrondi de 64 px, une colonne d'icônes. Au survol ou au clavier, le panneau
+     s'ouvre vers la droite (clip-path, arrondis intacts), la pastille de l'espace actif s'allonge avec
+     lui, les titres arrivent en cascade et la page s'assombrit derrière. Rien ne bouge dans la page. */
+  .rail {
+    width: var(--rail-w);
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* À la fermeture, le rail garde sa largeur le temps que les titres s'effacent */
+    transition: width 0s linear 420ms;
   }
-  /* Écrans peu hauts (portables 768-800 px) : pas la place pour le nom, seul le numéro reste */
-  @media (max-height: 860px) {
-    .vertical-label {
-      display: none;
-    }
+  .rail[data-open] {
+    width: calc(var(--rail-open) + 28px);
+    transition-delay: 0s;
+  }
+  .rail-panel {
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 14px;
+    width: var(--rail-open);
+    border-radius: 24px;
+    background: var(--surface);
+    clip-path: inset(0 calc(100% - 64px) 0 0 round 24px);
+    transition: clip-path 560ms var(--ease-out);
+  }
+  .rail[data-open] .rail-panel {
+    clip-path: inset(0 0 0 0 round 24px);
+  }
+  .rail-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    background: var(--overlay);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 420ms var(--ease-out);
+  }
+  .rail-scrim[data-on] {
+    opacity: 1;
+  }
+  /* Une ligne : icône de 44 px + titre. Survol : fond gris sur l'icône, sur toute la ligne rail ouvert */
+  .rail-link {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 44px;
+    border-radius: 14px;
+    text-align: left;
+    color: var(--text-dim);
+    transition: color var(--dur-micro) ease;
+  }
+  .rail-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: var(--surface-2);
+    opacity: 0;
+    clip-path: inset(0 calc(100% - 44px) 0 0 round 14px);
+    transition:
+      opacity var(--dur-micro) ease,
+      clip-path 560ms var(--ease-out);
+  }
+  .rail[data-open] .rail-link::before {
+    clip-path: inset(0 0 0 0 round 14px);
+  }
+  .rail-link:hover::before {
+    opacity: 1;
+  }
+  .rail-brand::before {
+    display: none;
+  }
+  .rail-link:hover,
+  .rail-link[aria-current="page"] {
+    color: var(--text);
+  }
+  .rail-link[aria-current="page"] .rail-icon {
+    color: var(--accent);
+  }
+  .rail-icon {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .rail-label {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 550;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      opacity 160ms ease,
+      transform 300ms var(--ease-in);
+  }
+  .rail[data-open] .rail-label {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 360ms ease,
+      transform 560ms var(--ease-out);
+    transition-delay: calc(90ms + var(--ri, 0) * 22ms);
+  }
+  /* Espace actif : une pastille grise qui glisse d'une ligne à l'autre et s'allonge rail ouvert */
+  .rail-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 44px;
+    border-radius: 14px;
+    background: var(--surface-2);
+    pointer-events: none;
+    clip-path: inset(0 calc(100% - 44px) 0 0 round 14px);
+    transition:
+      transform 560ms var(--ease-out),
+      clip-path 560ms var(--ease-out);
+  }
+  .rail[data-open] .rail-indicator {
+    clip-path: inset(0 0 0 0 round 14px);
+  }
+  .rail-tool {
+    height: 40px;
+  }
+  .rail-tool .rail-icon {
+    height: 40px;
+  }
+  .rail-tool::before {
+    inset: 0;
   }
 
-  /* ─── Grille bento ──────────────────────────────────── */
+  /* ─── Barre mobile flottante ──────────────────────────── */
+  .dock {
+    position: fixed;
+    left: 50%;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 40;
+    width: min(440px, calc(100vw - 20px));
+    padding: 6px;
+    transform: translateX(-50%);
+    border-radius: 26px;
+    background: color-mix(in oklab, var(--surface) 97%, transparent);
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 18px 40px -12px rgba(0, 0, 0, 0.55);
+  }
+  .dock-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 8px 2px 7px;
+    font-size: 10.5px;
+    font-weight: 550;
+    line-height: 1.2;
+    color: var(--text-dim);
+    transition: color var(--dur-micro) ease;
+  }
+  .dock-item[aria-current="page"] {
+    color: var(--text);
+  }
+  .dock-item[aria-current="page"] svg {
+    color: var(--accent);
+  }
+  .dock-pill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 4px;
+    z-index: -1;
+    border-radius: 20px;
+    background: var(--surface-2);
+    transition: transform 520ms var(--ease-out);
+  }
+  /* Feuille « Plus » (mobile) : monte depuis le bas */
+  .sheet {
+    position: fixed;
+    inset: auto 8px 8px;
+    z-index: 61;
+    padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+    border-radius: 28px;
+    background: var(--surface);
+    box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.6);
+    animation: sheet-in 520ms var(--ease-out) both;
+  }
+
+  /* ─── Grille bento ─────────────────────────────────────── */
   .bento {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 10px;
+    gap: 12px;
   }
   @media (min-width: 768px) {
     .bento {
@@ -442,215 +410,142 @@ html {
       gap: 16px;
     }
   }
-  /* 12 colonnes au même seuil que le préfixe lg: de Tailwind (1024 px), sinon les cartes
-     lg:col-span-* débordaient d'une grille encore à 6 colonnes entre 1024 et 1199 px */
+  /* 12 colonnes au même seuil que le préfixe lg: de Tailwind (1024 px) */
   @media (min-width: 1024px) {
     .bento {
       grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
     }
   }
 
-  /* ─── Carte ─────────────────────────────────────────── */
-  /* Coins coupés en biais (haut gauche, bas droite), signature de l'interface du jeu.
-     clip-path découpe les coins ; deux dégradés tracent la bordure sur les pans coupés. */
+  /* ─── Carte ────────────────────────────────────────────── */
+  /* Surface grise, grands arrondis, sans bordure. Une carte qui est un lien se soulève au survol. */
   .card {
-    --cut: 14px;
-    --card-edge: var(--line);
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
-    background:
-      linear-gradient(135deg, transparent 50%, var(--card-edge) 50%, var(--card-edge) calc(50% + 1px), transparent calc(50% + 1px))
-        left top / var(--cut) var(--cut) no-repeat border-box,
-      linear-gradient(135deg, transparent calc(50% - 1px), var(--card-edge) calc(50% - 1px), var(--card-edge) 50%, transparent 50%)
-        right bottom / var(--cut) var(--cut) no-repeat border-box,
-      var(--surface);
-    border: 1px solid var(--card-edge);
-    clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
-    /* Pas de backdrop-filter : recalculé à chaque image au défilement, il divisait la fluidité par 3
-       sur les machines modestes. Le fond quasi opaque (--surface) donne le même rendu. */
-    padding: 20px;
+    border-radius: var(--r-card);
+    background: var(--surface);
+    padding: 22px;
     transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-      --card-edge 300ms ease;
+      opacity 800ms var(--ease-out),
+      transform 900ms var(--ease-out),
+      background-color var(--dur-short) ease;
     transition-delay: calc(var(--i, 0) * 70ms), calc(var(--i, 0) * 70ms), 0ms;
-    scroll-margin-top: 84px;
+    scroll-margin-top: 24px;
   }
   @media (min-width: 768px) {
     .card {
-      --cut: 20px;
+      padding: 30px;
     }
   }
-
-  /* Plus de halo qui suit la souris : la carte survolée se signale seulement par sa bordure */
-  .card::after {
-    display: none;
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: radial-gradient(
-      280px circle at var(--mx, 50%) var(--my, 50%),
-      var(--spot),
-      transparent 75%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-      linear-gradient(#000 0 0) content-box exclude,
-      linear-gradient(#000 0 0);
-    opacity: 0;
-    transition: opacity 400ms ease;
-    pointer-events: none;
-  }
-  .card::before {
-    display: none;
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: radial-gradient(
-      460px circle at var(--mx, 50%) var(--my, 50%),
-      var(--spot-fill),
-      transparent 65%
-    );
-    opacity: 0;
-    transition: opacity 400ms ease;
-    pointer-events: none;
+  a.card,
+  .card-link {
+    transition:
+      opacity 800ms var(--ease-out),
+      transform 600ms var(--ease-out),
+      background-color var(--dur-short) ease;
   }
   @media (hover: hover) {
-    .card:hover::after,
-    .card:hover::before {
-      opacity: 1;
-    }
-    /* Carte survolée : bordure un peu plus marquée, pastille d'icône qui s'allume */
-    .card:hover {
-      --card-edge: var(--line-strong);
-    }
-    .card:hover .icon-pill {
-      color: var(--accent);
-    }
-  }
-  @media (min-width: 768px) {
-    .card {
-      padding: 28px;
+    a.card:hover,
+    .card-link:hover {
+      background: color-mix(in oklab, var(--surface) 80%, var(--surface-2));
+      transform: translateY(-4px);
     }
   }
 
   .tile {
     background: var(--surface-2);
-    border-radius: var(--radius-tile);
+    border-radius: var(--r-tile);
   }
 
   .icon-pill {
     display: inline-grid;
     place-items: center;
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
     background: var(--surface-2);
-    box-shadow: inset 0 0 0 1px var(--line);
-    color: var(--text-muted);
-    transition: color 300ms ease;
+    color: var(--text);
+    transition:
+      background-color var(--dur-short) ease,
+      color var(--dur-short) ease;
   }
 
-  /* Titres et gros chiffres en police condensée */
+  /* Titres et gros chiffres */
   .display {
     font-family: var(--font-display);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 0.88;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1;
   }
 
+  /* Petits libellés : gris, en casse normale */
   .label {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 450;
     color: var(--text-dim);
   }
 
-  /* ─── Boutons : rectangles francs, capitales, balayage en biais au survol ─── */
+  /* ─── Boutons : pilules ────────────────────────────────── */
   .btn {
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    min-height: 42px;
+    min-height: 44px;
     padding: 0 20px;
-    border-radius: 3px;
-    font-size: 12.5px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
+    border-radius: var(--r-control);
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
     white-space: nowrap;
     transition:
-      background-color 150ms ease,
-      color 150ms ease,
-      opacity 150ms ease,
-      box-shadow 300ms ease,
-      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  /* Balayage : une bande inclinée traverse le bouton au survol */
-  .btn::before {
-    content: "";
-    position: absolute;
-    inset: 0 -30%;
-    z-index: -1;
-    background: var(--btn-sweep, var(--surface-hover));
-    transform: translateX(-102%) skewX(-24deg);
-    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @media (hover: hover) {
-    .btn:hover:not(:disabled)::before {
-      transform: translateX(0) skewX(-24deg);
-    }
+      background-color var(--dur-micro) ease,
+      color var(--dur-micro) ease,
+      box-shadow var(--dur-micro) ease,
+      opacity var(--dur-micro) ease,
+      transform 420ms var(--ease-spring);
   }
   .btn:active:not(:disabled),
   .icon-btn:active {
     transform: scale(0.96);
+    transition-duration: 120ms;
   }
   .btn-sm {
-    min-height: 34px;
-    padding: 0 14px;
-    font-size: 11.5px;
+    min-height: 36px;
+    padding: 0 15px;
+    font-size: 13px;
     gap: 6px;
   }
-  /* Action principale : contour décalé, comme les boutons du jeu */
+  /* Action principale : le rouge, plein */
   .btn-primary {
-    --btn-sweep: color-mix(in oklab, var(--accent) 82%, white);
-    background: var(--accent);
+    background: var(--accent-strong);
     color: var(--on-accent);
   }
+  .btn-primary:hover {
+    background: color-mix(in oklab, var(--accent-strong) 88%, white);
+  }
+  /* Secondaire : contour fin, se remplit légèrement au survol */
   .btn-tonal {
-    background: var(--surface-3);
     color: var(--text);
-    box-shadow: inset 0 0 0 1px var(--line);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
   }
   .btn-tonal:hover {
-    box-shadow: inset 0 0 0 1px var(--line-strong);
+    background: var(--surface-2);
   }
   .btn-ghost {
     color: var(--text-muted);
   }
   .btn-ghost:hover {
-    background: var(--surface-3);
+    background: var(--surface-2);
     color: var(--text);
   }
   .btn:disabled {
-    opacity: 0.55;
+    opacity: 0.5;
   }
 
   .icon-btn {
@@ -661,24 +556,24 @@ html {
     border-radius: 999px;
     color: var(--text-muted);
     transition:
-      background-color 150ms ease,
-      color 150ms ease,
-      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+      background-color var(--dur-micro) ease,
+      color var(--dur-micro) ease,
+      transform 420ms var(--ease-spring);
   }
   .icon-btn:hover {
-    background: var(--surface-3);
+    background: var(--surface-2);
     color: var(--text);
   }
 
-  /* ─── Chips & tags ──────────────────────────────────── */
+  /* ─── Pastilles et tags ───────────────────────────────── */
   .chip {
     display: inline-flex;
     align-items: center;
     gap: 7px;
     min-height: 32px;
-    padding: 0 12px;
-    border-radius: 3px;
-    background: var(--surface-3);
+    padding: 0 13px;
+    border-radius: 999px;
+    background: var(--surface-2);
     color: var(--text);
     font-size: 13px;
     font-weight: 500;
@@ -686,92 +581,85 @@ html {
   .tag {
     display: inline-flex;
     align-items: center;
-    padding: 1px 7px;
-    border: 1px solid var(--line-strong);
-    border-radius: 6px;
-    font-family: var(--font-mono);
-    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    font-size: 12px;
     font-weight: 500;
     color: var(--text-muted);
     white-space: nowrap;
   }
 
-  /* ─── Terminal ──────────────────────────────────────── */
+  /* ─── Terminal (fastfetch, formules) ───────────────────── */
   .terminal {
     background: var(--inset);
-    border-radius: 16px;
-    box-shadow: inset 0 0 0 1px var(--line);
+    border-radius: var(--r-tile);
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.75;
     color: var(--text-muted);
   }
-  .terminal .prompt {
+  .terminal .prompt,
+  .terminal .key {
     color: var(--accent);
   }
   .terminal .key {
-    color: var(--accent);
     font-weight: 500;
   }
 
-  /* Page Contact : adresses en grand, coupées seulement à un endroit lisible (<wbr> avant le « @ »
-     ou après le « / » d'un lien), jamais au milieu d'un mot */
+  /* Page Contact : adresses en grand, coupées seulement à un endroit lisible */
   .contact-value {
     font-size: clamp(20px, 1.8vw, 26px);
-    line-height: 1.05;
-    text-transform: none;
+    line-height: 1.1;
     overflow-wrap: normal;
     word-break: normal;
   }
-  /* Statut en grand (NowCard size="lg") : la disponibilité en bandeau teinté, lisible d'un coup d'œil */
+  /* Statut en grand : la disponibilité sur un fond teinté */
   .now-availability {
     padding: 14px 16px;
-    border-radius: 4px;
+    border-radius: var(--r-tile);
     background: var(--accent-soft);
-    box-shadow: inset 0 0 0 1px var(--glow-ring);
     color: var(--text);
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 550;
   }
 
-  /* ─── Champs ────────────────────────────────────────── */
+  /* ─── Champs ───────────────────────────────────────────── */
   .field {
     width: 100%;
-    min-height: 44px;
-    padding: 0 14px;
-    border-radius: 12px;
+    min-height: 46px;
+    padding: 0 16px;
+    border-radius: var(--r-field);
     background: var(--surface-2);
-    border: 1px solid var(--line);
+    border: 1px solid transparent;
     color: var(--text);
     font-family: var(--font-mono);
     font-size: 15px;
-    transition: border-color 150ms ease;
+    transition:
+      border-color var(--dur-micro) ease,
+      background-color var(--dur-micro) ease;
   }
   .field:hover {
-    border-color: var(--line-strong);
+    background: var(--surface-3);
   }
   .field:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 0;
-    border-color: transparent;
   }
 
-  /* ─── Skeleton ──────────────────────────────────────── */
   .skeleton {
     background: var(--surface-3);
-    border-radius: 8px;
+    border-radius: 10px;
     animation: pulse 1.6s ease-in-out infinite;
   }
 
-  /* ─── Dialogs ───────────────────────────────────────── */
+  /* ─── Fenêtres ─────────────────────────────────────────── */
   .overlay {
     position: fixed;
     inset: 0;
     z-index: 60;
-    background: rgba(0, 0, 0, 0.45);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    animation: fade-in 220ms ease both;
+    background: var(--overlay);
+    animation: fade-in 260ms ease both;
   }
   .dialog {
     position: fixed;
@@ -782,11 +670,12 @@ html {
     width: min(560px, calc(100vw - 24px));
     max-height: calc(100dvh - 48px);
     overflow-y: auto;
-    background: var(--surface-solid);
-    border: 1px solid var(--line-strong);
-    border-radius: 24px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-    animation: dialog-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    background: var(--surface);
+    border-radius: 28px;
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 40px 80px -24px rgba(0, 0, 0, 0.7);
+    animation: dialog-in 460ms var(--ease-out) both;
   }
   .dialog-top {
     top: 12vh;
@@ -794,13 +683,26 @@ html {
     animation-name: dialog-top-in;
   }
 
-  /* ─── Guidage visuel ────────────────────────────────── */
-  /* Lueur réservée à ce qui compte : action principale, position actuelle */
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 7px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ─── Repères ──────────────────────────────────────────── */
+  /* Anneau rouge fin : position actuelle, élément choisi */
   .glow {
     box-shadow: 0 0 0 1px var(--glow-ring);
   }
 
-  /* Pastille "en direct" : un anneau qui s'étend doucement */
+  /* Pastille « en direct » : un anneau qui s'étend doucement */
   .live-dot {
     position: relative;
   }
@@ -811,7 +713,7 @@ html {
     border-radius: 999px;
     border: 1px solid var(--accent);
     opacity: 0;
-    animation: live-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    animation: live-ring 2.4s var(--ease-out) infinite;
   }
 
   /* Contenu d'une carte qui arrive en cascade quand la carte apparaît */
@@ -823,8 +725,8 @@ html {
     animation: reveal-fallback 1ms 2.5s forwards;
   }
   [data-js] .card[data-in] .stagger > * {
-    animation: fade-up 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(180ms + var(--si, 0) * 55ms);
+    animation: fade-up 700ms var(--ease-out) both;
+    animation-delay: calc(160ms + var(--si, 0) * 50ms);
   }
   .stagger > :nth-child(2) { --si: 1; }
   .stagger > :nth-child(3) { --si: 2; }
@@ -836,17 +738,9 @@ html {
   .stagger > :nth-child(9) { --si: 8; }
   .stagger > :nth-child(n + 10) { --si: 9; }
 
-  /* Lien "espace suivant" : pilule, lueur au survol, petit coup de coude à l'apparition */
+  /* Lien « espace suivant » */
   .next-space {
-    transition:
-      background-color 200ms ease,
-      box-shadow 300ms ease;
-  }
-  .next-space:hover {
-    box-shadow: none;
-  }
-  [data-js] .card[data-in] .next-space .nudge {
-    animation: nudge 900ms cubic-bezier(0.16, 1, 0.3, 1) 900ms 2;
+    transition: color var(--dur-micro) ease;
   }
 
   /* Schéma réseau : les liens se tracent quand la carte apparaît */
@@ -855,7 +749,7 @@ html {
     stroke-dashoffset: 1;
   }
   [data-js] .card[data-in] .map-draw {
-    animation: draw 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: draw 900ms var(--ease-in-out) both;
     animation-delay: calc(250ms + var(--li, 0) * 70ms);
   }
   [data-js] .card .map-fade {
@@ -865,17 +759,12 @@ html {
     animation: fade-in 500ms ease both;
     animation-delay: calc(250ms + var(--li, 0) * 70ms);
   }
-
-  /* Chemin du traceroute et nœud sélectionné : légère lueur */
   .map-trace {
-    filter: drop-shadow(0 0 4px var(--glow-strong));
+    filter: drop-shadow(0 0 3px var(--glow));
   }
-
-  /* Scénarios du schéma : trait qui se dessine pendant le trajet du paquet, tirets qui circulent
-     ensuite dans le sens du flux, pastille "en cours" qui tourne */
   .map-flow-draw {
     stroke-dasharray: 1;
-    animation: flow-draw 720ms cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: flow-draw 720ms var(--ease-in-out) both;
   }
   .map-flow-run {
     stroke-dasharray: 2 10;
@@ -892,7 +781,7 @@ html {
   .pipe-fill {
     transform: scaleX(0);
     transform-origin: left center;
-    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+    transition: transform 700ms var(--ease-in-out);
   }
   .pipe-fill-on {
     transform: none;
@@ -904,74 +793,63 @@ html {
     transform-origin: left center;
   }
   [data-js] .card[data-in] .clip-grow {
-    animation: clip-grow 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: clip-grow 800ms var(--ease-out) both;
     animation-delay: calc(200ms + var(--ci, 0) * 110ms);
   }
   [data-js] .card[data-in] .playhead {
-    animation: playhead 1400ms cubic-bezier(0.65, 0, 0.35, 1) 300ms both;
+    animation: playhead 1400ms var(--ease-in-out) 300ms both;
   }
 
-  /* Chiffres en matrice de points : les points s'allument colonne par colonne */
+  /* Chiffres en matrice de points */
   [data-js] .card[data-in] .dot-on {
     animation: dot-on 420ms ease both;
     animation-delay: calc(200ms + var(--dc, 0) * 28ms);
   }
 
-  /* ─── Accordéon : ouverture en douceur ──────────────── */
+  /* Accordéon et onglets */
   .accordion-content {
     overflow: hidden;
   }
   .accordion-content[data-state="open"] {
-    animation: accordion-down 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: accordion-down 460ms var(--ease-out);
   }
   .accordion-content[data-state="closed"] {
-    animation: accordion-up 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: accordion-up 300ms var(--ease-in-out);
   }
-
-  /* ─── Contenu d'onglet : fondu montant ──────────────── */
   .tab-in[data-state="active"] {
-    animation: fade-up 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fade-up 480ms var(--ease-out) both;
   }
 
-  /* ─── Menu des settings Valorant (même organisation qu'en jeu, DA du site) ─── */
+  /* ─── Menu des settings Valorant ──────────────────────── */
   .set-tab {
     flex-shrink: 0;
     min-height: 40px;
-    padding: 0 16px;
-    border-radius: 10px;
-    font-size: 13px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text-muted);
     transition:
-      background-color 200ms ease,
-      color 200ms ease,
-      box-shadow 300ms ease;
+      background-color var(--dur-micro) ease,
+      color var(--dur-micro) ease;
   }
   .set-tab:hover {
-    background: var(--surface-3);
+    background: var(--surface-2);
     color: var(--text);
   }
-  /* Onglet ouvert : seule lueur du menu (position actuelle) */
   .set-tab[aria-selected="true"] {
-    background: var(--accent-tint);
-    color: var(--on-accent-container);
-    box-shadow:
-      0 0 0 1px var(--glow-ring),
-      0 0 26px -4px var(--glow);
+    background: var(--text);
+    color: var(--bg);
   }
   .set-subtab {
     position: relative;
     flex-shrink: 0;
     min-height: 40px;
     padding: 0 14px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text-muted);
-    transition: color 200ms ease;
+    transition: color var(--dur-micro) ease;
   }
   .set-subtab::after {
     content: "";
@@ -983,7 +861,7 @@ html {
     border-radius: 2px;
     background: var(--accent);
     transform: scaleX(0);
-    transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform var(--dur-short) var(--ease-out);
   }
   .set-subtab:hover,
   .set-subtab[aria-selected="true"] {
@@ -992,33 +870,30 @@ html {
   .set-subtab[aria-selected="true"]::after {
     transform: scaleX(1);
   }
-
   .set-row {
     display: grid;
     gap: 10px;
     min-height: 52px;
-    padding: 10px 12px 12px 14px;
-    border-radius: 10px;
+    padding: 10px 12px 12px 16px;
+    border-radius: 14px;
     background: var(--surface-2);
-    transition: background-color 200ms ease;
+    transition: background-color var(--dur-micro) ease;
   }
   @media (min-width: 640px) {
     .set-row {
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 24px;
-      padding: 8px 9px 8px 16px;
+      padding: 8px 9px 8px 18px;
     }
   }
   .set-row:hover {
     background: var(--surface-3);
   }
   [data-js] .set-row {
-    animation: fade-up 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fade-up 420ms var(--ease-out) both;
     animation-delay: calc(var(--ri, 0) * 14ms);
   }
-
-  /* Sous-option : trait d'indentation */
   .set-branch {
     position: relative;
     flex-shrink: 0;
@@ -1036,15 +911,13 @@ html {
     height: 1px;
     background: var(--text-dim);
   }
-
   .set-seg,
   .set-box {
     display: inline-flex;
     align-items: center;
     min-height: 34px;
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--inset);
-    box-shadow: inset 0 0 0 1px var(--line);
     font-size: 12.5px;
     line-height: 1.15;
   }
@@ -1056,21 +929,19 @@ html {
   }
   .set-seg[data-on] {
     background: var(--accent-tint);
-    box-shadow: inset 0 0 0 1px var(--glow-ring);
-    color: var(--on-accent-container);
+    color: var(--text);
     font-weight: 600;
   }
   .set-box {
     padding: 0 12px;
     color: var(--text);
   }
-
   .set-track {
     position: relative;
     flex: 1;
-    height: 3px;
-    border-radius: 3px;
-    background: var(--line-strong);
+    height: 4px;
+    border-radius: 4px;
+    background: var(--surface-3);
   }
   .set-fill {
     position: absolute;
@@ -1083,44 +954,53 @@ html {
     position: absolute;
     top: 50%;
     left: var(--pct);
-    width: 11px;
-    height: 11px;
-    border: 2px solid var(--accent);
-    border-radius: 2px;
-    background: var(--surface-solid);
-    transform: translate(-50%, -50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--text);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
   }
-
-  /* Réglage grisé en jeu (dépend d'une option désactivée) : texte atténué, lisible */
   .set-row-off [data-label],
   .set-row-off .set-box {
     color: var(--text-dim);
   }
   .set-row-off .set-seg[data-on] {
     background: var(--surface-3);
-    box-shadow: inset 0 0 0 1px var(--line-strong);
     color: var(--text-muted);
   }
   .set-row-off .set-fill {
     background: var(--text-dim);
   }
-  .set-row-off .set-thumb {
-    border-color: var(--text-dim);
-  }
 
-  /* ─── Titre du hero : sort du flou au chargement ────── */
+  /* Titre du hero : sort doucement du flou au chargement */
   .hero-title {
-    animation: blur-in 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: blur-in 1100ms var(--ease-out) both;
   }
 
-  /* ─── Projets : vignette (grille fine + dessin du projet + vraie capture) ─── */
+  /* Image qui s'agrandit légèrement au survol */
+  .zoom-media {
+    transition: transform 900ms var(--ease-out);
+  }
+  .group:hover .zoom-media {
+    transform: scale(1.04);
+  }
+
+  .prose-card p + p {
+    margin-top: 0.75em;
+  }
+
+  .watch-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* ─── Médias et vignettes de projets ──────────────────── */
   .media-frame {
     position: relative;
     overflow: hidden;
+    border-radius: var(--r-tile);
     background: var(--surface-2);
-    border-radius: 4px;
   }
-
   .project-media {
     position: relative;
     aspect-ratio: 16 / 10;
@@ -1128,7 +1008,7 @@ html {
   .project-media-inner {
     position: absolute;
     inset: 0;
-    transition: transform 1100ms var(--ease-out);
+    transition: transform 1000ms var(--ease-out);
   }
   @media (hover: hover) {
     .project-card:hover .project-media-inner {
@@ -1138,15 +1018,13 @@ html {
   .project-veil {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 55%, color-mix(in oklab, var(--bg) 70%, transparent));
+    background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.35));
     opacity: 0;
     transition: opacity var(--dur-base) var(--ease-out);
   }
   .project-card:hover .project-veil {
     opacity: 1;
   }
-
-  /* Plate: the project's canvas (grid + line drawing + capture) */
   .plate {
     background: var(--surface-2);
   }
@@ -1157,18 +1035,17 @@ html {
       linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
       linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px;
     mask-image: radial-gradient(120% 90% at 30% 40%, #000 30%, transparent 85%);
-    opacity: 0.6;
+    opacity: 0.7;
   }
-  /* With a capture, the drawing keeps the left part of the plate */
   .plate-motif-side {
     right: 38%;
   }
   .plate-capture {
     position: absolute;
     overflow: hidden;
-    border: 1px solid var(--line-strong);
+    border-radius: 14px;
     background: var(--bg);
-    box-shadow: var(--shadow);
+    box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6);
   }
   .plate-capture-portrait {
     top: 9%;
@@ -1184,7 +1061,6 @@ html {
   .plate-capture-landscape {
     inset: 12% 6% 12% 40%;
   }
-  /* Strokes stay hidden until the plate is drawn (anime.js), texts fade in after */
   [data-js] .plate:not([data-drawn]) [data-draw],
   [data-js] .plate:not([data-drawn]) .motif-text {
     opacity: 0;
@@ -1192,7 +1068,7 @@ html {
   [data-js] .plate[data-drawn] .motif-text {
     animation: fade-in 1200ms var(--ease-out) 700ms both;
   }
-  /* "View" badge that grows in the middle of a project's plate on hover */
+  /* Badge « Voir » qui grandit au milieu de la vignette au survol */
   .view-badge {
     position: absolute;
     left: 50%;
@@ -1200,21 +1076,19 @@ html {
     z-index: 2;
     display: grid;
     place-items: center;
-    width: 96px;
-    height: 96px;
-    margin: -48px 0 0 -48px;
+    width: 88px;
+    height: 88px;
+    margin: -44px 0 0 -44px;
     border-radius: 999px;
     background: var(--text);
     color: var(--bg);
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.6);
     transition:
       opacity var(--dur-short) ease,
-      transform 700ms var(--ease-out);
+      transform 600ms var(--ease-spring);
     pointer-events: none;
   }
   @media (hover: hover) {
@@ -1224,170 +1098,76 @@ html {
     }
   }
 
-  /* ─── Image qui s'agrandit légèrement au survol ─────── */
-  .zoom-media {
-    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* ─── Page /lab/site : un paquet circule entre deux étapes ── */
+  .path-link {
+    position: relative;
+    align-self: center;
+    flex-shrink: 0;
+    width: 2px;
+    height: 24px;
+    margin: 6px 0;
+    list-style: none;
   }
-  .group:hover .zoom-media {
-    transform: scale(1.035);
-  }
-
-  /* ─── Texte long ────────────────────────────────────── */
-  .prose-card p + p {
-    margin-top: 0.75em;
-  }
-
-  .kbd {
-    display: inline-grid;
-    place-items: center;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
-    border-radius: 6px;
-    border: 1px solid var(--line-strong);
-    background: var(--surface-2);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-}
-
-/* ─── Curseur réticule (AimCursor, souris uniquement) ─── */
-@layer components {
-  html[data-aim],
-  html[data-aim] * {
-    cursor: none !important;
-  }
-  html[data-aim] :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"]), textarea, select, [contenteditable="true"]) {
-    cursor: text !important;
-  }
-  .aim {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    pointer-events: none;
-    transition: opacity 150ms ease;
-  }
-  .aim[data-hidden] {
-    opacity: 0;
-  }
-  .aim-cross {
-    position: absolute;
-    left: 0;
-    top: 0;
-    will-change: transform;
-  }
-  .aim-shot {
-    position: absolute;
-    left: -30px;
-    top: -30px;
-    display: block;
-    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.6));
-  }
-  .aim-shot > svg {
-    position: absolute;
-    inset: 0;
-  }
-  .aim-anchor,
-  :root[data-space="pro"] .aim-valo {
-    display: none;
-  }
-  :root[data-space="pro"] .aim-anchor {
-    display: block;
-  }
-  /* Tir : petit recul du réticule et onde d'impact */
-  .aim-shot::after {
+  .path-link::before {
     content: "";
     position: absolute;
-    inset: 18px;
-    border: 1.5px solid var(--accent);
-    border-radius: 999px;
-    opacity: 0;
+    inset: 0;
+    border-radius: 2px;
+    background: var(--line-strong);
   }
-  .aim-fire .aim-shot {
-    animation: aim-kick 240ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .aim-fire .aim-shot::after {
-    animation: aim-ring 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .aim-corner {
+  .path-packet {
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 0;
-    width: 10px;
-    height: 10px;
-    border: 2px solid var(--accent);
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 999px;
+    background: var(--accent);
     opacity: 0;
-    transition: opacity 200ms ease;
-    will-change: transform;
+    animation: packet-down 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    animation-delay: calc(var(--pi, 0) * 0.3s);
   }
-  .aim[data-target] .aim-corner {
-    opacity: 1;
-  }
-  .aim-corner-tl {
-    border-right: 0;
-    border-bottom: 0;
-  }
-  .aim-corner-tr {
-    border-left: 0;
-    border-bottom: 0;
-  }
-  .aim-corner-bl {
-    border-right: 0;
-    border-top: 0;
-  }
-  .aim-corner-br {
-    border-left: 0;
-    border-top: 0;
-  }
-  /* Aimant : le déplacement passe par la propriété translate (indépendante de transform) */
-  .btn,
-  .icon-btn {
-    transition-property: background-color, color, opacity, box-shadow, transform, translate;
-    transition-duration: 150ms, 150ms, 150ms, 300ms, 250ms, 350ms;
-    transition-timing-function: ease, ease, ease, ease, cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
+  @media (min-width: 768px) {
+    .path-link {
+      width: 40px;
+      height: 2px;
+      margin: 0 8px;
+    }
+    .path-packet {
+      top: 50%;
+      left: 0;
+      animation-name: packet-right;
+    }
   }
 }
 
-@keyframes aim-kick {
-  30% {
-    transform: scale(1.3) translateY(-2px);
-  }
-}
-
-@keyframes aim-ring {
-  from {
-    opacity: 0.9;
-    transform: scale(0.4);
-  }
-  to {
-    opacity: 0;
-    transform: scale(2.2);
-  }
-}
-
-/* ─── Accueil : hero, chiffres clés, tuiles d'espaces ─── */
+/* ─── Accueil : hero, chiffres clés, profils, tuiles ────── */
 @layer components {
   .hero-card {
-    min-height: clamp(640px, calc(100svh - 120px), 880px);
-    padding: 22px 20px 24px;
+    min-height: clamp(620px, calc(100svh - 28px), 860px);
+    padding: 24px 22px 26px;
     overflow: hidden;
   }
   @media (min-width: 768px) {
     .hero-card {
-      padding: 34px 40px 30px;
+      padding: 44px 52px 40px;
     }
   }
   .hero-name {
-    font-size: clamp(118px, 17vw, 260px);
-    line-height: 0.8;
-    margin-left: -0.035em;
+    font-size: clamp(76px, 9.2vw, 144px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    margin-left: -0.04em;
   }
-  /* Nom long (profil Baptiste) : plus petit pour tenir dans la colonne de gauche */
   .hero-name.hero-name-long {
-    font-size: clamp(84px, 10.5vw, 168px);
+    font-size: clamp(64px, 7.6vw, 120px);
   }
-  /* Arme 3D : en haut sur mobile, à droite sur grand écran */
+  .hero-punch {
+    color: var(--text);
+  }
+  /* Objet 3D : en haut sur mobile, à droite sur grand écran */
   .hero-3d {
     position: relative;
     z-index: 1;
@@ -1398,64 +1178,52 @@ html {
   @media (min-width: 1024px) {
     .hero-3d {
       position: absolute;
-      z-index: 1;
       order: 0;
-      top: 2%;
-      right: -4%;
-      width: 60%;
-      height: 74%;
+      top: 4%;
+      right: 1%;
+      width: 54%;
+      height: 70%;
       margin: 0;
     }
   }
-  /* Bande colorée en biais : donne le contraste derrière l'arme noire */
+  /* Halo rouge doux sous l'objet : la seule tache de couleur du hero. closest-side : le dégradé
+     s'éteint exactement au bord de sa boîte, sans arête visible. */
   .hero-band {
     position: absolute;
     z-index: 0;
-    top: 46px;
-    right: -14%;
-    width: 96%;
-    height: 170px;
-    background: linear-gradient(180deg, var(--accent-vivid) 0%, color-mix(in oklab, var(--accent-vivid) 80%, #000) 100%);
-    clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
-    transform-origin: right center;
-    animation: band-in 1200ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
-  }
-  .hero-band-outline {
-    display: none;
-    position: absolute;
-    z-index: 0;
-    top: 62px;
-    right: -18%;
-    width: 96%;
-    height: 170px;
-    fill: none;
-    stroke: var(--accent-2);
-    stroke-width: 1;
-    opacity: 0.6;
-    animation: band-in 1300ms cubic-bezier(0.16, 1, 0.3, 1) 380ms both;
+    left: 0;
+    right: 0;
+    top: 30px;
+    height: 300px;
+    background: radial-gradient(
+      closest-side,
+      var(--haze) 0%,
+      color-mix(in oklab, var(--haze) 45%, transparent) 50%,
+      transparent 100%
+    );
+    animation: fade-in 1600ms var(--ease-out) 300ms both;
+    pointer-events: none;
   }
   @media (min-width: 1024px) {
     .hero-band {
-      top: 17%;
-      right: -4%;
-      width: 52%;
-      height: 42%;
-    }
-    .hero-band-outline {
-      top: 21%;
-      right: -8%;
+      left: auto;
+      top: 14%;
+      right: 0;
       width: 58%;
-      height: 44%;
+      height: 76%;
     }
   }
-  /* Repères d'inspection (grand écran) */
+  .hero-band-outline {
+    display: none;
+  }
+  /* Repères (grand écran) : deux petits libellés gris */
   .hero-callout {
     position: absolute;
     z-index: 2;
     display: none;
     align-items: center;
-    gap: 10px;
-    animation: fade-in 800ms ease 1500ms both;
+    gap: 8px;
+    animation: fade-in 800ms ease 1400ms both;
   }
   @media (min-width: 1024px) {
     .hero-callout {
@@ -1463,128 +1231,129 @@ html {
     }
   }
   .hero-callout-a {
-    top: 9%;
-    right: 6%;
+    top: 7%;
+    right: 4%;
   }
   .hero-callout-b {
-    top: 66%;
-    right: 36%;
+    top: 52%;
+    right: 42%;
+  }
+  .hero-card[data-scene="laptop"] .hero-callout-b {
+    top: 74%;
+    right: 44%;
   }
   .hero-callout-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 999px;
-    background: var(--text);
+    background: var(--accent);
   }
   .hero-callout-line {
-    width: 48px;
-    height: 1px;
-    background: var(--line-strong);
+    display: none;
   }
 
-  /* Sélecteur de profil (Whoami) : deux grandes options. Chacune porte les couleurs de son univers
-     (data-accent) : l'autre profil se détache, avec un reflet qui le traverse une fois après l'intro
-     du hero et une flèche qui fait signe. Transform / opacity seulement. */
+  /* Sélecteur de profil : deux options dans une pilule grise, le profil affiché en blanc */
+  .whoami-switch {
+    display: inline-flex;
+    align-self: flex-start;
+    max-width: 100%;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--surface-2);
+  }
   .whoami-option {
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    display: flex;
-    flex: 1;
+    display: inline-flex;
     align-items: center;
-    gap: 11px;
+    gap: 10px;
     min-width: 0;
-    min-height: 58px;
-    padding: 9px 12px;
-    border-radius: 4px;
-    background: var(--surface-2);
-    box-shadow: inset 0 0 0 1px var(--line);
+    min-height: 50px;
+    padding: 0 18px 0 6px;
+    border-radius: 999px;
+    color: var(--text);
     transition:
-      box-shadow 300ms ease,
-      transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .whoami-option::before {
-    content: "";
-    position: absolute;
-    inset: 0 -30%;
-    z-index: -1;
-    background: var(--accent-soft);
-    transform: translateX(-102%) skewX(-24deg);
-    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+      background-color var(--dur-short) ease,
+      color var(--dur-short) ease,
+      transform 420ms var(--ease-spring);
   }
   .whoami-option:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
-  /* Icône à partir de 640 px : sur téléphone, toute la largeur va au nom et à l'appel */
   .whoami-icon {
-    display: none;
+    display: grid;
     flex-shrink: 0;
     place-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 4px;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
     background: var(--surface-3);
-    color: var(--accent);
+    color: var(--text-muted);
+    transition:
+      background-color var(--dur-short) ease,
+      color var(--dur-short) ease;
   }
-  @media (min-width: 640px) {
-    .whoami-option {
-      padding-left: 9px;
-    }
-    .whoami-icon {
-      display: grid;
-    }
+  .whoami-sub {
+    margin-top: 2px;
+    color: var(--text-dim);
   }
   .whoami-current {
-    background: color-mix(in oklab, var(--accent) 10%, var(--surface-2));
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 55%, transparent);
+    background: var(--text);
+    color: var(--bg);
   }
-  .whoami-other {
-    box-shadow: inset 0 0 0 1px var(--line-strong);
+  .whoami-current .whoami-sub {
+    color: color-mix(in oklab, var(--bg) 58%, var(--text));
+  }
+  .whoami-current .whoami-icon {
+    background: var(--accent-strong);
+    color: var(--on-accent);
+  }
+  .whoami-other:hover {
+    background: var(--surface-3);
+  }
+  .whoami-other:hover .whoami-icon {
+    background: var(--surface-hover);
+    color: var(--text);
   }
   .whoami-arrow {
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--text-dim);
+    transition:
+      transform var(--dur-short) var(--ease-out),
+      color var(--dur-short) ease;
   }
-  @media (hover: hover) {
-    .whoami-other:hover {
-      box-shadow: inset 0 0 0 1px var(--accent);
-    }
-    .whoami-option:hover::before {
-      transform: translateX(0) skewX(-24deg);
-    }
-    .whoami-other:hover .whoami-arrow {
-      transform: translateX(4px);
-    }
+  .whoami-other:hover .whoami-arrow {
+    color: var(--text);
+    transform: translateX(3px);
   }
-
 
   .key-stats {
-    gap: 18px 0;
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
+    gap: 22px 0;
+    padding-top: 26px;
   }
-  /* Une paire dt/dd par stat ; l'icône (dans le dt) est sortie du flux et centrée à gauche,
-     à la place qu'elle occupait dans l'ancienne rangée flex (36 px + 14 px d'écart) */
   .key-stat {
     --stat-pad: 0px;
     position: relative;
-    padding: 2px 16px 2px calc(var(--stat-pad) + 50px);
+    padding: 2px 8px 2px calc(var(--stat-pad) + 42px);
+  }
+  @media (min-width: 640px) {
+    .key-stat {
+      padding: 2px 16px 2px calc(var(--stat-pad) + 48px);
+    }
   }
   @media (min-width: 1024px) {
     .key-stat + .key-stat {
       --stat-pad: 24px;
-      border-left: 1px solid var(--line);
     }
   }
   .key-stat-icon {
     position: absolute;
     top: 50%;
     left: var(--stat-pad);
-    font-size: 1rem;
     translate: 0 -50%;
   }
   [data-js] .key-stat {
-    animation: fade-up 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(650ms + var(--si, 0) * 90ms);
+    animation: fade-up 800ms var(--ease-out) both;
+    animation-delay: calc(600ms + var(--si, 0) * 80ms);
   }
 
   /* Texte lettre par lettre (SplitText) */
@@ -1593,276 +1362,147 @@ html {
   }
   [data-js] .split:not(.split-card) .split-char,
   [data-js] .card[data-in] .split-card .split-char {
-    animation: char-in 1000ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--split-delay, 0ms) + var(--ci, 0) * 70ms);
+    animation: char-in 1000ms var(--ease-out) both;
+    animation-delay: calc(var(--split-delay, 0ms) + var(--ci, 0) * 55ms);
   }
   [data-js] .card:not([data-in]) .split-card .split-char {
     opacity: 0;
   }
 
-  /* Veille repliée (Parcours) : résumé en bouton, sans le triangle natif */
-  .watch-details > summary::-webkit-details-marker {
-    display: none;
-  }
-
-  /* Carton-titre de l'espace Création : voile coloré sur l'image de montage, sous le logo 3D */
+  /* Carton-titre de l'espace Création */
   .logo-title {
     background: var(--inset);
-    box-shadow: inset 0 0 0 1px var(--line);
   }
   .logo-title-veil {
     background:
       radial-gradient(70% 60% at 50% 50%, transparent, var(--inset) 95%),
-      linear-gradient(135deg, color-mix(in oklab, var(--accent) 30%, transparent), transparent 60%, color-mix(in oklab, var(--accent-2) 24%, transparent));
+      radial-gradient(60% 50% at 50% 100%, var(--haze), transparent 70%);
   }
 
-  /* Tuiles d'espaces */
+  /* Tuiles d'espaces : carte qui se soulève, flèche dans un rond qui devient rouge au survol */
   .space-tile {
     flex: 1;
-    min-height: 210px;
+    min-height: 200px;
     overflow: hidden;
     isolation: isolate;
   }
   @media (min-width: 1024px) {
     .space-tile {
-      min-height: 250px;
+      min-height: 230px;
     }
-  }
-  .space-tile:hover {
-    --card-edge: color-mix(in oklab, var(--accent) 60%, transparent);
   }
   .space-tile-image {
     z-index: -1;
     object-fit: cover;
-    opacity: 0.2;
-    filter: grayscale(0.7);
+    opacity: 0.16;
+    filter: grayscale(1);
     -webkit-mask-image: linear-gradient(to top, transparent 15%, #000 85%);
     mask-image: linear-gradient(to top, transparent 15%, #000 85%);
     transition:
       opacity 600ms ease,
       filter 600ms ease,
-      transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 1000ms var(--ease-out);
   }
   .space-tile-sweep {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 10%, transparent) 0%, transparent 70%);
-    transform: translateX(-101%);
-    transition: transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .space-tile::after {
-    content: "";
-    display: block;
-    position: absolute;
-    inset: 0 0 auto;
-    height: 2px;
-    padding: 0;
-    border-radius: 0;
-    background: var(--accent);
-    -webkit-mask: none;
-    mask: none;
-    opacity: 1;
-    transform: scaleX(0.14);
-    transform-origin: left center;
-    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    display: none;
   }
   .space-tile-icon {
     position: absolute;
-    right: 24px;
-    bottom: 24px;
+    right: 28px;
+    bottom: 28px;
     z-index: -1;
-    width: 72px;
-    height: 72px;
-    color: var(--accent);
-    opacity: 0.18;
+    width: 56px;
+    height: 56px;
+    color: var(--text-dim);
+    opacity: 0.35;
     transition:
-      transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 400ms ease;
+      opacity 400ms ease,
+      transform 700ms var(--ease-out);
   }
   .space-tile-num {
     color: var(--text-dim);
-    transition: color 400ms ease;
   }
   .space-tile-arrow {
-    transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      transform 500ms var(--ease-spring),
+      background-color var(--dur-short) ease,
+      color var(--dur-short) ease;
   }
   @media (hover: hover) {
     .space-tile:hover .space-tile-image {
-      opacity: 0.45;
-      filter: none;
-      transform: scale(1.05);
-    }
-    .space-tile:hover .space-tile-sweep {
-      transform: none;
+      opacity: 0.32;
+      filter: grayscale(0.2);
+      transform: scale(1.04);
     }
     .space-tile:hover .space-tile-icon {
-      opacity: 0.5;
+      opacity: 0.7;
       transform: translateY(-4px);
     }
-    .space-tile:hover .space-tile-num {
-      color: var(--accent);
-    }
-    .space-tile:hover::after {
-      transform: none;
-    }
     .space-tile:hover .space-tile-arrow {
-      transform: translate(3px, -3px);
+      transform: rotate(45deg);
+      background: var(--accent-strong);
+      color: var(--on-accent);
     }
   }
-}
 
-/* Reflet qui traverse l'option de l'autre profil (Whoami), puis s'efface */
-@keyframes whoami-shine {
-  0% {
-    transform: translateX(-102%) skewX(-24deg);
-    opacity: 1;
-  }
-  70% {
-    transform: translateX(102%) skewX(-24deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(102%) skewX(-24deg);
-    opacity: 0;
+  /* Pied de page */
+  .site-footer a {
+    transition: color var(--dur-micro) ease;
   }
 }
 
-@keyframes band-in {
-  from {
-    opacity: 0;
-    transform: translateX(14%) scaleX(0.6);
-  }
-}
-
-/* Lettres du nom : opacity + transform seulement (animés par le compositeur, sans repeindre) */
-@keyframes char-in {
-  from {
-    opacity: 0;
-    transform: translateY(38%) rotate(5deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ─── Animations (douces, façon Apple) ─────────────────── */
+/* ─── Animations ───────────────────────────────────────── */
 
 /* Apparition des cartes au défilement : fondu + léger glissement, une seule fois.
    data-in est posé par ScrollReveal. Filet de sécurité : si le script ne démarre pas
    (pas de data-reveal sur <html>), tout s'affiche après 2,5 s. */
 [data-js] .card:not([data-in]) {
   opacity: 0;
-  transform: translateY(18px) scale(0.985);
+  transform: translateY(20px) scale(0.985);
 }
 [data-js]:not([data-reveal]) .card:not([data-in]) {
   animation: reveal-fallback 1ms 2.5s forwards;
 }
-
-/* Apparition immédiate des cartes du premier écran (earlyRevealScript, avant React) */
 @keyframes early-in {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.985);
+    transform: translateY(20px) scale(0.985);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
-
 @keyframes reveal-fallback {
   to {
     opacity: 1;
     transform: none;
   }
 }
-
-/* Carte principale de la page (data-lcp : hero de l'accueil), qui porte le plus grand texte du premier
-   écran (élément LCP). Visible dès le premier affichage, sans attendre de script : elle garde son
-   glissement d'arrivée mais sans fondu, et ses boutons arrivent en cascade d'eux-mêmes (CSS seul).
-   Rien n'est rejoué après une navigation avec transition de page (data-instant). */
+/* Carte principale de la page (data-lcp) : visible dès le premier affichage, sans attendre de script */
 :root[data-js] .card[data-lcp] {
   opacity: 1;
   transform: none;
 }
 :root[data-js] .card[data-lcp]:not([data-instant]) {
-  animation: lcp-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: lcp-in 800ms var(--ease-out) both;
 }
 :root[data-js] .card[data-lcp]:not([data-instant]) .stagger > * {
-  animation: fade-up 650ms cubic-bezier(0.16, 1, 0.3, 1) calc(180ms + var(--si, 0) * 55ms) both;
+  animation: fade-up 700ms var(--ease-out) calc(200ms + var(--si, 0) * 50ms) both;
 }
 @keyframes lcp-in {
   from {
-    transform: translateY(18px) scale(0.985);
+    transform: translateY(16px) scale(0.99);
   }
 }
-
-/* Page /lab/site : liaison entre deux étapes du chemin d'une requête, avec un paquet qui circule
-   (vertical sur mobile, horizontal à partir de md) */
-.path-link {
-  position: relative;
-  align-self: center;
-  flex-shrink: 0;
-  width: 2px;
-  height: 24px;
-  margin: 6px 0;
-  list-style: none;
-}
-.path-link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 2px;
-  background: var(--line-strong);
-}
-.path-packet {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--glow-strong);
-  opacity: 0;
-  animation: packet-down 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  animation-delay: calc(var(--pi, 0) * 0.3s);
-}
-@media (min-width: 768px) {
-  .path-link {
-    width: 40px;
-    height: 2px;
-    margin: 0 8px;
-  }
-  .path-packet {
-    top: 50%;
-    left: 0;
-    animation-name: packet-right;
-  }
-}
-/* En transform (pas top/left) : animé par le compositeur, sans recalcul de mise en page */
-@keyframes packet-down {
-  0% { transform: translateY(0); opacity: 0; }
-  15%, 85% { opacity: 1; }
-  100% { transform: translateY(24px); opacity: 0; }
-}
-@keyframes packet-right {
-  0% { transform: translateX(0); opacity: 0; }
-  15%, 85% { opacity: 1; }
-  100% { transform: translateX(40px); opacity: 0; }
-}
-
-/* Carte arrivée avec la transition de page (ScrollReveal) : pas de second fondu */
+/* Carte arrivée avec la transition de page : pas de second fondu */
 [data-js] .card[data-instant] {
-  transition: border-color 300ms ease;
+  transition: background-color var(--dur-short) ease;
 }
 
 /* ─── Transitions entre pages (View Transitions, déclenchées par PageTransition) ───
-   Le reste de l'interface (rail, barre d'état) ne bouge pas ; le contenu glisse dans le sens
-   de la navigation (html[data-nav-dir]) et la carte principale se transforme en la suivante. */
+   L'ancienne page s'efface en reculant à peine, la nouvelle monte en fondu ; la carte principale
+   se transforme en celle de la page suivante (nom lead-card). */
 html {
   --vt-dir: 0;
 }
@@ -1876,111 +1516,87 @@ html[data-nav-dir="back"] {
 ::view-transition-new(root) {
   animation: none;
 }
-/* Nouvelle page : révélée par un balayage en biais, depuis la gauche (en avant) ou la droite (retour) */
 ::view-transition-old(page) {
-  animation: vt-page-out 300ms cubic-bezier(0.4, 0, 1, 1) both;
+  animation: vt-page-out 260ms var(--ease-in) both;
 }
 ::view-transition-new(page) {
-  animation:
-    vt-wipe-fwd 640ms cubic-bezier(0.65, 0, 0.35, 1) both,
-    vt-page-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-html[data-nav-dir="back"]::view-transition-new(page) {
-  animation-name: vt-wipe-back, vt-page-in;
+  animation: vt-page-in 640ms var(--ease-out) 80ms both;
 }
 ::view-transition-group(lead-card) {
-  animation-duration: 560ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-out);
 }
-/* Contenus des deux cartes ancrés en haut à gauche, rognés au cadre (pas d'étirement) */
 ::view-transition-image-pair(lead-card) {
   overflow: clip;
+  border-radius: 28px;
 }
 ::view-transition-old(lead-card),
 ::view-transition-new(lead-card) {
   height: 100%;
   object-fit: cover;
   object-position: left top;
-  animation-duration: 560ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-out);
 }
-
-/* Écrans tactiles (souvent moins puissants) : même mouvement, sans flou */
-@media (pointer: coarse) {
-  ::view-transition-old(page) {
-    animation-name: vt-page-out-lite;
-  }
-  ::view-transition-new(page) {
-    animation-name: vt-page-in-lite;
-  }
-}
-@keyframes vt-page-out-lite {
-  to {
-    opacity: 0;
-    transform: translateX(calc(var(--vt-dir) * -20px));
-  }
-}
-@keyframes vt-page-in-lite {
-  from {
-    opacity: 0;
-    transform: translateX(calc(var(--vt-dir) * 20px));
-  }
-}
-
-@keyframes vt-wipe-fwd {
-  from {
-    clip-path: polygon(0 0, 0 0, -18% 100%, -18% 100%);
-  }
-  to {
-    clip-path: polygon(0 0, 118% 0, 100% 100%, -18% 100%);
-  }
-}
-@keyframes vt-wipe-back {
-  from {
-    clip-path: polygon(118% 0, 118% 0, 100% 100%, 100% 100%);
-  }
-  to {
-    clip-path: polygon(0 0, 118% 0, 100% 100%, -18% 100%);
-  }
-}
-
 @keyframes vt-page-out {
   to {
     opacity: 0;
-    transform: translateX(calc(var(--vt-dir) * -28px)) scale(0.99);
-    filter: blur(6px);
+    transform: scale(0.985);
   }
 }
 @keyframes vt-page-in {
   from {
     opacity: 0;
-    transform: translateX(calc(var(--vt-dir) * 28px)) scale(0.99);
-    filter: blur(6px);
+    transform: translateY(18px);
   }
 }
 
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
 @keyframes dialog-in {
   from {
     opacity: 0;
-    transform: translate(-50%, -48%) scale(0.96);
+    transform: translate(-50%, -48%) scale(0.97);
   }
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 }
-
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
 @keyframes dialog-top-in {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(10px) scale(0.98);
+    transform: translate(-50%, 10px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
+    transform: translate(-50%, 0) scale(1);
   }
 }
-
 @keyframes accordion-down {
   from {
     height: 0;
@@ -1991,7 +1607,6 @@ html[data-nav-dir="back"]::view-transition-new(page) {
     opacity: 1;
   }
 }
-
 @keyframes accordion-up {
   from {
     height: var(--radix-accordion-content-height);
@@ -2002,118 +1617,16 @@ html[data-nav-dir="back"]::view-transition-new(page) {
     opacity: 0;
   }
 }
-
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes live-ring {
-  0% {
-    opacity: 0.7;
-    transform: scale(0.6);
-  }
-  80%,
-  100% {
-    opacity: 0;
-    transform: scale(1.9);
-  }
-}
-
-@keyframes nudge {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(4px);
-  }
-}
-
-@keyframes draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes clip-grow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes playhead {
-  from {
-    left: 0%;
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-}
-
-@keyframes dot-on {
-  from {
-    opacity: 0.12;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes blur-in {
-  from {
-    opacity: 0;
-    filter: blur(12px);
     transform: translateY(10px);
   }
   to {
     opacity: 1;
-    filter: blur(0);
     transform: none;
   }
 }
-
-@keyframes flow-draw {
-  from {
-    stroke-dashoffset: var(--from, 1);
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes flow-run {
-  to {
-    stroke-dashoffset: calc(var(--dir, -1) * 12);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes number-in {
-  from {
-    opacity: 0;
-    transform: translateY(6%);
-  }
-}
-
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -2122,15 +1635,83 @@ html[data-nav-dir="back"]::view-transition-new(page) {
     opacity: 1;
   }
 }
-
-@keyframes pulse {
+@keyframes live-ring {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+@keyframes nudge {
   0%,
   100% {
+    transform: none;
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes clip-grow {
+  to {
+    transform: none;
+  }
+}
+@keyframes playhead {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--playhead-to, 0));
+  }
+}
+@keyframes dot-on {
+  from {
+    opacity: 0.12;
+  }
+  to {
     opacity: 1;
   }
+}
+@keyframes flow-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes flow-run {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
   50% {
     opacity: 0.5;
   }
+}
+@keyframes packet-down {
+  0% { transform: translateY(0); opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { transform: translateY(24px); opacity: 0; }
+}
+@keyframes packet-right {
+  0% { transform: translateX(0); opacity: 0; }
+  15%, 85% { opacity: 1; }
+  100% { transform: translateX(40px); opacity: 0; }
 }
 
 /* Impression : tout le contenu, sans animation */
@@ -2151,7 +1732,9 @@ html[data-nav-dir="back"]::view-transition-new(page) {
   }
   [data-js] .card:not([data-in]),
   [data-js] .card .stagger > *,
-  [data-js] .card .map-fade {
+  [data-js] .card .map-fade,
+  [data-js] .plate:not([data-drawn]) [data-draw],
+  [data-js] .plate:not([data-drawn]) .motif-text {
     opacity: 1;
     transform: none;
   }

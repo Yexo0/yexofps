@@ -1,4 +1,4 @@
-// src/components/ui/next-space.tsx — Lien "espace suivant" : numéro dans un rond + nom + flèche.
+// src/components/ui/next-space.tsx — Lien "espace suivant" : nom + flèche dans un rond qui devient rouge au survol.
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -13,15 +13,15 @@ export function NextSpace({ to, label }: { to: SpaceId; label?: string }) {
   return (
     <Link
       href={space.href}
-      className="next-space group inline-flex items-center gap-2.5 py-1 text-sm font-semibold text-fg"
+      className="next-space group inline-flex items-center gap-3 py-1 text-[14.5px] font-semibold text-fg"
       aria-label={t("goToSpace", { n, name })}
     >
-      <span className="font-mono text-[11px] font-medium text-accent" aria-hidden="true">
-        {String(n).padStart(2, "0")}
-      </span>
       <span>{name}</span>
-      <span className="nudge inline-flex" aria-hidden="true">
-        <ArrowRight size={16} className="text-accent transition-transform duration-300 group-hover:translate-x-1" />
+      <span
+        aria-hidden="true"
+        className="grid h-7 w-7 place-items-center rounded-full bg-surface-2 transition-[background-color,color,transform] duration-300 ease-[var(--ease-out)] group-hover:translate-x-1 group-hover:bg-accent-strong group-hover:text-on-accent"
+      >
+        <ArrowRight size={15} />
       </span>
     </Link>
   );
